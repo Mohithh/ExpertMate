@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSun, AiOutlineMoon } from "react-icons/ai";
 import { FiUser, FiLogIn } from "react-icons/fi";
@@ -66,12 +65,10 @@ const Header = () => {
       xmlns="http://www.w3.org/2000/svg"
       className="h-10 w-auto transition-transform hover:scale-105"
     >
-      {/* Logo text - changes color based on dark mode */}
       <path 
         d="M20 15V25H25V20H30V25H35V15H30V20H25V15H20ZM40 15V25H50V20H45V15H40ZM55 15V25H60V20H65V25H70V15H65V20H60V15H55ZM75 15V25H85V20H80V15H75Z" 
         fill={darkMode ? "#F59E0B" : "#1a3e72"} 
       />
-      {/* Scale icon - part of the logo */}
       <path 
         d="M100 25L110 20L100 15" 
         stroke={darkMode ? "#F59E0B" : "#1a3e72"} 
@@ -95,7 +92,7 @@ const Header = () => {
     <>
       {/* Desktop Navigation */}
       <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 flex items-center">
@@ -149,22 +146,15 @@ const Header = () => {
               {menuOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
             </button>
           </div>
-        </nav>
+        </div>
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`md:hidden fixed inset-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg transition-all duration-300 ease-in-out transform ${menuOpen ? 'translate-y-0' : '-translate-y-full'} flex flex-col items-center justify-center`}
+          className={`md:hidden fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg transition-all duration-300 ease-in-out transform ${menuOpen ? 'translate-y-0' : '-translate-y-full'} pt-16`}
+          style={{ marginTop: '4rem' }} // Adjust this value based on your header height
           aria-hidden={!menuOpen}
         >
-          <button
-            className="absolute top-4 right-4 p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400"
-            onClick={closeMenu}
-            aria-label="Close menu"
-          >
-            <AiOutlineClose size={24} />
-          </button>
-
-          <div className="flex flex-col items-center space-y-6 w-full px-4">
+          <div className="flex flex-col items-center space-y-6 w-full px-4 h-full overflow-y-auto pb-8">
             <MobileNavLink href="/">Home</MobileNavLink>
             <MobileNavLink href="/lawyer">Lawyers</MobileNavLink>
             <MobileNavLink href="/case">Case Management</MobileNavLink>
@@ -200,6 +190,7 @@ const Header = () => {
           </div>
         </div>
       </header>
+      
       {/* Add padding to prevent content from being hidden behind the fixed header */}
       <div className="h-16"></div>
     </>
