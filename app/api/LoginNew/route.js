@@ -15,7 +15,7 @@ export const POST = testConnect(async (req, res) => {
             { status: 400, headers: { "content-type": "application/json" } }
         );
     }
-const encryptedPassword = CryptoJS.AES.encrypt(body.password, 'mohit').toString();
+const encryptedPassword = CryptoJS.AES.encrypt(body.password, 'Aman').toString();
 
         const newUser = new User({
             name: body.name,

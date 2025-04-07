@@ -7,10 +7,7 @@ const connectDB = (handler) => async (req, res) => {
   }
 
   try {
-    await mongoose.connect("mongodb://localhost:27017/All_data", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log("✅ Connected to MongoDB");
   } catch (error) {
     console.error("❌ MongoDB connection error:", error);
@@ -20,4 +17,4 @@ const connectDB = (handler) => async (req, res) => {
   return handler(req, res);
 };
 
-export default connectDB;
+export default connectDB;

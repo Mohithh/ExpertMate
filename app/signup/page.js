@@ -20,7 +20,7 @@ export default function SignUpPage() {
     const data = { name, email, password };
 
     try {
-      const response = await fetch("http://localhost:3000/api/LoginNew", {
+      const response = await fetch(process.env.NEXT_PUBLIC_API_SIGNUP_URL || '/api/signup', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
