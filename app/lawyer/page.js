@@ -3,38 +3,131 @@
 import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import data from "../assets/data.json";
 import {
-  FaInstagram,
-  FaTwitter,
   FaLinkedin,
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaStar,
-  FaRegStar,
   FaBriefcase,
   FaGraduationCap
 } from "react-icons/fa";
-import { GiScaleMail, GiJusticeStar } from "react-icons/gi";
+import { GiScaleMail } from "react-icons/gi";
 import { motion } from "framer-motion";
 import Header from "../header/page";
 import Image from "next/image";
 
-const Lawyer = () => {
-  const [activeTab, setActiveTab] = useState("all");
+const TeamPage = () => {
+  const [activeTab, setActiveTab] = useState("management");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 800);
   }, []);
 
-  const filteredLawyers =
-    activeTab === "all"
-      ? data.projects
-      : data.projects.filter((lawyer) =>
-          lawyer.practiceAreas?.includes(activeTab)
-        );
+  const teamData = {
+    management: [
+      {
+        id: 1,
+        name: "Nageshwar Singh",
+        title: "Founder & Managing Director",
+        image: "/team/nageshwar-singh.jpg",
+        experience: "30+ years in corporate law",
+        education: "LL.M, National Law School of India",
+        role: "Strategic leadership and firm governance",
+        location: "New Delhi",
+        phone: "+91 98765 43210",
+        email: "n.singh@settlesmart.com",
+        description: "Established Settle Smart in 2005 with a vision to create a client-centric law firm combining traditional values with modern practices. Specializes in corporate restructuring and complex dispute resolution."
+      }
+    ],
+    advocates: [
+      {
+        id: 1,
+        name: "Adv. Rajesh Verma",
+        title: "Senior Partner - Litigation",
+        image: "/team/advocate-1.jpg",
+        experience: "18 years at Supreme Court & High Courts",
+        education: "LL.B, Campus Law Centre, Delhi University",
+        practiceAreas: ["Commercial Litigation", "Arbitration"],
+        location: "New Delhi",
+        phone: "+91 98765 43211",
+        email: "r.verma@settlesmart.com",
+        description: "Leads our litigation practice with over 200 cases argued before superior courts. Known for meticulous case preparation and persuasive advocacy."
+      },
+      {
+        id: 2,
+        name: "Adv. Priya Sharma",
+        title: "Partner - Corporate Law",
+        image: "/team/advocate-2.jpg",
+        experience: "15 years in corporate transactions",
+        education: "LL.M, Harvard Law School",
+        practiceAreas: ["M&A", "Private Equity", "Compliance"],
+        location: "Mumbai",
+        phone: "+91 98765 43212",
+        email: "p.sharma@settlesmart.com",
+        description: "Heads our corporate practice, advising Fortune 500 companies and startups on complex transactions and regulatory matters."
+      }
+    ],
+    leadership: [
+      {
+        id: 1,
+        name: "Rudra N. Zadu",
+        title: "Chief Legal Officer",
+        image: "/team/rudra-zadu.jpg",
+        experience: "20 years in legal operations",
+        education: "LL.M, University of Oxford",
+        role: "Legal strategy and risk management",
+        location: "Bangalore",
+        phone: "+91 98765 43213",
+        email: "r.zadu@settlesmart.com",
+        description: "Oversees all legal operations, ensuring the highest standards of practice and ethical compliance across our offices."
+      },
+      {
+        id: 2,
+        name: "Aman Bhatti",
+        title: "Chief Technology Officer",
+        image: "/team/aman-bhatti.jpg",
+        experience: "12 years in legal technology",
+        education: "M.Tech, IIT Delhi",
+        role: "Legal tech innovation",
+        location: "Hyderabad",
+        phone: "+91 98765 43214",
+        email: "a.bhatti@settlesmart.com",
+        description: "Pioneers our legal tech initiatives, developing proprietary tools for case management and client collaboration."
+      }
+    ],
+    board: [
+      {
+        id: 1,
+        name: "Amit Sharma",
+        title: "Chairman",
+        image: "/team/amit-sharma.jpg",
+        experience: "35 years in corporate governance",
+        education: "MBA, IIM Ahmedabad",
+        role: "Board governance and strategic oversight",
+        tenure: "Board member since 2010",
+        description: "Former CEO of a leading financial services firm, brings extensive corporate governance experience to our board."
+      },
+      {
+        id: 2,
+        name: "Pankaj Rishi Krishnan",
+        title: "Independent Director",
+        image: "/team/pankaj-rishi.jpg",
+        experience: "30 years in finance and investments",
+        education: "CA, CFA",
+        role: "Financial strategy and risk assessment",
+        tenure: "Board member since 2015",
+        description: "Seasoned financial expert who guides our firm's fiscal strategy and growth initiatives."
+      }
+    ]
+  };
+
+  const tabs = [
+    { id: "management", name: "Management" },
+    { id: "advocates", name: "Advocates" },
+    { id: "leadership", name: "Leadership" },
+    { id: "board", name: "Board of Directors" }
+  ];
 
   const CustomArrow = ({ direction, onClick }) => (
     <motion.button
@@ -51,27 +144,6 @@ const Lawyer = () => {
       </span>
     </motion.button>
   );
-
-  const practiceAreas = [
-    { id: "all", name: "All Attorneys" },
-    { id: "corporate", name: "Corporate Law" },
-    { id: "family", name: "Family Law" },
-    { id: "criminal", name: "Criminal Defense" },
-    { id: "real-estate", name: "Real Estate" },
-    { id: "immigration", name: "Immigration" },
-    { id: "intellectual", name: "Intellectual Property" },
-    { id: "tax", name: "Tax Law" },
-  ];
-
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) =>
-      i + 1 <= rating ? (
-        <FaStar key={i} className="text-amber-400 inline-block" />
-      ) : (
-        <FaRegStar key={i} className="text-gray-300 inline-block" />
-      )
-    );
-  };
 
   if (isLoading) {
     return (
@@ -101,204 +173,196 @@ const Lawyer = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <GiJusticeStar className="mx-auto text-5xl mb-6 text-blue-600" />
+          <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <GiScaleMail className="text-3xl text-blue-600" />
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-            Our Distinguished Legal Team
+            Our Legal Leadership
           </h1>
           <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
-            Settle Smart Solution&rsquo;s premier attorneys bring unparalleled expertise 
-            and dedication to every case, ensuring your legal matters are handled 
-            with the utmost professionalism.
+            Settle Smart's team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
           </p>
         </motion.section>
 
-        {/* Filters */}
+        {/* Navigation Tabs */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
           className="flex flex-wrap justify-center gap-3 mb-16 px-4"
         >
-          {practiceAreas.map((area) => (
+          {tabs.map((tab) => (
             <motion.button
-              key={area.id}
+              key={tab.id}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveTab(area.id)}
+              onClick={() => setActiveTab(tab.id)}
               className={`px-5 py-2 rounded-lg transition-all duration-300 text-sm md:text-base ${
-                activeTab === area.id
+                activeTab === tab.id
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-white text-gray-700 hover:bg-gray-100 shadow-md border border-gray-200"
               }`}
             >
-              {area.name}
+              {tab.name}
             </motion.button>
           ))}
         </motion.div>
 
-        {/* Carousel */}
-        {filteredLawyers.length > 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+        {/* Team Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
+          <Carousel
+            showArrows
+            showThumbs={false}
+            showStatus={false}
+            infiniteLoop
+            renderArrowPrev={(onClickHandler, hasPrev) =>
+              hasPrev && <CustomArrow direction="prev" onClick={onClickHandler} />
+            }
+            renderArrowNext={(onClickHandler, hasNext) =>
+              hasNext && <CustomArrow direction="next" onClick={onClickHandler} />
+            }
+            className="max-w-7xl mx-auto"
           >
-            <Carousel
-              showArrows
-              showThumbs={false}
-              showStatus={false}
-              infiniteLoop
-              renderArrowPrev={(onClickHandler, hasPrev) =>
-                hasPrev && <CustomArrow direction="prev" onClick={onClickHandler} />
-              }
-              renderArrowNext={(onClickHandler, hasNext) =>
-                hasNext && <CustomArrow direction="next" onClick={onClickHandler} />
-              }
-              className="max-w-7xl mx-auto"
-            >
-              {filteredLawyers.map((lawyer) => (
-                <div
-                  key={lawyer.id}
-                  className="p-6 md:p-8 rounded-2xl bg-white shadow-xl mx-2 md:mx-4 border border-gray-200"
-                >
-                  <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Image */}
-                    <div className="w-full lg:w-1/3 flex flex-col items-center">
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        className="relative group"
-                      >
-                        <Image
-                          src={lawyer.image}
-                          alt={lawyer.name}
-                          width={220}
-                          height={220}
-                          className="object-cover rounded-lg shadow-md border-4 border-blue-500/10 group-hover:border-blue-500/30 transition-all duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                          <span className="text-white font-medium">
-                            {lawyer.title}
-                          </span>
-                        </div>
-                      </motion.div>
-
-                      {/* Contact */}
-                      <div className="flex gap-4 mt-6">
-                        <a href={`tel:${lawyer.phone}`} className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-600/20 hover:bg-blue-600/30 text-blue-600 transition-all shadow">
-                          <FaPhone />
-                        </a>
-                        <a href={`mailto:${lawyer.email}`} className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-600/20 hover:bg-blue-600/30 text-blue-600 transition-all shadow">
-                          <FaEnvelope />
-                        </a>
+            {teamData[activeTab].map((member) => (
+              <div
+                key={member.id}
+                className="p-6 md:p-8 rounded-2xl bg-white shadow-xl mx-2 md:mx-4 border border-gray-200"
+              >
+                <div className="flex flex-col lg:flex-row gap-8">
+                  {/* Image Column */}
+                  <div className="w-full lg:w-1/3 flex flex-col items-center">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      className="relative group"
+                    >
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        width={280}
+                        height={280}
+                        className="object-cover rounded-lg shadow-md border-4 border-blue-500/10 group-hover:border-blue-500/30 transition-all duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span className="text-white font-medium">
+                          {member.title}
+                        </span>
                       </div>
+                    </motion.div>
+
+                    {/* Contact Options */}
+                    <div className="flex gap-4 mt-6">
+                      <a 
+                        href={`tel:${member.phone}`} 
+                        className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors text-sm"
+                        title="Call"
+                      >
+                        <FaPhone className="mr-2 text-blue-600" />
+                        Contact
+                      </a>
+                      <a 
+                        href={`mailto:${member.email}`}
+                        className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
+                        title="Email"
+                      >
+                        <FaEnvelope className="mr-2" />
+                        Email
+                      </a>
                     </div>
+                  </div>
 
-                    {/* Details */}
-                    <div className="w-full lg:w-2/3">
-                      <div className="flex flex-col h-full">
-                        <div>
-                          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
-                            {lawyer.name}
-                          </h2>
-                          <p className="text-lg mb-4 text-blue-600 font-medium">
-                            {lawyer.title}
-                          </p>
+                  {/* Details Column */}
+                  <div className="w-full lg:w-2/3">
+                    <div className="flex flex-col h-full">
+                      <div>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
+                          {member.name}
+                        </h2>
+                        <p className="text-lg mb-4 text-blue-600 font-medium">
+                          {member.title}
+                        </p>
 
-                          <div className="flex items-center mb-4">
-                            {renderStars(lawyer.rating)}
-                            <span className="ml-2 text-gray-600 text-sm">
-                              ({lawyer.reviews} client reviews)
-                            </span>
+                        <p className="mb-6 text-gray-600 leading-relaxed">
+                          {member.description}
+                        </p>
+                      </div>
+
+                      <div className="mt-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                          <div className="flex items-start">
+                            <FaBriefcase className="text-blue-600 mt-1 mr-2" />
+                            <div>
+                              <p className="font-medium text-gray-800">Experience</p>
+                              <p className="text-gray-600">{member.experience}</p>
+                            </div>
                           </div>
-
-                          <p className="mb-6 text-gray-600 leading-relaxed">
-                            {lawyer.description}
-                          </p>
+                          <div className="flex items-start">
+                            <FaGraduationCap className="text-blue-600 mt-1 mr-2" />
+                            <div>
+                              <p className="font-medium text-gray-800">Education</p>
+                              <p className="text-gray-600">{member.education}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <GiScaleMail className="text-blue-600 mt-1 mr-2" />
+                            <div>
+                              <p className="font-medium text-gray-800">
+                                {member.practiceAreas ? "Practice Areas" : "Role"}
+                              </p>
+                              <p className="text-gray-600">
+                                {member.practiceAreas ? member.practiceAreas.join(", ") : member.role}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <FaMapMarkerAlt className="text-blue-600 mt-1 mr-2" />
+                            <div>
+                              <p className="font-medium text-gray-800">Location</p>
+                              <p className="text-gray-600">{member.location}</p>
+                            </div>
+                          </div>
                         </div>
 
-                        <div className="mt-auto">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div className="flex items-start">
-                              <FaBriefcase className="text-blue-600 mt-1 mr-2" />
-                              <div>
-                                <p className="font-medium text-gray-800">Experience</p>
-                                <p className="text-gray-600">{lawyer.experience} years in practice</p>
-                              </div>
-                            </div>
-                            <div className="flex items-start">
-                              <FaGraduationCap className="text-blue-600 mt-1 mr-2" />
-                              <div>
-                                <p className="font-medium text-gray-800">Education</p>
-                                <p className="text-gray-600">{lawyer.education || "Juris Doctor"}</p>
-                              </div>
-                            </div>
-                            <div className="flex items-start">
-                              <GiScaleMail className="text-blue-600 mt-1 mr-2" />
-                              <div>
-                                <p className="font-medium text-gray-800">Practice Areas</p>
-                                <p className="text-gray-600">{lawyer.practiceAreas?.join(", ")}</p>
-                              </div>
-                            </div>
-                            <div className="flex items-start">
-                              <FaMapMarkerAlt className="text-blue-600 mt-1 mr-2" />
-                              <div>
-                                <p className="font-medium text-gray-800">Location</p>
-                                <p className="text-gray-600">{lawyer.location}</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Social */}
-                          <div className="flex gap-4 border-t pt-4 border-gray-200">
-                            {[FaLinkedin, FaTwitter, FaInstagram].map((Icon, idx) => (
-                              <motion.a
-                                key={idx}
-                                whileHover={{ y: -2 }}
-                                href="#"
-                                className="text-lg text-gray-600 hover:text-blue-700 transition-colors"
-                                aria-label={`Connect on ${Icon.name}`}
-                              >
-                                <Icon />
-                              </motion.a>
-                            ))}
-                          </div>
+                        <div className="flex gap-4 border-t pt-4 border-gray-200">
+                          <motion.a
+                            whileHover={{ y: -2 }}
+                            href="#"
+                            className="text-lg text-gray-600 hover:text-blue-700 transition-colors"
+                            aria-label="Connect on LinkedIn"
+                          >
+                            <FaLinkedin />
+                          </motion.a>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </Carousel>
-          </motion.div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-16"
-          >
-            <div className="max-w-md mx-auto">
-              <GiScaleMail className="mx-auto text-4xl text-blue-600 mb-4" />
-              <h3 className="text-2xl font-medium text-gray-800 mb-2">
-                No attorneys found in this practice area
-              </h3>
-              <p className="text-gray-600 mb-6">
-                We currently don&rsquo;t have attorneys specializing in this area, but our 
-                general practice team can still assist you or refer you to qualified specialists.
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => setActiveTab("all")}
-                className="px-8 py-3 rounded-lg bg-blue-600 text-white hover:shadow-lg transition-all font-medium"
-              >
-                View All Attorneys
-              </motion.button>
-            </div>
-          </motion.div>
-        )}
+              </div>
+            ))}
+          </Carousel>
+        </motion.div>
+
+        {/* Firm Description */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-20 max-w-4xl mx-auto text-center"
+        >
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Settle Smart Legal Solutions</h2>
+          <p className="text-gray-600 leading-relaxed">
+            Founded in 2005, Settle Smart has grown into one of India's most respected full-service law firms.
+            Our team of 50+ legal professionals operates across six major cities, delivering strategic counsel
+            and exceptional representation to clients ranging from Fortune 500 companies to individual entrepreneurs.
+          </p>
+        </motion.section>
       </main>
     </div>
   );
 };
 
-export default Lawyer;
+export default TeamPage;

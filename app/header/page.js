@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSun, AiOutlineMoon } from "react-icons/ai";
 import { FiUser, FiLogIn } from "react-icons/fi";
 import Link from "next/link";
+// import lofi from "@/app/assets/lofi.svg";
+
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
