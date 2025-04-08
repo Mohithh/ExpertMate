@@ -8,15 +8,16 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check for saved theme preference
+    setMounted(true);
+    
     const savedTheme = localStorage.getItem('theme');
     const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
     setDarkMode(isDark);
     document.documentElement.classList.toggle('dark', isDark);
 
-    // Scroll effect
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
@@ -25,6 +26,7 @@ const Header = () => {
   }, []);
 
   const toggleDarkMode = () => {
+    if (!mounted) return;
     const newMode = !darkMode;
     setDarkMode(newMode);
     localStorage.setItem('theme', newMode ? 'dark' : 'light');
@@ -34,9 +36,9 @@ const Header = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
 
-  // Reusable NavLink component
+  // NavLink component
   const NavLink = ({ href, children }) => (
-    <Link href={href} className="relative group">
+    <Link href={href} className="relative group" passHref>
       <span className="text-gray-700 dark:text-gray-300 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
         {children}
       </span>
@@ -49,7 +51,8 @@ const Header = () => {
     <Link 
       href={href} 
       onClick={closeMenu}
-      className="text-gray-800 dark:text-gray-200 text-xl font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 w-full text-center"
+      className="text-gray-800 dark:text-gray-200 text-lg font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 w-full text-center"
+      passHref
     >
       {children}
     </Link>
@@ -91,16 +94,16 @@ const Header = () => {
   return (
     <>
       {/* Desktop Navigation */}
-      <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className={`fixed w-full top-0 z-50 transition-all duration-300 h-16 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+          <div className="flex items-center justify-between h-full">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 flex items-center">
               <Logo />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-8">
               <NavLink href="/">Home</NavLink>
               <NavLink href="/lawyer">Lawyers</NavLink>
               <NavLink href="/case">Case Management</NavLink>
@@ -108,7 +111,7 @@ const Header = () => {
               <NavLink href="/arbitrator">Arbitrators</NavLink>
               <NavLink href="/pricing">Pricing</NavLink>
               <NavLink href="/contact">Contact</NavLink>
-            </div>
+            </nav>
 
             {/* Right side buttons */}
             <div className="hidden md:flex items-center space-x-4">
@@ -150,11 +153,17 @@ const Header = () => {
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`md:hidden fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg transition-all duration-300 ease-in-out transform ${menuOpen ? 'translate-y-0' : '-translate-y-full'} pt-16`}
-          style={{ marginTop: '4rem' }} // Adjust this value based on your header height
+          className={`md:hidden fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg transition-all duration-300 ease-in-out ${
+            menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+          }`}
+          style={{ 
+            top: '4rem',
+            height: 'calc(100vh - 4rem)',
+            pointerEvents: menuOpen ? 'auto' : 'none' 
+          }}
           aria-hidden={!menuOpen}
         >
-          <div className="flex flex-col items-center space-y-6 w-full px-4 h-full overflow-y-auto pb-8">
+          <div className="flex flex-col items-center justify-start space-y-4 w-full h-full overflow-y-auto py-8">
             <MobileNavLink href="/">Home</MobileNavLink>
             <MobileNavLink href="/lawyer">Lawyers</MobileNavLink>
             <MobileNavLink href="/case">Case Management</MobileNavLink>
