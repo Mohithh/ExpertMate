@@ -100,7 +100,7 @@ const Hero = () => {
         strokeLinecap="round"
         variants={itemVariants}
       />
-      
+
       {/* Scale Beam */}
       <motion.rect
         x="220"
@@ -111,7 +111,7 @@ const Hero = () => {
         fill="#1a3e72"
         variants={itemVariants}
       />
-      
+
       {/* Scale Pans with enhanced design */}
       <motion.path
         d="M175 220C175 240 195 260 225 260C255 260 275 240 275 220C275 200 255 180 225 180C195 180 175 200 175 220Z"
@@ -141,7 +141,7 @@ const Hero = () => {
           duration: 2.2,
         }}
       />
-      
+
       {/* Scale chains for more realism */}
       <motion.path
         d="M225 190L225 180"
@@ -157,7 +157,7 @@ const Hero = () => {
         strokeLinecap="round"
         variants={itemVariants}
       />
-      
+
       {/* Legal documents with more detail */}
       <motion.rect
         x="180"
@@ -179,7 +179,7 @@ const Hero = () => {
         stroke="#1a3e72"
         variants={itemVariants}
       />
-      
+
       {/* Document text lines */}
       <motion.path
         d="M185 160H215M185 170H205M185 180H195M185 190H210M185 200H200"
@@ -193,7 +193,7 @@ const Hero = () => {
         strokeWidth="1.5"
         variants={itemVariants}
       />
-      
+
       {/* Gavel element */}
       <motion.rect
         x="230"
@@ -213,7 +213,7 @@ const Hero = () => {
         fill="#1a3e72"
         variants={itemVariants}
       />
-      
+
       {/* Floating legal icons */}
       <motion.path
         d="M150 100C150 100 160 90 170 100C180 110 170 120 150 110"
@@ -238,7 +238,7 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         />
-        
+
         {/* Animated abstract legal pattern with more complexity */}
         <motion.svg
           className="absolute top-0 left-0 w-full h-full opacity-10"
@@ -274,7 +274,7 @@ const Hero = () => {
             transition={{ duration: 2.5, delay: 1 }}
           />
         </motion.svg>
-        
+
         {/* Floating document icons */}
         {[...Array(8)].map((_, i) => (
           <motion.div
@@ -335,7 +335,7 @@ const Hero = () => {
             className="inline-flex items-center bg-[#1a3e72]/10 px-4 py-2 rounded-full mb-4"
             variants={itemVariants}
           >
-            <motion.span 
+            <motion.span
               className="text-[#1a3e72] font-medium"
               key={currentStat}
               initial={{ opacity: 0, y: 10 }}
@@ -350,7 +350,7 @@ const Hero = () => {
               ][currentStat]}
             </motion.span>
           </motion.div>
-          
+
           <motion.h1
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1a3e72] leading-tight"
             variants={itemVariants}
@@ -360,13 +360,13 @@ const Hero = () => {
               Without the Courtroom Drama
             </span>
           </motion.h1>
-          
+
           <motion.p
             className="mt-4 text-lg md:text-xl text-gray-700 max-w-2xl"
             variants={itemVariants}
           >
-            SettleSmart leverages cutting-edge mediation technology and a network of 
-            retired judges to resolve disputes fairly, quickly, and at a fraction of 
+            SettleSmart leverages cutting-edge mediation technology and a network of
+            retired judges to resolve disputes fairly, quickly, and at a fraction of
             traditional legal costs. Our platform makes justice accessible to everyone.
           </motion.p>
 
@@ -376,29 +376,29 @@ const Hero = () => {
             variants={containerVariants}
           >
             {[
-              { 
-                icon: "⚖️", 
-                text: "Legally Binding", 
+              {
+                icon: "⚖️",
+                text: "Legally Binding",
                 desc: "Enforceable agreements",
-                color: "bg-purple-100 text-purple-800" 
+                color: "bg-purple-100 text-purple-800"
               },
-              { 
-                icon: "💰", 
-                text: "1/3 Court Cost", 
+              {
+                icon: "💰",
+                text: "1/3 Court Cost",
                 desc: "Save thousands",
-                color: "bg-green-100 text-green-800" 
+                color: "bg-green-100 text-green-800"
               },
-              { 
-                icon: "⏱️", 
-                text: "90% Faster", 
+              {
+                icon: "⏱️",
+                text: "90% Faster",
                 desc: "Weeks not years",
-                color: "bg-blue-100 text-blue-800" 
+                color: "bg-blue-100 text-blue-800"
               },
-              { 
-                icon: "🔒", 
-                text: "Confidential", 
+              {
+                icon: "🔒",
+                text: "Confidential",
                 desc: "Private resolutions",
-                color: "bg-amber-100 text-amber-800" 
+                color: "bg-amber-100 text-amber-800"
               },
             ].map((item, index) => (
               <motion.div
@@ -435,7 +435,7 @@ const Hero = () => {
               </span>
               <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </motion.button>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               <motion.button
                 onClick={() => router.push("/how-it-works")}
@@ -448,7 +448,7 @@ const Hero = () => {
                 </svg>
                 How It Works
               </motion.button>
-              
+
               <motion.button
                 onClick={() => router.push("/case-types")}
                 className="text-[#1a3e72] hover:text-blue-700 underline underline-offset-4 font-medium flex items-center justify-center"
@@ -472,10 +472,10 @@ const Hero = () => {
               ))}
               <span className="ml-2 font-medium">4.9/5 (127 Reviews)</span>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               {stats.map((stat, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   className={`text-center ${index === currentStat ? 'opacity-100 scale-105' : 'opacity-60 scale-95'} transition-all duration-500`}
                 >
@@ -494,7 +494,7 @@ const Hero = () => {
             variants={scaleVariants}
           >
             <JusticeScale />
-            
+
             {/* Floating Badges with more information */}
             <motion.div
               className="absolute -bottom-5 -left-5 bg-white shadow-lg rounded-full px-4 py-2 flex items-center border border-blue-100"
@@ -513,7 +513,7 @@ const Hero = () => {
                 <div className="text-xs text-gray-500">Court-enforceable</div>
               </div>
             </motion.div>
-            
+
             <motion.div
               className="absolute -top-5 -right-5 bg-white shadow-lg rounded-full px-4 py-2 flex items-center border border-blue-100"
               initial={{ x: 20, opacity: 0 }}
@@ -551,7 +551,7 @@ const Hero = () => {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* Animated tooltip that appears after delay */}
             <motion.div
               className="absolute top-20 left-0 bg-white shadow-xl rounded-lg p-3 w-48"
@@ -605,15 +605,15 @@ const Hero = () => {
           delay: 1,
         }}
       />
-      
+
       {/* Scrolling testimonials at the bottom */}
-      <motion.div 
+      <motion.div
         className="relative bg-[#1a3e72]/5 py-4 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
-        <motion.div 
+        <motion.div
           className="flex whitespace-nowrap"
           animate={{
             x: ['0%', '-100%'],
@@ -625,25 +625,26 @@ const Hero = () => {
           }}
         >
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="inline-flex items-center mx-8">
-              <div className="text-lg font-medium text-[#1a3e72] mr-4">
-                "SettleSmart saved us $50,000 in legal fees"
-              </div>
-              <div className="text-sm text-gray-600">— Tech Startup CEO</div>
-              <div className="mx-8 text-gray-300">•</div>
-              
-              <div className="text-lg font-medium text-[#1a3e72] mr-4">
-                "Resolved in 3 weeks what would take years in court"
-              </div>
-              <div className="text-sm text-gray-600">— Small Business Owner</div>
-              <div className="mx-8 text-gray-300">•</div>
-              
-              <div className="text-lg font-medium text-[#1a3e72] mr-4">
-                "Fair process that actually worked for both sides"
-              </div>
-              <div className="text-sm text-gray-600">— Family Law Client</div>
-              <div className="mx-8 text-gray-300">•</div>
-            </div>
+           <div key={i} className="inline-flex items-center mx-8">
+           <div className="text-lg font-medium text-[#1a3e72] mr-4">
+             &quot;SettleSmart saved us $5,000 in legal fees&quot;
+           </div>
+           <div className="text-sm text-gray-600">— Tech Startup CEO</div>
+           <div className="mx-8 text-gray-300">•</div>
+         
+           <div className="text-lg font-medium text-[#1a3e72] mr-4">
+             &quot;Resolved in 3 weeks what would take years in court&quot;
+           </div>
+           <div className="text-sm text-gray-600">— Small Business Owner</div>
+           <div className="mx-8 text-gray-300">•</div>
+         
+           <div className="text-lg font-medium text-[#1a3e72] mr-4">
+             &quot;Fair process that actually worked for both sides&quot;
+           </div>
+           <div className="text-sm text-gray-600">— Family Law Client</div>
+           <div className="mx-8 text-gray-300">•</div>
+         </div>
+         
           ))}
         </motion.div>
       </motion.div>
