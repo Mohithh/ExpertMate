@@ -180,8 +180,8 @@ const TeamPage = () => {
             Our Legal Leadership
           </h1>
           <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
-            Settle Smart's team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
-          </p>
+  Settle Smart&apos;s team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
+</p>
         </motion.section>
 
         {/* Navigation Tabs */}
@@ -355,10 +355,10 @@ const TeamPage = () => {
         >
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Settle Smart Legal Solutions</h2>
           <p className="text-gray-600 leading-relaxed">
-            Founded in 2005, Settle Smart has grown into one of India's most respected full-service law firms.
-            Our team of 50+ legal professionals operates across six major cities, delivering strategic counsel
-            and exceptional representation to clients ranging from Fortune 500 companies to individual entrepreneurs.
-          </p>
+  Founded in 2005, Settle Smart has grown into one of India&apos;s most respected full-service law firms.
+  Our team of 50+ legal professionals operates across six major cities, delivering strategic counsel
+  and exceptional representation to clients ranging from Fortune 500 companies to individual entrepreneurs.
+</p>
         </motion.section>
       </main>
     </div>
