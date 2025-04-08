@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import Email from "@/app/assets/email.svg"; // make sure this file exists
-
+import Email from "@/app/assets/login.png"
 import Image from "next/image";
 
 
@@ -125,13 +124,13 @@ export default function LoginPage() {
 
         {/* Right Side - Illustration */}
         <div className="hidden md:block md:w-1/2 bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center p-8">
-          <Image
-            src={Email}
-            alt="Signup Illustration"
-            className="w-full h-auto object-contain rounded-lg"
-            placeholder="blur"
-            priority
-          />
+        <Image
+          src={Email}
+          alt="Signup Illustration"
+          className="w-full h-auto object-contain rounded-lg"
+          placeholder="blur"
+          priority
+        />
 
         </div>
       </div>
