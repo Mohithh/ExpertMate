@@ -30,14 +30,14 @@ const TeamPage = () => {
         id: 1,
         name: "Nageshwar Singh",
         title: "Founder & Managing Director",
-        image: "/team/nageshwar-singh.jpg",
-        experience: "30+ years in corporate law",
-        education: "LL.M, National Law School of India",
+        image: "",
+        experience: "",
+        education: "BLLB Chandigarh University",
         role: "Strategic leadership and firm governance",
         location: "New Delhi",
-        phone: "+91 98765 43210",
-        email: "n.singh@settlesmart.com",
-        description: "Established Settle Smart in 2005 with a vision to create a client-centric law firm combining traditional values with modern practices. Specializes in corporate restructuring and complex dispute resolution."
+        phone: "+91 91499 45265",
+        email: "choudharyyuvan8@gmail.com",
+        description: "Legal Acumen & Experiential Scholar || Author || Corporate & Financial Laws || Former Intern at Khaitan & Co., LK & S, Reliance Retail Ltd.(Legal), Trilegal."
       }
     ],
     advocates: [
@@ -106,7 +106,7 @@ const TeamPage = () => {
         education: "MBA, IIM Ahmedabad",
         role: "Board governance and strategic oversight",
         tenure: "Board member since 2010",
-        description: "Former CEO of a leading financial services firm, brings extensive corporate governance experience to our board."
+        description: "Practising Lawyer at J&K High Court."
       },
       {
         id: 2,
