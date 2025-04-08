@@ -19,13 +19,13 @@ import {
 import { GiScaleMail, GiJusticeStar } from "react-icons/gi";
 import { motion } from "framer-motion";
 import Header from "../header/page";
+import Image from "next/image";
 
 const Lawyer = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading delay
     setTimeout(() => setIsLoading(false), 800);
   }, []);
 
@@ -81,7 +81,7 @@ const Lawyer = () => {
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full mb-4"
-          ></motion.div>
+          />
           <p className="text-lg font-medium text-gray-600">
             Loading our legal team...
           </p>
@@ -93,7 +93,6 @@ const Lawyer = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <motion.section 
@@ -107,13 +106,13 @@ const Lawyer = () => {
             Our Distinguished Legal Team
           </h1>
           <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
-            Settle Smart Solution's premier attorneys bring unparalleled expertise 
+            Settle Smart Solution&rsquo;s premier attorneys bring unparalleled expertise 
             and dedication to every case, ensuring your legal matters are handled 
             with the utmost professionalism.
           </p>
         </motion.section>
 
-        {/* Practice Area Filters */}
+        {/* Filters */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -137,7 +136,7 @@ const Lawyer = () => {
           ))}
         </motion.div>
 
-        {/* Lawyers Carousel */}
+        {/* Carousel */}
         {filteredLawyers.length > 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -145,10 +144,10 @@ const Lawyer = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
           >
             <Carousel
-              showArrows={true}
+              showArrows
               showThumbs={false}
               showStatus={false}
-              infiniteLoop={true}
+              infiniteLoop
               renderArrowPrev={(onClickHandler, hasPrev) =>
                 hasPrev && <CustomArrow direction="prev" onClick={onClickHandler} />
               }
@@ -163,16 +162,18 @@ const Lawyer = () => {
                   className="p-6 md:p-8 rounded-2xl bg-white shadow-xl mx-2 md:mx-4 border border-gray-200"
                 >
                   <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Lawyer Image */}
+                    {/* Image */}
                     <div className="w-full lg:w-1/3 flex flex-col items-center">
                       <motion.div
                         whileHover={{ scale: 1.02 }}
                         className="relative group"
                       >
-                        <img
+                        <Image
                           src={lawyer.image}
                           alt={lawyer.name}
-                          className="w-48 h-48 md:w-56 md:h-56 object-cover rounded-lg shadow-md border-4 border-blue-500/10 group-hover:border-blue-500/30 transition-all duration-300"
+                          width={220}
+                          height={220}
+                          className="object-cover rounded-lg shadow-md border-4 border-blue-500/10 group-hover:border-blue-500/30 transition-all duration-300"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                           <span className="text-white font-medium">
@@ -180,27 +181,19 @@ const Lawyer = () => {
                           </span>
                         </div>
                       </motion.div>
-                      
-                      {/* Contact Buttons */}
+
+                      {/* Contact */}
                       <div className="flex gap-4 mt-6">
-                        <a
-                          href={`tel:${lawyer.phone}`}
-                          className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600/20 hover:bg-blue-600/30 text-blue-600 transition-all duration-300 shadow hover:shadow-md"
-                          aria-label="Call attorney"
-                        >
+                        <a href={`tel:${lawyer.phone}`} className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-600/20 hover:bg-blue-600/30 text-blue-600 transition-all shadow">
                           <FaPhone />
                         </a>
-                        <a
-                          href={`mailto:${lawyer.email}`}
-                          className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600/20 hover:bg-blue-600/30 text-blue-600 transition-all duration-300 shadow hover:shadow-md"
-                          aria-label="Email attorney"
-                        >
+                        <a href={`mailto:${lawyer.email}`} className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-600/20 hover:bg-blue-600/30 text-blue-600 transition-all shadow">
                           <FaEnvelope />
                         </a>
                       </div>
                     </div>
-                    
-                    {/* Lawyer Details */}
+
+                    {/* Details */}
                     <div className="w-full lg:w-2/3">
                       <div className="flex flex-col h-full">
                         <div>
@@ -210,75 +203,62 @@ const Lawyer = () => {
                           <p className="text-lg mb-4 text-blue-600 font-medium">
                             {lawyer.title}
                           </p>
-                          
+
                           <div className="flex items-center mb-4">
                             {renderStars(lawyer.rating)}
                             <span className="ml-2 text-gray-600 text-sm">
                               ({lawyer.reviews} client reviews)
                             </span>
                           </div>
-                          
+
                           <p className="mb-6 text-gray-600 leading-relaxed">
                             {lawyer.description}
                           </p>
                         </div>
-                        
+
                         <div className="mt-auto">
-                          {/* Professional Details */}
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <div className="flex items-start">
-                              <FaBriefcase className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
+                              <FaBriefcase className="text-blue-600 mt-1 mr-2" />
                               <div>
                                 <p className="font-medium text-gray-800">Experience</p>
-                                <p className="text-gray-600">
-                                  {lawyer.experience} years in practice
-                                </p>
+                                <p className="text-gray-600">{lawyer.experience} years in practice</p>
                               </div>
                             </div>
                             <div className="flex items-start">
-                              <FaGraduationCap className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
+                              <FaGraduationCap className="text-blue-600 mt-1 mr-2" />
                               <div>
                                 <p className="font-medium text-gray-800">Education</p>
-                                <p className="text-gray-600">
-                                  {lawyer.education || "Juris Doctor"}
-                                </p>
+                                <p className="text-gray-600">{lawyer.education || "Juris Doctor"}</p>
                               </div>
                             </div>
                             <div className="flex items-start">
-                              <GiScaleMail className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
+                              <GiScaleMail className="text-blue-600 mt-1 mr-2" />
                               <div>
                                 <p className="font-medium text-gray-800">Practice Areas</p>
-                                <p className="text-gray-600">
-                                  {lawyer.practiceAreas?.join(", ") || "Multiple practice areas"}
-                                </p>
+                                <p className="text-gray-600">{lawyer.practiceAreas?.join(", ")}</p>
                               </div>
                             </div>
                             <div className="flex items-start">
-                              <FaMapMarkerAlt className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
+                              <FaMapMarkerAlt className="text-blue-600 mt-1 mr-2" />
                               <div>
                                 <p className="font-medium text-gray-800">Location</p>
-                                <p className="text-gray-600">
-                                  {lawyer.location}
-                                </p>
+                                <p className="text-gray-600">{lawyer.location}</p>
                               </div>
                             </div>
                           </div>
-                          
-                          {/* Social Links */}
+
+                          {/* Social */}
                           <div className="flex gap-4 border-t pt-4 border-gray-200">
-                            {[
-                              { icon: FaLinkedin, label: "LinkedIn" },
-                              { icon: FaTwitter, label: "Twitter" },
-                              { icon: FaInstagram, label: "Instagram" },
-                            ].map((social, idx) => (
+                            {[FaLinkedin, FaTwitter, FaInstagram].map((Icon, idx) => (
                               <motion.a
                                 key={idx}
                                 whileHover={{ y: -2 }}
                                 href="#"
-                                className="text-lg text-gray-600 hover:text-blue-700 transition-colors duration-300"
-                                aria-label={`Connect on ${social.label}`}
+                                className="text-lg text-gray-600 hover:text-blue-700 transition-colors"
+                                aria-label={`Connect on ${Icon.name}`}
                               >
-                                <social.icon />
+                                <Icon />
                               </motion.a>
                             ))}
                           </div>
@@ -302,7 +282,7 @@ const Lawyer = () => {
                 No attorneys found in this practice area
               </h3>
               <p className="text-gray-600 mb-6">
-                We currently don't have attorneys specializing in this area, but our 
+                We currently don&rsquo;t have attorneys specializing in this area, but our 
                 general practice team can still assist you or refer you to qualified specialists.
               </p>
               <motion.button

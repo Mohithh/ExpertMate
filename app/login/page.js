@@ -6,7 +6,9 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import Email from "@/app/assets/email.svg"; // make sure this file exists
+
 import Image from "next/image";
+
 
 
 export default function LoginPage() {
@@ -61,7 +63,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
       <div className="flex max-w-5xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden">
-        
+
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-10">
           <h2 className="text-4xl font-bold text-indigo-700 mb-2">Welcome Back</h2>
@@ -123,11 +125,14 @@ export default function LoginPage() {
 
         {/* Right Side - Illustration */}
         <div className="hidden md:block md:w-1/2 bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center p-8">
-          <img
-                    src={Email.src}
-                    alt="Signup Illustration"
-                    className="w-full h-auto object-contain rounded-lg"
-                  />
+          <Image
+            src={Email}
+            alt="Signup Illustration"
+            className="w-full h-auto object-contain rounded-lg"
+            placeholder="blur"
+            priority
+          />
+
         </div>
       </div>
 

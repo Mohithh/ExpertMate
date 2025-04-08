@@ -4,10 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Image from "next/image";
 
 import Singup from "@/app/assets/singup.svg"; // make sure this file exists
-import Image from "next/image";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -135,11 +134,12 @@ export default function SignUpPage() {
 
         {/* Right Side - Illustration */}
         <div className="hidden md:flex md:w-1/2 items-center justify-center bg-gradient-to-br from-emerald-400 to-green-500 p-8">
-        <img
-          src={Singup.src}
-          alt="Signup Illustration"
-          className="w-full h-auto object-contain rounded-lg"
-        />
+          <Image
+            src={Singup}
+            alt="Signup Illustration"
+            className="w-full h-auto object-contain rounded-lg"
+            priority // Optional: if this image is above the fold
+          />
         </div>
       </div>
 
