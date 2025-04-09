@@ -142,9 +142,8 @@ const TeamPage = () => {
     <motion.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className={`absolute top-1/2 z-20 -translate-y-1/2 flex items-center justify-center w-12 h-12 bg-blue-600/30 hover:bg-blue-600/40 text-blue-600 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 ${
-        direction === "prev" ? "left-4" : "right-4"
-      }`}
+      className={`absolute top-1/2 z-20 -translate-y-1/2 flex items-center justify-center w-12 h-12 bg-blue-600/30 hover:bg-blue-600/40 text-blue-600 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 ${direction === "prev" ? "left-4" : "right-4"
+        }`}
       onClick={onClick}
       aria-label={direction === "prev" ? "Previous Slide" : "Next Slide"}
     >
@@ -175,7 +174,7 @@ const TeamPage = () => {
     <div className="min-h-screen bg-white">
       <Header />
       <main className="container mx-auto px-4 py-12">
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -188,11 +187,12 @@ const TeamPage = () => {
             Our Leadership
           </h1>
           <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
-            Settle Smart's team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
+            Settle Smart&apos;s team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
           </p>
+
         </motion.section>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -204,11 +204,10 @@ const TeamPage = () => {
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2 rounded-lg transition-all duration-300 text-sm md:text-base ${
-                activeTab === tab.id
+              className={`px-5 py-2 rounded-lg transition-all duration-300 text-sm md:text-base ${activeTab === tab.id
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-white text-gray-700 hover:bg-gray-100 shadow-md border border-gray-200"
-              }`}
+                }`}
             >
               {tab.name}
             </motion.button>
@@ -265,15 +264,15 @@ const TeamPage = () => {
                     </motion.div>
 
                     <div className="flex gap-4 mt-6">
-                      <a 
-                        href={`tel:${member.phone}`} 
+                      <a
+                        href={`tel:${member.phone}`}
                         className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors text-sm"
                         title="Call"
                       >
                         <FaPhone className="mr-2 text-blue-600" />
                         Contact
                       </a>
-                      <a 
+                      <a
                         href={`mailto:${member.email}`}
                         className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
                         title="Email"
@@ -307,7 +306,7 @@ const TeamPage = () => {
                               <p className="text-gray-600">{member.experience}</p>
                             </div>
                           </div>
-                          
+
                           <div className="flex items-start">
                             <FaUniversity className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
                             <div>
@@ -315,7 +314,7 @@ const TeamPage = () => {
                               <p className="text-gray-600">{member.education}</p>
                             </div>
                           </div>
-                          
+
                           <div className="flex items-start">
                             <FaBalanceScale className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
                             <div>
@@ -327,7 +326,7 @@ const TeamPage = () => {
                               </p>
                             </div>
                           </div>
-                          
+
                           <div className="flex items-start">
                             <FaMapMarkerAlt className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
                             <div>
