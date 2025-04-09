@@ -3,6 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Amit from "@/app/assets/amit.png";
+import Rudra from "@/app/assets/rudra.png";
+// import PankajRishi from "@/app/assets/pankaj-rishi.jpg";
+// import c from "@/app/assets/harsha-anand.jpg";
+// import AmitSharma from "@/app/assets/amit-sharma.jpg";
+
 import {
   FaLinkedin,
   FaPhone,
@@ -43,81 +49,81 @@ const TeamPage = () => {
     advocates: [
       {
         id: 1,
-        name: "Adv. Rajesh Verma",
-        title: "Senior Partner - Litigation",
-        image: "/team/advocate-1.jpg",
-        experience: "18 years at Supreme Court & High Courts",
-        education: "LL.B, Campus Law Centre, Delhi University",
-        practiceAreas: ["Commercial Litigation", "Arbitration"],
+        name: "Adv. Pankaj Rishi Krishnan",
+        title: "Board of Directors & Head—ODR/Dispute Resolution (Civil, Matrimonial & Property Matters)",
+        image: "",
+        experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
+        education: "B.S., M.S., LL.B., LL.M., PGD in ADR, Diploma in Constitutional Law (DCL), and Intellectual Property Rights (DIPR)",
+        practiceAreas: ["Civil Litigation", "Matrimonial Disputes", "Property Matters", "Criminal Law"],
         location: "New Delhi",
-        phone: "+91 98765 43211",
-        email: "r.verma@settlesmart.com",
-        description: "Leads our litigation practice with over 200 cases argued before superior courts. Known for meticulous case preparation and persuasive advocacy."
+        phone: "+91 XXXXX XXXXX",
+        email: "pankaj.krishnan@settlesmart.com",
+        description: "Distinguished Supreme Court lawyer and legal research scholar with vast experience across premier legal forums. Professor of criminal & constitutional law for State PCS and UPSC civil services aspirants. Known for precision in legal drafting and thorough research."
       },
       {
         id: 2,
-        name: "Adv. Priya Sharma",
-        title: "Partner - Corporate Law",
-        image: "/team/advocate-2.jpg",
-        experience: "15 years in corporate transactions",
-        education: "LL.M, Harvard Law School",
-        practiceAreas: ["M&A", "Private Equity", "Compliance"],
-        location: "Mumbai",
-        phone: "+91 98765 43212",
-        email: "p.sharma@settlesmart.com",
-        description: "Heads our corporate practice, advising Fortune 500 companies and startups on complex transactions and regulatory matters."
+        name: "Adv. Harsha Sharma & Adv. Anand Dubey",
+        title: "Founders & Partners – Konrad Legal LLP | Heads – ODR & Dispute Resolution",
+        image: "",
+        experience: "PAN-India practice before Supreme Court, High Courts, trial courts, tribunals",
+        education: "LL.B. (Delhi University) & LL.M. (Business Law)",
+        practiceAreas: ["ADR", "Labour & Employment", "Consumer Disputes", "Debt Recovery", "Service Matters", "MV Accident Claims"],
+        location: "New Delhi",
+        phone: "+91 XXXXX XXXXX",
+        email: "odr-team@settlesmart.com",
+        description: "Seasoned legal professionals with dynamic approach to dispute resolution. Specialize in Corporate and Commercial Litigation, Banking & Finance, Insurance, Insolvency, Criminal & Civil Disputes. Committed to revolutionizing dispute resolution through technology."
       }
     ],
     leadership: [
       {
         id: 1,
-        name: "Rudra N. Zadu",
-        title: "Chief Legal Officer",
-        image: "/team/rudra-zadu.jpg",
-        experience: "20 years in legal operations",
-        education: "LL.M, University of Oxford",
-        role: "Legal strategy and risk management",
-        location: "Bangalore",
-        phone: "+91 98765 43213",
-        email: "r.zadu@settlesmart.com",
-        description: "Oversees all legal operations, ensuring the highest standards of practice and ethical compliance across our offices."
+        name: "Adv. Rudra N. Zadu",
+        title: "Chief Legal Officer & Head – ODR/Dispute Resolution (Corporate & Financial Law)",
+        image: Rudra,
+        experience: "Leadership over 40+ legal professionals across six cities",
+        education: "LL.M. in Corporate and Financial Laws (O.P. Jindal Global Law School) | B.A. LL.B. (D.E.S. Law College, Pune)",
+        role: "Corporate Law, Financial Law, Capital Markets, Private Equity, M&A",
+        location: "Pune",
+        phone: "+91 XXXXX XXXXX",
+        email: "rudra.zadu@settlesmart.com",
+        description: "Accomplished Corporate Lawyer and Managing Director of Corporate Consultants. Expert in Corporate Law, Financial Law, Capital Markets, Private Equity, M&A, and Contractual Compliance. Certified in Cyber Laws, Corporate Laws, Energy Laws, and Privacy Regulations."
       },
       {
         id: 2,
-        name: "Aman Bhatti",
-        title: "Chief Technology Officer",
-        image: "/team/aman-bhatti.jpg",
-        experience: "12 years in legal technology",
-        education: "M.Tech, IIT Delhi",
-        role: "Legal tech innovation",
-        location: "Hyderabad",
-        phone: "+91 98765 43214",
-        email: "a.bhatti@settlesmart.com",
-        description: "Pioneers our legal tech initiatives, developing proprietary tools for case management and client collaboration."
+        name: "Adv. Amit Kumar Sharma",
+        title: "Board of Directors & Head—ODR & Dispute Resolution (Taxation, Corporate & Commercial Law)",
+        image: Amit,
+        experience: "8+ years before J&K High Court, CAT, AFT, Sales Tax Tribunals, NCLT, NCLAT",
+        education: "LL.M. in Business Law (Rajiv Gandhi National University of Law) | B.A., LL.B. (University of Jammu)",
+        role: "Taxation, Corporate Governance, Commercial Disputes",
+        location: "Jammu",
+        phone: "+91 XXXXX XXXXX",
+        email: "amit.sharma@settlesmart.com",
+        description: "Taxation and corporate law expert with sharp analytical skills. Handles complex commercial and tax matters with precision. Strengthens our ODR platform with expertise in taxation, corporate governance, and commercial disputes."
       }
     ],
     board: [
       {
         id: 1,
-        name: "Amit Sharma",
-        title: "Chairman",
-        image: "/team/amit-sharma.jpg",
-        experience: "35 years in corporate governance",
-        education: "MBA, IIM Ahmedabad",
-        role: "Board governance and strategic oversight",
-        tenure: "Board member since 2010",
-        description: "Practising Lawyer at J&K High Court."
+        name: "Adv. Pankaj Rishi Krishnan",
+        title: "Board of Directors & Head—ODR/Dispute Resolution",
+        image: "",
+        experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
+        education: "B.S., M.S., LL.B., LL.M., PGD in ADR, DCL, DIPR",
+        role: "Civil, Matrimonial & Property Dispute Resolution",
+        tenure: "Professor - Criminal & Constitutional Law at State PCS & UPSC Civil Service",
+        description: "Distinguished Supreme Court lawyer with expertise in prosecution and defense across complex cases. Renowned for crafting precise legal petitions with exceptional clarity and depth."
       },
       {
         id: 2,
-        name: "Pankaj Rishi Krishnan",
-        title: "Independent Director",
-        image: "/team/pankaj-rishi.jpg",
-        experience: "30 years in finance and investments",
-        education: "CA, CFA",
-        role: "Financial strategy and risk assessment",
-        tenure: "Board member since 2015",
-        description: "Seasoned financial expert who guides our firm's fiscal strategy and growth initiatives."
+        name: "Adv. Amit Kumar Sharma",
+        title: "Board of Directors & Head—ODR & Dispute Resolution",
+        image: "",
+        experience: "Taxation and Corporate Law Expert",
+        education: "LL.M. in Business Law (RGNUL) | B.A., LL.B. (University of Jammu)",
+        role: "Taxation, Corporate & Commercial Law",
+        tenure: "Practising Lawyer at J&K High Court",
+        description: "Seasoned practitioner before various tribunals including CAT, AFT, Sales Tax Tribunals, NCLT, NCLAT, and Income Tax Appellate Tribunals."
       }
     ]
   };
@@ -180,8 +186,9 @@ const TeamPage = () => {
             Our Legal Leadership
           </h1>
           <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
-  Settle Smart&apos;s team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
+  Settle Smart&#39;s team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
 </p>
+
         </motion.section>
 
         {/* Navigation Tabs */}
@@ -233,19 +240,25 @@ const TeamPage = () => {
                 className="p-6 md:p-8 rounded-2xl bg-white shadow-xl mx-2 md:mx-4 border border-gray-200"
               >
                 <div className="flex flex-col lg:flex-row gap-8">
-                  {/* Image Column */}
+                  {/* Image Column - Fixed */}
                   <div className="w-full lg:w-1/3 flex flex-col items-center">
                     <motion.div
                       whileHover={{ scale: 1.02 }}
-                      className="relative group"
+                      className="relative group w-[280px] h-[280px]"
                     >
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        width={280}
-                        height={280}
-                        className="object-cover rounded-lg shadow-md border-4 border-blue-500/10 group-hover:border-blue-500/30 transition-all duration-300"
-                      />
+                      {member.image ? (
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover rounded-lg shadow-md border-4 border-blue-500/10 group-hover:border-blue-500/30 transition-all duration-300"
+                          priority
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+                          <span className="text-gray-500">No Image Available</span>
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                         <span className="text-white font-medium">
                           {member.title}
@@ -292,22 +305,27 @@ const TeamPage = () => {
 
                       <div className="mt-auto">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                          <div className="flex items-start">
-                            <FaBriefcase className="text-blue-600 mt-1 mr-2" />
+                          {/* Experience - Fixed gap */}
+                          <div className="flex items-start gap-2">
+                            <FaBriefcase className="text-blue-600 mt-1" />
                             <div>
                               <p className="font-medium text-gray-800">Experience</p>
                               <p className="text-gray-600">{member.experience}</p>
                             </div>
                           </div>
-                          <div className="flex items-start">
-                            <FaGraduationCap className="text-blue-600 mt-1 mr-2" />
+                          
+                          {/* Education - Fixed gap */}
+                          <div className="flex items-start gap-2">
+                            <FaGraduationCap className="text-blue-600 mt-1" />
                             <div>
                               <p className="font-medium text-gray-800">Education</p>
                               <p className="text-gray-600">{member.education}</p>
                             </div>
                           </div>
-                          <div className="flex items-start">
-                            <GiScaleMail className="text-blue-600 mt-1 mr-2" />
+                          
+                          {/* Practice Areas - Fixed gap */}
+                          <div className="flex items-start gap-2">
+                            <GiScaleMail className="text-blue-600 mt-1" />
                             <div>
                               <p className="font-medium text-gray-800">
                                 {member.practiceAreas ? "Practice Areas" : "Role"}
@@ -317,8 +335,10 @@ const TeamPage = () => {
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start">
-                            <FaMapMarkerAlt className="text-blue-600 mt-1 mr-2" />
+                          
+                          {/* Location - Fixed gap */}
+                          <div className="flex items-start gap-2">
+                            <FaMapMarkerAlt className="text-blue-600 mt-1" />
                             <div>
                               <p className="font-medium text-gray-800">Location</p>
                               <p className="text-gray-600">{member.location}</p>
@@ -353,12 +373,12 @@ const TeamPage = () => {
           viewport={{ once: true }}
           className="mt-20 max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Settle Smart Legal Solutions</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">SettleSmart Solutions</h2>
           <p className="text-gray-600 leading-relaxed">
-  Founded in 2005, Settle Smart has grown into one of India&apos;s most respected full-service law firms.
-  Our team of 50+ legal professionals operates across six major cities, delivering strategic counsel
-  and exceptional representation to clients ranging from Fortune 500 companies to individual entrepreneurs.
-</p>
+            Our multi-disciplinary ODR platform combines decades of litigation expertise with technology-driven dispute resolution.
+            With specialists across civil, criminal, corporate, tax, matrimonial, labour, and financial disputes, we deliver
+            efficient, cost-effective justice through our team of Supreme Court lawyers, corporate law experts, and ADR specialists.
+          </p>
         </motion.section>
       </main>
     </div>
