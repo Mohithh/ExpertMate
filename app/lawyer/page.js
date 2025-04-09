@@ -5,17 +5,19 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Amit from "@/app/assets/amit.png";
 import Rudra from "@/app/assets/rudra.png";
-// import PankajRishi from "@/app/assets/pankaj-rishi.jpg";
-// import c from "@/app/assets/harsha-anand.jpg";
-// import AmitSharma from "@/app/assets/amit-sharma.jpg";
-
+import Harsha from "@/app/assets/harsha1.png";
+import Pankaj from "@/app/assets/pankaj1.png";
+import Anand from "@/app/assets/anand.png";
 import {
   FaLinkedin,
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
   FaBriefcase,
-  FaGraduationCap
+  FaUniversity,
+  FaTwitter,
+  FaInstagram,
+  FaBalanceScale
 } from "react-icons/fa";
 import { GiScaleMail } from "react-icons/gi";
 import { motion } from "framer-motion";
@@ -35,50 +37,22 @@ const TeamPage = () => {
       {
         id: 1,
         name: "Nageshwar Singh",
-        title: "Founder & Managing Director",
+        title: "Founder & Chief Managing Director",
         image: "",
         experience: "",
         education: "BLLB Chandigarh University",
         role: "Strategic leadership and firm governance",
         location: "New Delhi",
         phone: "+91 91499 45265",
-        email: "choudharyyuvan8@gmail.com",
+        email: "ns677112@gmail.com",
         description: "Legal Acumen & Experiential Scholar || Author || Corporate & Financial Laws || Former Intern at Khaitan & Co., LK & S, Reliance Retail Ltd.(Legal), Trilegal."
-      }
-    ],
-    advocates: [
-      {
-        id: 1,
-        name: "Adv. Pankaj Rishi Krishnan",
-        title: "Board of Directors & Head—ODR/Dispute Resolution (Civil, Matrimonial & Property Matters)",
-        image: "",
-        experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
-        education: "B.S., M.S., LL.B., LL.M., PGD in ADR, Diploma in Constitutional Law (DCL), and Intellectual Property Rights (DIPR)",
-        practiceAreas: ["Civil Litigation", "Matrimonial Disputes", "Property Matters", "Criminal Law"],
-        location: "New Delhi",
-        phone: "+91 XXXXX XXXXX",
-        email: "pankaj.krishnan@settlesmart.com",
-        description: "Distinguished Supreme Court lawyer and legal research scholar with vast experience across premier legal forums. Professor of criminal & constitutional law for State PCS and UPSC civil services aspirants. Known for precision in legal drafting and thorough research."
-      },
-      {
-        id: 2,
-        name: "Adv. Harsha Sharma & Adv. Anand Dubey",
-        title: "Founders & Partners – Konrad Legal LLP | Heads – ODR & Dispute Resolution",
-        image: "",
-        experience: "PAN-India practice before Supreme Court, High Courts, trial courts, tribunals",
-        education: "LL.B. (Delhi University) & LL.M. (Business Law)",
-        practiceAreas: ["ADR", "Labour & Employment", "Consumer Disputes", "Debt Recovery", "Service Matters", "MV Accident Claims"],
-        location: "New Delhi",
-        phone: "+91 XXXXX XXXXX",
-        email: "odr-team@settlesmart.com",
-        description: "Seasoned legal professionals with dynamic approach to dispute resolution. Specialize in Corporate and Commercial Litigation, Banking & Finance, Insurance, Insolvency, Criminal & Civil Disputes. Committed to revolutionizing dispute resolution through technology."
       }
     ],
     leadership: [
       {
         id: 1,
-        name: "Adv. Rudra N. Zadu",
-        title: "Chief Legal Officer & Head – ODR/Dispute Resolution (Corporate & Financial Law)",
+        name: "Rudra N. Zadu",
+        title: "Chief Legal Officer",
         image: Rudra,
         experience: "Leadership over 40+ legal professionals across six cities",
         education: "LL.M. in Corporate and Financial Laws (O.P. Jindal Global Law School) | B.A. LL.B. (D.E.S. Law College, Pune)",
@@ -90,8 +64,23 @@ const TeamPage = () => {
       },
       {
         id: 2,
-        name: "Adv. Amit Kumar Sharma",
-        title: "Board of Directors & Head—ODR & Dispute Resolution (Taxation, Corporate & Commercial Law)",
+        name: "Aman Bhatti",
+        title: "Chief Technology Officer",
+        image: "/images/team/aman-bhatti.webp",
+        experience: "Skilled in full-stack web development with hands-on project and internship experience",
+        education: "B.E. in Computer Science Engineering, Chandigarh University",
+        role: "Technology Strategy, Product Development, Innovation",
+        location: "Gurgaon, India",
+        phone: "+91 9992422581",
+        email: "amanbhatti105@gmail.com",
+        description: "Aspiring tech leader with strong foundation in front-end and back-end development. Proficient in React.js, PHP, and modern web technologies. Passionate about creating innovative legal tech platforms that simplify and streamline dispute resolution processes. Experienced through internships and personal projects focused on real-world problem solving."
+      }
+    ],
+    board: [
+      {
+        id: 1,
+        name: "Amit Kumar Sharma",
+        title: "Board of Directors",
         image: Amit,
         experience: "8+ years before J&K High Court, CAT, AFT, Sales Tax Tribunals, NCLT, NCLAT",
         education: "LL.M. in Business Law (Rajiv Gandhi National University of Law) | B.A., LL.B. (University of Jammu)",
@@ -100,37 +89,51 @@ const TeamPage = () => {
         phone: "+91 XXXXX XXXXX",
         email: "amit.sharma@settlesmart.com",
         description: "Taxation and corporate law expert with sharp analytical skills. Handles complex commercial and tax matters with precision. Strengthens our ODR platform with expertise in taxation, corporate governance, and commercial disputes."
-      }
-    ],
-    board: [
-      {
-        id: 1,
-        name: "Adv. Pankaj Rishi Krishnan",
-        title: "Board of Directors & Head—ODR/Dispute Resolution",
-        image: "",
-        experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
-        education: "B.S., M.S., LL.B., LL.M., PGD in ADR, DCL, DIPR",
-        role: "Civil, Matrimonial & Property Dispute Resolution",
-        tenure: "Professor - Criminal & Constitutional Law at State PCS & UPSC Civil Service",
-        description: "Distinguished Supreme Court lawyer with expertise in prosecution and defense across complex cases. Renowned for crafting precise legal petitions with exceptional clarity and depth."
       },
       {
         id: 2,
-        name: "Adv. Amit Kumar Sharma",
-        title: "Board of Directors & Head—ODR & Dispute Resolution",
-        image: "",
-        experience: "Taxation and Corporate Law Expert",
-        education: "LL.M. in Business Law (RGNUL) | B.A., LL.B. (University of Jammu)",
-        role: "Taxation, Corporate & Commercial Law",
-        tenure: "Practising Lawyer at J&K High Court",
-        description: "Seasoned practitioner before various tribunals including CAT, AFT, Sales Tax Tribunals, NCLT, NCLAT, and Income Tax Appellate Tribunals."
+        name: "Pankaj Rishi Krishnan",
+        title: "Board of Directors",
+        image: Pankaj,
+        experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
+        education: "B.S., M.S., LL.B., LL.M., PGD in ADR, Diploma in Constitutional Law (DCL), and Intellectual Property Rights (DIPR)",
+        role: "Civil Litigation, Matrimonial Disputes, Property Matters, Criminal Law",
+        location: "New Delhi",
+        phone: "+91 XXXXX XXXXX",
+        email: "pankaj.krishnan@settlesmart.com",
+        description: "Distinguished Supreme Court lawyer and legal research scholar with vast experience across premier legal forums. Professor of criminal & constitutional law for State PCS and UPSC civil services aspirants. Known for precision in legal drafting and thorough research."
+      },
+      {
+        id: 3,
+        name: "Harsha Sharma",
+        title: "Board of Directors",
+        image: Harsha,
+        experience: "PAN-India practice before Supreme Court, High Courts, trial courts, tribunals",
+        education: "LL.B. (Delhi University) & LL.M. (Business Law)",
+        role: "ADR, Labour & Employment, Consumer Disputes, Debt Recovery, Service Matters, MV Accident Claims",
+        location: "New Delhi",
+        phone: "+91 XXXXX XXXXX",
+        email: "harsha.sharma@settlesmart.com",
+        description: "Seasoned legal professional with dynamic approach to dispute resolution. Specialize in Corporate and Commercial Litigation, Banking & Finance, Insurance, Insolvency, Criminal & Civil Disputes."
+      },
+      {
+        id: 4,
+        name: "Anand Dubey",
+        title: "Board of Directors",
+        image: Anand,
+        experience: "Extensive experience in corporate and commercial litigation",
+        education: "LL.B. (Delhi University) & LL.M. (Business Law)",
+        role: "Corporate and Commercial Disputes, Banking & Finance, Insolvency",
+        location: "New Delhi",
+        phone: "+91 XXXXX XXXXX",
+        email: "anand.dubey@settlesmart.com",
+        description: "Expert in corporate and commercial litigation with a focus on delivering strategic legal solutions. Committed to revolutionizing dispute resolution through innovative approaches."
       }
     ]
   };
 
   const tabs = [
     { id: "management", name: "Management" },
-    { id: "advocates", name: "Advocates" },
     { id: "leadership", name: "Leadership" },
     { id: "board", name: "Board of Directors" }
   ];
@@ -161,7 +164,7 @@ const TeamPage = () => {
             className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full mb-4"
           />
           <p className="text-lg font-medium text-gray-600">
-            Loading our legal team...
+            Loading our leadership team...
           </p>
         </div>
       </div>
@@ -172,7 +175,6 @@ const TeamPage = () => {
     <div className="min-h-screen bg-white">
       <Header />
       <main className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
         <motion.section 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -183,15 +185,13 @@ const TeamPage = () => {
             <GiScaleMail className="text-3xl text-blue-600" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-            Our Legal Leadership
+            Our Leadership
           </h1>
           <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
-  Settle Smart&#39;s team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
-</p>
-
+            Settle Smart's team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
+          </p>
         </motion.section>
 
-        {/* Navigation Tabs */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -215,7 +215,6 @@ const TeamPage = () => {
           ))}
         </motion.div>
 
-        {/* Team Section */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -240,7 +239,6 @@ const TeamPage = () => {
                 className="p-6 md:p-8 rounded-2xl bg-white shadow-xl mx-2 md:mx-4 border border-gray-200"
               >
                 <div className="flex flex-col lg:flex-row gap-8">
-                  {/* Image Column - Fixed */}
                   <div className="w-full lg:w-1/3 flex flex-col items-center">
                     <motion.div
                       whileHover={{ scale: 1.02 }}
@@ -266,7 +264,6 @@ const TeamPage = () => {
                       </div>
                     </motion.div>
 
-                    {/* Contact Options */}
                     <div className="flex gap-4 mt-6">
                       <a 
                         href={`tel:${member.phone}`} 
@@ -287,7 +284,6 @@ const TeamPage = () => {
                     </div>
                   </div>
 
-                  {/* Details Column */}
                   <div className="w-full lg:w-2/3">
                     <div className="flex flex-col h-full">
                       <div>
@@ -297,7 +293,6 @@ const TeamPage = () => {
                         <p className="text-lg mb-4 text-blue-600 font-medium">
                           {member.title}
                         </p>
-
                         <p className="mb-6 text-gray-600 leading-relaxed">
                           {member.description}
                         </p>
@@ -305,27 +300,24 @@ const TeamPage = () => {
 
                       <div className="mt-auto">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                          {/* Experience - Fixed gap */}
-                          <div className="flex items-start gap-2">
-                            <FaBriefcase className="text-blue-600 mt-1" />
+                          <div className="flex items-start">
+                            <FaBriefcase className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
                             <div>
                               <p className="font-medium text-gray-800">Experience</p>
                               <p className="text-gray-600">{member.experience}</p>
                             </div>
                           </div>
                           
-                          {/* Education - Fixed gap */}
-                          <div className="flex items-start gap-2">
-                            <FaGraduationCap className="text-blue-600 mt-1" />
+                          <div className="flex items-start">
+                            <FaUniversity className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
                             <div>
                               <p className="font-medium text-gray-800">Education</p>
                               <p className="text-gray-600">{member.education}</p>
                             </div>
                           </div>
                           
-                          {/* Practice Areas - Fixed gap */}
-                          <div className="flex items-start gap-2">
-                            <GiScaleMail className="text-blue-600 mt-1" />
+                          <div className="flex items-start">
+                            <FaBalanceScale className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
                             <div>
                               <p className="font-medium text-gray-800">
                                 {member.practiceAreas ? "Practice Areas" : "Role"}
@@ -336,9 +328,8 @@ const TeamPage = () => {
                             </div>
                           </div>
                           
-                          {/* Location - Fixed gap */}
-                          <div className="flex items-start gap-2">
-                            <FaMapMarkerAlt className="text-blue-600 mt-1" />
+                          <div className="flex items-start">
+                            <FaMapMarkerAlt className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
                             <div>
                               <p className="font-medium text-gray-800">Location</p>
                               <p className="text-gray-600">{member.location}</p>
@@ -355,6 +346,22 @@ const TeamPage = () => {
                           >
                             <FaLinkedin />
                           </motion.a>
+                          <motion.a
+                            whileHover={{ y: -2 }}
+                            href="#"
+                            className="text-lg text-gray-600 hover:text-blue-400 transition-colors"
+                            aria-label="Follow on Twitter"
+                          >
+                            <FaTwitter />
+                          </motion.a>
+                          <motion.a
+                            whileHover={{ y: -2 }}
+                            href="#"
+                            className="text-lg text-gray-600 hover:text-pink-600 transition-colors"
+                            aria-label="Follow on Instagram"
+                          >
+                            <FaInstagram />
+                          </motion.a>
                         </div>
                       </div>
                     </div>
@@ -365,7 +372,6 @@ const TeamPage = () => {
           </Carousel>
         </motion.div>
 
-        {/* Firm Description */}
         <motion.section
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
