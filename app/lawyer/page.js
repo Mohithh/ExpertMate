@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Amit from "@/app/assets/amit.png";
 import Rudra from "@/app/assets/rudra.png";
 import Harsha from "@/app/assets/harsha1.png";
-import Pankaj from "@/app/assets/pankaj1.png";
+import Pankaj from "@/app/assets/Pankaj1.png";
 import Anand from "@/app/assets/anand.png";
 import {
   FaLinkedin,
