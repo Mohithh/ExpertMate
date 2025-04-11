@@ -62,7 +62,7 @@ const ScheduleMeeting = () => {
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Meeting Scheduled!</h2>
           <p className="text-gray-600 mb-6">
-            We&apos;ve sent a Zoom link to {formData.email} and your team.
+            We&apos;ve sent a Zoom link to {formData.email} and your team
           </p>
 
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-left space-y-4">
