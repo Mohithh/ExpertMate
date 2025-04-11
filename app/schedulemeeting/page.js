@@ -16,8 +16,8 @@ const ScheduleMeeting = () => {
   const [success, setSuccess] = useState(false);
 
   const timeSlots = [
-    '09:00', '10:00', '11:00', 
-    '12:00', '13:00', '14:00', 
+    '09:00', '10:00', '11:00',
+    '12:00', '13:00', '14:00',
     '15:00', '16:00'
   ];
 
@@ -62,8 +62,9 @@ const ScheduleMeeting = () => {
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Meeting Scheduled!</h2>
           <p className="text-gray-600 mb-6">
-            We've sent a Zoom link to {formData.email} and your team.
+            We&apos;ve sent a Zoom link to {formData.email} and your team.
           </p>
+
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-left space-y-4">
             <div className="flex items-start">
               <Calendar className="h-5 w-5 text-blue-500 mt-0.5 mr-3" />
@@ -94,7 +95,7 @@ const ScheduleMeeting = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       <div className="max-w-md mx-auto px-4 py-12">
         <div className="text-center mb-8">
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 mb-3">
