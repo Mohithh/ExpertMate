@@ -7,7 +7,6 @@ const Page = () => {
     <div>
       <Header />  
       <Hero />
-      {/* Add more sections here */}
     </div>
   )
 }
