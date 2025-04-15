@@ -21,6 +21,8 @@ import Harsha from "@/app/assets/harsha11.jpeg";
 import Pankaj from "@/app/assets/Pankaj11.jpeg";
 import Anand from "@/app/assets/anand1.jpeg";
 import Nageshwar from "@/app/assets/nages.jpeg";
+// import Aman from "@/app/assets/Aman.jpg";
+import Bhatti from "@/app/assets/Bhatti.jpg";
 
 const TeamPage = () => {
   const [activeTab, setActiveTab] = useState("management");
@@ -78,7 +80,7 @@ const TeamPage = () => {
         id: 2,
         name: "Aman Bhatti",
         title: "Chief Technology Officer",
-        image: "/images/team/aman-bhatti.webp",
+        image: Bhatti,
         experience: "Skilled in full-stack web development with hands-on project and internship experience",
         education: "B.E. in Computer Science Engineering, Chandigarh University",
         role: "Technology Strategy, Product Development, Innovation",

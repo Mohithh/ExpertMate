@@ -5,6 +5,8 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import MeetingSchedule from "@/app/schedulemeeting/page"
+import Header from "@/app/header/page";
+
 const Hero = () => {
   const router = useRouter();
   const controls = useAnimation();
@@ -231,6 +233,20 @@ const Hero = () => {
 
   return (
     <div className="relative bg-white overflow-hidden" ref={ref}>
+      <Header />
+      
+      {/* Slogan Banner */}
+      <div className="bg-gradient-to-r from-blue-800 to-blue-900 py-2 text-center">
+        <motion.p 
+          className="text-lg font-medium italic text-white tracking-wide"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          "from Vivaad se Samadhan Tak – Justice Delivered with Care"
+        </motion.p>
+      </div>
+
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div
@@ -647,7 +663,6 @@ const Hero = () => {
               <div className="text-sm text-gray-600">— Family Law Client</div>
               <div className="mx-8 text-gray-300">•</div>
             </div>
-
           ))}
         </motion.div>
       </motion.div>
