@@ -127,7 +127,7 @@ const ContactPage = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm">
           <h3 className="font-medium text-blue-700 mb-2">Visit Us</h3>
           <p className="text-gray-600">
-            Plot 123, Sector 45<br />Gurgaon, Haryana, India
+          Cannought Place<br />New Delhi
           </p>
         </div>
       </div>
