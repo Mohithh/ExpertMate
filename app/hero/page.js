@@ -234,17 +234,18 @@ const Hero = () => {
   return (
     <div className="relative bg-white overflow-hidden" ref={ref}>
       <Header />
-      
+
       {/* Slogan Banner */}
       <div className="bg-gradient-to-r from-blue-800 to-blue-900 py-2 text-center">
-        <motion.p 
+        <motion.p
           className="text-lg font-medium italic text-white tracking-wide"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          "from Vivaad se Samadhan Tak – Justice Delivered with Care"
+          &quot;from Vivaad se Samadhan Tak – Justice Delivered with Care&quot;
         </motion.p>
+
       </div>
 
       {/* Enhanced Animated Background */}
