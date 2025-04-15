@@ -16,7 +16,9 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaBriefcase,
-  FaBalanceScale
+  FaBalanceScale,
+  FaGraduationCap,
+  FaUserTie
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Header from "../header/page";
@@ -37,102 +39,102 @@ const TeamPage = () => {
         name: "Nageshwar Singh",
         title: "Founder & Chief Managing Director",
         image: Nageshwar,
-        experience: "",
-        education: "BLLB Chandigarh University",
+        experience: "Corporate Law Specialist with multiple high-profile internships",
+        education: "B.A. LL.B. (Honours), Corporate Law, Chandigarh University",
         role: "Strategic leadership and firm governance",
         location: "New Delhi",
         phone: "+91 91499 45265",
         email: "ns677112@gmail.com",
         linkedin: "https://www.linkedin.com/in/choudhary-nageshwar-singh-696808227/",
-        description: "Legal Acumen & Experiential Scholar || Author || Corporate & Financial Laws || Former Intern at Khaitan & Co., LK & S, Reliance Retail Ltd.(Legal), Trilegal."
+        description: "Legal scholar and corporate law expert with experience at Khaitan & Co., LKS, and Reliance Retail. Specializes in corporate and financial laws with strong research and advisory capabilities."
       }
     ],
     leadership: [
       {
         id: 1,
         name: "Rudra N. Zadu",
-        title: "Chief Legal Officer",
+        title: "Chief Legal Officer & Head of Corporate Dispute Resolution",
         image: Rudra,
-        experience: "Leadership over 40+ legal professionals across six cities",
-        education: "LL.M. in Corporate and Financial Laws (O.P. Jindal Global Law School) | B.A. LL.B. (D.E.S. Law College, Pune)",
-        role: "Corporate Law, Financial Law, Capital Markets, Private Equity, M&A",
-        location: "Pune",
-        phone: "+91 XXXXX XXXXX",
+        experience: "10+ years in corporate law and dispute resolution",
+        education: "LL.M. in Corporate and Financial Laws (O.P. Jindal Global University) | B.A. LL.B. (D.E.S. Law College, Pune)",
+        role: "Corporate Law, Financial Regulations, M&A, Private Equity",
+        location: "Pune, Mumbai",
+        phone: "+91 98220 84422",
         email: "rudra.zadu@settlesmart.com",
         linkedin: "https://www.linkedin.com/in/rudra-n-zadu-717200148/",
-        description: "Accomplished Corporate Lawyer and Managing Director of Corporate Consultants. Expert in Corporate Law, Financial Law, Capital Markets, Private Equity, M&A, and Contractual Compliance. Certified in Cyber Laws, Corporate Laws, Energy Laws, and Privacy Regulations."
+        description: "Corporate law expert with extensive experience in financial regulations, capital markets, and mergers & acquisitions. Certified in Cyber Law, Corporate Law, and Energy Law."
       },
       {
         id: 2,
         name: "Aman Bhatti",
         title: "Chief Technology Officer",
         image: "/images/team/aman-bhatti.webp",
-        experience: "Skilled in full-stack web development with hands-on project and internship experience",
+        experience: "Full-stack development with focus on legal tech solutions",
         education: "B.E. in Computer Science Engineering, Chandigarh University",
         role: "Technology Strategy, Product Development, Innovation",
         location: "Gurgaon, India",
-        phone: "+91 9992422581",
+        phone: "+91 99924 22581",
         email: "amanbhatti105@gmail.com",
         linkedin: "https://www.linkedin.com/in/amanbhatti01/",
-        description: "Aspiring tech leader with strong foundation in front-end and back-end development. Proficient in React.js, PHP, and modern web technologies. Passionate about creating innovative legal tech platforms that simplify and streamline dispute resolution processes. Experienced through internships and personal projects focused on real-world problem solving."
+        description: "Tech leader specializing in building innovative dispute resolution platforms. Expertise in React.js, Node.js, and cloud technologies to transform legal processes."
       }
     ],
     board: [
       {
         id: 1,
         name: "Amit Kumar Sharma",
-        title: "Board of Directors",
+        title: "Board Director & Head of Taxation Disputes",
         image: Amit,
-        experience: "8+ years before J&K High Court, CAT, AFT, Sales Tax Tribunals, NCLT, NCLAT",
-        education: "LL.M. in Business Law (Rajiv Gandhi National University of Law) | B.A., LL.B. (University of Jammu)",
-        role: "Taxation, Corporate Governance, Commercial Disputes",
-        location: "Jammu",
-        phone: "+91 XXXXX XXXXX",
+        experience: "8+ years before J&K High Court, NCLT, NCLAT, and Tax Tribunals",
+        education: "LL.M. in Business Law (RGNUL) | B.A., LL.B. (University of Jammu)",
+        role: "Taxation, Commercial Disputes, Corporate Governance",
+        location: "Jammu & New Delhi",
+        phone: "+91 94191 96940",
         email: "amit.sharma@settlesmart.com",
         linkedin: "https://www.linkedin.com/in/amit-sharma-ab33b5107/",
-        description: "Taxation and corporate law expert with sharp analytical skills. Handles complex commercial and tax matters with precision. Strengthens our ODR platform with expertise in taxation, corporate governance, and commercial disputes."
+        description: "Taxation law specialist with sharp analytical skills for complex commercial and tax matters. Strengthens our ODR platform with expertise in corporate governance and fiscal disputes."
       },
       {
         id: 2,
         name: "Pankaj Rishi Krishnan",
-        title: "Board of Directors",
+        title: "Board Director & Head of Civil Disputes",
         image: Pankaj,
-        experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
-        education: "B.S., M.S., LL.B., LL.M., PGD in ADR, Diploma in Constitutional Law (DCL), and Intellectual Property Rights (DIPR)",
-        role: "Civil Litigation, Matrimonial Disputes, Property Matters, Criminal Law",
+        experience: "Supreme Court Advocate with appearances across all major tribunals",
+        education: "B.S., M.S., LL.B., PGD in ADR, Diploma in Constitutional Law & IPR",
+        role: "Civil Litigation, Matrimonial Disputes, Property Matters",
         location: "New Delhi",
-        phone: "+91 XXXXX XXXXX",
+        phone: "+91 98103 44566",
         email: "pankaj.krishnan@settlesmart.com",
         linkedin: "https://www.linkedin.com/in/pankaj-rishi-krishnan-3a193221b/",
-        description: "Distinguished Supreme Court lawyer and legal research scholar with vast experience across premier legal forums. Professor of criminal & constitutional law for State PCS and UPSC civil services aspirants. Known for precision in legal drafting and thorough research."
+        description: "Distinguished Supreme Court lawyer and legal scholar. Professor for civil services aspirants with expertise in constitutional law, criminal law, and civil disputes."
       },
       {
         id: 3,
         name: "Harsha Sharma",
-        title: "Board of Directors",
+        title: "Board Director & Head of ADR & Consumer Disputes",
         image: Harsha,
-        experience: "PAN-India practice before Supreme Court, High Courts, trial courts, tribunals",
-        education: "LL.B. (Delhi University) & LL.M. (Business Law)",
-        role: "ADR, Labour & Employment, Consumer Disputes, Debt Recovery, Service Matters, MV Accident Claims",
+        experience: "PAN-India practice in consumer, labor and service matters",
+        education: "B.A. LL.B. (Faculty of Law, University of Delhi)",
+        role: "Alternative Dispute Resolution, Consumer Protection, Labor Laws",
         location: "New Delhi",
-        phone: "+91 XXXXX XXXXX",
+        phone: "+91 98101 64629",
         email: "harsha.sharma@settlesmart.com",
         linkedin: "https://www.linkedin.com/in/advocate-harsha-sharma-911a78108/",
-        description: "Seasoned legal professional with dynamic approach to dispute resolution. Specialize in Corporate and Commercial Litigation, Banking & Finance, Insurance, Insolvency, Criminal & Civil Disputes."
+        description: "Seasoned litigator specializing in corporate disputes, banking matters, and consumer protection. Combines traditional litigation skills with modern ADR techniques."
       },
       {
         id: 4,
-        name: "Anand Dubey",
-        title: "Board of Directors",
+        name: "Anand Kumar Dubey",
+        title: "Board Director & Head of Commercial Disputes",
         image: Anand,
-        experience: "Extensive experience in corporate and commercial litigation",
-        education: "LL.B. (Delhi University) & LL.M. (Business Law)",
-        role: "Corporate and Commercial Disputes, Banking & Finance, Insolvency",
+        experience: "Extensive practice in corporate and commercial litigation",
+        education: "LL.B. (University of Delhi) & LL.M. (Business Law)",
+        role: "Corporate Disputes, Banking & Finance, Insolvency Matters",
         location: "New Delhi",
-        phone: "+91 XXXXX XXXXX",
+        phone: "+91 98108 47722",
         email: "anand.dubey@settlesmart.com",
         linkedin: "https://www.linkedin.com/in/adv-anand-kumar-dubey-9b97619a/",
-        description: "Expert in corporate and commercial litigation with a focus on delivering strategic legal solutions. Committed to revolutionizing dispute resolution through innovative approaches."
+        description: "Corporate litigation expert focused on delivering strategic legal solutions. Committed to modernizing dispute resolution through innovative approaches."
       }
     ]
   };
@@ -185,17 +187,30 @@ const TeamPage = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-            </svg>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+          <motion.div 
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <FaUserTie className="w-8 h-8 text-blue-600" />
+          </motion.div>
+          <motion.h1 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-4xl md:text-5xl font-bold mb-4 text-gray-800"
+          >
             Our Leadership
-          </h1>
-          <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
-            Settle Smart&apos;s team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
-          </p>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed"
+          >
+            Settle Smart's team combines decades of legal expertise with innovative technology to deliver exceptional dispute resolution.
+          </motion.p>
         </motion.section>
 
         <motion.div
@@ -207,10 +222,10 @@ const TeamPage = () => {
           {tabs.map((tab) => (
             <motion.button
               key={tab.id}
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -2, scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2 rounded-lg transition-all duration-300 text-sm md:text-base ${activeTab === tab.id
+              className={`px-5 py-2 rounded-lg transition-all duration-300 text-sm md:text-base font-medium ${activeTab === tab.id
                 ? "bg-blue-600 text-white shadow-lg"
                 : "bg-white text-gray-700 hover:bg-gray-100 shadow-md border border-gray-200"
                 }`}
@@ -239,9 +254,12 @@ const TeamPage = () => {
             className="max-w-7xl mx-auto"
           >
             {teamData[activeTab].map((member) => (
-              <div
+              <motion.div
                 key={member.id}
-                className="p-6 md:p-8 rounded-2xl bg-white shadow-xl mx-2 md:mx-4 border border-gray-200"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="p-6 md:p-8 rounded-2xl bg-white shadow-xl mx-2 md:mx-4 border border-gray-200 hover:shadow-2xl transition-shadow duration-300"
               >
                 <div className="flex flex-col lg:flex-row gap-8">
                   <div className="w-full lg:w-1/3 flex flex-col items-center">
@@ -262,30 +280,36 @@ const TeamPage = () => {
                           <span className="text-gray-500">No Image Available</span>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-lg flex items-end p-4"
+                      >
                         <span className="text-white font-medium">
                           {member.title}
                         </span>
-                      </div>
+                      </motion.div>
                     </motion.div>
 
                     <div className="flex gap-4 mt-6">
-                      <a
+                      <motion.a
+                        whileHover={{ y: -2 }}
                         href={`tel:${member.phone}`}
                         className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors text-sm"
                         title="Call"
                       >
                         <FaPhone className="mr-2 text-blue-600" />
                         Contact
-                      </a>
-                      <a
+                      </motion.a>
+                      <motion.a
+                        whileHover={{ y: -2 }}
                         href={`mailto:${member.email}`}
                         className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
                         title="Email"
                       >
                         <FaEnvelope className="mr-2" />
                         Email
-                      </a>
+                      </motion.a>
                     </div>
                   </div>
 
@@ -313,20 +337,19 @@ const TeamPage = () => {
                             </div>
                           </div>
 
-                          <div>
-                            <p className="font-medium text-gray-800">Education</p>
-                            <p className="text-gray-600">{member.education}</p>
+                          <div className="flex items-start">
+                            <FaGraduationCap className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
+                            <div>
+                              <p className="font-medium text-gray-800">Education</p>
+                              <p className="text-gray-600">{member.education}</p>
+                            </div>
                           </div>
 
                           <div className="flex items-start">
                             <FaBalanceScale className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
                             <div>
-                              <p className="font-medium text-gray-800">
-                                {member.practiceAreas ? "Practice Areas" : "Role"}
-                              </p>
-                              <p className="text-gray-600">
-                                {member.practiceAreas ? member.practiceAreas.join(", ") : member.role}
-                              </p>
+                              <p className="font-medium text-gray-800">Specialization</p>
+                              <p className="text-gray-600">{member.role}</p>
                             </div>
                           </div>
 
@@ -342,7 +365,7 @@ const TeamPage = () => {
                         <div className="flex gap-4 border-t pt-4 border-gray-200">
                           {member.linkedin && (
                             <motion.a
-                              whileHover={{ y: -2 }}
+                              whileHover={{ y: -2, scale: 1.1 }}
                               href={member.linkedin}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -357,7 +380,7 @@ const TeamPage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </Carousel>
         </motion.div>
@@ -369,11 +392,11 @@ const TeamPage = () => {
           viewport={{ once: true }}
           className="mt-20 max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">SettleSmart Solutions</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Our Comprehensive Approach</h2>
           <p className="text-gray-600 leading-relaxed">
-            Our multi-disciplinary ODR platform combines decades of litigation expertise with technology-driven dispute resolution.
-            With specialists across civil, criminal, corporate, tax, matrimonial, labour, and financial disputes, we deliver
-            efficient, cost-effective justice through our team of Supreme Court lawyers, corporate law experts, and ADR specialists.
+            SettleSmart combines decades of litigation expertise with cutting-edge technology for dispute resolution.
+            Our multidisciplinary team of Supreme Court advocates, corporate law experts, and ADR specialists delivers
+            efficient, cost-effective solutions across all legal domains.
           </p>
         </motion.section>
       </main>
