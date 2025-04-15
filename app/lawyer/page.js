@@ -187,7 +187,7 @@ const TeamPage = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.div 
+          <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
@@ -195,7 +195,7 @@ const TeamPage = () => {
           >
             <FaUserTie className="w-8 h-8 text-blue-600" />
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -209,8 +209,9 @@ const TeamPage = () => {
             transition={{ delay: 0.4 }}
             className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed"
           >
-            Settle Smart's team combines decades of legal expertise with innovative technology to deliver exceptional dispute resolution.
+            Settle Smart&rsquo;s team combines decades of legal expertise with innovative technology to deliver exceptional dispute resolution.
           </motion.p>
+
         </motion.section>
 
         <motion.div
@@ -280,7 +281,7 @@ const TeamPage = () => {
                           <span className="text-gray-500">No Image Available</span>
                         </div>
                       )}
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
                         className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-lg flex items-end p-4"
