@@ -42,7 +42,7 @@ const ContactPage = () => {
 
       setStatus({ submitting: false, submitted: true, error: null });
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
+
       // Reset submission status after 5 seconds
       setTimeout(() => {
         setStatus(prev => ({ ...prev, submitted: false }));
@@ -75,7 +75,7 @@ const ContactPage = () => {
               </span>
               Send us a message
             </h2>
-            
+
             {status.submitted ? (
               <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
                 <div className="flex justify-center mb-4">
@@ -84,7 +84,10 @@ const ContactPage = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-medium text-green-800 mb-2">Thank you!</h3>
-                <p className="text-green-600">Your message has been sent successfully. We'll get back to you soon.</p>
+                <p className="text-green-600">
+                  Your message has been sent successfully. We&apos;ll get back to you soon.
+                </p>
+
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -186,28 +189,28 @@ const ContactPage = () => {
               </div>
               <h3 className="font-medium text-lg text-blue-700 mb-2">Email Us</h3>
               <p className="text-gray-600">support@settlesmart.com</p>
-              <a 
-                href="mailto:support@settlesmart.com" 
+              <a
+                href="mailto:support@settlesmart.com"
                 className="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block"
               >
                 Send an email
               </a>
             </div>
-            
+
             <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition border border-blue-50 text-center">
               <div className="bg-blue-100 p-4 rounded-full inline-flex mb-4">
                 <FaPhone className="text-blue-600 text-2xl" />
               </div>
               <h3 className="font-medium text-lg text-blue-700 mb-2">Call Us</h3>
               <p className="text-gray-600">011-2345-6789</p>
-              <a 
-                href="tel:01123456789" 
+              <a
+                href="tel:01123456789"
                 className="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block"
               >
                 Call now
               </a>
             </div>
-            
+
             <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition border border-blue-50 text-center">
               <div className="bg-blue-100 p-4 rounded-full inline-flex mb-4">
                 <FaMapMarkerAlt className="text-blue-600 text-2xl" />
@@ -216,9 +219,9 @@ const ContactPage = () => {
               <p className="text-gray-600">
                 Connaught Place<br />New Delhi, India
               </p>
-              <a 
-                href="https://maps.google.com/?q=Connaught+Place,New+Delhi" 
-                target="_blank" 
+              <a
+                href="https://maps.google.com/?q=Connaught+Place,New+Delhi"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block"
               >
