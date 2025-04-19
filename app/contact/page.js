@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Header from '../header/page';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCheck, FaSpinner } from 'react-icons/fa';
+import Footer from '../footer/page';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -188,7 +189,7 @@ const ContactPage = () => {
                 <FaEnvelope className="text-blue-600 text-2xl" />
               </div>
               <h3 className="font-medium text-lg text-blue-700 mb-2">Email Us</h3>
-              <p className="text-gray-600">support@settlesmart.com</p>
+              <p className="text-gray-600">settlesmartsolutions01@gmail.com</p>
               <a
                 href="mailto:support@settlesmart.com"
                 className="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block"
@@ -202,7 +203,7 @@ const ContactPage = () => {
                 <FaPhone className="text-blue-600 text-2xl" />
               </div>
               <h3 className="font-medium text-lg text-blue-700 mb-2">Call Us</h3>
-              <p className="text-gray-600">011-2345-6789</p>
+              <p className="text-gray-600">+91 82890 28892</p>
               <a
                 href="tel:01123456789"
                 className="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block"
@@ -231,6 +232,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
