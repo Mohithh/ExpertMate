@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const facultySchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
+// Prevent model overwrite in development
+const Faculty = mongoose.models.Faculty || mongoose.model("Faculty", facultySchema);
 
-export default User;
+export default Faculty;

@@ -1,5 +1,5 @@
 import testConnect from "@/testConnect/page";
-import User from "@/model/UserLogin/page";
+import User from "@/model/facultyLogin/page";
 import CryptoJS from "crypto-js";
 var jwt = require('jsonwebtoken');
 
@@ -8,9 +8,10 @@ export const POST = testConnect(async (req) => {
     const user = await User.findOne({ email: body.email });
 
     if (user) {
-        const bytes = CryptoJS.AES.decrypt(user.password,process.env.PASSWORD_SECRET_);
+        const bytes = CryptoJS.AES.decrypt(user.password, process.env.PASSWORD_SECRET_);
 
-       
+        // console.log(process.env.PASSWORD_SECRET_)
+
 
         const userPassword = bytes.toString(CryptoJS.enc.Utf8);
 

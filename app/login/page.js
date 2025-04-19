@@ -21,7 +21,10 @@ export default function LoginPage() {
     const data = { email, password };
 
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_API_LOGIN_URL || '/api/login', {
+     
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/Login`, {
+
+        
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -117,6 +120,14 @@ export default function LoginPage() {
               Don’t have an account?{" "}
               <Link href="/signup" className="text-indigo-600 font-medium hover:underline">
                 Create New Account
+              </Link>
+            </p>
+
+
+            <p className="mt-4">
+              
+              <Link href="/facultylogin" className="text-indigo-600 font-medium hover:underline">
+              faculty Login
               </Link>
             </p>
           </div>

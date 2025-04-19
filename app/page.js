@@ -1,10 +1,20 @@
+
+'use client';
+
 import React from 'react'
 import Header from './header/page' 
 import Hero from './hero/page' 
 
 const Page = () => {  
-  return (
+
+
+  
+
+  return ( 
+
     <div>
+
+
       <Header />  
       <Hero />
       {/* Add more sections here */}

@@ -3,16 +3,42 @@ import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSun, AiOutlineMoon } from "react-icons/ai";
 import { FiUser, FiLogIn } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+
+
+
 // import lofi from "@/app/assets/lofi.svg";
 
 
 const Header = () => {
+
+  const router = useRouter();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const [loginn, setloginn] = useState(false)
+
   useEffect(() => {
+
+    const token = localStorage.getItem("token");
+
+    
+    // console.log("Token from localStorage:", token);
+
+    if (!token) {
+      setloginn(false);
+    }
+   else if(token) {
+      setloginn(true);
+    }
+
+
+
+
+
     setMounted(true);
     
     const savedTheme = localStorage.getItem('theme');
@@ -37,6 +63,17 @@ const Header = () => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
+
+  const logout = ()=>{
+    localStorage.removeItem("token");
+    localStorage.removeItem("facultytoken");
+
+
+    router.push('/login');
+
+
+
+  }
 
   // NavLink component
   const NavLink = ({ href, children }) => (
@@ -113,6 +150,7 @@ const Header = () => {
               <NavLink href="/arbitrator">Arbitrators</NavLink>
               <NavLink href="/pricing">Pricing</NavLink>
               <NavLink href="/contact">Contact</NavLink>
+              <NavLink href="/search">search</NavLink>
             </nav>
 
             {/* Right side buttons */}
@@ -127,17 +165,21 @@ const Header = () => {
 
               <div className="flex space-x-2">
                 <Link href="/login">
-                  <button className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
+                 {!loginn &&  <button className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
                     <FiLogIn className="mr-2" />
                     Login
-                  </button>
+                  </button>}
                 </Link>
                 <Link href="/signup">
-                  <button className="flex items-center px-4 py-2 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg">
+                 {!loginn && <button className="flex items-center px-4 py-2 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg">
                     <FiUser className="mr-2" />
                     Sign Up
-                  </button>
+                  </button>}
                 </Link>
+                {loginn &&<button onClick={logout} className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
+                    <FiLogIn className="mr-2" />
+                    LOGOUT
+                  </button>}
               </div>
             </div>
 

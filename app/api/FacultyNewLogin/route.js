@@ -1,5 +1,5 @@
 import testConnect from "@/testConnect/page";
-import User from "@/model/UserLogin/page";
+import User from "@/model/facultyLogin/page";
 import CryptoJS from "crypto-js";
 var jwt = require('jsonwebtoken');
 
@@ -14,8 +14,10 @@ export const POST = testConnect(async (req, res) => {
             JSON.stringify({ success: false, error: "Email already registered" }),
             { status: 400, headers: { "content-type": "application/json" } }
         );
-    }
-const encryptedPassword = CryptoJS.AES.encrypt(body.password, process.env.PASSWORD_SECRET_).toString();
+    } 
+const encryptedPassword = CryptoJS.AES.encrypt(body.password, process.env.PASSWORD_SECRET_).toString(); 
+
+
 
         const newUser = new User({
             name: body.name,
@@ -34,6 +36,6 @@ const encryptedPassword = CryptoJS.AES.encrypt(body.password, process.env.PASSWO
         return new Response(
             JSON.stringify({ success: true, token }),
             { status: 201, headers: { "content-type": "application/json" } }
-        );
-    
+   );
+
 });

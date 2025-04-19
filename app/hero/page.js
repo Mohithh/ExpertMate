@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
+
 const Hero = () => {
   const router = useRouter();
   const controls = useAnimation();
@@ -230,6 +231,9 @@ const Hero = () => {
 
   return (
     <div className="relative bg-white overflow-hidden" ref={ref}>
+
+
+      
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div

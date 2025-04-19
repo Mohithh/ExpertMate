@@ -1,10 +1,30 @@
 "use client";
 import React from "react";
 import Header from "../header/page";
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
 import { FaHandshake, FaSearch, FaChess, FaPlay } from "react-icons/fa";
 
 const Services = () => {
+    const router = useRouter();
+
+    
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      console.log("Token from localStorage:", token);
+  
+      // Example: If no token, redirect to login
+      if (!token) {
+        router.push('/login');
+      }
+    }, []);
+  
+
+  
+  
   return (
+    
     <>
       <Header />
       <section id="services" className="w-full min-h-screen bg-white text-gray-900 overflow-hidden relative py-20 px-8">
