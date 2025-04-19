@@ -83,6 +83,7 @@ const Header = () => {
               <NavLink href="/lawyer">Our Leadership</NavLink>
               <NavLink href="/case">Case Management</NavLink>
               <NavLink href="/services">Services</NavLink>
+              <NavLink href="/StartDispute">Dispute</NavLink>
               {/* <NavLink href="/arbitrator">Arbitrators</NavLink> */}
               {/* <NavLink href="/pricing">Pricing</NavLink> */}
               <NavLink href="/contact">Contact</NavLink>

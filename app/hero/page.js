@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
-
 const Hero = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
@@ -171,9 +170,9 @@ const Hero = () => {
               className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-gray-900 leading-tight mb-6"
               variants={itemVariants}
             >
-              <span className="block">From Conflict to</span>
+              <span className="block">From Vivaad se Samadhan</span>
               <span className="block bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                Resolution in Days
+              Tak within Days
               </span>
             </motion.h1>
 
@@ -207,7 +206,7 @@ const Hero = () => {
               className="flex flex-col sm:flex-row gap-4 mb-12"
               variants={itemVariants}
             >
-              <Link href="/file-case">
+              <Link href="/StartDispute">
                 <motion.button
                   className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-semibold transition-all flex items-center gap-2 group shadow-lg hover:shadow-blue-200/50"
                   whileHover={{
@@ -216,6 +215,7 @@ const Hero = () => {
                   }}
                   whileTap={{ scale: 0.98 }}
                 >
+                  
                   <span>Start a Dispute</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -224,7 +224,7 @@ const Hero = () => {
                 </motion.button>
               </Link>
 
-              <Link href="/join-as-professional">
+              <Link href="/JoinAsArbitrator">
                 <motion.button
                   className="px-8 py-4 border-2 border-blue-600 bg-white text-blue-600 hover:bg-blue-50 rounded-xl font-semibold transition-all flex items-center gap-2 group"
                   whileHover={{

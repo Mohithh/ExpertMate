@@ -29,16 +29,16 @@ const Footer = () => {
             <FaGavel className="h-6 w-6 text-blue-400" />
             <span className="text-xl font-bold text-white">SettleSmart</span>
           </div>
-          <p className="text-gray-400 text-sm">Innovative legal solutions for modern disputes.</p>
+          <p className="text-gray-400 text-sm">Smart Solutions for Settling Disputes</p>
           
           <div className="space-y-1 text-sm">
             <div className="flex items-center space-x-1">
               <PhoneIcon className="h-4 w-4 text-blue-400" />
-              <span>+1 (555) 123-4567</span>
+              <span>+91 82890 28892</span>
             </div>
             <div className="flex items-center space-x-1">
               <EnvelopeIcon className="h-4 w-4 text-blue-400" />
-              <span>contact@settlesmart.com</span>
+              <span>settlesmartsolutions01@gmail.com</span>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@ const Footer = () => {
             <a href="#" className="text-gray-400 hover:text-blue-400 transition" aria-label="Twitter">
               <FaTwitter className="h-4 w-4" />
             </a>
-            <a href="#" className="text-gray-400 hover:text-blue-400 transition" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/company/settlesmart-solutions/posts/?feedView=all" className="text-gray-400 hover:text-blue-400 transition" aria-label="LinkedIn">
               <FaLinkedin className="h-4 w-4" />
             </a>
             <a href="#" className="text-gray-400 hover:text-blue-400 transition" aria-label="Facebook">
