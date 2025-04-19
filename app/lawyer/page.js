@@ -23,6 +23,7 @@ import Anand from "@/app/assets/anand1.jpeg";
 import Nageshwar from "@/app/assets/nages.jpeg";
 // import Aman from "@/app/assets/Aman.jpg";
 import Bhatti from "@/app/assets/Bhatti.jpg";
+import Footer from "../footer/page";
 
 const TeamPage = () => {
   const [activeTab, setActiveTab] = useState("management");
@@ -436,6 +437,7 @@ const TeamPage = () => {
           </p>
         </motion.section>
       </main>
+      <Footer/>
     </div>
   );
 };

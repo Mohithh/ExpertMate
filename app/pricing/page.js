@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import Header from "../header/page";
+import Footer from "../footer/page";
 
 const Pricing = () => {
   useEffect(() => {
@@ -134,7 +135,8 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-    </section>    </>
+    </section>   
+    <Footer/> </>
   );
 };
 

@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../header/page";
 import { FaBalanceScale, FaHandshake, FaHome, FaUserInjured, FaBriefcaseMedical, FaGavel } from "react-icons/fa";
 import { MdFamilyRestroom } from "react-icons/md";
+import Footer from "../footer/page";
 
 const serviceData = [
   {
@@ -192,6 +193,7 @@ const Services = () => {
             </div>
           </div>
         </div>
+        <Footer/>
       </section>
     </>
   );

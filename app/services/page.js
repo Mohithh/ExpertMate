@@ -2,6 +2,7 @@
 import React from "react";
 import Header from "../header/page";
 import { FaHandshake, FaSearch, FaChess, FaPlay } from "react-icons/fa";
+import Footer from "../footer/page";
 
 const Services = () => {
   return (
@@ -186,6 +187,7 @@ const Services = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </>
   );
 };
