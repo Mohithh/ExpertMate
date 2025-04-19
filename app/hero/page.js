@@ -3,8 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+<<<<<<< HEAD
 
 
+=======
+import Link from "next/link";
+import MeetingSchedule from "@/app/schedulemeeting/page"
+>>>>>>> ad71e9fb9358202de220c3bd2e2dbb33c9a937b3
 const Hero = () => {
   const router = useRouter();
   const controls = useAnimation();
@@ -426,17 +431,19 @@ const Hero = () => {
             variants={itemVariants}
           >
             <motion.button
-              onClick={() => router.push("/schedule")}
+              onClick={() => router.push("/schedulemeeting")}
               className="relative bg-gradient-to-r from-[#1a3e72] to-blue-700 hover:from-blue-800 hover:to-blue-900 text-white px-6 py-3 rounded-md font-semibold shadow-lg transition flex items-center justify-center overflow-hidden group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="relative z-10 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                </svg>
-                Free 30-Min Consultation
-              </span>
+              <Link href="/schedulemeeting">
+                <span className="relative z-10 flex items-center cursor-pointer">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                  Free 30-Min Consultation
+                </span>
+              </Link>
               <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </motion.button>
 
@@ -629,26 +636,26 @@ const Hero = () => {
           }}
         >
           {[...Array(6)].map((_, i) => (
-           <div key={i} className="inline-flex items-center mx-8">
-           <div className="text-lg font-medium text-[#1a3e72] mr-4">
-             &quot;SettleSmart saved us $5,000 in legal fees&quot;
-           </div>
-           <div className="text-sm text-gray-600">— Tech Startup CEO</div>
-           <div className="mx-8 text-gray-300">•</div>
-         
-           <div className="text-lg font-medium text-[#1a3e72] mr-4">
-             &quot;Resolved in 3 weeks what would take years in court&quot;
-           </div>
-           <div className="text-sm text-gray-600">— Small Business Owner</div>
-           <div className="mx-8 text-gray-300">•</div>
-         
-           <div className="text-lg font-medium text-[#1a3e72] mr-4">
-             &quot;Fair process that actually worked for both sides&quot;
-           </div>
-           <div className="text-sm text-gray-600">— Family Law Client</div>
-           <div className="mx-8 text-gray-300">•</div>
-         </div>
-         
+            <div key={i} className="inline-flex items-center mx-8">
+              <div className="text-lg font-medium text-[#1a3e72] mr-4">
+                &quot;SettleSmart saved us $5,000 in legal fees&quot;
+              </div>
+              <div className="text-sm text-gray-600">— Tech Startup CEO</div>
+              <div className="mx-8 text-gray-300">•</div>
+
+              <div className="text-lg font-medium text-[#1a3e72] mr-4">
+                &quot;Resolved in 3 weeks what would take years in court&quot;
+              </div>
+              <div className="text-sm text-gray-600">— Small Business Owner</div>
+              <div className="mx-8 text-gray-300">•</div>
+
+              <div className="text-lg font-medium text-[#1a3e72] mr-4">
+                &quot;Fair process that actually worked for both sides&quot;
+              </div>
+              <div className="text-sm text-gray-600">— Family Law Client</div>
+              <div className="mx-8 text-gray-300">•</div>
+            </div>
+
           ))}
         </motion.div>
       </motion.div>

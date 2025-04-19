@@ -17,7 +17,6 @@ const Page = () => {
 
       <Header />  
       <Hero />
-      {/* Add more sections here */}
     </div>
   )
 }

@@ -4,22 +4,20 @@ import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Amit from "@/app/assets/amit.png";
-import Rudra from "@/app/assets/rudra.png";
-import Harsha from "@/app/assets/harsha1.png";
-import Pankaj from "@/app/assets/Pankaj1.png";
-import Anand from "@/app/assets/anand.png";
+import Rudra from "@/app/assets/rudra1.jpeg";
+import Harsha from "@/app/assets/harsha11.jpeg";
+import Pankaj from "@/app/assets/Pankaj11.jpeg";
+import Anand from "@/app/assets/anand1.jpeg";
+import Nageshwar from "@/app/assets/nages.jpeg";
+
 import {
   FaLinkedin,
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
   FaBriefcase,
-  FaUniversity,
-  FaTwitter,
-  FaInstagram,
   FaBalanceScale
 } from "react-icons/fa";
-import { GiScaleMail } from "react-icons/gi";
 import { motion } from "framer-motion";
 import Header from "../header/page";
 import Image from "next/image";
@@ -38,13 +36,14 @@ const TeamPage = () => {
         id: 1,
         name: "Nageshwar Singh",
         title: "Founder & Chief Managing Director",
-        image: "",
+        image: Nageshwar,
         experience: "",
         education: "BLLB Chandigarh University",
         role: "Strategic leadership and firm governance",
         location: "New Delhi",
         phone: "+91 91499 45265",
         email: "ns677112@gmail.com",
+        linkedin: "https://www.linkedin.com/in/choudhary-nageshwar-singh-696808227/",
         description: "Legal Acumen & Experiential Scholar || Author || Corporate & Financial Laws || Former Intern at Khaitan & Co., LK & S, Reliance Retail Ltd.(Legal), Trilegal."
       }
     ],
@@ -60,6 +59,7 @@ const TeamPage = () => {
         location: "Pune",
         phone: "+91 XXXXX XXXXX",
         email: "rudra.zadu@settlesmart.com",
+        linkedin: "https://www.linkedin.com/in/rudra-n-zadu-717200148/",
         description: "Accomplished Corporate Lawyer and Managing Director of Corporate Consultants. Expert in Corporate Law, Financial Law, Capital Markets, Private Equity, M&A, and Contractual Compliance. Certified in Cyber Laws, Corporate Laws, Energy Laws, and Privacy Regulations."
       },
       {
@@ -73,6 +73,7 @@ const TeamPage = () => {
         location: "Gurgaon, India",
         phone: "+91 9992422581",
         email: "amanbhatti105@gmail.com",
+        linkedin: "https://www.linkedin.com/in/amanbhatti01/",
         description: "Aspiring tech leader with strong foundation in front-end and back-end development. Proficient in React.js, PHP, and modern web technologies. Passionate about creating innovative legal tech platforms that simplify and streamline dispute resolution processes. Experienced through internships and personal projects focused on real-world problem solving."
       }
     ],
@@ -88,6 +89,7 @@ const TeamPage = () => {
         location: "Jammu",
         phone: "+91 XXXXX XXXXX",
         email: "amit.sharma@settlesmart.com",
+        linkedin: "https://www.linkedin.com/in/amit-sharma-ab33b5107/",
         description: "Taxation and corporate law expert with sharp analytical skills. Handles complex commercial and tax matters with precision. Strengthens our ODR platform with expertise in taxation, corporate governance, and commercial disputes."
       },
       {
@@ -101,6 +103,7 @@ const TeamPage = () => {
         location: "New Delhi",
         phone: "+91 XXXXX XXXXX",
         email: "pankaj.krishnan@settlesmart.com",
+        linkedin: "https://www.linkedin.com/in/pankaj-rishi-krishnan-3a193221b/",
         description: "Distinguished Supreme Court lawyer and legal research scholar with vast experience across premier legal forums. Professor of criminal & constitutional law for State PCS and UPSC civil services aspirants. Known for precision in legal drafting and thorough research."
       },
       {
@@ -114,6 +117,7 @@ const TeamPage = () => {
         location: "New Delhi",
         phone: "+91 XXXXX XXXXX",
         email: "harsha.sharma@settlesmart.com",
+        linkedin: "https://www.linkedin.com/in/advocate-harsha-sharma-911a78108/",
         description: "Seasoned legal professional with dynamic approach to dispute resolution. Specialize in Corporate and Commercial Litigation, Banking & Finance, Insurance, Insolvency, Criminal & Civil Disputes."
       },
       {
@@ -127,6 +131,7 @@ const TeamPage = () => {
         location: "New Delhi",
         phone: "+91 XXXXX XXXXX",
         email: "anand.dubey@settlesmart.com",
+        linkedin: "https://www.linkedin.com/in/adv-anand-kumar-dubey-9b97619a/",
         description: "Expert in corporate and commercial litigation with a focus on delivering strategic legal solutions. Committed to revolutionizing dispute resolution through innovative approaches."
       }
     ]
@@ -191,7 +196,6 @@ const TeamPage = () => {
           <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
             Settle Smart&apos;s team combines decades of experience with innovative approaches to deliver exceptional legal solutions.
           </p>
-
         </motion.section>
 
         <motion.div
@@ -309,12 +313,9 @@ const TeamPage = () => {
                             </div>
                           </div>
 
-                          <div className="flex items-start">
-                            <FaUniversity className="text-blue-600 mt-1 mr-2 flex-shrink-0" />
-                            <div>
-                              <p className="font-medium text-gray-800">Education</p>
-                              <p className="text-gray-600">{member.education}</p>
-                            </div>
+                          <div>
+                            <p className="font-medium text-gray-800">Education</p>
+                            <p className="text-gray-600">{member.education}</p>
                           </div>
 
                           <div className="flex items-start">
@@ -339,30 +340,18 @@ const TeamPage = () => {
                         </div>
 
                         <div className="flex gap-4 border-t pt-4 border-gray-200">
-                          <motion.a
-                            whileHover={{ y: -2 }}
-                            href="#"
-                            className="text-lg text-gray-600 hover:text-blue-700 transition-colors"
-                            aria-label="Connect on LinkedIn"
-                          >
-                            <FaLinkedin />
-                          </motion.a>
-                          <motion.a
-                            whileHover={{ y: -2 }}
-                            href="#"
-                            className="text-lg text-gray-600 hover:text-blue-400 transition-colors"
-                            aria-label="Follow on Twitter"
-                          >
-                            <FaTwitter />
-                          </motion.a>
-                          <motion.a
-                            whileHover={{ y: -2 }}
-                            href="#"
-                            className="text-lg text-gray-600 hover:text-pink-600 transition-colors"
-                            aria-label="Follow on Instagram"
-                          >
-                            <FaInstagram />
-                          </motion.a>
+                          {member.linkedin && (
+                            <motion.a
+                              whileHover={{ y: -2 }}
+                              href={member.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-lg text-gray-600 hover:text-blue-700 transition-colors"
+                              aria-label="Connect on LinkedIn"
+                            >
+                              <FaLinkedin />
+                            </motion.a>
+                          )}
                         </div>
                       </div>
                     </div>

@@ -144,7 +144,7 @@ const Header = () => {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               <NavLink href="/">Home</NavLink>
-              <NavLink href="/lawyer">Lawyers</NavLink>
+              <NavLink href="/lawyer">Our Leadership</NavLink>
               <NavLink href="/case">Case Management</NavLink>
               <NavLink href="/services">Services</NavLink>
               <NavLink href="/arbitrator">Arbitrators</NavLink>
