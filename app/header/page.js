@@ -66,15 +66,18 @@ const Header = () => {
       <header className={`fixed w-full top-0 z-50 transition-all duration-300 h-16 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0 flex items-center">
-              <Image 
-                src={Logo} 
-                alt="Company Logo" 
-                width={120} 
-                height={40}
-                className="h-10 w-auto transition-transform hover:scale-105"
-              />
+            {/* Logo - Increased size */}
+            <Link href="/" className="flex-shrink-0 flex items-center min-w-[220px]">
+              <div className="relative w-[220px] h-[80px]">
+                <Image
+                  src={Logo}
+                  alt="Company Logo"
+                  fill
+                  sizes="(max-width: 768px) 280px, 280px"
+                  className="object-contain object-left transition-transform hover:scale-105 duration-300"
+                  priority
+                />
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
