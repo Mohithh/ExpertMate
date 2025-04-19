@@ -302,7 +302,7 @@ const ConsultationPage = () => {
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Phone</h3>
                       <p className="mt-1 text-gray-600">
-                        <a href="tel:+15551234567" className="hover:text-blue-600 transition-colors">+1 (555) 123-4567</a>
+                        <a href="tel:+15551234567" className="hover:text-blue-600 transition-colors">+91 82890 28892</a>
                       </p>
                     </div>
                   </div>
@@ -316,7 +316,7 @@ const ConsultationPage = () => {
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Email</h3>
                       <p className="mt-1 text-gray-600">
-                        <a href="mailto:consultations@legalservices.com" className="hover:text-blue-600 transition-colors">consultations@legalservices.com</a>
+                        <a href="mailto:consultations@legalservices.com" className="hover:text-blue-600 transition-colors">settlesmartsolutions01@gmail.com</a>
                       </p>
                     </div>
                   </div>
@@ -329,8 +329,9 @@ const ConsultationPage = () => {
                     </div>
                     <div className="ml-4">
                       <h3 className="text-lg font-medium text-gray-900">Office</h3>
-                      <p className="mt-1 text-gray-600">123 Legal Avenue, Suite 100</p>
-                      <p className="text-gray-600">New York, NY 10001</p>
+                      <p className="mt-1 text-gray-600">Connaught Place
+                      </p>
+                      <p className="text-gray-600">New Delhi, India</p>
                     </div>
                   </div>
 
