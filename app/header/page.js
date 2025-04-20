@@ -147,6 +147,7 @@ const Header = () => {
             <MobileNavLink href="/lawyer">Lawyers</MobileNavLink>
             <MobileNavLink href="/case">Case Management</MobileNavLink>
             <MobileNavLink href="/services">Services</MobileNavLink>
+            <NavLink href="/StartDispute">Dispute</NavLink>
             {/* <MobileNavLink href="/arbitrator">Arbitrators</MobileNavLink> */}
             {/* <MobileNavLink href="/pricing">Pricing</MobileNavLink> */}
             <MobileNavLink href="/contact">Contact</MobileNavLink>
