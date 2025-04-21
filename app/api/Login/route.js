@@ -4,14 +4,6 @@ import CryptoJS from "crypto-js";
 var jwt = require('jsonwebtoken');
 
 
-
-// import connectDB from "@/connection/page"
-
-// import User from "@/models/Users/page";
-
-// import CryptoJS from "crypto-js"; 
-// var jwt = require('jsonwebtoken');
-
  
 export const POST  = async(req,res)=>{
     const body = await req.json()
