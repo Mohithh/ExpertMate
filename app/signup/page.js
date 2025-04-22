@@ -19,12 +19,14 @@ export default function SignUpPage() {
     const data = { name, email, password };
 
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_API_SIGNUP_URL || '/api/signup', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/LoginNew`, {  
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
+      
       const res = await response.json();
 
       if (res.success) {

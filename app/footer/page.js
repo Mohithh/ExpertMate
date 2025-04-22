@@ -44,7 +44,7 @@ const Footer = () => {
                 className="object-contain"
               />
             </div>
-            <span className="text-2xl font-bold text-white bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent text-center md:text-left">
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent text-center md:text-left">
               SettleSmart
             </span>
           </div>

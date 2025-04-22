@@ -15,7 +15,7 @@ export const POST = testConnect(async (req, res) => {
             { status: 400, headers: { "content-type": "application/json" } }
         );
     }
-const encryptedPassword = CryptoJS.AES.encrypt(body.password, 'Aman').toString();
+const encryptedPassword = CryptoJS.AES.encrypt(body.password, process.env.PASSWORD_SECRET_).toString();
 
         const newUser = new User({
             name: body.name,
@@ -27,7 +27,7 @@ const encryptedPassword = CryptoJS.AES.encrypt(body.password, 'Aman').toString()
 
         var token = jwt.sign(
             { success: true, email: body.email, name: body.name },
-            'jwttokenn',
+            process.env.JWT_SECRET_,
             { expiresIn: '1d' }
         );
 

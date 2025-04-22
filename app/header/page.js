@@ -3,18 +3,31 @@ import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSun, AiOutlineMoon } from "react-icons/ai";
 import { FiUser, FiLogIn } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Logo from "@/app/assets/hello_logo.png";
 
 const Header = () => {
+
+  const router = useRouter();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [loginn, setloginn] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setloginn(false);
+    } else {
+      setloginn(true);
+    }
+
     setMounted(true);
-    
+
     const savedTheme = localStorage.getItem('theme');
     const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
     setDarkMode(isDark);
@@ -38,6 +51,12 @@ const Header = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("facultytoken");
+    router.push('/login');
+  };
+
   // NavLink component
   const NavLink = ({ href, children }) => (
     <Link href={href} className="relative group" passHref>
@@ -50,8 +69,8 @@ const Header = () => {
 
   // Mobile NavLink component
   const MobileNavLink = ({ href, children }) => (
-    <Link 
-      href={href} 
+    <Link
+      href={href}
       onClick={closeMenu}
       className="text-gray-800 dark:text-gray-200 text-lg font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 w-full text-center"
       passHref
@@ -66,7 +85,7 @@ const Header = () => {
       <header className={`fixed w-full top-0 z-50 transition-all duration-300 h-16 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
-            {/* Logo - Increased size */}
+            {/* Logo */}
             <Link href="/" className="flex-shrink-0 flex items-center min-w-[220px]">
               <div className="relative w-[220px] h-[80px]">
                 <Image
@@ -87,9 +106,8 @@ const Header = () => {
               <NavLink href="/case">Case Management</NavLink>
               <NavLink href="/services">Services</NavLink>
               <NavLink href="/StartDispute">Dispute</NavLink>
-              {/* <NavLink href="/arbitrator">Arbitrators</NavLink> */}
-              {/* <NavLink href="/pricing">Pricing</NavLink> */}
               <NavLink href="/contact">Contact</NavLink>
+              <NavLink href="/search">search</NavLink>
             </nav>
 
             {/* Right side buttons */}
@@ -104,17 +122,21 @@ const Header = () => {
 
               <div className="flex space-x-2">
                 <Link href="/login">
-                  <button className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
+                  {!loginn && <button className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
                     <FiLogIn className="mr-2" />
                     Login
-                  </button>
+                  </button>}
                 </Link>
                 <Link href="/signup">
-                  <button className="flex items-center px-4 py-2 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg">
+                  {!loginn && <button className="flex items-center px-4 py-2 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg">
                     <FiUser className="mr-2" />
                     Sign Up
-                  </button>
+                  </button>}
                 </Link>
+                {loginn && <button onClick={logout} className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
+                  <FiLogIn className="mr-2" />
+                  LOGOUT
+                </button>}
               </div>
             </div>
 
@@ -132,13 +154,11 @@ const Header = () => {
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`md:hidden fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg transition-all duration-300 ease-in-out ${
-            menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-          }`}
-          style={{ 
+          className={`md:hidden fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg transition-all duration-300 ease-in-out ${menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
+          style={{
             top: '4rem',
             height: 'calc(100vh - 4rem)',
-            pointerEvents: menuOpen ? 'auto' : 'none' 
+            pointerEvents: menuOpen ? 'auto' : 'none'
           }}
           aria-hidden={!menuOpen}
         >
@@ -147,9 +167,7 @@ const Header = () => {
             <MobileNavLink href="/lawyer">Lawyers</MobileNavLink>
             <MobileNavLink href="/case">Case Management</MobileNavLink>
             <MobileNavLink href="/services">Services</MobileNavLink>
-            <NavLink href="/StartDispute">Dispute</NavLink>
-            {/* <MobileNavLink href="/arbitrator">Arbitrators</MobileNavLink> */}
-            {/* <MobileNavLink href="/pricing">Pricing</MobileNavLink> */}
+            <MobileNavLink href="/StartDispute">Dispute</MobileNavLink>
             <MobileNavLink href="/contact">Contact</MobileNavLink>
 
             <div className="flex items-center mt-8 space-x-4">
@@ -179,7 +197,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      
+
       {/* Add padding to prevent content from being hidden behind the fixed header */}
       <div className="h-16"></div>
     </>

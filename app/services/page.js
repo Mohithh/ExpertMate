@@ -1,10 +1,11 @@
-"use client"
-import React, { useState } from 'react'
-import Header from '../header/page'
-import Footer from '../footer/page'
-import { FaBalanceScale, FaHandshake, FaUsers, FaComments, FaGavel, FaChevronDown, FaChevronUp } from 'react-icons/fa'
-import { motion, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
+"use client";
+import React, { useState, useEffect } from 'react';
+import Header from '../header/page';
+import Footer from '../footer/page';
+import { FaBalanceScale, FaHandshake, FaUsers, FaComments, FaGavel, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const serviceData = [
   {
@@ -77,14 +78,24 @@ const serviceData = [
     color: "bg-indigo-50",
     features: ["Case evaluation", "Risk assessment", "Document review", "Ongoing support"]
   }
-]
+];
 
 const ServicesPage = () => {
-  const [expandedCard, setExpandedCard] = useState(null)
+  const [expandedCard, setExpandedCard] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log("Token from localStorage:", token);
+
+    if (!token) {
+      router.push('/login');
+    }
+  }, [router]);
 
   const toggleCard = (index) => {
-    setExpandedCard(expandedCard === index ? null : index)
-  }
+    setExpandedCard(expandedCard === index ? null : index);
+  };
 
   return (
     <>
@@ -202,7 +213,7 @@ const ServicesPage = () => {
       </div>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default ServicesPage
+export default ServicesPage;
