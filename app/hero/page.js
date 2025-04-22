@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
+import Image from "next/image";
 
 const Hero = () => {
   const controls = useAnimation();
@@ -267,10 +268,13 @@ const Hero = () => {
             className="lg:w-1/2"
             variants={scaleUp}
           >
-            <img
+            <Image
               src="/assets/hero-image.png"
               alt="Dispute resolution"
+              width={600}
+              height={400}
               className="w-full h-auto rounded-xl shadow-xl"
+              priority
             />
           </motion.div>
         </div>

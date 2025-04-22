@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import Image from 'next/image'; // Add this import
 
 export default function UploadPage() {
   const [image, setImage] = useState(null);
@@ -77,11 +78,14 @@ export default function UploadPage() {
           {items.map((item) => (
             <div key={item._id} className="border p-4 rounded shadow">
               {item.isImage ? (
-                <img
-                  src={`data:${item.contentType};base64,${item.fileBase64}`}
-                  alt={item.filename}
-                  className="w-full h-auto"
-                />
+                <div className="relative w-full h-64">
+                  <Image
+                    src={`data:${item.contentType};base64,${item.fileBase64}`}
+                    alt={item.filename}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                  />
+                </div>
               ) : item.contentType === "application/pdf" ? (
                 <iframe
                   src={`data:${item.contentType};base64,${item.fileBase64}`}
@@ -98,7 +102,7 @@ export default function UploadPage() {
                   download={item.filename}
                   className="text-blue-600 underline"
                 >
-                  📄 Download jkhenfsfnsdn {item.filename}
+                  📄 Download {item.filename}
                 </a>
               )}
               <p className="text-sm mt-2">{item.filename}</p>

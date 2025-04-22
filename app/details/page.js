@@ -1,13 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {  // Changed from 'page' to 'Page'
   const [useremail, setuseremail] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-
-  const [alldetails, setalldetails] = useState("")
+  const [alldetails, setalldetails] = useState("");
 
   // First API: get user email from token
   useEffect(() => {
@@ -89,30 +87,27 @@ const page = () => {
         </div>
       )}
 
-{alldetails && (
-  <div className="mb-8">
-    <label className="font-bold text-2xl">your  Details:</label>
-    <div className="border px-3 py-2 rounded-md w-full mt-2">
-      <p>Email: {alldetails.email}</p>
-      <p>Country: {alldetails.country}</p>
-      <p>City: {alldetails.city}</p>
-      <p>Profession: {alldetails.profession}</p>
-      <p>Profession Category: {alldetails.professionCategory}</p>
-      <p>Gender: {alldetails.gender}</p>
-      <p>Experience: {alldetails.experience}</p>
-      <p>Age: {alldetails.age}</p>
-      <p>Working Mode: {alldetails.workingMode}</p>
-      <p>Job Type: {alldetails.jobType}</p>
-      <p>Created At: {new Date(alldetails.createdAt).toLocaleString()}</p>
-      <p>Updated At: {new Date(alldetails.updatedAt).toLocaleString()}</p>
-    </div>
-  </div>
-)}
-
-      
-
+      {alldetails && (
+        <div className="mb-8">
+          <label className="font-bold text-2xl">your Details:</label>
+          <div className="border px-3 py-2 rounded-md w-full mt-2">
+            <p>Email: {alldetails.email}</p>
+            <p>Country: {alldetails.country}</p>
+            <p>City: {alldetails.city}</p>
+            <p>Profession: {alldetails.profession}</p>
+            <p>Profession Category: {alldetails.professionCategory}</p>
+            <p>Gender: {alldetails.gender}</p>
+            <p>Experience: {alldetails.experience}</p>
+            <p>Age: {alldetails.age}</p>
+            <p>Working Mode: {alldetails.workingMode}</p>
+            <p>Job Type: {alldetails.jobType}</p>
+            <p>Created At: {new Date(alldetails.createdAt).toLocaleString()}</p>
+            <p>Updated At: {new Date(alldetails.updatedAt).toLocaleString()}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default page;
+export default Page;  // Changed from 'page' to 'Page'
