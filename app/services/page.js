@@ -1,37 +1,11 @@
-<<<<<<< HEAD
 "use client";
-import React from "react";
-import Header from "../header/page";
+import React, { useState, useEffect } from 'react';
+import Header from '../header/page';
+import Footer from '../footer/page';
+import { FaBalanceScale, FaHandshake, FaUsers, FaComments, FaGavel, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-
-import { FaHandshake, FaSearch, FaChess, FaPlay } from "react-icons/fa";
-
-const Services = () => {
-    const router = useRouter();
-
-    
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      console.log("Token from localStorage:", token);
-  
-      // Example: If no token, redirect to login
-      if (!token) {
-        router.push('/login');
-      }
-    }, []);
-  
-
-  
-  
-=======
-"use client"
-import React, { useState } from 'react'
-import Header from '../header/page'
-import Footer from '../footer/page'
-import { FaBalanceScale, FaHandshake, FaUsers, FaComments, FaGavel, FaChevronDown, FaChevronUp } from 'react-icons/fa'
-import { motion, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
 
 const serviceData = [
   {
@@ -104,18 +78,26 @@ const serviceData = [
     color: "bg-indigo-50",
     features: ["Case evaluation", "Risk assessment", "Document review", "Ongoing support"]
   }
-]
+];
 
 const ServicesPage = () => {
-  const [expandedCard, setExpandedCard] = useState(null)
+  const [expandedCard, setExpandedCard] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log("Token from localStorage:", token);
+
+    if (!token) {
+      router.push('/login');
+    }
+  }, [router]);
 
   const toggleCard = (index) => {
-    setExpandedCard(expandedCard === index ? null : index)
-  }
+    setExpandedCard(expandedCard === index ? null : index);
+  };
 
->>>>>>> 8a0bc6e9f7810a64536b0335014b221e854f03da
   return (
-    
     <>
       <Header />
       <div className="bg-gray-50 min-h-screen">
@@ -231,7 +213,7 @@ const ServicesPage = () => {
       </div>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default ServicesPage
+export default ServicesPage;
