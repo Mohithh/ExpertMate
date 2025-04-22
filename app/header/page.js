@@ -3,12 +3,17 @@ import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSun, AiOutlineMoon } from "react-icons/ai";
 import { FiUser, FiLogIn } from "react-icons/fi";
 import Link from "next/link";
+<<<<<<< HEAD
 import { useRouter } from 'next/navigation';
 
 
 
 // import lofi from "@/app/assets/lofi.svg";
 
+=======
+import Image from "next/image";
+import Logo from "@/app/assets/hello_logo.png";
+>>>>>>> 8a0bc6e9f7810a64536b0335014b221e854f03da
 
 const Header = () => {
 
@@ -97,48 +102,24 @@ const Header = () => {
     </Link>
   );
 
-  // SVG Logo Component
-  const Logo = () => (
-    <svg 
-      width="120" 
-      height="40" 
-      viewBox="0 0 120 40" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-10 w-auto transition-transform hover:scale-105"
-    >
-      <path 
-        d="M20 15V25H25V20H30V25H35V15H30V20H25V15H20ZM40 15V25H50V20H45V15H40ZM55 15V25H60V20H65V25H70V15H65V20H60V15H55ZM75 15V25H85V20H80V15H75Z" 
-        fill={darkMode ? "#F59E0B" : "#1a3e72"} 
-      />
-      <path 
-        d="M100 25L110 20L100 15" 
-        stroke={darkMode ? "#F59E0B" : "#1a3e72"} 
-        strokeWidth="2"
-      />
-      <circle 
-        cx="105" 
-        cy="20" 
-        r="3" 
-        fill={darkMode ? "#F59E0B" : "#1a3e72"}
-      />
-      <path 
-        d="M105 17V12M105 23V28" 
-        stroke={darkMode ? "#F59E0B" : "#1a3e72"} 
-        strokeWidth="2"
-      />
-    </svg>
-  );
-
   return (
     <>
       {/* Desktop Navigation */}
       <header className={`fixed w-full top-0 z-50 transition-all duration-300 h-16 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0 flex items-center">
-              <Logo />
+            {/* Logo - Increased size */}
+            <Link href="/" className="flex-shrink-0 flex items-center min-w-[220px]">
+              <div className="relative w-[220px] h-[80px]">
+                <Image
+                  src={Logo}
+                  alt="Company Logo"
+                  fill
+                  sizes="(max-width: 768px) 280px, 280px"
+                  className="object-contain object-left transition-transform hover:scale-105 duration-300"
+                  priority
+                />
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
@@ -147,8 +128,9 @@ const Header = () => {
               <NavLink href="/lawyer">Our Leadership</NavLink>
               <NavLink href="/case">Case Management</NavLink>
               <NavLink href="/services">Services</NavLink>
-              <NavLink href="/arbitrator">Arbitrators</NavLink>
-              <NavLink href="/pricing">Pricing</NavLink>
+              <NavLink href="/StartDispute">Dispute</NavLink>
+              {/* <NavLink href="/arbitrator">Arbitrators</NavLink> */}
+              {/* <NavLink href="/pricing">Pricing</NavLink> */}
               <NavLink href="/contact">Contact</NavLink>
               <NavLink href="/search">search</NavLink>
             </nav>
@@ -212,8 +194,9 @@ const Header = () => {
             <MobileNavLink href="/lawyer">Lawyers</MobileNavLink>
             <MobileNavLink href="/case">Case Management</MobileNavLink>
             <MobileNavLink href="/services">Services</MobileNavLink>
-            <MobileNavLink href="/arbitrator">Arbitrators</MobileNavLink>
-            <MobileNavLink href="/pricing">Pricing</MobileNavLink>
+            <NavLink href="/StartDispute">Dispute</NavLink>
+            {/* <MobileNavLink href="/arbitrator">Arbitrators</MobileNavLink> */}
+            {/* <MobileNavLink href="/pricing">Pricing</MobileNavLink> */}
             <MobileNavLink href="/contact">Contact</MobileNavLink>
 
             <div className="flex items-center mt-8 space-x-4">

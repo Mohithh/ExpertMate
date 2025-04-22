@@ -1,12 +1,15 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Header from "@/app/header/page";
 
 
 =======
 import Script from "next/script";
 >>>>>>> ad71e9fb9358202de220c3bd2e2dbb33c9a937b3
+=======
+>>>>>>> 8a0bc6e9f7810a64536b0335014b221e854f03da
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,26 +36,15 @@ export default function RootLayout({ children }) {
         <Header/>
 =======
       <head>
-        {/* ✅ Replace below with your actual chatbot ID for test */}
-        <Script
-          id="chatbase-config"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.chatbaseConfig = {
-                chatbotId: "your-actual-chatbot-id-here"
-              };
-            `,
-          }}
-        />
-        <Script
-          src="https://www.chatbase.co/embed.min.js"
-          strategy="afterInteractive"
-        />
+
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 >>>>>>> ad71e9fb9358202de220c3bd2e2dbb33c9a937b3
         {children}
+
+        <script src="//code.tidio.co/8jpdhmhglwc0sfka7q6kltnmeazvydai.js" async></script>
       </body>
     </html>
   );

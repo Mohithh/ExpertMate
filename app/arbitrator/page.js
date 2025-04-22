@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Header from "../header/page";
+import Footer from "../footer/page";
 
 const Arbitrators = () => {
   useEffect(() => {
@@ -38,6 +39,7 @@ const Arbitrators = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </section>
     </>
   );

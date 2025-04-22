@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../header/page";
 import { FaBalanceScale, FaHandshake, FaHome, FaUserInjured, FaBriefcaseMedical, FaGavel } from "react-icons/fa";
 import { MdFamilyRestroom } from "react-icons/md";
+import Footer from "../footer/page";
 
 const serviceData = [
   {
@@ -150,7 +151,7 @@ const Services = () => {
                 
                 <div className="bg-gray-50 px-8 py-4 border-t border-gray-200">
                   <a
-                    href="#contact"
+                    href="/ConsultationPage"
                     className="w-full inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors duration-300"
                   >
                     Consult Now
@@ -172,7 +173,7 @@ const Services = () => {
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <a
-                  href="#contact"
+                  href="/ConsultationPage"
                   className="bg-white text-blue-600 hover:bg-gray-100 font-medium px-8 py-3 rounded-md transition-colors duration-300"
                 >
                   Schedule Consultation
@@ -185,13 +186,14 @@ const Services = () => {
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    Call Now: (123) 456-7890
+                    Call Now: +91 82890 28892
                   </span>
                 </a>
               </div>
             </div>
           </div>
         </div>
+        <Footer/>
       </section>
     </>
   );
