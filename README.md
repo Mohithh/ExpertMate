@@ -23,7 +23,7 @@ A smart settlement platform for efficient dispute resolution.
 ### Prerequisites
 
 - Node.js (v14 or later)
-- npm or yarn
+- npm or yarn.
 
 ### Installation
 
