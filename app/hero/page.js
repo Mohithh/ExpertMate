@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import Image from "next/image";
+import Logo from "@/app/assets/hello_logo.png"; // your company logo
 
 const Hero = () => {
   const controls = useAnimation();
@@ -18,7 +19,6 @@ const Hero = () => {
     }
   }, [controls, inView]);
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -54,13 +54,12 @@ const Hero = () => {
     },
   };
 
-  // Data
   const steps = [
     {
       number: "1",
       title: "File a Dispute",
       description: "Submit details through our secure online form",
-      icon: "📝",
+      icon: "📄",
     },
     {
       number: "2",
@@ -91,9 +90,11 @@ const Hero = () => {
 
   return (
     <div className="relative bg-white overflow-hidden" ref={ref}>
-      {/* Animated background elements */}
+      {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 to-white z-0"></div>
       <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 z-0"></div>
+
+      {/* Animated blobs */}
       <motion.div
         className="absolute top-0 right-0 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
         animate={{
@@ -123,7 +124,7 @@ const Hero = () => {
         }}
       />
 
-      {/* Dual marquee banner */}
+      {/* Marquee */}
       <div className="bg-gradient-to-r from-blue-800 to-blue-900 py-2 overflow-hidden">
         <motion.div
           className="text-white font-bold text-sm md:text-base whitespace-nowrap"
@@ -137,7 +138,7 @@ const Hero = () => {
           }}
         >
           <span className="mx-8">
-            • SETTLESMART SOLUTIONS • INDIA&rsquo;s LEADING DISPUTE RESOLUTION PLATFORM • TRUSTED BY 500+ BUSINESSES •
+            • SETTLESMART SOLUTIONS • INDIA'S LEADING DISPUTE RESOLUTION PLATFORM • TRUSTED BY 500+ BUSINESSES •
           </span>
         </motion.div>
         <motion.div
@@ -168,7 +169,7 @@ const Hero = () => {
             </motion.div>
 
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-gray-900 leading-tight mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6"
               variants={itemVariants}
             >
               <span className="block">From Vivaad se Samadhan</span>
@@ -184,7 +185,36 @@ const Hero = () => {
               SettleSmart Solutions leverages cutting-edge technology and a network of 200+ legal experts to resolve disputes fairly, confidentially, and at a fraction of traditional legal costs.
             </motion.p>
 
-            {/* Stats grid */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 mb-12"
+              variants={itemVariants}
+            >
+              <Link href="/StartDispute">
+                <motion.button
+                  className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-semibold transition-all flex items-center gap-2 group shadow-lg hover:shadow-blue-200/50"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>Start a Dispute</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </motion.button>
+              </Link>
+
+              <Link href="/JoinAsArbitrator">
+                <motion.button
+                  className="px-8 py-4 border-2 border-blue-600 bg-white text-blue-600 hover:bg-blue-50 rounded-xl font-semibold transition-all flex items-center gap-2 group"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>Join as Arbitrator/Mediator</span>
+                </motion.button>
+              </Link>
+            </motion.div>
+
+            {/* Stats */}
             <motion.div
               className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10"
               variants={containerVariants}
@@ -201,83 +231,89 @@ const Hero = () => {
                 </motion.div>
               ))}
             </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 mb-12"
-              variants={itemVariants}
-            >
-              <Link href="/StartDispute">
-                <motion.button
-                  className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-semibold transition-all flex items-center gap-2 group shadow-lg hover:shadow-blue-200/50"
-                  whileHover={{
-                    scale: 1.02,
-                    boxShadow: "0 8px 20px rgba(37, 99, 235, 0.3)",
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span>Start a Dispute</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </motion.button>
-              </Link>
-
-              <Link href="/JoinAsArbitrator">
-                <motion.button
-                  className="px-8 py-4 border-2 border-blue-600 bg-white text-blue-600 hover:bg-blue-50 rounded-xl font-semibold transition-all flex items-center gap-2 group"
-                  whileHover={{
-                    scale: 1.02,
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span>Join as Arbitrator/Mediator</span>
-                </motion.button>
-              </Link>
-            </motion.div>
-
-            {/* How It Works Section */}
-            <motion.div
-              className="mb-12"
-              variants={containerVariants}
-            >
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">Our Simple 4-Step Process</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {steps.map((step, index) => (
-                  <motion.div
-                    key={index}
-                    className="bg-white p-6 rounded-xl shadow-md border border-gray-100"
-                    variants={itemVariants}
-                  >
-                    <div className="flex items-center mb-4">
-                      <div className="bg-blue-200 p-3 rounded-full text-blue-600 text-xl font-semibold mr-4">
-                        {step.number}
-                      </div>
-                      <h4 className="text-lg font-semibold text-gray-900">{step.title}</h4>
-                    </div>
-                    <p className="text-gray-600">{step.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </div>
 
-          {/* Right image */}
-          <motion.div
-            className="lg:w-1/2"
+          {/* Right content - Image/Illustration */}
+          <motion.div 
+            className="lg:w-1/2 flex items-center justify-center"
             variants={scaleUp}
           >
-            <Image
-              src="/assets/hero-image.png"
-              alt="Dispute resolution"
-              width={600}
-              height={400}
-              className="w-full h-auto rounded-xl shadow-xl"
-              priority
-            />
+            <div className="relative w-full max-w-lg aspect-[4/3] bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-xl overflow-hidden border border-blue-100">
+              {/* Main illustration */}
+              <div className="absolute inset-0 flex items-center justify-center p-8">
+                <div className="text-center">
+                  <div className="relative w-32 h-32 mx-auto mb-6">
+                    <Image
+                      src={Logo}
+                      alt="Company Logo"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-3">Fast & Fair Dispute Resolution</h3>
+                  <p className="text-gray-600 mb-6">Technology-powered solutions for modern legal challenges</p>
+                  
+                  {/* Process steps visualization */}
+                  <div className="relative h-32 w-full">
+                    {steps.map((step, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute bg-white p-3 rounded-lg shadow-md border border-gray-100 flex items-center gap-3"
+                        style={{
+                          width: '160px',
+                          left: `${i * 25}%`,
+                          top: `${i % 2 === 0 ? 0 : 60}px`,
+                          zIndex: steps.length - i,
+                        }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 * i }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="text-2xl">{step.icon}</div>
+                        <div>
+                          <div className="text-xs font-semibold text-blue-600">STEP {step.number}</div>
+                          <div className="text-sm font-medium">{step.title}</div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200 rounded-full filter blur-3xl opacity-20"></div>
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-purple-200 rounded-full filter blur-3xl opacity-20"></div>
+            </div>
           </motion.div>
         </div>
+
+        {/* Process steps section */}
+        <motion.div
+          className="mt-16"
+          variants={containerVariants}
+        >
+          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Our Simple 4-Step Process</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all"
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex flex-col items-center text-center mb-4">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl mb-3">
+                    {step.icon}
+                  </div>
+                  <div className="text-blue-600 font-bold text-sm mb-1">STEP {step.number}</div>
+                  <h4 className="text-lg font-semibold text-gray-900">{step.title}</h4>
+                </div>
+                <p className="text-gray-600 text-center">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </div>
   );
