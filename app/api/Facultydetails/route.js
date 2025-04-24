@@ -3,9 +3,12 @@ import FacultyDetails from "@/model/facultyDetails/page";
 
 const connectDb = async () => {
     if (mongoose.connections[0].readyState) {
-        return; // Already connected
+        return; // Already connected 
     }
-    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
 };
 
 export const POST = async (req) => {
@@ -15,6 +18,10 @@ export const POST = async (req) => {
 
         const newFaculty = new FacultyDetails({
             email: body.email,
+            name: body.name,
+            description: body.description,
+            mobile: body.mobile, // ✅ NEW FIELD
+
             country: body.country,
             city: body.city,
             profession: body.profession,
@@ -42,7 +49,10 @@ export const POST = async (req) => {
     } catch (error) {
         console.error("Error:", error);
         return new Response(
-            JSON.stringify({ success: false, error: "Error saving faculty details" }),
+            JSON.stringify({
+                success: false,
+                error: "Error saving faculty details",
+            }),
             {
                 status: 500,
                 headers: { "Content-Type": "application/json" },

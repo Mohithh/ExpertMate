@@ -10,6 +10,9 @@ const page = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+    const [dp, setdp] = useState()
+    const [file, setfile] = useState()
+
   useEffect(() => {
     const checkuser = async () => {
       const token = localStorage.getItem("token");
@@ -113,6 +116,26 @@ const page = () => {
   const [job_type, setjob_type] = useState("");
   const [progress, setProgress] = useState(0);
 
+  const [username, setusername] = useState("")
+  const [description, setdescription] = useState("")
+
+  const [mobile, setmobile] = useState("")
+
+
+  const mailupload =(e)=>{
+    setuseremail(e.target.value)
+    // console.log(email)
+  }
+
+  const imgupload = (e)=>{
+    // setdp(e.target.value)
+    setdp(e.target.files[0])
+  }
+
+  const fileupload = (e)=>{
+    setfile(e.target.files[0])
+  }
+
 
   const handlechange = (e) => {
     setcountry(e.target.value);
@@ -161,6 +184,18 @@ const page = () => {
     setProgress(progress+20)
   };
 
+  const onchnagename = (e)=>{
+    setusername(e.target.value)
+  }
+
+  const onchnageDescription = (e)=>{
+    setdescription(e.target.value)
+
+  }
+  const onchangemobile = (e)=>{
+    setmobile(e.target.value)
+  }
+
   const submitform = async (e) => {
     e.preventDefault(); 
   
@@ -172,6 +207,9 @@ const page = () => {
         },
         body: JSON.stringify({
           email: useremail,
+          name: username,
+          description: description,
+          mobile: mobile,
           country: country,
           city: city,
           profession: profession,
@@ -186,6 +224,28 @@ const page = () => {
   
       const result = await response.json();
       console.log("✅ Response:", result);
+
+
+
+      const formData = new FormData();
+    formData.append("email", useremail);
+    formData.append("image", dp);
+    formData.append("file", file);
+
+    const res = await fetch("/api/uploadImage", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    alert(data.message);
+
+    setuseremail("");
+    setdp(null);
+    setfile(null);
+
+
+
     } catch (error) {
       console.error("❌ Error:", error);
     }
@@ -193,171 +253,227 @@ const page = () => {
   
 
   return (
-    <div className='p-10 max-w-4xl mx-auto'>
-
-
-      <Link className='font-bold text-xl' href={"/details"}>View information</Link>
-       
-
-
-      <form action="" onSubmit={submitform} className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
-      <ProgressBar 
-    completed={progress}
-    bgColor="#10b981"
-    baseBgColor="#e5e7eb"
-    height="20px"
-    labelAlignment="center"
-    className="mb-6 z-50 sticky top-0"
-
-
-  />
-
-{loading ? (
-      <p>Loading email...</p>
-    ) : error ? (
-      <p style={{ color: "red" }}>{error}</p>
-    ) : (
-      <div className='mb-8'>
-
-        <label className='font-bold text-2xl'>Your Email ID:</label>
-        <input
-          type="text"
-          value={useremail}
-          readOnly
-          className="border px-3 py-2 rounded-md w-full"
-        />
-      </div>
-    )}
-      {/* Location Section */}
-      <div className='mb-8'>
-        <h2 className='text-2xl font-bold mb-4'>Location</h2>
-
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select Country</label>
-          <select required name="" id="" onChange={handlechange} className='mt-2 p-2 border rounded-md w-full'>
-            <option value="">Select</option>
-            {Object.keys(data).map((value) => (
-              <option key={value} value={value}>{value}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select City</label>
-          <select required name="" id="" onChange={handlecity} className='mt-2 p-2 border rounded-md w-full'>
-            <option value="">Select</option>
-            {country && Object.keys(data[country]).map((value) => (
-              <option key={value} value={value}>{data[country][value]}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Profession Section */}
-      <div className='mb-8'>
-        <h2 className='text-2xl font-bold mb-4'>Profession</h2>
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select Profession</label>
-          <select required name="" id="" onChange={handleprofession} className='mt-2 p-2 border rounded-md w-full'>
-            <option value="">Select</option>
-            {Object.keys(professions).map((value) => (
-              <option key={value} value={value}>{value}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select Profession Category</label>
-          <select onChange={handleCategory} className='mt-2 p-2 border rounded-md w-full' disabled={!profession}>
-            <option value="">Select</option>
-            {profession && Object.entries(professions[profession]).map(([key, val]) => (
-              <option key={key} value={key}>{val}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Personal Information Section */}
-      <div className='mb-8'>
-        <h2 className='text-2xl font-bold mb-4'>Personal Information</h2>
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select Gender</label>
-          <select required name="" id="" onChange={handlegender} className='mt-2 p-2 border rounded-md w-full'>
-            <option value="">Select</option>
-            {Object.keys(genders).map((value) => (
-              <option key={value} value={value}>{value}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select Experience</label>
-          <select required name="" id="" onChange={handleexperience} className='mt-2 p-2 border rounded-md w-full'>
-            <option value="">Select</option>
-            {Object.keys(experiences).map((value) => (
-              <option key={value} value={value}>{value}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select Age</label>
-          <select required name="" id="" onChange={handleage} className='mt-2 p-2 border rounded-md w-full'>
-            <option value="">Select</option>
-            {Object.keys(ages).map((value) => (
-              <option key={value} value={value}>{value}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Job Preferences Section */}
-      <div className='mb-8'>
-        <h2 className='text-2xl font-bold mb-4'>Job Preferences</h2>
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select Working Mode</label>
-          <select required name="" id="" onChange={handlemode} className='mt-2 p-2 border rounded-md w-full'>
-            <option value="">Select</option>
-            {Object.keys(working_mode).map((value) => (
-              <option key={value} value={value}>{value}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className='mb-4'>
-          <label htmlFor="" className='block text-lg font-semibold'>Select Job Type</label>
-          <select required name="" id="" onChange={handlejob_type}  className='mt-2 p-2 border rounded-md w-full'>
-            <option value="">Select</option>
-            {Object.keys(Job_types).map((value) => (
-              <option key={value} value={value}>{value}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Selected Values */}
-      <p className='mt-4 p-4 bg-green-600 text-white rounded-md'>
-        Selected values: {country} {city} {profession} {pcatagory} {gender} {experience} {age} {mode} {job_type}
-      </p>
-
-      <button className=' p-3 m-3 bg-green-400 w-full hover:bg-red-400 cursor-pointer'> Submit </button>
-
-
-      </form>
-
-
-
-
-     
-
-
-
-
+    <div className="max-w-5xl mx-auto px-4 py-10">
+    <div className="flex justify-between items-center mb-6">
+      <h1 className="text-3xl font-bold text-green-600">Submit Your Details</h1>
+      <Link href="/details" className="text-blue-600 font-semibold hover:underline text-lg">
+        View Information
+      </Link>
     </div>
+  
+    <form onSubmit={submitform} className="bg-white shadow-2xl rounded-2xl p-8 space-y-8 border border-gray-100">
+      
+      {/* ProgressBar */}
+      <ProgressBar 
+        completed={progress}
+        bgColor="#10b981"
+        baseBgColor="#e5e7eb"
+        height="20px"
+        labelAlignment="center"
+        className="sticky top-0 z-50"
+      />
+  
+      {/* Email Section */}
+      {loading ? (
+        <p className="text-gray-700">Loading email...</p>
+      ) : error ? (
+        <p className="text-red-500">{error}</p>
+      ) : (
+        <div>
+          <label className="block text-xl font-bold mb-2">Your Email ID:</label>
+          <input
+            type="text"
+            value={useremail}
+            readOnly
+            className="border border-gray-300 px-4 py-2 rounded-lg w-full bg-gray-100"
+          />
+        </div>
+      )}
+
+
+<section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label className="block font-medium mb-1">Full Name</label>
+            <input  onChange={onchnagename} type="text" value={username} name='name' required className="w-full p-3 rounded-md border border-gray-300" />
+          </div>
+
+          <div>
+            <label className="block font-medium mb-1">Contact Number</label>
+            <input   onChange={onchangemobile} type="number" value={mobile} name='number' required className="w-full p-3 rounded-md border border-gray-300" />
+          </div>
+         
+        </div>
+      </section>
+
+
+
+
+
+
+  
+      {/* Location Section */}
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Location</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label className="block font-medium mb-1">Select Country</label>
+            <select onChange={handlechange} required className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {Object.keys(data).map((value) => (
+                <option key={value} value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+  
+          <div>
+            <label className="block font-medium mb-1">Select City</label>
+            <select onChange={handlecity} required className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {country && Object.keys(data[country]).map((value) => (
+                <option key={value} value={value}>{data[country][value]}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </section>
+  
+      {/* Profession Section */}
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Profession</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label className="block font-medium mb-1">Select Profession</label>
+            <select onChange={handleprofession} required className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {Object.keys(professions).map((value) => (
+                <option key={value} value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+  
+          <div>
+            <label className="block font-medium mb-1">Select Profession Category</label>
+            <select onChange={handleCategory} disabled={!profession} className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {profession && Object.entries(professions[profession]).map(([key, val]) => (
+                <option key={key} value={key}>{val}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </section>
+  
+      {/* Personal Info Section */}
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Personal Information</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div>
+            <label className="block font-medium mb-1">Select Gender</label>
+            <select onChange={handlegender} required className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {Object.keys(genders).map((value) => (
+                <option key={value} value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+  
+          <div>
+            <label className="block font-medium mb-1">Select Experience</label>
+            <select onChange={handleexperience} required className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {Object.keys(experiences).map((value) => (
+                <option key={value} value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+  
+          <div>
+            <label className="block font-medium mb-1">Select Age</label>
+            <select onChange={handleage} required className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {Object.keys(ages).map((value) => (
+                <option key={value} value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </section>
+  
+      {/* Job Preferences */}
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Job Preferences</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label className="block font-medium mb-1">Select Working Mode</label>
+            <select onChange={handlemode} required className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {Object.keys(working_mode).map((value) => (
+                <option key={value} value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+  
+          <div>
+            <label className="block font-medium mb-1">Select Job Type</label>
+            <select onChange={handlejob_type} required className="w-full p-3 rounded-md border border-gray-300">
+              <option value="">Select</option>
+              {Object.keys(Job_types).map((value) => (
+                <option key={value} value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </section>
+  
+      {/* Selected Values */}
+      <div className="p-4 bg-green-100 border border-green-300 rounded-lg text-sm text-green-700">
+        Selected values: {country} {city} {profession} {pcatagory} {gender} {experience} {age} {mode} {job_type}
+      </div>
+  
+      {/* File Upload Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label className="block font-medium mb-2">Upload Image</label>
+          <input type="file" onChange={imgupload} accept="image/*" required className="w-full p-2 border rounded-md" />
+        </div>
+        <div>
+          <label className="block font-medium mb-2">Upload File</label>
+          <input type="file" onChange={fileupload} required className="w-full p-2 border rounded-md" />
+        </div>
+      </div>
+
+
+
+
+
+      <section>
+        <div className="">
+          <div>
+            <label className="block font-medium mb-1">Description</label>
+            <textarea required className='border w-full h-24 border-black ' onChange={onchnageDescription} name="description" value={description} id=""></textarea>
+          </div>
+
+         
+        </div>
+      </section>
+  
+
+
+
+
+
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="w-full mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl transition duration-300"
+      >
+        Submit Form
+      </button>
+    </form>
+  </div>
+  
   );
 };
 

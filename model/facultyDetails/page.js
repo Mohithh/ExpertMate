@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 const facultyDetailsSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    mobile: { type: String, required: true },
 
     country: { type: String, required: true },
     city: { type: String, required: true },
