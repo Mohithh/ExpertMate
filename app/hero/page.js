@@ -158,6 +158,22 @@ const Hero = () => {
 
       {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-24 lg:py-32">
+        {/* Logo section - Mobile first */}
+        <motion.div 
+          className="lg:hidden w-full flex items-center justify-center mb-8"
+          variants={scaleUp}
+        >
+          <div className="relative w-48 h-48 mx-auto">
+            <Image
+              src={Logo}
+              alt="Company Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        </motion.div>
+
         <div className="flex flex-col lg:flex-row gap-12 xl:gap-16 items-center">
           {/* Left content */}
           <div className="lg:w-1/2">
@@ -195,7 +211,7 @@ const Hero = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>Start a Dispute</span>
+                  <span>Settle Dispute</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
                     <line x1="5" y1="12" x2="19" y2="12" />
                     <polyline points="12 5 19 12 12 19" />
@@ -233,9 +249,9 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right content - Image/Illustration */}
+          {/* Right content - Image/Illustration (Desktop only) */}
           <motion.div 
-            className="lg:w-1/2 flex items-center justify-center"
+            className="hidden lg:flex lg:w-1/2 items-center justify-center"
             variants={scaleUp}
           >
             <div className="relative w-full max-w-lg aspect-[4/3] bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-xl overflow-hidden border border-blue-100">

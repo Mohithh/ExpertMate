@@ -130,16 +130,16 @@ export default function ContactForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
       <Toaster position="top-center" richColors expand={true} />
-      
+
       <div className="max-w-6xl mx-auto">
         {/* Header with logo */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <Image 
-              src={Logo} 
-              alt="LegalConnect Logo" 
-              width={120} 
-              height={120} 
+            <Image
+              src={Logo}
+              alt="LegalConnect Logo"
+              width={120}
+              height={120}
               className="h-16 w-auto"
             />
           </div>
@@ -352,16 +352,16 @@ export default function ContactForm() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
                   Our Office Location
                 </h2>
-                
+
                 {mapLoaded ? (
                   <div className="h-96 rounded-xl overflow-hidden shadow-md border border-gray-200">
                     <iframe
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      style={{ border: 0 }}
-                      src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=Law+Office+New+York`}
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.366085044946!2d77.2065413150824!3d28.6316449824229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f1!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                      className="w-full h-full border-0"
                       allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Google Map"
                     ></iframe>
                   </div>
                 ) : (
@@ -377,7 +377,9 @@ export default function ContactForm() {
                     </div>
                     <div className="ml-4">
                       <h3 className="text-sm font-medium text-gray-900">Address</h3>
-                      <p className="text-sm text-gray-600">123 Legal Avenue, Suite 500<br />New York, NY 10001</p>
+                      <p className="text-sm text-gray-600">Connaught Place
+
+<br />New Delhi, Delhi 110001</p>
                     </div>
                   </div>
 
@@ -387,7 +389,7 @@ export default function ContactForm() {
                     </div>
                     <div className="ml-4">
                       <h3 className="text-sm font-medium text-gray-900">Phone</h3>
-                      <p className="text-sm text-gray-600">+1 (555) 123-4567</p>
+                      <p className="text-sm text-gray-600">+91 82890 28892</p>
                     </div>
                   </div>
 
@@ -397,7 +399,7 @@ export default function ContactForm() {
                     </div>
                     <div className="ml-4">
                       <h3 className="text-sm font-medium text-gray-900">Email</h3>
-                      <p className="text-sm text-gray-600">contact@legalfirm.com</p>
+                      <p className="text-sm text-gray-600">settlesmartsolutions01@gmail.com</p>
                     </div>
                   </div>
 

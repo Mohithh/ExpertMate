@@ -105,7 +105,7 @@ const Header = () => {
               <NavLink href="/lawyer">Our Leadership</NavLink>
               <NavLink href="/case">Case Management</NavLink>
               <NavLink href="/services">Services</NavLink>
-              <NavLink href="/StartDispute">Dispute</NavLink>
+              <NavLink href="/StartDispute">Settle Dispute</NavLink>
               <NavLink href="/contact">Contact</NavLink>
               <NavLink href="/search">search</NavLink>
             </nav>
@@ -167,7 +167,7 @@ const Header = () => {
             <MobileNavLink href="/lawyer">Lawyers</MobileNavLink>
             <MobileNavLink href="/case">Case Management</MobileNavLink>
             <MobileNavLink href="/services">Services</MobileNavLink>
-            <MobileNavLink href="/StartDispute">Dispute</MobileNavLink>
+            <MobileNavLink href="/StartDispute">Settle Dispute</MobileNavLink>
             <MobileNavLink href="/contact">Contact</MobileNavLink>
 
             <div className="flex items-center mt-8 space-x-4">

@@ -78,7 +78,7 @@ const Footer = () => {
           <ul className="space-y-3">
             {[
               { name: "Home", href: "/" },
-              { name: "About Us", href: "/about" },
+            
               { name: "Services", href: "/services" },
               { name: "Case Studies", href: "/cases" },
               { name: "Contact", href: "/contact" }
@@ -105,7 +105,7 @@ const Footer = () => {
               { name: "Arbitration", href: "/services/arbitration" },
               { name: "Contract Review", href: "/services/contract-review" },
               { name: "Legal Consultation", href: "/services/consultation" },
-              { name: "Dispute Resolution", href: "/services/dispute-resolution" }
+             
             ].map((item) => (
               <li key={item.name}>
                 <a href={item.href} className="text-gray-400 hover:text-white transition flex items-center group text-sm">
