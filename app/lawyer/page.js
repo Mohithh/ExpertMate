@@ -80,7 +80,7 @@ const TeamPage = () => {
       {
         id: 2,
         name: "Aman Bhatti",
-        title: "Chief Technology Officer",
+        title: "Chief Technical Officer",
         image: Bhatti,
         experience: "Skilled in full-stack web development with hands-on project and internship experience",
         education: "B.E. in Computer Science Engineering, Chandigarh University",
