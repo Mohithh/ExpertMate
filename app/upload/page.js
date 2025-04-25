@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 
 const Page = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState<string>("");
   const [dp, setDp] = useState<File | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
@@ -26,6 +26,11 @@ const Page = () => {
   const submit = async (e) => {
     e.preventDefault();
 
+    if (!email || !dp || !file) {
+      alert("Please fill all required fields");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("email", email);
     if (dp) formData.append("image", dp);
@@ -36,6 +41,10 @@ const Page = () => {
         method: "POST",
         body: formData,
       });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
 
       const data = await res.json();
       alert(data.message);
@@ -50,7 +59,7 @@ const Page = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 max-w-md mx-auto">
       <h2 className="text-xl font-semibold mb-4">Upload Form</h2>
       <form onSubmit={submit} className="flex flex-col space-y-4">
         <input
@@ -61,22 +70,28 @@ const Page = () => {
           placeholder="Email"
           className="border p-2 rounded"
         />
-        <input
-          required
-          onChange={imgUpload}
-          accept="image/*"
-          type="file"
-          className="border p-2 rounded"
-        />
-        <input
-          required
-          onChange={fileUpload}
-          type="file"
-          className="border p-2 rounded"
-        />
+        <div>
+          <label className="block mb-1 text-sm font-medium">Profile Image (required)</label>
+          <input
+            required
+            onChange={imgUpload}
+            accept="image/*"
+            type="file"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 text-sm font-medium">File (required)</label>
+          <input
+            required
+            onChange={fileUpload}
+            type="file"
+            className="border p-2 rounded w-full"
+          />
+        </div>
         <button
           type="submit"
-          className="bg-green-500 text-white py-2 rounded font-bold"
+          className="bg-green-500 hover:bg-green-600 text-white py-2 rounded font-bold transition-colors"
         >
           Submit Form
         </button>
@@ -85,18 +100,19 @@ const Page = () => {
       <div className="mt-6">
         {dp && (
           <div className="mb-4">
-            <p>Image Preview: {dp.name}</p>
+            <p className="font-medium">Image Preview: {dp.name}</p>
             <img
               src={URL.createObjectURL(dp)}
               alt="Image Preview"
               width="200"
-              className="mt-2"
+              className="mt-2 border rounded"
             />
           </div>
         )}
         {file && (
           <div>
-            <p>File: {file.name}</p>
+            <p className="font-medium">File: {file.name}</p>
+            <p className="text-sm text-gray-500">Size: {(file.size / 1024).toFixed(2)} KB</p>
           </div>
         )}
       </div>
