@@ -57,13 +57,13 @@ const Footer = () => {
             <a href="https://www.linkedin.com/company/settlesmart-solutions" className="text-gray-400 hover:text-white transition-all hover:-translate-y-0.5">
               <FaLinkedin className="h-5 w-5" />
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-all hover:-translate-y-0.5">
+            {/* <a href="#" className="text-gray-400 hover:text-white transition-all hover:-translate-y-0.5">
               <FaTwitter className="h-5 w-5" />
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition-all hover:-translate-y-0.5">
               <FaFacebook className="h-5 w-5" />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-all hover:-translate-y-0.5">
+            </a> */}
+            <a href="https://www.instagram.com/solutions.settlesmart?igsh=OWtyem1wczJramNk" className="text-gray-400 hover:text-white transition-all hover:-translate-y-0.5">
               <FaInstagram className="h-5 w-5" />
             </a>
           </div>
@@ -78,7 +78,7 @@ const Footer = () => {
           <ul className="space-y-3">
             {[
               { name: "Home", href: "/" },
-              { name: "About Us", href: "/about" },
+            
               { name: "Services", href: "/services" },
               { name: "Case Studies", href: "/cases" },
               { name: "Contact", href: "/contact" }
@@ -105,7 +105,7 @@ const Footer = () => {
               { name: "Arbitration", href: "/services/arbitration" },
               { name: "Contract Review", href: "/services/contract-review" },
               { name: "Legal Consultation", href: "/services/consultation" },
-              { name: "Dispute Resolution", href: "/services/dispute-resolution" }
+             
             ].map((item) => (
               <li key={item.name}>
                 <a href={item.href} className="text-gray-400 hover:text-white transition flex items-center group text-sm">

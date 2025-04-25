@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-const page = () => {
+const Page = () => {
   const [teacherList, setTeacherList] = useState([]); // List of all teachers
   const [userImages, setUserImages] = useState({}); // Stores images/files for each teacher's email
 
@@ -122,7 +122,6 @@ const page = () => {
                   </div>
                 </div>
               )}
-
             </div>
           );
         })}
@@ -131,4 +130,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

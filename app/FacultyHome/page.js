@@ -22,7 +22,7 @@ const page = () => {
         setLoading(false);
         return;
       }
-
+ 
       try {
         const response = await fetch("http://localhost:3000/api/useremail", {
           method: "POST",

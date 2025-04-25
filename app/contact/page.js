@@ -24,12 +24,27 @@ const ContactPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const validateForm = () => {
+    if (!formData.name.trim()) return "Name is required";
+    if (!formData.email.trim()) return "Email is required";
+    if (!/^\S+@\S+\.\S+$/.test(formData.email)) return "Email is invalid";
+    if (!formData.message.trim()) return "Message is required";
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const validationError = validateForm();
+    if (validationError) {
+      setStatus({ submitting: false, submitted: false, error: validationError });
+      return;
+    }
+
     setStatus({ submitting: true, submitted: false, error: null });
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/api/send-email-contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,19 +52,24 @@ const ContactPage = () => {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to submit form');
+        throw new Error(data.error || 'Failed to submit form');
       }
 
       setStatus({ submitting: false, submitted: true, error: null });
       setFormData({ name: '', email: '', subject: '', message: '' });
 
-      // Reset submission status after 5 seconds
       setTimeout(() => {
         setStatus(prev => ({ ...prev, submitted: false }));
       }, 5000);
     } catch (error) {
-      setStatus({ submitting: false, submitted: false, error: error.message });
+      setStatus({ 
+        submitting: false, 
+        submitted: false, 
+        error: error.message || 'An unexpected error occurred' 
+      });
     }
   };
 
@@ -88,7 +108,6 @@ const ContactPage = () => {
                 <p className="text-green-600">
                   Your message has been sent successfully. We&apos;ll get back to you soon.
                 </p>
-
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">

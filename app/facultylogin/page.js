@@ -7,7 +7,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation"; 
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [email, setemail] = useState(""); 
   const [password, setpassword] = useState("");
@@ -15,7 +15,7 @@ const page = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) router.push("/");
-  }, []);
+  }, [router]);
 
   const onchangeevent = (e) => {
     if (e.target.name === "email") setemail(e.target.value);
@@ -28,7 +28,7 @@ const page = () => {
 
     const response = await fetch(`${process.env.LOCAL_URL}/api/FacultyLogin`, {
       method: "POST",
-      headers: { "context-type": "application/json" },
+      headers: { "content-type": "application/json" }, // small fix: should be "content-type", not "context-type"
       body: JSON.stringify(data)
     });
 
@@ -121,4 +121,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

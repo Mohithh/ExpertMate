@@ -7,10 +7,9 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation"; 
 
-const page = () => {
+const Page = () => {
     const router = useRouter();
   
-
    useEffect(() => {
       const token = localStorage.getItem('token')
   
@@ -18,7 +17,7 @@ const page = () => {
         router.push("/");
       }
       
-    }, [])
+    }, [router])
  
   
   
@@ -164,4 +163,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

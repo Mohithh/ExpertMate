@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [doctorList, setDoctorList] = useState([]);           // List of all doctors
   const [userImages, setUserImages] = useState({});           // Stores images/files for each email
 
   useEffect(() => {
-    const checkuser = async () => {
+    const checkUser = async () => {
       try {
-        // ✅ First API - Get list of all doctors
+        // ✅ Get list of all doctors
         const response = await fetch("http://localhost:3000/api/doctorList", {
           method: "GET",
           headers: {
@@ -22,7 +22,7 @@ const page = () => {
         setDoctorList(doctors);
 
         // ✅ Fetch image+file for each doctor's email
-        const imagesMap = {};  // Temporary object to store results
+        const imagesMap = {};
 
         for (const doctor of doctors) {
           const imageRes = await fetch("/api/userimage", {
@@ -34,13 +34,11 @@ const page = () => {
           });
 
           const imageData = await imageRes.json();
-
           if (imageData.success) {
             imagesMap[doctor.email] = imageData.data;
           }
         }
 
-        // ✅ Save all image data
         setUserImages(imagesMap);
         console.log("All images loaded ✅");
 
@@ -49,9 +47,8 @@ const page = () => {
       }
     };
 
-    checkuser();
-
-  }, []); // Only run once
+    checkUser();
+  }, []);
 
   return (
     <div className="p-10 bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 min-h-screen">
@@ -61,7 +58,7 @@ const page = () => {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
         {doctorList.map((value) => {
-          const imageData = userImages[value.email];  // Get image+file for this user
+          const imageData = userImages[value.email];
 
           return (
             <div
@@ -76,9 +73,8 @@ const page = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-sm text-gray-800 leading-relaxed mb-6">
-                <div className="items-center m-1 text-xl font-medium"> Name: {value.name}</div>
+                <div className="items-center m-1 text-xl font-medium">Name: {value.name}</div>
                 <br />
-
                 <div>🏙️ <span className="font-medium">City:</span> {value.city}</div>
                 <div>🌏 <span className="font-medium">Country:</span> {value.country}</div>
                 <div>👤 <span className="font-medium">Gender:</span> {value.gender}</div>
@@ -93,7 +89,6 @@ const page = () => {
                 <p>🔄 Updated: {new Date(value.updatedAt).toLocaleString()}</p>
               </div>
 
-              {/* Image and File section (if exists for this user) */}
               {imageData && (
                 <div className="mt-6 border-t pt-5">
                   <div className="flex flex-col md:flex-row gap-6">
@@ -130,7 +125,6 @@ const page = () => {
                   </div>
                 </div>
               )}
-
             </div>
           );
         })}
@@ -139,4 +133,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
