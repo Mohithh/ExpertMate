@@ -11,6 +11,7 @@ export default function UserProfilePage() {
     const params = useParams();
     const [value, setValue] = useState("");
 
+    
 
     const [details, setdetails] = useState("")
     const [userData, setUserData] = useState(null);

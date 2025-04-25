@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Header />
-        {children}
+        {children }
         <Script src="//code.tidio.co/8jpdhmhglwc0sfka7q6kltnmeazvydai.js" strategy="lazyOnload" />
       </body>
     </html>
