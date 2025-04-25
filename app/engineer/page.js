@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 
+import Link from "next/link";
+
 const page = () => {
   const [engineerList, setEngineerList] = useState([]);
   const [userImages, setUserImages] = useState({});
@@ -58,6 +60,7 @@ const page = () => {
           className="bg-white shadow-2xl rounded-2xl p-6 border border-purple-200 hover:shadow-purple-300 hover:scale-[1.03] transition-all duration-300"
         >
           {/* Header */}
+          <Link href={`/userprofile/${value.email}`}>
           <div className="text-center mb-5">
             <h2 className="text-2xl font-bold text-purple-600">
               {value.professionCategory} <span className="text-sm text-gray-400">({value.profession})</span>
@@ -84,6 +87,9 @@ const page = () => {
             <p>🕒 Created: {new Date(value.createdAt).toLocaleString()}</p>
             <p>🔄 Updated: {new Date(value.updatedAt).toLocaleString()}</p>
           </div>
+
+</Link>
+
 
           {/* Image & File */}
           {imageData && (
@@ -120,6 +126,7 @@ const page = () => {
           </a>
         </div>
       </div>
+
     </div>
   </div>
 )}
