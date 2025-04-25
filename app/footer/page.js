@@ -80,7 +80,6 @@ const Footer = () => {
               { name: "Home", href: "/" },
             
               { name: "Services", href: "/services" },
-              { name: "Case Studies", href: "/cases" },
               { name: "Contact", href: "/contact" }
             ].map((item) => (
               <li key={item.name}>
