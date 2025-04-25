@@ -1,7 +1,28 @@
 "use client";
 import { useState, useEffect } from "react";
-import { AiOutlineMenu, AiOutlineClose, AiOutlineSun, AiOutlineMoon, AiOutlineDown, AiOutlineUp } from "react-icons/ai";
-import { FiUser, FiLogIn } from "react-icons/fi";
+import { 
+  AiOutlineMenu, 
+  AiOutlineClose, 
+  AiOutlineSun, 
+  AiOutlineMoon, 
+  AiOutlineDown, 
+  AiOutlineUp,
+  AiOutlineHome
+} from "react-icons/ai";
+import { 
+  FiUser, 
+  FiLogIn, 
+  FiUsers,
+  FiFileText,
+  FiList,
+  FiHeadphones,
+  FiClock,
+  FiSettings,
+  FiShield,
+  FiMail
+} from "react-icons/fi";
+import { IoSearchOutline } from "react-icons/io5";
+import { MdOutlineManageSearch } from "react-icons/md";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
@@ -88,141 +109,145 @@ const Header = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [caseDropdownOpen]);
 
-  // NavLink component
-  const NavLink = ({ href, children, onClick }) => (
-    <Link href={href} className="relative group" passHref onClick={onClick}>
-      <span className="text-gray-700 dark:text-gray-300 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors text-base lg:text-[15px] xl:text-base">
-        {children}
-      </span>
-      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-amber-500 group-hover:w-full transition-all duration-300"></span>
+  // NavLink component with single-line enforcement
+  const NavLink = ({ href, children, onClick, icon: Icon }) => (
+    <Link href={href} className="relative group whitespace-nowrap" passHref onClick={onClick}>
+      <div className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 h-10">
+        {Icon && <Icon className="mr-2 text-base opacity-70 group-hover:opacity-100 transition-opacity" />}
+        <span className="text-gray-700 dark:text-gray-300 font-medium group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors text-sm">
+          {children}
+        </span>
+      </div>
+      <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-amber-500 group-hover:w-4/5 transition-all duration-300 ease-out"></span>
     </Link>
   );
 
   // Mobile NavLink component
-  const MobileNavLink = ({ href, children, onClick }) => (
+  const MobileNavLink = ({ href, children, onClick, icon: Icon }) => (
     <Link
       href={href}
       onClick={onClick}
-      className="text-gray-800 dark:text-gray-200 text-lg font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 w-full text-center"
+      className="flex items-center text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 w-full whitespace-nowrap"
       passHref
     >
-      {children}
+      {Icon && <Icon className="mr-3 text-lg" />}
+      <span>{children}</span>
     </Link>
   );
 
   return (
     <>
       {/* Desktop Navigation */}
-      <header className={`fixed w-full top-0 z-50 transition-all duration-300 h-16 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-          <div className="flex items-center justify-between h-full">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0 flex items-center min-w-[180px] md:min-w-[220px]">
-              <div className="relative w-[180px] md:w-[220px] h-[60px] md:h-[80px]">
+      <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo - fixed width to prevent layout shift */}
+            <Link href="/" className="flex-shrink-0 w-40">
+              <div className="relative w-full h-12">
                 <Image
                   src={Logo}
                   alt="Company Logo"
                   fill
-                  sizes="(max-width: 768px) 180px, 220px"
-                  className="object-contain object-left transition-transform hover:scale-105 duration-300"
+                  className="object-contain object-left"
                   priority
                 />
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/lawyer">Our Leadership</NavLink>
-              
-              {/* Case Management Dropdown */}
-              <div className="relative">
-                <button 
-                  onClick={toggleCaseDropdown}
-                  className="flex items-center text-gray-700 dark:text-gray-300 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors text-base lg:text-[15px] xl:text-base"
-                >
-                  Case Management
-                  {caseDropdownOpen ? (
-                    <AiOutlineUp className="ml-1" size={14} />
-                  ) : (
-                    <AiOutlineDown className="ml-1" size={14} />
-                  )}
-                </button>
+            {/* Centered Navigation */}
+            <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
+              <div className="flex items-center space-x-1">
+                <NavLink href="/" icon={AiOutlineHome}>Home</NavLink>
+                <NavLink href="/lawyer" icon={FiUsers}>Leadership</NavLink>
                 
-                {caseDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700">
-                    <Link 
-                      href="/case" 
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
-                      onClick={() => setCaseDropdownOpen(false)}
-                    >
-                      Overview
-                    </Link>
-                    <Link 
-                      href="/case/cause-list" 
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
-                      onClick={() => setCaseDropdownOpen(false)}
-                    >
-                      Cause List
-                    </Link>
-                    <Link 
-                      href="/case/current-hearings" 
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
-                      onClick={() => setCaseDropdownOpen(false)}
-                    >
-                      Current Hearings
-                    </Link>
-                    <Link 
-                      href="/case/upcoming-hearings" 
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
-                      onClick={() => setCaseDropdownOpen(false)}
-                    >
-                      Upcoming Hearings
-                    </Link>
-                  </div>
-                )}
+                {/* Case Management Dropdown */}
+                <div className="relative">
+                  <button 
+                    onClick={toggleCaseDropdown}
+                    className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 group h-10 whitespace-nowrap"
+                  >
+                    <MdOutlineManageSearch className="mr-2 text-base" />
+                    <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
+                      Cases
+                    </span>
+                    {caseDropdownOpen ? (
+                      <AiOutlineUp className="ml-1" size={14} />
+                    ) : (
+                      <AiOutlineDown className="ml-1" size={14} />
+                    )}
+                  </button>
+                  
+                  {caseDropdownOpen && (
+                    <div className="absolute left-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700 animate-fadeIn">
+                      <Link 
+                        href="/case" 
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                        onClick={() => setCaseDropdownOpen(false)}
+                      >
+                        <FiFileText className="mr-2" />
+                        Overview
+                      </Link>
+                      <Link 
+                        href="/case/cause-list" 
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                        onClick={() => setCaseDropdownOpen(false)}
+                      >
+                        <FiList className="mr-2" />
+                        Cause List
+                      </Link>
+                      <Link 
+                        href="/case/current-hearings" 
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                        onClick={() => setCaseDropdownOpen(false)}
+                      >
+                        <FiHeadphones className="mr-2" />
+                        Hearings
+                      </Link>
+                    </div>
+                  )}
+                </div>
+                
+                <NavLink href="/services" icon={FiSettings}>Services</NavLink>
+                <NavLink href="/StartDispute" icon={FiShield}>Dispute</NavLink>
+                <NavLink href="/contact" icon={FiMail}>Contact</NavLink>
+                <NavLink href="/search" icon={IoSearchOutline}>Search</NavLink>
               </div>
-              
-              <NavLink href="/services">Services</NavLink>
-              <NavLink href="/StartDispute">Settle Dispute</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
-              <NavLink href="/search">Search</NavLink>
             </nav>
 
             {/* Right side buttons */}
-            <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
+            <div className="hidden md:flex items-center space-x-2">
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
               >
-                {darkMode ? <AiOutlineSun size={20} /> : <AiOutlineMoon size={20} />}
+                {darkMode ? <AiOutlineSun size={18} /> : <AiOutlineMoon size={18} />}
               </button>
 
-              <div className="flex space-x-2">
-                {!loginn && (
-                  <>
-                    <Link href="/login">
-                      <button className="flex items-center px-3 py-1.5 lg:px-4 lg:py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors text-sm lg:text-base">
-                        <FiLogIn className="mr-1 lg:mr-2" size={16} />
-                        Login
-                      </button>
-                    </Link>
-                    <Link href="/signup">
-                      <button className="flex items-center px-3 py-1.5 lg:px-4 lg:py-2 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg text-sm lg:text-base">
-                        <FiUser className="mr-1 lg:mr-2" size={16} />
-                        Sign Up
-                      </button>
-                    </Link>
-                  </>
-                )}
-                {loginn && (
-                  <button onClick={logout} className="flex items-center px-3 py-1.5 lg:px-4 lg:py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors text-sm lg:text-base">
-                    <FiLogIn className="mr-1 lg:mr-2" size={16} />
-                    LOGOUT
-                  </button>
-                )}
-              </div>
+              {!loginn ? (
+                <>
+                  <Link href="/login">
+                    <button className="flex items-center px-3 py-1.5 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors text-sm whitespace-nowrap">
+                      <FiLogIn className="mr-1.5" size={14} />
+                      Login
+                    </button>
+                  </Link>
+                  <Link href="/signup">
+                    <button className="flex items-center px-3 py-1.5 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors text-sm whitespace-nowrap">
+                      <FiUser className="mr-1.5" size={14} />
+                      Sign Up
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <button 
+                  onClick={logout} 
+                  className="flex items-center px-3 py-1.5 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors text-sm whitespace-nowrap"
+                >
+                  <FiLogIn className="mr-1.5" size={14} />
+                  LOGOUT
+                </button>
+              )}
             </div>
 
             {/* Mobile menu button */}
@@ -232,7 +257,7 @@ const Header = () => {
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
             >
-              {menuOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
+              {menuOpen ? <AiOutlineClose size={22} /> : <AiOutlineMenu size={22} />}
             </button>
           </div>
         </div>
@@ -248,74 +273,73 @@ const Header = () => {
           aria-hidden={!menuOpen}
         >
           <div className="flex flex-col items-center justify-start w-full h-full overflow-y-auto py-4">
-            <MobileNavLink href="/" onClick={closeMenu}>Home</MobileNavLink>
-            <MobileNavLink href="/lawyer" onClick={closeMenu}>Our Leadership</MobileNavLink>
+            <MobileNavLink href="/" onClick={closeMenu} icon={AiOutlineHome}>Home</MobileNavLink>
+            <MobileNavLink href="/lawyer" onClick={closeMenu} icon={FiUsers}>Leadership</MobileNavLink>
             
             {/* Mobile Case Management Dropdown */}
             <div className="w-full">
               <button 
                 onClick={toggleMobileCaseDropdown}
-                className="flex items-center justify-center w-full text-gray-800 dark:text-gray-200 text-lg font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6"
+                className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
               >
-                Case Management
+                <MdOutlineManageSearch className="mr-3 text-lg" />
+                <span>Case Management</span>
                 {mobileCaseDropdownOpen ? (
-                  <AiOutlineUp className="ml-1" size={14} />
+                  <AiOutlineUp className="ml-auto" size={14} />
                 ) : (
-                  <AiOutlineDown className="ml-1" size={14} />
+                  <AiOutlineDown className="ml-auto" size={14} />
                 )}
               </button>
               
               {mobileCaseDropdownOpen && (
                 <div className="w-full bg-gray-50 dark:bg-gray-800/50">
-                  <MobileNavLink href="/case" onClick={closeMenu}>Overview</MobileNavLink>
-                  <MobileNavLink href="/case/cause-list" onClick={closeMenu}>Cause List</MobileNavLink>
-                  <MobileNavLink href="/case/current-hearings" onClick={closeMenu}>Current Hearings</MobileNavLink>
-                  <MobileNavLink href="/case/upcoming-hearings" onClick={closeMenu}>Upcoming Hearings</MobileNavLink>
+                  <MobileNavLink href="/case" onClick={closeMenu} icon={FiFileText}>Overview</MobileNavLink>
+                  <MobileNavLink href="/case/cause-list" onClick={closeMenu} icon={FiList}>Cause List</MobileNavLink>
+                  <MobileNavLink href="/case/current-hearings" onClick={closeMenu} icon={FiHeadphones}>Hearings</MobileNavLink>
                 </div>
               )}
             </div>
             
-            <MobileNavLink href="/services" onClick={closeMenu}>Services</MobileNavLink>
-            <MobileNavLink href="/StartDispute" onClick={closeMenu}>Settle Dispute</MobileNavLink>
-            <MobileNavLink href="/contact" onClick={closeMenu}>Contact</MobileNavLink>
-            <MobileNavLink href="/search" onClick={closeMenu}>Search</MobileNavLink>
+            <MobileNavLink href="/services" onClick={closeMenu} icon={FiSettings}>Services</MobileNavLink>
+            <MobileNavLink href="/StartDispute" onClick={closeMenu} icon={FiShield}>Dispute</MobileNavLink>
+            <MobileNavLink href="/contact" onClick={closeMenu} icon={FiMail}>Contact</MobileNavLink>
+            <MobileNavLink href="/search" onClick={closeMenu} icon={IoSearchOutline}>Search</MobileNavLink>
 
-            <div className="flex items-center mt-4 space-x-4">
+            <div className="flex items-center mt-4">
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
               >
-                {darkMode ? <AiOutlineSun size={24} /> : <AiOutlineMoon size={24} />}
+                {darkMode ? <AiOutlineSun size={22} /> : <AiOutlineMoon size={22} />}
               </button>
             </div>
 
-            <div className="flex flex-col space-y-4 w-full max-w-xs mt-4 px-6">
-              {!loginn && (
+            <div className="flex flex-col space-y-3 w-full max-w-xs mt-4 px-4">
+              {!loginn ? (
                 <>
                   <Link href="/login" className="w-full" onClick={closeMenu}>
-                    <button className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
-                      <FiLogIn className="mr-2" />
+                    <button className="flex items-center justify-center w-full px-4 py-2.5 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors whitespace-nowrap">
+                      <FiLogIn className="mr-2" size={16} />
                       Login
                     </button>
                   </Link>
                   <Link href="/signup" className="w-full" onClick={closeMenu}>
-                    <button className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors">
-                      <FiUser className="mr-2" />
+                    <button className="flex items-center justify-center w-full px-4 py-2.5 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors whitespace-nowrap">
+                      <FiUser className="mr-2" size={16} />
                       Sign Up
                     </button>
                   </Link>
                 </>
-              )}
-              {loginn && (
+              ) : (
                 <button 
                   onClick={() => {
                     logout();
                     closeMenu();
                   }} 
-                  className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors"
+                  className="flex items-center justify-center w-full px-4 py-2.5 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors whitespace-nowrap"
                 >
-                  <FiLogIn className="mr-2" />
+                  <FiLogIn className="mr-2" size={16} />
                   LOGOUT
                 </button>
               )}
@@ -326,6 +350,17 @@ const Header = () => {
 
       {/* Add padding to prevent content from being hidden behind the fixed header */}
       <div className="h-16"></div>
+
+      {/* Add global styles for animations */}
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out forwards;
+        }
+      `}</style>
     </>
   );
 };
