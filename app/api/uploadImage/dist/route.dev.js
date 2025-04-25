@@ -23,7 +23,7 @@ var config = {
 exports.config = config;
 
 function POST(req) {
-  var formData, file, buffer, base64, isImage, newFile;
+  var formData, email, image, file, imageBuffer, fileBuffer, newEntry;
   return regeneratorRuntime.async(function POST$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -37,44 +37,58 @@ function POST(req) {
 
         case 4:
           formData = _context.sent;
+          email = formData.get("email");
+          image = formData.get("image");
           file = formData.get("file");
 
-          if (file) {
-            _context.next = 8;
+          if (!(!email || !image || !file)) {
+            _context.next = 10;
             break;
           }
 
           return _context.abrupt("return", _server.NextResponse.json({
             success: false,
-            message: "No file provided"
+            message: "Email, image, and file are required!"
           }));
 
-        case 8:
+        case 10:
           _context.t0 = Buffer;
-          _context.next = 11;
+          _context.next = 13;
+          return regeneratorRuntime.awrap(image.arrayBuffer());
+
+        case 13:
+          _context.t1 = _context.sent;
+          imageBuffer = _context.t0.from.call(_context.t0, _context.t1);
+          _context.t2 = Buffer;
+          _context.next = 18;
           return regeneratorRuntime.awrap(file.arrayBuffer());
 
-        case 11:
-          _context.t1 = _context.sent;
-          buffer = _context.t0.from.call(_context.t0, _context.t1);
-          base64 = buffer.toString("base64");
-          isImage = file.type.startsWith("image/");
-          newFile = new _page.FileModel({
-            filename: file.name,
-            contentType: file.type,
-            fileBase64: base64,
-            isImage: isImage
-          });
-          _context.next = 18;
-          return regeneratorRuntime.awrap(newFile.save());
-
         case 18:
+          _context.t3 = _context.sent;
+          fileBuffer = _context.t2.from.call(_context.t2, _context.t3);
+          newEntry = new _page.FileModel({
+            email: email,
+            image: {
+              filename: image.name,
+              contentType: image.type,
+              fileBase64: imageBuffer.toString("base64")
+            },
+            file: {
+              filename: file.name,
+              contentType: file.type,
+              fileBase64: fileBuffer.toString("base64")
+            }
+          });
+          _context.next = 23;
+          return regeneratorRuntime.awrap(newEntry.save());
+
+        case 23:
           return _context.abrupt("return", _server.NextResponse.json({
             success: true,
-            message: "".concat(isImage ? "Image" : "File", " uploaded")
+            message: "Uploaded successfully"
           }));
 
-        case 19:
+        case 24:
         case "end":
           return _context.stop();
       }

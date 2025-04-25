@@ -1,11 +1,21 @@
-// model/UploadImage/page.js
 import mongoose from "mongoose";
 
-const FileSchema = new mongoose.Schema({
-  filename: String,
-  contentType: String,
-  fileBase64: String,
-  isImage: Boolean,
-}, { timestamps: true });
+const fileSchema = new mongoose.Schema(
+  {
+    email: String,
+    image: {
+      filename: String,
+      contentType: String,
+      fileBase64: String,
+    },
+    file: {
+      filename: String,
+      contentType: String,
+      fileBase64: String,
+    },
+  },
+  { timestamps: true }
+);
 
-export const FileModel = mongoose.models.FileModel || mongoose.model("FileModel", FileSchema);
+export const FileModel =
+  mongoose.models.File || mongoose.model("File", fileSchema);
