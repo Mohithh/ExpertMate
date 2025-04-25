@@ -91,7 +91,7 @@ const Header = () => {
   // NavLink component
   const NavLink = ({ href, children, onClick }) => (
     <Link href={href} className="relative group" passHref onClick={onClick}>
-      <span className="text-gray-700 dark:text-gray-300 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+      <span className="text-gray-700 dark:text-gray-300 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors text-base lg:text-[15px] xl:text-base">
         {children}
       </span>
       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-amber-500 group-hover:w-full transition-all duration-300"></span>
@@ -117,13 +117,13 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0 flex items-center min-w-[220px]">
-              <div className="relative w-[220px] h-[80px]">
+            <Link href="/" className="flex-shrink-0 flex items-center min-w-[180px] md:min-w-[220px]">
+              <div className="relative w-[180px] md:w-[220px] h-[60px] md:h-[80px]">
                 <Image
                   src={Logo}
                   alt="Company Logo"
                   fill
-                  sizes="(max-width: 768px) 280px, 280px"
+                  sizes="(max-width: 768px) 180px, 220px"
                   className="object-contain object-left transition-transform hover:scale-105 duration-300"
                   priority
                 />
@@ -131,7 +131,7 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
               <NavLink href="/">Home</NavLink>
               <NavLink href="/lawyer">Our Leadership</NavLink>
               
@@ -139,7 +139,7 @@ const Header = () => {
               <div className="relative">
                 <button 
                   onClick={toggleCaseDropdown}
-                  className="flex items-center text-gray-700 dark:text-gray-300 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                  className="flex items-center text-gray-700 dark:text-gray-300 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors text-base lg:text-[15px] xl:text-base"
                 >
                   Case Management
                   {caseDropdownOpen ? (
@@ -153,28 +153,28 @@ const Header = () => {
                   <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700">
                     <Link 
                       href="/case" 
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
                       onClick={() => setCaseDropdownOpen(false)}
                     >
                       Overview
                     </Link>
                     <Link 
                       href="/case/cause-list" 
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
                       onClick={() => setCaseDropdownOpen(false)}
                     >
                       Cause List
                     </Link>
                     <Link 
                       href="/case/current-hearings" 
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
                       onClick={() => setCaseDropdownOpen(false)}
                     >
                       Current Hearings
                     </Link>
                     <Link 
                       href="/case/upcoming-hearings" 
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
                       onClick={() => setCaseDropdownOpen(false)}
                     >
                       Upcoming Hearings
@@ -190,7 +190,7 @@ const Header = () => {
             </nav>
 
             {/* Right side buttons */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -200,22 +200,28 @@ const Header = () => {
               </button>
 
               <div className="flex space-x-2">
-                <Link href="/login">
-                  {!loginn && <button className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
-                    <FiLogIn className="mr-2" />
-                    Login
-                  </button>}
-                </Link>
-                <Link href="/signup">
-                  {!loginn && <button className="flex items-center px-4 py-2 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg">
-                    <FiUser className="mr-2" />
-                    Sign Up
-                  </button>}
-                </Link>
-                {loginn && <button onClick={logout} className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
-                  <FiLogIn className="mr-2" />
-                  LOGOUT
-                </button>}
+                {!loginn && (
+                  <>
+                    <Link href="/login">
+                      <button className="flex items-center px-3 py-1.5 lg:px-4 lg:py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors text-sm lg:text-base">
+                        <FiLogIn className="mr-1 lg:mr-2" size={16} />
+                        Login
+                      </button>
+                    </Link>
+                    <Link href="/signup">
+                      <button className="flex items-center px-3 py-1.5 lg:px-4 lg:py-2 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg text-sm lg:text-base">
+                        <FiUser className="mr-1 lg:mr-2" size={16} />
+                        Sign Up
+                      </button>
+                    </Link>
+                  </>
+                )}
+                {loginn && (
+                  <button onClick={logout} className="flex items-center px-3 py-1.5 lg:px-4 lg:py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors text-sm lg:text-base">
+                    <FiLogIn className="mr-1 lg:mr-2" size={16} />
+                    LOGOUT
+                  </button>
+                )}
               </div>
             </div>
 
@@ -285,18 +291,34 @@ const Header = () => {
             </div>
 
             <div className="flex flex-col space-y-4 w-full max-w-xs mt-4 px-6">
-              <Link href="/login" className="w-full" onClick={closeMenu}>
-                <button className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
+              {!loginn && (
+                <>
+                  <Link href="/login" className="w-full" onClick={closeMenu}>
+                    <button className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
+                      <FiLogIn className="mr-2" />
+                      Login
+                    </button>
+                  </Link>
+                  <Link href="/signup" className="w-full" onClick={closeMenu}>
+                    <button className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors">
+                      <FiUser className="mr-2" />
+                      Sign Up
+                    </button>
+                  </Link>
+                </>
+              )}
+              {loginn && (
+                <button 
+                  onClick={() => {
+                    logout();
+                    closeMenu();
+                  }} 
+                  className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors"
+                >
                   <FiLogIn className="mr-2" />
-                  Login
+                  LOGOUT
                 </button>
-              </Link>
-              <Link href="/signup" className="w-full" onClick={closeMenu}>
-                <button className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors">
-                  <FiUser className="mr-2" />
-                  Sign Up
-                </button>
-              </Link>
+              )}
             </div>
           </div>
         </div>
