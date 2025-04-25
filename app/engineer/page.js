@@ -32,7 +32,7 @@ const page = () => {
           if (imageData.success) {
             imagesMap[eng.email] = imageData.data;
           }
-        }
+        } 
 
         setUserImages(imagesMap);
         console.log("✅ Engineer images loaded");
