@@ -83,7 +83,7 @@ const serviceData = [
 const Services = () => {
   return (
     <>
-      <Header />
+     
       <section className="bg-white text-gray-900 py-20 px-5">
         <div className="max-w-7xl mx-auto">
           {/* Header with animated underline */}
@@ -193,8 +193,9 @@ const Services = () => {
             </div>
           </div>
         </div>
-        <Footer/>
+        
       </section>
+      <Footer/>
     </>
   );
 };

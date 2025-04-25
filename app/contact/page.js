@@ -75,7 +75,6 @@ const ContactPage = () => {
 
   return (
     <>
-      <Header />
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">

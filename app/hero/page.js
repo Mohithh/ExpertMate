@@ -4,7 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/app/assets/hello_logo.png"; // your company logo
+import Logo from "@/app/assets/hello_logo.png";
 
 const Hero = () => {
   const controls = useAnimation();
@@ -89,7 +89,7 @@ const Hero = () => {
   ];
 
   return (
-    <div className="relative bg-white overflow-hidden" ref={ref}>
+    <div className="relative bg-white overflow-hidden" ref={ref} style={{ marginTop: '-1px' }}>
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 to-white z-0"></div>
       <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 z-0"></div>
@@ -156,14 +156,14 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-24 lg:py-32">
+      {/* Main content - Reduced top padding */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-8 pb-16 md:pt-12 md:pb-24 lg:pt-16 lg:pb-32">
         {/* Logo section - Mobile first */}
         <motion.div 
-          className="lg:hidden w-full flex items-center justify-center mb-8"
+          className="lg:hidden w-full flex items-center justify-center mb-6"
           variants={scaleUp}
         >
-          <div className="relative w-48 h-48 mx-auto">
+          <div className="relative w-40 h-40 mx-auto">
             <Image
               src={Logo}
               alt="Company Logo"
@@ -174,18 +174,18 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-12 xl:gap-16 items-center">
+        <div className="flex flex-col lg:flex-row gap-8 xl:gap-16 items-center">
           {/* Left content */}
           <div className="lg:w-1/2">
             <motion.div
-              className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full mb-4"
+              className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full mb-3"
               variants={itemVariants}
             >
               INNOVATIVE DISPUTE RESOLUTION
             </motion.div>
 
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4"
               variants={itemVariants}
             >
               <span className="block">From Vivaad se Samadhan</span>
@@ -195,19 +195,19 @@ const Hero = () => {
             </motion.h1>
 
             <motion.p
-              className="text-lg text-gray-600 mb-8 leading-relaxed"
+              className="text-base md:text-lg text-gray-600 mb-6 leading-relaxed"
               variants={itemVariants}
             >
               SettleSmart Solutions leverages cutting-edge technology and a network of 200+ legal experts to resolve disputes fairly, confidentially, and at a fraction of traditional legal costs.
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 mb-12"
+              className="flex flex-col sm:flex-row gap-3 mb-8"
               variants={itemVariants}
             >
               <Link href="/StartDispute">
                 <motion.button
-                  className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-semibold transition-all flex items-center gap-2 group shadow-lg hover:shadow-blue-200/50"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-semibold transition-all flex items-center gap-2 group shadow-lg hover:shadow-blue-200/50"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -221,7 +221,7 @@ const Hero = () => {
 
               <Link href="/JoinAsArbitrator">
                 <motion.button
-                  className="px-8 py-4 border-2 border-blue-600 bg-white text-blue-600 hover:bg-blue-50 rounded-xl font-semibold transition-all flex items-center gap-2 group"
+                  className="px-6 py-3 border-2 border-blue-600 bg-white text-blue-600 hover:bg-blue-50 rounded-xl font-semibold transition-all flex items-center gap-2 group"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -232,18 +232,18 @@ const Hero = () => {
 
             {/* Stats */}
             <motion.div
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8"
               variants={containerVariants}
             >
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all"
+                  className="bg-white p-3 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all"
                   variants={itemVariants}
                   whileHover={{ y: -5 }}
                 >
-                  <div className="text-2xl font-bold text-blue-600">{stat.value}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
+                  <div className="text-xl font-bold text-blue-600">{stat.value}</div>
+                  <div className="text-xs text-gray-600">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>
@@ -256,9 +256,9 @@ const Hero = () => {
           >
             <div className="relative w-full max-w-lg aspect-[4/3] bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-xl overflow-hidden border border-blue-100">
               {/* Main illustration */}
-              <div className="absolute inset-0 flex items-center justify-center p-8">
+              <div className="absolute inset-0 flex items-center justify-center p-6">
                 <div className="text-center">
-                  <div className="relative w-32 h-32 mx-auto mb-6">
+                  <div className="relative w-28 h-28 mx-auto mb-4">
                     <Image
                       src={Logo}
                       alt="Company Logo"
@@ -266,19 +266,19 @@ const Hero = () => {
                       className="object-contain"
                     />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-3">Fast & Fair Dispute Resolution</h3>
-                  <p className="text-gray-600 mb-6">Technology-powered solutions for modern legal challenges</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Fast & Fair Dispute Resolution</h3>
+                  <p className="text-gray-600 mb-4 text-sm">Technology-powered solutions for modern legal challenges</p>
                   
                   {/* Process steps visualization */}
-                  <div className="relative h-32 w-full">
+                  <div className="relative h-28 w-full">
                     {steps.map((step, i) => (
                       <motion.div
                         key={i}
-                        className="absolute bg-white p-3 rounded-lg shadow-md border border-gray-100 flex items-center gap-3"
+                        className="absolute bg-white p-2 rounded-lg shadow-md border border-gray-100 flex items-center gap-2"
                         style={{
-                          width: '160px',
+                          width: '140px',
                           left: `${i * 25}%`,
-                          top: `${i % 2 === 0 ? 0 : 60}px`,
+                          top: `${i % 2 === 0 ? 0 : 50}px`,
                           zIndex: steps.length - i,
                         }}
                         initial={{ opacity: 0, y: 20 }}
@@ -286,10 +286,10 @@ const Hero = () => {
                         transition={{ delay: 0.2 * i }}
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="text-2xl">{step.icon}</div>
+                        <div className="text-xl">{step.icon}</div>
                         <div>
                           <div className="text-xs font-semibold text-blue-600">STEP {step.number}</div>
-                          <div className="text-sm font-medium">{step.title}</div>
+                          <div className="text-xs font-medium">{step.title}</div>
                         </div>
                       </motion.div>
                     ))}
@@ -298,34 +298,34 @@ const Hero = () => {
               </div>
               
               {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200 rounded-full filter blur-3xl opacity-20"></div>
-              <div className="absolute bottom-0 left-0 w-40 h-40 bg-purple-200 rounded-full filter blur-3xl opacity-20"></div>
+              <div className="absolute top-0 right-0 w-28 h-28 bg-blue-200 rounded-full filter blur-3xl opacity-20"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-200 rounded-full filter blur-3xl opacity-20"></div>
             </div>
           </motion.div>
         </div>
 
         {/* Process steps section */}
         <motion.div
-          className="mt-16"
+          className="mt-12"
           variants={containerVariants}
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Our Simple 4-Step Process</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Our Simple 4-Step Process</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all"
+                className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all"
                 variants={itemVariants}
                 whileHover={{ y: -5 }}
               >
-                <div className="flex flex-col items-center text-center mb-4">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl mb-3">
+                <div className="flex flex-col items-center text-center mb-3">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl mb-2">
                     {step.icon}
                   </div>
-                  <div className="text-blue-600 font-bold text-sm mb-1">STEP {step.number}</div>
-                  <h4 className="text-lg font-semibold text-gray-900">{step.title}</h4>
+                  <div className="text-blue-600 font-bold text-xs mb-1">STEP {step.number}</div>
+                  <h4 className="text-base font-semibold text-gray-900">{step.title}</h4>
                 </div>
-                <p className="text-gray-600 text-center">{step.description}</p>
+                <p className="text-gray-600 text-center text-sm">{step.description}</p>
               </motion.div>
             ))}
           </div>

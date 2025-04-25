@@ -58,7 +58,7 @@ const StartDispute = () => {
 
     return (
         <>
-            <Header />
+            
             <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
                 <div className="max-w-6xl mx-auto">
                     <div className="flex flex-col md:flex-row gap-8">

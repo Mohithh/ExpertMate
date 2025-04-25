@@ -99,9 +99,10 @@ const ServicesPage = () => {
 
   return (
     <>
-      <Header />
+      
       <div className="bg-gray-50 min-h-screen">
         {/* Hero Section */}
+        
         <div className="bg-gradient-to-r from-blue-600 to-indigo-800 py-20 text-white text-center">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
