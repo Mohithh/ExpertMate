@@ -72,13 +72,13 @@ const Page = () => {
               <div className="grid grid-cols-2 gap-3 text-sm text-gray-800 leading-relaxed mb-6">
                 <div className="items-center m-1 text-xl font-medium"> Name: {value.name}</div>
                 <br />
-                <div>🏙️ <span className="font-medium">City:</span> {value.city}</div>
+                <div>🏙 <span className="font-medium">City:</span> {value.city}</div>
                 <div>🌏 <span className="font-medium">Country:</span> {value.country}</div>
                 <div>👤 <span className="font-medium">Gender:</span> {value.gender}</div>
                 <div>📈 <span className="font-medium">Experience:</span> {value.experience} yrs</div>
                 <div>🎂 <span className="font-medium">Age:</span> {value.age}</div>
                 <div>💼 <span className="font-medium">Job Type:</span> {value.jobType}</div>
-                <div>🖥️ <span className="font-medium">Working Mode:</span> {value.workingMode}</div>
+                <div>🖥 <span className="font-medium">Working Mode:</span> {value.workingMode}</div>
               </div>
 
               <div className="text-xs text-gray-400">
@@ -115,13 +115,14 @@ const Page = () => {
                           download={imageData.file.filename}
                           className="inline-block px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-700 transition"
                         >
-                          ⬇️ Download File
+                          ⬇ Download File
                         </a>
                       </div>
                     </div>
                   </div>
                 </div>
               )}
+
             </div>
           );
         })}

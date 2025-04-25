@@ -7,23 +7,23 @@ const Page = () => {
   const [dp, setDp] = useState<File | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
-  const mailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const mailUpload = (e) => {
     setEmail(e.target.value);
   };
 
-  const imgUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const imgUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
       setDp(e.target.files[0]);
     }
   };
 
-  const fileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const fileUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
     }
   };
 
-  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
