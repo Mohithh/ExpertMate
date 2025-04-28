@@ -8,7 +8,6 @@ import Footer from './footer/page' // Assuming you have a footer component
 
 const Page = () => {  
   return ( 
-
     <div> 
       <Hero />
       <Footer />
