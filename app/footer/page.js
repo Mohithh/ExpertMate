@@ -93,7 +93,7 @@ const Footer = () => {
         </div>
 
         {/* Services */}
-        <div className="bg-gray-800/50 rounded-xl p-5 backdrop-blur-sm">
+        {/* <div className="bg-gray-800/50 rounded-xl p-5 backdrop-blur-sm">
           <h3 className="text-sm font-semibold text-white mb-4 flex items-center">
             <ScaleIcon className="h-4 w-4 mr-2 text-blue-400" />
             Services
@@ -114,7 +114,7 @@ const Footer = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         {/* Contact & Newsletter */}
         <div className="bg-gray-800/50 rounded-xl p-5 backdrop-blur-sm">
