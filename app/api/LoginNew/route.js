@@ -3,7 +3,7 @@ import User from "@/model/UserLogin/page";
 import CryptoJS from "crypto-js";
 var jwt = require('jsonwebtoken');
 
-export const POST = testConnect(async (req, res) => {
+export const POST = testConnect(async (req) => {
     const body = await req.json();
 
     // Check if the user already exists
@@ -15,25 +15,25 @@ export const POST = testConnect(async (req, res) => {
             { status: 400, headers: { "content-type": "application/json" } }
         );
     }
-const encryptedPassword = CryptoJS.AES.encrypt(body.password, process.env.PASSWORD_SECRET_).toString();
 
-        const newUser = new User({
-            name: body.name,
-            email: body.email,
-            password: encryptedPassword,
-        });
+    const encryptedPassword = CryptoJS.AES.encrypt(body.password, process.env.PASSWORD_SECRET_).toString();
 
-        await newUser.save();
+    const newUser = new User({
+        name: body.name,
+        email: body.email,
+        password: encryptedPassword,
+    });
 
-        var token = jwt.sign(
-            { success: true, email: body.email, name: body.name },
-            process.env.JWT_SECRET_,
-            { expiresIn: '1d' }
-        );
+    await newUser.save();
 
-        return new Response(
-            JSON.stringify({ success: true, token }),
-            { status: 201, headers: { "content-type": "application/json" } }
-        );
-    
+    var token = jwt.sign(
+        { success: true, email: body.email, name: body.name },
+        process.env.JWT_SECRET_,
+        { expiresIn: '1d' }
+    );
+
+    return new Response(
+        JSON.stringify({ success: true, token }),
+        { status: 201, headers: { "content-type": "application/json" } }
+    );
 });
