@@ -1,14 +1,8 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import Email from "@/app/assets/login.png"
 import Image from "next/image";
-
-
 
 export default function LoginPage() {
   const router = useRouter();
@@ -21,10 +15,7 @@ export default function LoginPage() {
     const data = { email, password };
 
     try {
-     
       const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/Login`, {
-
-        
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -33,32 +24,18 @@ export default function LoginPage() {
       const res = await response.json();
 
       if (res.success) {
-        localStorage.setItem("email", email);
-        localStorage.setItem("token", res.token);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("email", email);
+          localStorage.setItem("token", res.token);
+        }
 
-        toast.success("Welcome back!", {
-          position: "top-center",
-          autoClose: 3000,
-          theme: "light",
-          transition: Bounce,
-        });
-
+        alert("Welcome back!"); // Replaced toast with alert
         setTimeout(() => router.push("/"), 1000);
       } else {
-        toast.error(res.error || "Login failed", {
-          position: "top-center",
-          autoClose: 3000,
-          theme: "light",
-          transition: Bounce,
-        });
+        alert(res.error || "Login failed"); // Replaced toast with alert
       }
     } catch (error) {
-      toast.error("Something went wrong!", {
-        position: "top-center",
-        autoClose: 3000,
-        theme: "light",
-        transition: Bounce,
-      });
+      alert("Something went wrong!"); // Replaced toast with alert
     }
   };
 
@@ -103,13 +80,15 @@ export default function LoginPage() {
                 required
               />
             </div>
+            <Link href="/" className="text-sm text-indigo-600 hover:underline">
+              <button
 
-            <button
-              type="submit"
-              className="w-full py-2.5 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition duration-200 shadow-md"
-            >
-              Sign In
-            </button>
+                type="submit"
+                className="w-full py-2.5 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition duration-200 shadow-md"
+              >
+                Sign In
+              </button>
+            </Link>
           </form>
 
           <div className="mt-6 text-center text-sm text-gray-500">
@@ -117,17 +96,15 @@ export default function LoginPage() {
               Forgot password?
             </Link>
             <p className="mt-4">
-              Don’t have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/signup" className="text-indigo-600 font-medium hover:underline">
                 Create New Account
               </Link>
             </p>
 
-
             <p className="mt-4">
-              
               <Link href="/facultylogin" className="text-indigo-600 font-medium hover:underline">
-              faculty Login
+                Faculty Login
               </Link>
             </p>
           </div>
@@ -135,18 +112,21 @@ export default function LoginPage() {
 
         {/* Right Side - Illustration */}
         <div className="hidden md:block md:w-1/2 bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center p-8">
-        <Image
-          src={Email}
-          alt="Signup Illustration"
-          className="w-full h-auto object-contain rounded-lg"
-          placeholder="blur"
-          priority
-        />
-
+          {/* Replace with your actual image import */}
+          {/* <Image
+            src="/login-illustration.png"
+            alt="Login Illustration"
+            width={500}
+            height={500}
+            className="w-full h-auto object-contain rounded-lg"
+            priority
+          /> */}
+          <div className="text-white text-center">
+            <p className="text-2xl font-bold mb-4">Welcome to Our Platform</p>
+            <p className="text-lg">Your journey starts here</p>
+          </div>
         </div>
       </div>
-
-      <ToastContainer />
     </div>
   );
 }
