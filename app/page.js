@@ -10,9 +10,8 @@ const Page = () => {
   return ( 
 
     <div> 
-      {/* <Hero />
-      <Footer /> */}
-      <h1>hell</h1>
+      <Hero />
+      <Footer />
     </div>
   )
 }
