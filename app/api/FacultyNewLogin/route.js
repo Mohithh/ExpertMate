@@ -14,28 +14,28 @@ export const POST = testConnect(async (req, res) => {
             JSON.stringify({ success: false, error: "Email already registered" }),
             { status: 400, headers: { "content-type": "application/json" } }
         );
-    } 
-const encryptedPassword = CryptoJS.AES.encrypt(body.password, process.env.PASSWORD_SECRET_).toString(); 
+    }
+    const encryptedPassword = CryptoJS.AES.encrypt(body.password, process.env.PASSWORD_SECRET_).toString();
 
 
 
-        const newUser = new User({
-            name: body.name,
-            email: body.email,
-            password: encryptedPassword,
-        });
+    const newUser = new User({
+        name: body.name,
+        email: body.email,
+        password: encryptedPassword,
+    });
 
-        await newUser.save();
+    await newUser.save();
 
-        var token = jwt.sign(
-            { success: true, email: body.email, name: body.name },
-            process.env.JWT_SECRET_,
-            { expiresIn: '1d' }
-        );
+    var token = jwt.sign(
+        { success: true, email: body.email, name: body.name },
+        process.env.JWT_SECRET_,
+        { expiresIn: '1d' }
+    );
 
-        return new Response(
-            JSON.stringify({ success: true, token }),
-            { status: 201, headers: { "content-type": "application/json" } }
-   );
+    return new Response(
+        JSON.stringify({ success: true, token }),
+        { status: 201, headers: { "content-type": "application/json" } }
+    );
 
 });

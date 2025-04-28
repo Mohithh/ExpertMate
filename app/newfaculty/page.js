@@ -46,7 +46,7 @@ const Page = () => {
     try {
       
     //  const response = await fetch("http://localhost:3000/api/signin", {
-     const response = await fetch(`${process.env.LOCAL_URL}/api/FacultyNewLogin`, {
+     const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/FacultyNewLogin`, {
       method: "POST",
       headers:{"context-type":"application/json"},
       body:JSON.stringify(data)
