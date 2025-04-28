@@ -17,6 +17,7 @@ export default function SignUpPage() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     const data = { name, email, password };
+  
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/LoginNew`, {  
