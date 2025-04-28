@@ -9,32 +9,35 @@ import { useRouter } from "next/navigation";
 
 const Page = () => {
   const router = useRouter();
-  const [email, setemail] = useState(""); 
-  const [password, setpassword] = useState("");
+  const [email, setEmail] = useState(""); 
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) router.push("/");
   }, [router]);
 
-  const onchangeevent = (e) => {
-    if (e.target.name === "email") setemail(e.target.value);
-    else if (e.target.name === "password") setpassword(e.target.value);
+  const handleChange = (e) => {
+    if (e.target.name === "email") setEmail(e.target.value);
+    else if (e.target.name === "password") setPassword(e.target.value);
   };
 
-  const submitbottton = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { email, password };
+    
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/FacultyLogin`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
 
-    const response = await fetch(`${process.env.LOCAL_URL}/api/FacultyLogin`, {
-      method: "POST",
-      headers: { "content-type": "application/json" }, // small fix: should be "content-type", not "context-type"
-      body: JSON.stringify(data)
-    });
+      const res = await response.json();
 
-    const res = await response.json();
+      if (!response.ok) {
+        throw new Error(res.error || "Login failed");
+      }
 
-    if (res.success) {
       localStorage.setItem('email', email);
       localStorage.setItem('token', res.token);
 
@@ -48,8 +51,8 @@ const Page = () => {
       setTimeout(() => {
         router.push("/FacultyHome");
       }, 1000);
-    } else {
-      toast.error(res.error, {
+    } catch (error) {
+      toast.error(error.message, {
         position: "top-center",
         autoClose: 3000,
         theme: "light",
@@ -67,14 +70,14 @@ const Page = () => {
           <p className="text-gray-500 text-sm mb-6">Welcome back, please enter your details</p>
         </div>
 
-        <form onSubmit={submitbottton} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               type="email"
               name="email"
               value={email}
-              onChange={onchangeevent}
+              onChange={handleChange}
               required
               placeholder="you@example.com"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
@@ -87,7 +90,7 @@ const Page = () => {
               type="password"
               name="password"
               value={password}
-              onChange={onchangeevent}
+              onChange={handleChange}
               required
               placeholder="••••••••"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
