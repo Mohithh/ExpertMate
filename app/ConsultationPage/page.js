@@ -377,9 +377,7 @@ export default function ContactForm() {
                     </div>
                     <div className="ml-4">
                       <h3 className="text-sm font-medium text-gray-900">Address</h3>
-                      <p className="text-sm text-gray-600">Connaught Place
-
-<br />New Delhi, Delhi 110001</p>
+                      <p className="text-sm text-gray-600">Connaught Place<br />New Delhi, Delhi 110001</p>
                     </div>
                   </div>
 
