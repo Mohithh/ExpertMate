@@ -15,6 +15,7 @@ const page = () => {
 
   useEffect(() => {
     const checkuser = async () => {
+
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -44,6 +45,8 @@ const page = () => {
       } finally {
         setLoading(false); // ✅ set loading to false after everything
       }
+
+      
     };
 
     checkuser();
