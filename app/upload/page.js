@@ -48,7 +48,6 @@ const page = () => {
 
 
 
-  useState
   return (
     <div>
 
