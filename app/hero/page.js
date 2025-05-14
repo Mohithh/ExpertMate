@@ -174,23 +174,7 @@ const Hero = () => {
       {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-8 pb-16 md:pt-12 md:pb-24 lg:pt-16 lg:pb-32">
         {/* Logo section - Mobile first */}
-        <motion.div 
-          className="lg:hidden w-full flex items-center justify-center mb-6"
-          variants={scaleUp}
-        >
-          <motion.div 
-            className="relative w-40 h-40 mx-auto"
-            animate={pulseAnimation}
-          >
-            <Image
-              src={Logo}
-              alt="Company Logo"
-              fill
-              className="object-contain"
-              priority
-            />
-          </motion.div>
-        </motion.div>
+       
 
         <div className="flex flex-col lg:flex-row gap-8 xl:gap-16 items-center">
           {/* Left content */}

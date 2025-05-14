@@ -6,8 +6,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Header from "../header/page";
+import Footer from "../footer/page";
 
-// Icons (Using Lucide React for modern icons)
+// Icons
 import { 
   Linkedin, Phone, Mail, MapPin, Briefcase, Scale, GraduationCap, 
   UserCircle, ChevronLeft, ChevronRight, Gavel, Handshake, Landmark,
@@ -22,39 +23,17 @@ import Pankaj from "@/app/assets/Pankaj11.jpeg";
 import Anand from "@/app/assets/anand1.jpeg";
 import Nageshwar from "@/app/assets/nages.jpeg";
 import Bhatti from "@/app/assets/Bhatti.jpg";
-import Footer from "../footer/page";
 
 const TeamPage = () => {
   const [activeTab, setActiveTab] = useState("management");
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
-  useEffect(() => {
-    // Check for saved theme preference or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-      setDarkMode(true);
-    }
-    
-    setTimeout(() => setIsLoading(false), 800);
-  }, []);
-
-  useEffect(() => {
-    // Apply dark mode class to document
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const tabs = [
+    { id: "management", name: "Management", icon: <UserCircle size={18} /> },
+    { id: "leadership", name: "Leadership", icon: <Briefcase size={18} /> },
+    { id: "board", name: "Board", icon: <Landmark size={18} /> }
+  ];
 
   const teamData = {
     management: [
@@ -206,11 +185,30 @@ const TeamPage = () => {
     ]
   };
 
-  const tabs = [
-    { id: "management", name: "Management", icon: <UserCircle size={18} /> },
-    { id: "leadership", name: "Leadership", icon: <Briefcase size={18} /> },
-    { id: "board", name: "Board", icon: <Landmark size={18} /> }
-  ];
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      setDarkMode(true);
+    }
+    
+    setTimeout(() => setIsLoading(false), 800);
+  }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   const CustomArrow = ({ direction, onClick }) => (
     <motion.button
@@ -219,7 +217,7 @@ const TeamPage = () => {
       className={`absolute top-1/2 z-20 -translate-y-1/2 flex items-center justify-center w-10 h-10 bg-white/80 hover:bg-white text-blue-600 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 border border-gray-200 dark:bg-gray-700/80 dark:hover:bg-gray-700 dark:text-blue-400 dark:border-gray-600 ${direction === "prev" ? "left-4" : "right-4"}`}
       onClick={onClick}
     >
-      {direction === "prev" ? <ChevronLeft /> : <ChevronRight />}
+      {direction === "prev" ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
     </motion.button>
   );
 
@@ -239,7 +237,6 @@ const TeamPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <Header />
       
-      {/* Dark Mode Toggle Button */}
       <button
         onClick={toggleDarkMode}
         className="fixed z-50 bottom-6 right-6 w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
@@ -253,7 +250,6 @@ const TeamPage = () => {
       </button>
       
       <main className="container mx-auto px-4 py-16">
-        {/* Hero Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -278,7 +274,6 @@ const TeamPage = () => {
           </p>
         </motion.section>
 
-        {/* Tab Navigation */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -301,7 +296,6 @@ const TeamPage = () => {
           </div>
         </motion.div>
 
-        {/* Team Carousel */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -330,7 +324,6 @@ const TeamPage = () => {
                     className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
                   >
                     <div className="flex flex-col md:flex-row">
-                      {/* Profile Image */}
                       <div className="w-full md:w-1/3 p-6 flex justify-center bg-gray-50 dark:bg-gray-700">
                         <motion.div
                           whileHover={{ scale: 1.02 }}
@@ -352,7 +345,6 @@ const TeamPage = () => {
                         </motion.div>
                       </div>
                       
-                      {/* Profile Content */}
                       <div className="w-full md:w-2/3 p-8">
                         <div className="flex flex-col h-full">
                           <div>
@@ -365,7 +357,6 @@ const TeamPage = () => {
                           </div>
                           
                           <div className="mt-auto">
-                            {/* Info Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                               <div className="flex items-start gap-3">
                                 <Briefcase className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" size={18} />
@@ -407,7 +398,6 @@ const TeamPage = () => {
                               </div>
                             </div>
                             
-                            {/* Action Buttons */}
                             <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
                               <motion.a
                                 whileHover={{ scale: 1.03 }}
@@ -452,7 +442,6 @@ const TeamPage = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Footer Section */}
         <motion.section
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
