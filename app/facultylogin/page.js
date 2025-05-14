@@ -5,76 +5,56 @@ import { FaRegUserCircle } from "react-icons/fa";
 import Link from 'next/link';
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; 
 
-const FacultyLoginPage = () => {
+const page = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setemail] = useState(""); 
+  const [password, setpassword] = useState("");
 
   useEffect(() => {
-    // Check authentication more securely
-    const checkAuth = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          // Add token validation API call here if needed
-          router.push("/FacultyHome");
-        } catch (error) {
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-        }
-      }
-    };
-    checkAuth();
-  }, [router]);
+    const token = localStorage.getItem('token');
+    if (token) router.push("/");
+  }, []);
 
-  const handleSubmit = async (e) => {
+  const onchangeevent = (e) => {
+    if (e.target.name === "email") setemail(e.target.value);
+    else if (e.target.name === "password") setpassword(e.target.value);
+  };
+
+  const submitbottton = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    const data = { email, password };
 
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_LOGIN_URL || '/api/FacultyLogin'}`, {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: 'include' // For httpOnly cookies if using them
-      });
+    const response = await fetch(`${process.env.LOCAL_URL}/api/FacultyLogin`, {
+      method: "POST",
+      headers: { "context-type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Login failed");
-      }
+    const res = await response.json();
 
-      const data = await response.json();
+    if (res.success) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('token', res.token);
 
-      // Store token more securely (consider httpOnly cookies instead)
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('email', email);
-        
-        toast.success("Successfully logged in", {
-          position: "top-center",
-          autoClose: 3000,
-          theme: "light",
-          transition: Bounce,
-        });
-
-        router.push("/FacultyHome");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error(error.message || "An error occurred during login", {
+      toast.success("Successfully logged in", {
         position: "top-center",
         autoClose: 3000,
         theme: "light",
         transition: Bounce,
       });
-    } finally {
-      setIsLoading(false);
+
+      setTimeout(() => {
+        router.push("/FacultyHome");
+      }, 1000);
+    } else {
+      toast.error(res.error, {
+        position: "top-center",
+        autoClose: 3000,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
@@ -83,63 +63,47 @@ const FacultyLoginPage = () => {
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-2xl">
         <div className="flex flex-col items-center">
           <FaRegUserCircle className='text-6xl text-indigo-500 mb-4' />
-          <h2 className='text-3xl font-bold text-gray-800 mb-2'>Faculty Login</h2>
-          <p className="text-gray-500 text-sm mb-6">Enter your credentials to access the faculty portal</p>
+          <h2 className='text-3xl font-bold text-gray-800 mb-2'>Login to Your Account</h2>
+          <p className="text-gray-500 text-sm mb-6">Welcome back, please enter your details</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={submitbottton} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               type="email"
               name="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={onchangeevent}
               required
-              autoComplete="username"
-              placeholder="faculty@example.com"
+              placeholder="you@example.com"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <input
               type="password"
               name="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={onchangeevent}
               required
-              autoComplete="current-password"
               placeholder="••••••••"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              minLength="8"
             />
           </div>
 
           <button
             type="submit"
-            disabled={isLoading}
-            className={`w-full py-2.5 rounded-lg font-semibold transition duration-200 shadow-md ${
-              isLoading 
-                ? 'bg-indigo-400 cursor-not-allowed' 
-                : 'bg-indigo-600 hover:bg-indigo-700 text-white'
-            }`}
+            className="w-full py-2.5 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition duration-200 shadow-md"
           >
-            {isLoading ? 'Signing In...' : 'Sign In'}
+            Sign In
           </button>
 
           <div className="flex justify-between mt-4 text-sm text-blue-600">
-            <Link href="/newfaculty" className="hover:underline hover:text-blue-800">
-              Register new faculty
-            </Link>
-            <Link href="/forgot-password" className="hover:underline hover:text-blue-800">
-              Forgot password?
-            </Link>
+            <Link href="/newfaculty" className="hover:underline">Create new account</Link>
+            <Link href="/forgot" className="hover:underline">Forgot password?</Link>
           </div>
         </form>
       </div>
@@ -147,13 +111,9 @@ const FacultyLoginPage = () => {
       <ToastContainer
         position="top-center"
         autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
+        hideProgressBar
+        closeOnClick={false}
+        pauseOnHover={false}
         theme="light"
         transition={Bounce}
       />
@@ -161,4 +121,4 @@ const FacultyLoginPage = () => {
   );
 };
 
-export default FacultyLoginPage;
+export default page;
