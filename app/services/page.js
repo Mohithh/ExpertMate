@@ -205,6 +205,8 @@ const ServicesPage = () => {
             </p>
             <Link href="/ConsultationPage">
               <button className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl">
+            <Link href="https://cal.com/settlesmart/schedule-meeting">
+              <button className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-700 dark:to-purple-700 text-white rounded-full text-lg font-semibold hover:from-indigo-700 hover:to-purple-700 dark:hover:from-indigo-800 dark:hover:to-purple-800 transition-all shadow-lg hover:shadow-xl">
                 Schedule Consultation
               </button>
             </Link>

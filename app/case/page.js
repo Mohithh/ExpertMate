@@ -173,8 +173,13 @@ const Services = () => {
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <a
+
                   href="/ConsultationPage"
                   className="bg-white text-blue-600 hover:bg-gray-100 font-medium px-8 py-3 rounded-md transition-colors duration-300"
+
+                  href="https://cal.com/settlesmart/schedule-meeting"
+                  className="bg-white text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-200 font-medium px-8 py-3 rounded-md transition-colors duration-300"
+
                 >
                   Schedule Consultation
                 </a>
