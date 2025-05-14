@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState } from "react";
+import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   const [email, setemail] = useState("");
-  const [alldetails, setalldetails] = useState("");
+  const [alldetails, setalldetails] = useState(null);
   const [userData, setUserData] = useState(null);
 
   const onChange = (e) => setemail(e.target.value);
@@ -14,7 +14,7 @@ const page = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/api/viewFacultydetails", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/viewFacultydetails`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -74,9 +74,7 @@ const page = () => {
       {alldetails && (
         <div className="w-full max-w-5xl bg-white shadow-2xl rounded-3xl p-10 flex flex-col md:flex-row items-start gap-10 border-t-4 border-green-400">
           <div className="flex-1 text-gray-700 text-sm grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-[1rem]">
-          <p className=" text-3xl font-bold m-2" > Name: {alldetails.name}</p>
-          <br />
-
+            <p className="text-3xl font-bold m-2">Name: {alldetails.name}</p>
             <p><span className="font-semibold">📧 Email:</span> {alldetails.email}</p>
             <p><span className="font-semibold">🌍 Country:</span> {alldetails.country}</p>
             <p><span className="font-semibold">🏙️ City:</span> {alldetails.city}</p>
@@ -91,7 +89,7 @@ const page = () => {
             <p><span className="font-semibold">🔄 Updated At:</span> {new Date(alldetails.updatedAt).toLocaleString()}</p>
           </div>
 
-          {userData && (
+          {userData?.image && (
             <div className="flex-shrink-0">
               <img
                 src={`data:${userData.image.contentType};base64,${userData.image.fileBase64}`}
@@ -100,11 +98,10 @@ const page = () => {
               />
             </div>
           )}
-
         </div>
       )}
 
-      {userData && (
+      {userData?.file && (
         <div className="w-full max-w-3xl mt-12 bg-gradient-to-br from-white to-blue-100 shadow-2xl p-10 rounded-3xl text-center animate-fade-in">
           <h2 className="text-3xl font-bold mb-4 flex justify-center items-center gap-2 text-blue-700">
             📁 <span className="tracking-wide">Uploaded File</span>
@@ -119,8 +116,7 @@ const page = () => {
         </div>
       )}
     </div>
-
   );
 };
 
-export default page;
+export default Page;

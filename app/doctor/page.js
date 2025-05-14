@@ -2,15 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 
-const page = () => {
-  const [doctorList, setDoctorList] = useState([]);           // List of all doctors
-  const [userImages, setUserImages] = useState({});           // Stores images/files for each email
+const Page = () => {
+  const [doctorList, setDoctorList] = useState([]); // List of all doctors
+  const [userImages, setUserImages] = useState({}); // Stores images/files for each email
 
   useEffect(() => {
     const checkuser = async () => {
       try {
         // ✅ First API - Get list of all doctors
-        const response = await fetch("http://localhost:3000/api/doctorList", {
+        const response = await fetch( `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/doctorList`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -79,13 +79,13 @@ const page = () => {
                 <div className="items-center m-1 text-xl font-medium"> Name: {value.name}</div>
                 <br />
 
-                <div>🏙️ <span className="font-medium">City:</span> {value.city}</div>
+                <div>🏙 <span className="font-medium">City:</span> {value.city}</div>
                 <div>🌏 <span className="font-medium">Country:</span> {value.country}</div>
                 <div>👤 <span className="font-medium">Gender:</span> {value.gender}</div>
                 <div>📈 <span className="font-medium">Experience:</span> {value.experience} yrs</div>
                 <div>🎂 <span className="font-medium">Age:</span> {value.age}</div>
                 <div>💼 <span className="font-medium">Job Type:</span> {value.jobType}</div>
-                <div>🖥️ <span className="font-medium">Working Mode:</span> {value.workingMode}</div>
+                <div>🖥 <span className="font-medium">Working Mode:</span> {value.workingMode}</div>
               </div>
 
               <div className="text-xs text-gray-400">
@@ -123,7 +123,7 @@ const page = () => {
                           download={imageData.file.filename}
                           className="inline-block px-4 py-2 bg-blue-600 text-white text-xs font-semibold rounded hover:bg-blue-700 transition"
                         >
-                          ⬇️ Download File
+                          ⬇ Download File
                         </a>
                       </div>
                     </div>
@@ -139,4 +139,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
