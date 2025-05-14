@@ -6,9 +6,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import Link from "next/link";
-
-// ✅ Import your signup illustration image
-// import SignupIllustration from "@/public/signup-illustration.png"; // Make sure you have this image inside /public folder
+import Img from '@/app/assets/singup.svg';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -147,14 +145,12 @@ export default function SignUpPage() {
 
         {/* Right Side - Illustration */}
         <div className="hidden md:flex md:w-1/2 items-center justify-center bg-gradient-to-br from-emerald-400 to-green-500 p-8">
-          {/* <Image
-            src={SignupIllustration}
+          <Image
+            src={Img}
             alt="Signup Illustration"
-            width={500}
-            height={500}
-            className="w-full h-auto object-contain rounded-lg"
+            className="w-full h-auto object-contain"
             priority
-          /> */}
+          />
         </div>
       </div>
 

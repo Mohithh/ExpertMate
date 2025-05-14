@@ -6,6 +6,7 @@ import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCheck, FaSpinner, FaMoon, FaSun 
 
 const ContactPage = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,16 +21,21 @@ const ContactPage = () => {
   });
 
   useEffect(() => {
+    setMounted(true);
     // Check for saved theme preference or system preference
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    if (savedTheme) {
+      setDarkMode(savedTheme === 'dark');
+    } else if (prefersDark) {
       setDarkMode(true);
     }
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+    
     if (darkMode) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -37,7 +43,7 @@ const ContactPage = () => {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
-  }, [darkMode]);
+  }, [darkMode, mounted]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -93,20 +99,22 @@ const ContactPage = () => {
     }
   };
 
+  if (!mounted) return null;
+
   return (
     <>
-    
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+        {/* <div className="flex justify-end mb-4">
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-yellow-300"
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {darkMode ? <FaSun /> : <FaMoon />}
+          </button>
+        </div> */}
+        
         <div className="text-center mb-12">
-          <div className="flex justify-end mb-4">
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-yellow-300"
-              aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {darkMode ? <FaSun /> : <FaMoon />}
-            </button>
-          </div>
           <h1 className="text-4xl font-bold text-blue-800 dark:text-blue-400 mb-4">Contact Us</h1>
           <div className="w-20 h-1 bg-blue-600 dark:bg-blue-500 mx-auto mb-6"></div>
           <p className="text-gray-600 dark:text-gray-300 mt-2 max-w-2xl mx-auto text-lg">
