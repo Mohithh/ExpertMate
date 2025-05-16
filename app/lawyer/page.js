@@ -12,7 +12,7 @@ import Footer from "../footer/page";
 import { 
   Linkedin, Phone, Mail, MapPin, Briefcase, Scale, GraduationCap, 
   UserCircle, ChevronLeft, ChevronRight, Gavel, Handshake, Landmark,
-  Award, BookOpen, Layers, FileText, Shield, TrendingUp, Moon, Sun 
+  Award, BookOpen, Layers, FileText, Shield, TrendingUp 
 } from 'lucide-react';
 
 // Team Images
@@ -22,12 +22,16 @@ import Harsha from "@/app/assets/harsha11.jpeg";
 import Pankaj from "@/app/assets/Pankaj11.jpeg";
 import Anand from "@/app/assets/anand1.jpeg";
 import Nageshwar from "@/app/assets/nages.jpeg";
+// import Aman from "@/app/assets/Aman.jpg";
 import Bhatti from "@/app/assets/Bhatti.jpg";
 
 const TeamPage = () => {
   const [activeTab, setActiveTab] = useState("management");
   const [isLoading, setIsLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 800);
+  }, []);
 
   const tabs = [
     { id: "management", name: "Management", icon: <UserCircle size={18} /> },
@@ -82,7 +86,7 @@ const TeamPage = () => {
       {
         id: 2,
         name: "Aman Bhatti",
-        title: "Chief Technical Officer",
+        title: "Chief Technology Officer",
         image: Bhatti,
         experience: "Skilled in full-stack web development with hands-on project and internship experience",
         education: "B.E. in Computer Science Engineering, Chandigarh University",
@@ -214,7 +218,7 @@ const TeamPage = () => {
     <motion.button
       whileHover={{ scale: 1.2, backgroundColor: "rgba(37, 99, 235, 0.2)" }}
       whileTap={{ scale: 0.9 }}
-      className={`absolute top-1/2 z-20 -translate-y-1/2 flex items-center justify-center w-10 h-10 bg-white/80 hover:bg-white text-blue-600 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 border border-gray-200 dark:bg-gray-700/80 dark:hover:bg-gray-700 dark:text-blue-400 dark:border-gray-600 ${direction === "prev" ? "left-4" : "right-4"}`}
+      className={`absolute top-1/2 z-20 -translate-y-1/2 flex items-center justify-center w-10 h-10 bg-white/80 hover:bg-white text-blue-600 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 border border-gray-200 ${direction === "prev" ? "left-4" : "right-4"}`}
       onClick={onClick}
     >
       {direction === "prev" ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
@@ -223,20 +227,22 @@ const TeamPage = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-          className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full dark:border-blue-400"
+          className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full"
         />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Header />
       
+ 
+
       <button
         onClick={toggleDarkMode}
         className="fixed z-50 bottom-6 right-6 w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
@@ -260,16 +266,16 @@ const TeamPage = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="w-24 h-24 bg-white dark:bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-gray-100 dark:border-gray-700"
+            className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-gray-100"
           >
-            <Gavel className="w-10 h-10 text-blue-600 dark:text-blue-400" strokeWidth={1.5} />
+            <Gavel className="w-10 h-10 text-blue-600" strokeWidth={1.5} />
           </motion.div>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-            Meet Our <span className="text-blue-600 dark:text-blue-400">Legal Experts</span>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+            Meet Our <span className="text-blue-600">Legal Experts</span>
           </h1>
           
-          <p className="text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300 leading-relaxed">
+          <p className="text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed">
             Distinguished professionals combining decades of legal expertise with innovative dispute resolution approaches
           </p>
         </motion.section>
@@ -280,14 +286,14 @@ const TeamPage = () => {
           transition={{ delay: 0.3 }}
           className="flex justify-center mb-16"
         >
-          <div className="inline-flex bg-white dark:bg-gray-800 rounded-xl p-1 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="inline-flex bg-white rounded-xl p-1 shadow-sm border border-gray-200">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-5 py-2.5 rounded-lg text-sm font-medium flex items-center gap-2 transition-all ${activeTab === tab.id
                   ? "bg-blue-600 text-white shadow-md"
-                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"}`}
+                  : "text-gray-600 hover:bg-gray-100"}`}
               >
                 {tab.icon}
                 {tab.name}
@@ -321,9 +327,11 @@ const TeamPage = () => {
                 <div key={member.id} className="px-4 pb-12">
                   <motion.div
                     whileHover={{ y: -5 }}
-                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
+                    className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100"
                   >
                     <div className="flex flex-col md:flex-row">
+                      {/* Profile Image */}
+                      <div className="w-full md:w-1/3 p-6 flex justify-center bg-gray-50">
                       <div className="w-full md:w-1/3 p-6 flex justify-center bg-gray-50 dark:bg-gray-700">
                         <motion.div
                           whileHover={{ scale: 1.02 }}
@@ -338,8 +346,8 @@ const TeamPage = () => {
                               priority
                             />
                           ) : (
-                            <div className="w-full h-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center">
-                              <UserCircle className="text-gray-400 dark:text-gray-300" size={48} />
+                            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                              <UserCircle className="text-gray-400" size={48} />
                             </div>
                           )}
                         </motion.div>
@@ -348,39 +356,39 @@ const TeamPage = () => {
                       <div className="w-full md:w-2/3 p-8">
                         <div className="flex flex-col h-full">
                           <div>
-                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{member.name}</h2>
-                            <p className="text-blue-600 dark:text-blue-400 font-medium mb-1">{member.title}</p>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-1">{member.name}</h2>
+                            <p className="text-blue-600 font-medium mb-1">{member.title}</p>
                             {member.subtitle && (
-                              <p className="text-blue-500 dark:text-blue-300 text-sm font-medium mb-4">{member.subtitle}</p>
+                              <p className="text-blue-500 text-sm font-medium mb-4">{member.subtitle}</p>
                             )}
-                            <p className="text-gray-600 dark:text-gray-300 mb-6">{member.description}</p>
+                            <p className="text-gray-600 mb-6">{member.description}</p>
                           </div>
                           
                           <div className="mt-auto">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                               <div className="flex items-start gap-3">
-                                <Briefcase className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" size={18} />
+                                <Briefcase className="text-blue-600 mt-0.5 flex-shrink-0" size={18} />
                                 <div>
-                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Experience</p>
-                                  <p className="text-gray-800 dark:text-gray-200">{member.experience}</p>
+                                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Experience</p>
+                                  <p className="text-gray-800">{member.experience}</p>
                                 </div>
                               </div>
                               
                               <div className="flex items-start gap-3">
-                                <GraduationCap className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" size={18} />
+                                <GraduationCap className="text-blue-600 mt-0.5 flex-shrink-0" size={18} />
                                 <div>
-                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Education</p>
-                                  <p className="text-gray-800 dark:text-gray-200">{member.education}</p>
+                                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Education</p>
+                                  <p className="text-gray-800">{member.education}</p>
                                 </div>
                               </div>
                               
                               <div className="flex items-start gap-3">
-                                <Scale className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" size={18} />
+                                <Scale className="text-blue-600 mt-0.5 flex-shrink-0" size={18} />
                                 <div>
-                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Specializations</p>
+                                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Specializations</p>
                                   <div className="flex flex-wrap gap-2 mt-1">
                                     {member.specializations.map((spec, index) => (
-                                      <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs">
+                                      <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs">
                                         {spec.icon}
                                         {spec.name}
                                       </span>
@@ -390,22 +398,25 @@ const TeamPage = () => {
                               </div>
                               
                               <div className="flex items-start gap-3">
-                                <MapPin className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" size={18} />
+                                <MapPin className="text-blue-600 mt-0.5 flex-shrink-0" size={18} />
                                 <div>
-                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Location</p>
-                                  <p className="text-gray-800 dark:text-gray-200">{member.location}</p>
+                                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Location</p>
+                                  <p className="text-gray-800">{member.location}</p>
                                 </div>
                               </div>
                             </div>
                             
+                            {/* Action Buttons */}
+                            <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200">
+
                             <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
                               <motion.a
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.98 }}
                                 href={`tel:${member.phone}`}
-                                className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors text-gray-800 dark:text-gray-200"
+                                className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors"
                               >
-                                <Phone className="mr-2 text-blue-600 dark:text-blue-400" size={16} />
+                                <Phone className="mr-2 text-blue-600" size={16} />
                                 Contact
                               </motion.a>
                               
@@ -425,9 +436,9 @@ const TeamPage = () => {
                                   href={member.linkedin}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex items-center justify-center w-10 h-10 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg transition-colors ml-auto"
+                                  className="flex items-center justify-center w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors ml-auto"
                                 >
-                                  <Linkedin className="text-blue-600 dark:text-blue-400" size={18} />
+                                  <Linkedin className="text-blue-600" size={18} />
                                 </motion.a>
                               )}
                             </div>
@@ -449,14 +460,14 @@ const TeamPage = () => {
           viewport={{ once: true }}
           className="mt-24 max-w-4xl mx-auto text-center"
         >
-          <div className="inline-flex items-center gap-3 bg-blue-50 dark:bg-blue-900/20 px-6 py-3 rounded-full mb-6">
-            <Handshake className="text-blue-600 dark:text-blue-400" size={24} />
-            <span className="text-blue-600 dark:text-blue-400 font-medium">Multidisciplinary Legal Excellence</span>
+          <div className="inline-flex items-center gap-3 bg-blue-50 px-6 py-3 rounded-full mb-6">
+            <Handshake className="text-blue-600" size={24} />
+            <span className="text-blue-600 font-medium">Multidisciplinary Legal Excellence</span>
           </div>
           
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Comprehensive Legal Expertise</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Comprehensive Legal Expertise</h2>
           
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+          <p className="text-gray-600 leading-relaxed">
             Our team combines deep legal knowledge with innovative technology to deliver exceptional results across all practice areas. 
             Each member brings specialized expertise that contributes to our holistic approach to dispute resolution.
           </p>

@@ -3,6 +3,7 @@
 // import { Dice1 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 
 
@@ -25,9 +26,10 @@ export default function UserProfilePage() {
 
 
             const data = async () => {
+                
                 console.log(decodeURIComponent(params.slug))
 
-                const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}api/viewFacultydetails`, {
+                const response = await fetch("http://localhost:3000/api/viewFacultydetails", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email: decodeURIComponent(params.slug) }),
@@ -125,7 +127,7 @@ export default function UserProfilePage() {
                     <div className="mt-14 w-full   flex items-center justify-center ">
                         <div className="backdrop-blur-md pt-7 pb-5 shadow-2xl rounded-3xl  w-full max-w-5xl space-y-8">
                             <h1 className="text-4xl font-extrabold text-center text-blue-800 drop-shadow-sm">
-                                🧑‍💼 Professional Profile
+                                🧑‍💼 Professional Profile 
                             </h1>
 
                             <div className="flex flex-col lg:flex-row items-start gap-8">
@@ -163,6 +165,9 @@ export default function UserProfilePage() {
                                     <p className="col-span-full font-semibold text-blue-700">
                                         Description: <span className="font-normal text-gray-800">{details.description}</span>
                                     </p>
+                                
+
+                                   <Link href={`/userchat/${details.email}`}> <button className="mt-4 bg-green-700 hover:bg-green-800 text-white font-medium py-2 px-6 rounded-full shadow-md transition-all duration-200">Chat  </button></Link>
                                 </div>
 
                             </div>

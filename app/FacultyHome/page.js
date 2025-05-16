@@ -49,6 +49,7 @@ const LawyerRegistrationPage = () => {
 
   useEffect(() => {
     const checkuser = async () => {
+
       const token = localStorage.getItem("token");
       if (!token) {
         setError("Please login to register");
@@ -57,7 +58,7 @@ const LawyerRegistrationPage = () => {
       }
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+        const response = await fetch( `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -76,6 +77,8 @@ const LawyerRegistrationPage = () => {
       } finally {
         setLoading(false);
       }
+
+      
     };
     checkuser();
   }, []);
@@ -136,8 +139,7 @@ const LawyerRegistrationPage = () => {
     }
 
     try {
-      // First submit form data
-      const response = await fetch('/api/lawyer-registration', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/Facultydetails`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

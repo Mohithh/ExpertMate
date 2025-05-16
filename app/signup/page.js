@@ -6,27 +6,29 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import Link from "next/link";
-import Img from '@/app/assets/singup.svg';
+
+// ✅ Import your signup illustration image
+// import SignupIllustration from "@/public/signup-illustration.png"; // Make sure you have this image inside /public folder
 
 export default function SignUpPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     const data = { name, email, password };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/LoginNew`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/LoginNew`, {  
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
+      
       const res = await response.json();
 
       if (res.success) {
@@ -59,8 +61,6 @@ export default function SignUpPage() {
         theme: "light",
         transition: Bounce,
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -77,7 +77,7 @@ export default function SignUpPage() {
           <form onSubmit={handleSignUp} className="space-y-5">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
+                Name
               </label>
               <input
                 id="name"
@@ -87,13 +87,12 @@ export default function SignUpPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 placeholder="John Doe"
                 required
-                minLength={3}
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email Address
+                Email
               </label>
               <input
                 id="email"
@@ -118,39 +117,35 @@ export default function SignUpPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 placeholder="••••••••"
                 required
-                minLength={6}
               />
             </div>
 
             <button
               type="submit"
-              disabled={isLoading}
-              className={`w-full py-2.5 text-white rounded-lg font-semibold transition duration-200 shadow-md ${
-                isLoading
-                  ? "bg-emerald-400 cursor-not-allowed"
-                  : "bg-emerald-600 hover:bg-emerald-700"
-              }`}
+              className="w-full py-2.5 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition duration-200 shadow-md"
             >
-              {isLoading ? "Creating Account..." : "Sign Up"}
+              Sign Up
             </button>
           </form>
 
           <div className="mt-6 text-center text-sm text-gray-500">
             Already have an account?{" "}
-            <Link href="/login" className="text-emerald-600 hover:underline font-medium">
+            <a href="/login" className="text-emerald-600 hover:underline font-medium">
               Sign In
-            </Link>
+            </a>
           </div>
         </div>
 
         {/* Right Side - Illustration */}
         <div className="hidden md:flex md:w-1/2 items-center justify-center bg-gradient-to-br from-emerald-400 to-green-500 p-8">
-          <Image
-            src={Img}
+          {/* <Image
+            src={SignupIllustration}
             alt="Signup Illustration"
-            className="w-full h-auto object-contain"
+            width={500}
+            height={500}
+            className="w-full h-auto object-contain rounded-lg"
             priority
-          />
+          /> */}
         </div>
       </div>
 
