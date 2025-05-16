@@ -1,4 +1,5 @@
 "use client";
+import Header from '@/app/header/page';
 import React from 'react';
 
 const CurrentHearingsPage = () => {
@@ -30,6 +31,9 @@ const CurrentHearingsPage = () => {
   ];
 
   return (
+    <>
+      <Header />
+
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Current Hearings</h1>
@@ -68,6 +72,7 @@ const CurrentHearingsPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Header from '../header/page';
 
 const page = () => {
   const [email, setemail] = useState("");
@@ -45,6 +46,8 @@ const page = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="w-full min-h-screen bg-gradient-to-br from-gray-100 via-blue-50 to-purple-100 p-6 flex flex-col items-center font-sans animate-fade-in">
       <div className="flex flex-wrap gap-5 mb-10">
         <Link className="px-5 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white text-lg rounded-xl shadow-md hover:scale-105 transition-transform" href="/engineer">👷 Engineers</Link>
@@ -119,7 +122,7 @@ const page = () => {
         </div>
       )}
     </div>
-
+</> 
   );
 };
 

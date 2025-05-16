@@ -23,6 +23,7 @@
     "formidable": "^3.5.3",
     "framer-motion": "^12.7.4",
     "jsonwebtoken": "^9.0.2",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.487.0",
     "mongodb": "^6.16.0",
     "mongoose": "^8.13.2",

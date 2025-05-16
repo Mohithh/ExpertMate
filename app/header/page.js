@@ -1,14 +1,37 @@
 "use client";
 import { useState, useEffect } from "react";
-import { AiOutlineMenu, AiOutlineClose, AiOutlineSun, AiOutlineMoon } from "react-icons/ai";
-import { FiUser, FiLogIn } from "react-icons/fi";
+import { 
+  AiOutlineMenu, 
+  AiOutlineClose, 
+  AiOutlineSun, 
+  AiOutlineMoon, 
+  AiOutlineDown, 
+  AiOutlineUp,
+  AiOutlineHome,
+  AiOutlineVideoCamera
+} from "react-icons/ai";
+import { 
+  FiUser, 
+  FiLogIn, 
+  FiLogOut,
+  FiUsers,
+  FiFileText,
+  FiList,
+  FiHeadphones,
+  FiSettings,
+  FiShield,
+  FiMail,
+  FiPlus
+} from "react-icons/fi";
+import { IoSearchOutline } from "react-icons/io5";
+import { MdOutlineManageSearch } from "react-icons/md";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Logo from "@/app/assets/hello_logo.png";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
-
   const router = useRouter();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,16 +39,15 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [loginn, setloginn] = useState(false);
+  const [caseDropdownOpen, setCaseDropdownOpen] = useState(false);
+  const [mobileCaseDropdownOpen, setMobileCaseDropdownOpen] = useState(false);
+  const [meetingDropdownOpen, setMeetingDropdownOpen] = useState(false);
+  const [mobileMeetingDropdownOpen, setMobileMeetingDropdownOpen] = useState(false);
+  const [additionalEmails, setAdditionalEmails] = useState([""]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
-    if (!token) {
-      setloginn(false); 
-    } else {
-      setloginn(true);
-    }
-
+    setloginn(!!token);
     setMounted(true);
 
     const savedTheme = localStorage.getItem('theme');
@@ -48,8 +70,35 @@ const Header = () => {
     document.documentElement.classList.toggle('dark', newMode);
   };
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const closeMenu = () => setMenuOpen(false);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    document.body.style.overflow = menuOpen ? '' : 'hidden';
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+    document.body.style.overflow = '';
+  };
+
+  const toggleCaseDropdown = (e) => {
+    e.stopPropagation();
+    setCaseDropdownOpen(!caseDropdownOpen);
+  };
+
+  const toggleMobileCaseDropdown = (e) => {
+    e.stopPropagation();
+    setMobileCaseDropdownOpen(!mobileCaseDropdownOpen);
+  };
+
+  const toggleMeetingDropdown = (e) => {
+    e.stopPropagation();
+    setMeetingDropdownOpen(!meetingDropdownOpen);
+  };
+
+  const toggleMobileMeetingDropdown = (e) => {
+    e.stopPropagation();
+    setMobileMeetingDropdownOpen(!mobileMeetingDropdownOpen);
+  };
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -57,151 +106,520 @@ const Header = () => {
     router.push('/login');
   };
 
-  // NavLink component
-  const NavLink = ({ href, children }) => (
-    <Link href={href} className="relative group" passHref>
-      <span className="text-gray-700 dark:text-gray-300 font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
-        {children}
-      </span>
-      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-amber-500 group-hover:w-full transition-all duration-300"></span>
+  const handleAddEmail = () => {
+    setAdditionalEmails([...additionalEmails, ""]);
+  };
+
+  const handleEmailChange = (index, value) => {
+    const newEmails = [...additionalEmails];
+    newEmails[index] = value;
+    setAdditionalEmails(newEmails);
+  };
+
+  const generateMeetingLink = () => {
+    const baseUrl = "https://cal.com/settlesmart/15min";
+    if (additionalEmails.some(email => email.trim() !== "")) {
+      const emailsParam = additionalEmails.filter(e => e.trim() !== "").join(",");
+      return `${baseUrl}?email=${emailsParam}`;
+    }
+    return baseUrl;
+  };
+
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (caseDropdownOpen) setCaseDropdownOpen(false);
+      if (meetingDropdownOpen) setMeetingDropdownOpen(false);
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [caseDropdownOpen, meetingDropdownOpen]);
+
+  const NavLink = ({ href, children, onClick, icon: Icon }) => (
+    <Link href={href} passHref onClick={onClick}>
+      <motion.div 
+        className="relative group whitespace-nowrap"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <div className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 h-10">
+          {Icon && (
+            <motion.span 
+              className="mr-2 text-base opacity-70 group-hover:opacity-100 transition-opacity"
+              whileHover={{ rotate: 10 }}
+            >
+              <Icon />
+            </motion.span>
+          )}
+          <span className="text-gray-700 dark:text-gray-300 font-medium group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors text-sm">
+            {children}
+          </span>
+        </div>
+        <motion.span 
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-amber-500"
+          initial={{ width: 0 }}
+          whileHover={{ width: '80%' }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.div>
     </Link>
   );
 
-  // Mobile NavLink component
-  const MobileNavLink = ({ href, children }) => (
-    <Link
-      href={href}
-      onClick={closeMenu}
-      className="text-gray-800 dark:text-gray-200 text-lg font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 w-full text-center"
-      passHref
-    >
-      {children}
+  const MobileNavLink = ({ href, children, onClick, icon: Icon }) => (
+    <Link href={href} passHref onClick={onClick}>
+      <motion.div 
+        className="flex items-center text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 w-full whitespace-nowrap"
+        whileHover={{ x: 5 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        {Icon && <Icon className="mr-3 text-lg" />}
+        <span>{children}</span>
+      </motion.div>
     </Link>
+  );
+
+  const MeetingDropdownContent = ({ isMobile = false }) => (
+    <div className={`${isMobile ? 'px-4 py-2' : 'px-4 py-2'}`}>
+      <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        Schedule Meeting
+      </h4>
+      <div className="space-y-2">
+        {additionalEmails.map((email, index) => (
+          <div key={index} className="flex items-center">
+            <input
+              type="email"
+              placeholder="Participant email"
+              value={email}
+              onChange={(e) => handleEmailChange(index, e.target.value)}
+              className="w-full px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 dark:bg-gray-700 dark:text-white"
+            />
+            {index === additionalEmails.length - 1 && (
+              <button
+                onClick={handleAddEmail}
+                className="ml-2 p-1 text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300"
+              >
+                <FiPlus size={16} />
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+      <a
+        href={generateMeetingLink()}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 block w-full text-center px-3 py-1.5 text-sm bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 text-white rounded transition-colors"
+      >
+        Start Meeting
+      </a>
+    </div>
   );
 
   return (
     <>
-      {/* Desktop Navigation */}
-      <header className={`fixed w-full top-0 z-50 transition-all duration-300 h-16 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-          <div className="flex items-center justify-between h-full">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0 flex items-center min-w-[220px]">
-              <div className="relative w-[220px] h-[80px]">
-                <Image
-                  src={Logo}
-                  alt="Company Logo"
-                  fill
-                  sizes="(max-width: 768px) 280px, 280px"
-                  className="object-contain object-left transition-transform hover:scale-105 duration-300"
-                  priority
-                />
-              </div>
+      <motion.header 
+        className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, type: 'spring' }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link href="/" passHref>
+              <motion.div 
+                className="flex-shrink-0 w-40"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className="relative w-full h-12">
+                  <Image
+                    src={Logo}
+                    alt="Company Logo"
+                    fill
+                    className="object-contain object-left"
+                    priority
+                  />
+                </div>
+              </motion.div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/lawyer">Our Leadership</NavLink>
-              <NavLink href="/case">Case Management</NavLink>
-              <NavLink href="/services">Services</NavLink>
-              <NavLink href="/StartDispute">Dispute</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
-              <NavLink href="/search">search</NavLink>
+            <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
+              <div className="flex items-center space-x-1">
+                <NavLink href="/" icon={AiOutlineHome}>Home</NavLink>
+                <NavLink href="/lawyer" icon={FiUsers}>Leadership</NavLink>
+
+                <div className="relative">
+                  <motion.button 
+                    onClick={toggleCaseDropdown}
+                    className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 group h-10 whitespace-nowrap"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MdOutlineManageSearch className="mr-2 text-base" />
+                    <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
+                      Cases
+                    </span>
+                    {caseDropdownOpen ? (
+                      <AiOutlineUp className="ml-1" size={14} />
+                    ) : (
+                      <AiOutlineDown className="ml-1" size={14} />
+                    )}
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {caseDropdownOpen && (
+                      <motion.div 
+                        className="absolute left-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Link href="/case" passHref>
+                          <motion.div 
+                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                            whileHover={{ x: 5 }}
+                            onClick={() => setCaseDropdownOpen(false)}
+                          >
+                            <FiFileText className="mr-2" />
+                            Overview
+                          </motion.div>
+                        </Link>
+                        <Link href="/case/cause-list" passHref>
+                          <motion.div 
+                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                            whileHover={{ x: 5 }}
+                            onClick={() => setCaseDropdownOpen(false)}
+                          >
+                            <FiList className="mr-2" />
+                            Cause List
+                          </motion.div>
+                        </Link>
+                        <Link href="/case/current-hearings" passHref>
+                          <motion.div 
+                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                            whileHover={{ x: 5 }}
+                            onClick={() => setCaseDropdownOpen(false)}
+                          >
+                            <FiHeadphones className="mr-2" />
+                            Hearings
+                          </motion.div>
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <NavLink href="/services" icon={FiSettings}>Services</NavLink>
+                <NavLink href="/StartDispute" icon={FiShield}>Dispute</NavLink>
+                <NavLink href="/contact" icon={FiMail}>Contact</NavLink>
+
+                <div className="relative">
+                  <motion.button 
+                    onClick={toggleMeetingDropdown}
+                    className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 group h-10 whitespace-nowrap"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <AiOutlineVideoCamera className="mr-2 text-base" />
+                    <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
+                      Conference
+                    </span>
+                    {meetingDropdownOpen ? (
+                      <AiOutlineUp className="ml-1" size={14} />
+                    ) : (
+                      <AiOutlineDown className="ml-1" size={14} />
+                    )}
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {meetingDropdownOpen && (
+                      <motion.div 
+                        className="absolute left-0 mt-1 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-2 z-50 border border-gray-200 dark:border-gray-700"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <MeetingDropdownContent />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
             </nav>
 
-            {/* Right side buttons */}
-            <div className="hidden md:flex items-center space-x-4">
-              <button
+            <div className="hidden md:flex items-center space-x-2">
+              <motion.button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                {darkMode ? <AiOutlineSun size={20} /> : <AiOutlineMoon size={20} />}
-              </button>
+                {darkMode ? <AiOutlineSun size={18} /> : <AiOutlineMoon size={18} />}
+              </motion.button>
 
-              <div className="flex space-x-2">
-                <Link href="/login">
-                  {!loginn && <button className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
-                    <FiLogIn className="mr-2" />
-                    Login
-                  </button>}
-                </Link>
-                <Link href="/signup">
-                  {!loginn && <button className="flex items-center px-4 py-2 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors shadow-md hover:shadow-lg">
-                    <FiUser className="mr-2" />
-                    Sign Up
-                  </button>}
-                </Link>
-                {loginn && <button onClick={logout} className="flex items-center px-4 py-2 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
-                  <FiLogIn className="mr-2" />
-                  LOGOUT
-                </button>}
-              </div>
+              {!loginn ? (
+                <>
+                  <Link href="/login" passHref>
+                    <motion.button 
+                      className="flex items-center px-4 py-2 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50/80 dark:hover:bg-gray-800/90 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FiLogIn className="mr-2" size={16} />
+                      <span>Login</span>
+                      <svg 
+                        className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M5 12h14m-7-7l7 7-7 7"
+                        />
+                      </svg>
+                    </motion.button>
+                  </Link>
+                  <Link href="/signup" passHref>
+                    <motion.button 
+                      className="flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white font-medium hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-700 dark:hover:to-amber-800 shadow-sm hover:shadow-amber-200/50 dark:hover:shadow-amber-700/30 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FiUser className="mr-2" size={16} />
+                      <span>Sign Up</span>
+                      <svg 
+                        className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M12 4v16m8-8H4"
+                        />
+                      </svg>
+                    </motion.button>
+                  </Link>
+                </>
+              ) : (
+                <motion.button 
+                  onClick={logout} 
+                  className="flex items-center px-4 py-2 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50/80 dark:hover:bg-gray-800/90 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <FiLogOut className="mr-2" size={16} />
+                  <span>Logout</span>
+                  <svg 
+                    className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M10 22H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h5m7 14l4-4m0 0l-4-4m4 4H9"
+                    />
+                  </svg>
+                </motion.button>
+              )}
             </div>
 
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 focus:outline-none"
+            <motion.button
+              className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
               onClick={toggleMenu}
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {menuOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
-            </button>
+              {menuOpen ? (
+                <AiOutlineClose size={22} className="text-amber-600 dark:text-amber-400" />
+              ) : (
+                <AiOutlineMenu size={22} />
+              )}
+            </motion.button>
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        <div
-          className={`md:hidden fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg transition-all duration-300 ease-in-out ${menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
-          style={{
-            top: '4rem',
-            height: 'calc(100vh - 4rem)',
-            pointerEvents: menuOpen ? 'auto' : 'none'
-          }}
-          aria-hidden={!menuOpen}
-        >
-          <div className="flex flex-col items-center justify-start space-y-4 w-full h-full overflow-y-auto py-8">
-            <MobileNavLink href="/">Home</MobileNavLink>
-            <MobileNavLink href="/lawyer">Lawyers</MobileNavLink>
-            <MobileNavLink href="/case">Case Management</MobileNavLink>
-            <MobileNavLink href="/services">Services</MobileNavLink>
-            <MobileNavLink href="/StartDispute">Dispute</MobileNavLink>
-            <MobileNavLink href="/contact">Contact</MobileNavLink>
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              className="md:hidden fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg"
+              style={{
+                top: '4rem',
+                height: 'calc(100vh - 4rem)',
+              }}
+              initial={{ opacity: 0, y: '-100%' }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: '-100%' }}
+              transition={{ type: 'spring', damping: 25 }}
+            >
+              <div className="flex flex-col items-center justify-start w-full h-full overflow-y-auto py-4">
+                <MobileNavLink href="/" onClick={closeMenu} icon={AiOutlineHome}>Home</MobileNavLink>
+                <MobileNavLink href="/lawyer" onClick={closeMenu} icon={FiUsers}>Leadership</MobileNavLink>
 
-            <div className="flex items-center mt-8 space-x-4">
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
-              >
-                {darkMode ? <AiOutlineSun size={24} /> : <AiOutlineMoon size={24} />}
-              </button>
-            </div>
+                <div className="w-full">
+                  <motion.button 
+                    onClick={toggleMobileCaseDropdown}
+                    className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
+                    whileHover={{ x: 5 }}
+                  >
+                    <MdOutlineManageSearch className="mr-3 text-lg" />
+                    <span>Case Management</span>
+                    {mobileCaseDropdownOpen ? (
+                      <AiOutlineUp className="ml-auto" size={14} />
+                    ) : (
+                      <AiOutlineDown className="ml-auto" size={14} />
+                    )}
+                  </motion.button>
 
-            <div className="flex flex-col space-y-4 w-full max-w-xs mt-6">
-              <Link href="/login" className="w-full" onClick={closeMenu}>
-                <button className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors">
-                  <FiLogIn className="mr-2" />
-                  Login
-                </button>
-              </Link>
-              <Link href="/signup" className="w-full" onClick={closeMenu}>
-                <button className="flex items-center justify-center w-full px-6 py-3 rounded-md bg-amber-600 dark:bg-amber-500 text-white font-medium hover:bg-amber-700 dark:hover:bg-amber-600 transition-colors">
-                  <FiUser className="mr-2" />
-                  Sign Up
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+                  <AnimatePresence>
+                    {mobileCaseDropdownOpen && (
+                      <motion.div 
+                        className="w-full bg-gray-50 dark:bg-gray-800/50"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <MobileNavLink href="/case" onClick={closeMenu} icon={FiFileText}>Overview</MobileNavLink>
+                        <MobileNavLink href="/case/cause-list" onClick={closeMenu} icon={FiList}>Cause List</MobileNavLink>
+                        <MobileNavLink href="/case/current-hearings" onClick={closeMenu} icon={FiHeadphones}>Hearings</MobileNavLink>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
-      {/* Add padding to prevent content from being hidden behind the fixed header */}
+                <MobileNavLink href="/services" onClick={closeMenu} icon={FiSettings}>Services</MobileNavLink>
+                <MobileNavLink href="/StartDispute" onClick={closeMenu} icon={FiShield}>Dispute</MobileNavLink>
+                <MobileNavLink href="/contact" onClick={closeMenu} icon={FiMail}>Contact</MobileNavLink>
+
+                <div className="w-full">
+                  <motion.button 
+                    onClick={toggleMobileMeetingDropdown}
+                    className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
+                    whileHover={{ x: 5 }}
+                  >
+                    <AiOutlineVideoCamera className="mr-3 text-lg" />
+                    <span>Conference Room</span>
+                    {mobileMeetingDropdownOpen ? (
+                      <AiOutlineUp className="ml-auto" size={14} />
+                    ) : (
+                      <AiOutlineDown className="ml-auto" size={14} />
+                    )}
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {mobileMeetingDropdownOpen && (
+                      <motion.div 
+                        className="w-full bg-gray-50 dark:bg-gray-800/50"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <MeetingDropdownContent isMobile={true} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div className="flex items-center mt-4">
+                  <motion.button
+                    onClick={toggleDarkMode}
+                    className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                    aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {darkMode ? <AiOutlineSun size={22} /> : <AiOutlineMoon size={22} />}
+                  </motion.button>
+                </div>
+
+                <div className="flex flex-col space-y-3 w-full max-w-xs mt-4 px-4">
+                  {!loginn ? (
+                    <>
+                      <Link href="/login" className="w-full" onClick={closeMenu} passHref>
+                        <motion.button 
+                          className="flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors whitespace-nowrap relative overflow-hidden group"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <FiLogIn className="mr-2" size={16} />
+                          <span>Login</span>
+                          <svg 
+                            className="absolute -right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+                            width="16" 
+                            height="16" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M5 12h14m-7-7l7 7-7 7"
+                            />
+                          </svg>
+                        </motion.button>
+                      </Link>
+                      <Link href="/signup" className="w-full" onClick={closeMenu} passHref>
+                        <motion.button 
+                          className="flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white font-medium hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-700 dark:hover:to-amber-800 transition-colors whitespace-nowrap relative overflow-hidden group"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <FiUser className="mr-2" size={16} />
+                          <span>Sign Up</span>
+                          <svg 
+                            className="absolute -right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+                            width="16" 
+                            height="16" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M12 4v16m8-8H4"
+                            />
+                          </svg>
+                        </motion.button>
+                      </Link>
+                    </>
+                  ) : (
+                    <motion.button 
+                      onClick={() => {
+                        logout();
+                        closeMenu();
+                      }} 
+                      className="flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors whitespace-nowrap relative overflow-hidden group"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FiLogOut className="mr-2" size={16} />
+                      <span>Logout</span>
+                      <svg 
+                        className="absolute -right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M10 22H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h5m7 14l4-4m0 0l-4-4m4 4H9"
+                        />
+                      </svg>
+                    </motion.button>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+
       <div className="h-16"></div>
     </>
   );
 };
-
 export default Header;

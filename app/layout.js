@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/header/page";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -25,7 +24,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Header />
+        
         {children }
         <Script src="//code.tidio.co/8jpdhmhglwc0sfka7q6kltnmeazvydai.js" strategy="lazyOnload" />
       </body>

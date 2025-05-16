@@ -11,17 +11,16 @@ export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Added missing state
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const data = { email, password };
 
     try {
-     
       const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/Login`, {
-
-        
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -56,6 +55,8 @@ export default function LoginPage() {
         theme: "light",
         transition: Bounce,
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -123,7 +124,7 @@ export default function LoginPage() {
             </p>
             <p className="mt-4">
               <Link href="/facultylogin" className="text-indigo-600 font-medium hover:underline">
-              faculty Login
+                Faculty Login
               </Link>
             </p>
           </div>
