@@ -21,7 +21,7 @@
     "emailjs-com": "^3.2.0",
     "firebase": "^11.6.0",
     "formidable": "^3.5.3",
-    "framer-motion": "^12.7.4",
+    "framer-motion": "^12.12.1",
     "jsonwebtoken": "^9.0.2",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.487.0",

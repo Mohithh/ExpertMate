@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import LawyerDetails from "@/models/lawyerDetails";
+import LawyerDetails from "@/model/LawyerDetails";
 
 const connectDb = async () => {
     if (mongoose.connections[0].readyState) {
