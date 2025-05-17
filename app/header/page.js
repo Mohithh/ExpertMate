@@ -21,9 +21,8 @@ import {
   FiSettings,
   FiShield,
   FiMail,
-  FiPlus
+  FiVideo
 } from "react-icons/fi";
-import { IoSearchOutline } from "react-icons/io5";
 import { MdOutlineManageSearch } from "react-icons/md";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
@@ -41,9 +40,6 @@ const Header = () => {
   const [loginn, setloginn] = useState(false);
   const [caseDropdownOpen, setCaseDropdownOpen] = useState(false);
   const [mobileCaseDropdownOpen, setMobileCaseDropdownOpen] = useState(false);
-  const [meetingDropdownOpen, setMeetingDropdownOpen] = useState(false);
-  const [mobileMeetingDropdownOpen, setMobileMeetingDropdownOpen] = useState(false);
-  const [additionalEmails, setAdditionalEmails] = useState([""]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -90,14 +86,13 @@ const Header = () => {
     setMobileCaseDropdownOpen(!mobileCaseDropdownOpen);
   };
 
-  const toggleMeetingDropdown = (e) => {
-    e.stopPropagation();
-    setMeetingDropdownOpen(!meetingDropdownOpen);
-  };
-
-  const toggleMobileMeetingDropdown = (e) => {
-    e.stopPropagation();
-    setMobileMeetingDropdownOpen(!mobileMeetingDropdownOpen);
+  const handleConferenceClick = (e) => {
+    e.preventDefault();
+    if (!loginn) {
+      router.push('/login');
+      return;
+    }
+    router.push('/conference');
   };
 
   const logout = () => {
@@ -106,33 +101,13 @@ const Header = () => {
     router.push('/login');
   };
 
-  const handleAddEmail = () => {
-    setAdditionalEmails([...additionalEmails, ""]);
-  };
-
-  const handleEmailChange = (index, value) => {
-    const newEmails = [...additionalEmails];
-    newEmails[index] = value;
-    setAdditionalEmails(newEmails);
-  };
-
-  const generateMeetingLink = () => {
-    const baseUrl = "https://cal.com/settlesmart/15min";
-    if (additionalEmails.some(email => email.trim() !== "")) {
-      const emailsParam = additionalEmails.filter(e => e.trim() !== "").join(",");
-      return `${baseUrl}?email=${emailsParam}`;
-    }
-    return baseUrl;
-  };
-
   useEffect(() => {
     const handleClickOutside = () => {
       if (caseDropdownOpen) setCaseDropdownOpen(false);
-      if (meetingDropdownOpen) setMeetingDropdownOpen(false);
     };
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
-  }, [caseDropdownOpen, meetingDropdownOpen]);
+  }, [caseDropdownOpen]);
 
   const NavLink = ({ href, children, onClick, icon: Icon }) => (
     <Link href={href} passHref onClick={onClick}>
@@ -144,7 +119,7 @@ const Header = () => {
         <div className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 h-10">
           {Icon && (
             <motion.span 
-              className="mr-2 text-base opacity-70 group-hover:opacity-100 transition-opacity"
+              className="mr-2 text-base text-gray-700 dark:text-gray-300 opacity-70 group-hover:opacity-100 transition-opacity"
               whileHover={{ rotate: 10 }}
             >
               <Icon />
@@ -171,47 +146,10 @@ const Header = () => {
         whileHover={{ x: 5 }}
         whileTap={{ scale: 0.98 }}
       >
-        {Icon && <Icon className="mr-3 text-lg" />}
+        {Icon && <Icon className="mr-3 text-lg text-gray-800 dark:text-gray-200" />}
         <span>{children}</span>
       </motion.div>
     </Link>
-  );
-
-  const MeetingDropdownContent = ({ isMobile = false }) => (
-    <div className={`${isMobile ? 'px-4 py-2' : 'px-4 py-2'}`}>
-      <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Schedule Meeting
-      </h4>
-      <div className="space-y-2">
-        {additionalEmails.map((email, index) => (
-          <div key={index} className="flex items-center">
-            <input
-              type="email"
-              placeholder="Participant email"
-              value={email}
-              onChange={(e) => handleEmailChange(index, e.target.value)}
-              className="w-full px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 dark:bg-gray-700 dark:text-white"
-            />
-            {index === additionalEmails.length - 1 && (
-              <button
-                onClick={handleAddEmail}
-                className="ml-2 p-1 text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300"
-              >
-                <FiPlus size={16} />
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
-      <a
-        href={generateMeetingLink()}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-3 block w-full text-center px-3 py-1.5 text-sm bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 text-white rounded transition-colors"
-      >
-        Start Meeting
-      </a>
-    </div>
   );
 
   return (
@@ -243,7 +181,7 @@ const Header = () => {
             </Link>
 
             <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
-              <div className="flex items-center space-x-1">
+              <div className="flex items-center space-x-2">
                 <NavLink href="/" icon={AiOutlineHome}>Home</NavLink>
                 <NavLink href="/lawyer" icon={FiUsers}>Leadership</NavLink>
 
@@ -254,14 +192,14 @@ const Header = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <MdOutlineManageSearch className="mr-2 text-base" />
+                    <MdOutlineManageSearch className="mr-2 text-base text-gray-700 dark:text-gray-300" />
                     <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
                       Cases
                     </span>
                     {caseDropdownOpen ? (
-                      <AiOutlineUp className="ml-1" size={14} />
+                      <AiOutlineUp className="ml-1 text-gray-700 dark:text-gray-300" size={14} />
                     ) : (
-                      <AiOutlineDown className="ml-1" size={14} />
+                      <AiOutlineDown className="ml-1 text-gray-700 dark:text-gray-300" size={14} />
                     )}
                   </motion.button>
 
@@ -280,7 +218,7 @@ const Header = () => {
                             whileHover={{ x: 5 }}
                             onClick={() => setCaseDropdownOpen(false)}
                           >
-                            <FiFileText className="mr-2" />
+                            <FiFileText className="mr-2 text-gray-700 dark:text-gray-300" />
                             Overview
                           </motion.div>
                         </Link>
@@ -290,7 +228,7 @@ const Header = () => {
                             whileHover={{ x: 5 }}
                             onClick={() => setCaseDropdownOpen(false)}
                           >
-                            <FiList className="mr-2" />
+                            <FiList className="mr-2 text-gray-700 dark:text-gray-300" />
                             Cause List
                           </motion.div>
                         </Link>
@@ -300,7 +238,7 @@ const Header = () => {
                             whileHover={{ x: 5 }}
                             onClick={() => setCaseDropdownOpen(false)}
                           >
-                            <FiHeadphones className="mr-2" />
+                            <FiHeadphones className="mr-2 text-gray-700 dark:text-gray-300" />
                             Hearings
                           </motion.div>
                         </Link>
@@ -312,39 +250,8 @@ const Header = () => {
                 <NavLink href="/services" icon={FiSettings}>Services</NavLink>
                 <NavLink href="/StartDispute" icon={FiShield}>Dispute</NavLink>
                 <NavLink href="/contact" icon={FiMail}>Contact</NavLink>
-
-                <div className="relative">
-                  <motion.button 
-                    onClick={toggleMeetingDropdown}
-                    className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 group h-10 whitespace-nowrap"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <AiOutlineVideoCamera className="mr-2 text-base" />
-                    <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
-                      Conference
-                    </span>
-                    {meetingDropdownOpen ? (
-                      <AiOutlineUp className="ml-1" size={14} />
-                    ) : (
-                      <AiOutlineDown className="ml-1" size={14} />
-                    )}
-                  </motion.button>
-
-                  <AnimatePresence>
-                    {meetingDropdownOpen && (
-                      <motion.div 
-                        className="absolute left-0 mt-1 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-2 z-50 border border-gray-200 dark:border-gray-700"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <MeetingDropdownContent />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                
+                <NavLink href={loginn ? "/conference" : "/login"} onClick={handleConferenceClick} icon={FiVideo}>Conference</NavLink>
               </div>
             </nav>
 
@@ -356,7 +263,11 @@ const Header = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                {darkMode ? <AiOutlineSun size={18} /> : <AiOutlineMoon size={18} />}
+                {darkMode ? (
+                  <AiOutlineSun size={18} className="text-gray-300" />
+                ) : (
+                  <AiOutlineMoon size={18} className="text-gray-700" />
+                )}
               </motion.button>
 
               {!loginn ? (
@@ -367,7 +278,7 @@ const Header = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <FiLogIn className="mr-2" size={16} />
+                      <FiLogIn className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
                       <span>Login</span>
                       <svg 
                         className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
@@ -411,7 +322,7 @@ const Header = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <FiLogOut className="mr-2" size={16} />
+                  <FiLogOut className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
                   <span>Logout</span>
                   <svg 
                     className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
@@ -439,7 +350,7 @@ const Header = () => {
               {menuOpen ? (
                 <AiOutlineClose size={22} className="text-amber-600 dark:text-amber-400" />
               ) : (
-                <AiOutlineMenu size={22} />
+                <AiOutlineMenu size={22} className="text-gray-700 dark:text-gray-300" />
               )}
             </motion.button>
           </div>
@@ -468,12 +379,12 @@ const Header = () => {
                     className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
                     whileHover={{ x: 5 }}
                   >
-                    <MdOutlineManageSearch className="mr-3 text-lg" />
+                    <MdOutlineManageSearch className="mr-3 text-lg text-gray-800 dark:text-gray-200" />
                     <span>Case Management</span>
                     {mobileCaseDropdownOpen ? (
-                      <AiOutlineUp className="ml-auto" size={14} />
+                      <AiOutlineUp className="ml-auto text-gray-800 dark:text-gray-200" size={14} />
                     ) : (
-                      <AiOutlineDown className="ml-auto" size={14} />
+                      <AiOutlineDown className="ml-auto text-gray-800 dark:text-gray-200" size={14} />
                     )}
                   </motion.button>
 
@@ -497,36 +408,13 @@ const Header = () => {
                 <MobileNavLink href="/services" onClick={closeMenu} icon={FiSettings}>Services</MobileNavLink>
                 <MobileNavLink href="/StartDispute" onClick={closeMenu} icon={FiShield}>Dispute</MobileNavLink>
                 <MobileNavLink href="/contact" onClick={closeMenu} icon={FiMail}>Contact</MobileNavLink>
-
-                <div className="w-full">
-                  <motion.button 
-                    onClick={toggleMobileMeetingDropdown}
-                    className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
-                    whileHover={{ x: 5 }}
-                  >
-                    <AiOutlineVideoCamera className="mr-3 text-lg" />
-                    <span>Conference Room</span>
-                    {mobileMeetingDropdownOpen ? (
-                      <AiOutlineUp className="ml-auto" size={14} />
-                    ) : (
-                      <AiOutlineDown className="ml-auto" size={14} />
-                    )}
-                  </motion.button>
-
-                  <AnimatePresence>
-                    {mobileMeetingDropdownOpen && (
-                      <motion.div 
-                        className="w-full bg-gray-50 dark:bg-gray-800/50"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <MeetingDropdownContent isMobile={true} />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                <MobileNavLink href={loginn ? "/conference" : "/login"} onClick={(e) => {
+                  if (!loginn) {
+                    e.preventDefault();
+                    router.push('/login');
+                    closeMenu();
+                  }
+                }} icon={FiVideo}>Conference</MobileNavLink>
 
                 <div className="flex items-center mt-4">
                   <motion.button
@@ -536,7 +424,11 @@ const Header = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    {darkMode ? <AiOutlineSun size={22} /> : <AiOutlineMoon size={22} />}
+                    {darkMode ? (
+                      <AiOutlineSun size={22} className="text-gray-300" />
+                    ) : (
+                      <AiOutlineMoon size={22} className="text-gray-700" />
+                    )}
                   </motion.button>
                 </div>
 
@@ -549,7 +441,7 @@ const Header = () => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          <FiLogIn className="mr-2" size={16} />
+                          <FiLogIn className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
                           <span>Login</span>
                           <svg 
                             className="absolute -right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
@@ -596,7 +488,7 @@ const Header = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <FiLogOut className="mr-2" size={16} />
+                      <FiLogOut className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
                       <span>Logout</span>
                       <svg 
                         className="absolute -right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
