@@ -7,6 +7,7 @@ import Image from "next/image";
 import Logo from "@/app/assets/hello_logo.png";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
+import registerCase from "@/app/registerCase/page"
 
 const Hero = () => {
   const { theme } = useTheme();
@@ -163,7 +164,23 @@ const Hero = () => {
                   >
                     Join as Arbitrator/Mediator
                   </motion.button>
+
                 </Link>
+                 
+              </div>
+              
+               <div className="flex flex-col sm:flex-row gap-3">
+                <Link href="/registerCase">
+                  <motion.button
+                    className="px-6 py-3 border-2 border-blue-600 dark:border-blue-500 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-xl font-semibold transition-all flex items-center gap-2 group w-full sm:w-auto justify-center"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Register a Case 
+                  </motion.button>
+
+                </Link>
+                 
               </div>
             </motion.div>
 
@@ -185,6 +202,7 @@ const Hero = () => {
 
           {/* Right-side image section skipped for brevity (you can re-add it here if needed) */}
         </div>
+      
       </div>
     </div>
   );
