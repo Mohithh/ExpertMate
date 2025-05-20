@@ -11,7 +11,7 @@ const page = () => {
   useEffect(() => {
     const fetchEngineers = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/engineerList", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/engineerList`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });

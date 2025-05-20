@@ -9,7 +9,7 @@ const page = () => {
   useEffect(() => {
     const checkuser = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/teacherList", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/teacherList`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

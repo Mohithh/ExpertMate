@@ -10,7 +10,7 @@ const page = () => {
     const checkuser = async () => {
       try {
         // ✅ First API - Get list of all doctors
-        const response = await fetch("http://localhost:3000/api/doctorList", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/doctorList`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
