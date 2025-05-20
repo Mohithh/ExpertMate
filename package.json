@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
+    "@fullcalendar/daygrid": "^6.1.17",
+    "@fullcalendar/interaction": "^6.1.17",
+    "@fullcalendar/react": "^6.1.17",
+    "@fullcalendar/timegrid": "^6.1.17",
+    "@heroicons/react": "^1.0.6",
     "@ramonak/react-progress-bar": "^5.4.0",
     "@react-firebase/firestore": "^0.5.5",
     "@vercel/blob": "^1.0.1",
@@ -17,6 +21,7 @@
     "animate.css": "^4.1.1",
     "axios": "^1.8.4",
     "crypto-js": "^4.2.0",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "emailjs-com": "^3.2.0",
     "firebase": "^11.6.0",
@@ -47,7 +52,8 @@
     "resend": "^4.2.0",
     "sharp": "^0.34.1",
     "simple-peer": "^9.11.1",
-    "sonner": "^2.0.3"
+    "sonner": "^2.0.3",
+    "swr": "^2.3.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^2.1.4",

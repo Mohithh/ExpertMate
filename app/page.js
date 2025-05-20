@@ -19,7 +19,7 @@ const Page = () => {
 
       <Header />
       <Hero />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
