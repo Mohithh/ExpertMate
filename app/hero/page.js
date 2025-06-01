@@ -98,35 +98,60 @@ const Hero = () => {
   return (
     <div ref={ref} className="relative bg-white dark:bg-gray-900 overflow-hidden">
       {/* Legal Consent Popup */}
-      {showConsent && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-          <motion.div 
-            className="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6 shadow-xl"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 100 }}
-          >
-            <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Legal Disclaimer</h2>
-            <div className="text-gray-700 dark:text-gray-300 mb-6 text-sm space-y-3">
-              <p>The information provided on this website does not, and is not intended to, constitute legal advice; instead, all information, content, and materials available on this site are for general informational purposes only.</p>
-              <p>Use of, and access to, this website or any of the links or resources contained within the site do not create an attorney-client relationship between the reader, user, or browser and website authors, contributors, or law firms.</p>
-              <p>Readers of this website should contact their attorney to obtain advice with respect to any particular legal matter.</p>
-            </div>
-            <div className="flex justify-end">
-              <motion.button
-                onClick={acceptConsent}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                animate={buttonClicked ? popAnimation : {}}
-              >
-                I Understand
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      )}
+     {showConsent && (
+  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+    <motion.div 
+      className="bg-white dark:bg-gray-800 rounded-xl max-w-2xl w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto"
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 100 }}
+    >
+      <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white text-center">Welcome to SettleSmart Solutions</h1>
+      <h2 className="text-xl font-semibold mb-6 text-center text-blue-600 dark:text-blue-400">Powered by Shivaay Legal Professionals</h2>
+      
+      <div className="text-gray-700 dark:text-gray-300 mb-6 space-y-4">
+        <p className="font-medium">Before you proceed, please read and accept the following disclaimer in accordance with the rules of the Bar Council of India (BCI) and applicable Indian laws:</p>
 
+        <div className="space-y-6">
+          <div>
+            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">No Advertisement or Solicitation:</h3>
+            <p>This website is not intended to advertise, solicit work, or offer legal advice. By accessing this platform, the user acknowledges that they are doing so voluntarily and of their own accord and that there has been no form of solicitation, personal communication, or inducement by SettleSmart Solutions or its Board of Directors.</p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Informational Purpose Only:</h3>
+            <p>The content provided on this website is intended only for general information purposes regarding our online dispute resolution services, and does not constitute legal advice or the formation of an attorney-client relationship.</p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Professional Relationship:</h3>
+            <p>Any use of this platform does not create a lawyer-client relationship between the user and SettleSmart Solutions, or with any of its Board Members. Users are advised to seek appropriate professional or legal advice before acting on any information provided here.</p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Compliant with BCI Guidelines:</h3>
+            <p>This website is designed to comply with Rule 36 of the BCI Rules and the relevant norms laid down by the Bar Council of India regarding lawyer websites and online presence. We do not seek to advertise or promote our services in violation of any BCI rules or laws of India.</p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Consent and Acknowledgement:</h3>
+            <p>By clicking "I Agree" below and proceeding further, the user acknowledges that they have read and understood this Disclaimer and wish to gain more information about SettleSmart Solutions for their own information and use.</p>
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <motion.button
+          onClick={acceptConsent}
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          I Agree and Proceed
+        </motion.button>
+      </div>
+    </motion.div>
+  </div>
+)}
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 to-white dark:from-gray-800/20 dark:to-gray-900 z-0"></div>
       <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 dark:opacity-[0.03] z-0"></div>

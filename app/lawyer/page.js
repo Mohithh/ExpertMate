@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Header from "../header/page";
-import Footer from "../footer/page";
+// import Footer from "../footer/page";
 
 // Icons
 import { 
@@ -19,7 +19,7 @@ import {
 import Amit from "@/app/assets/amit.png";
 import Rudra from "@/app/assets/rudra1.jpeg";
 import Harsha from "@/app/assets/harsha11.jpeg";
-import Pankaj from "@/app/assets/Pankaj11.jpeg";
+// import Pankaj from "@/app/assets/Pankaj11.jpeg";
 import Anand from "@/app/assets/anand1.jpeg";
 import Nageshwar from "@/app/assets/nages.jpeg";
 import Bhatti from "@/app/assets/BhattiAman.jpg";
@@ -122,27 +122,27 @@ const TeamPage = () => {
         linkedin: "https://www.linkedin.com/in/amit-sharma-ab33b5107/",
         description: "Tax litigation specialist with a razor-sharp understanding of fiscal regulations. Known for his landmark victories in complex tax disputes, Amit brings strategic depth to our commercial ODR practice. His dual expertise in corporate law and taxation creates unique synergies for SettleSmart's high-value dispute clients."
       },
-      {
-        id: 2,
-        name: "Pankaj Rishi Krishnan",
-        title: "Board of Directors & Head of ODR",
-        subtitle: "Civil, Matrimonial, and Property Disputes",
-        image: Pankaj,
-        experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
-        education: "B.S., M.S., LL.B., PGD in ADR, Diploma in Constitutional Law (DCL), and Intellectual Property Rights (DIPR)",
-        role: "Civil Litigation, Matrimonial Disputes, Property Matters, Criminal Law",
-        specializations: [
-          { icon: <Scale size={16} />, name: "Civil Litigation" },
-          { icon: <BookOpen size={16} />, name: "Family Law" },
-          { icon: <Layers size={16} />, name: "Property Disputes" },
-          { icon: <Shield size={16} />, name: "Criminal Defense" }
-        ],
-        location: "New Delhi",
-        phone: "+91 98103 44566",
-        email: "pankaj.krishnan@settlesmart.com",
-        linkedin: "https://www.linkedin.com/in/pankaj-rishi-krishnan-3a193221b/",
-        description: "Supreme Court advocate with an extraordinary track record in civil disputes. Pankaj's multidisciplinary qualifications - spanning law, science, and ADR - enable him to architect innovative solutions for complex family and property disputes. His systematic approach to dispute resolution has become a benchmark in our civil practice."
-      },
+      // {
+      //   id: 2,
+      //   name: "Pankaj Rishi Krishnan",
+      //   title: "Board of Directors & Head of ODR",
+      //   subtitle: "Civil, Matrimonial, and Property Disputes",
+      //   image: Pankaj,
+      //   experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
+      //   education: "B.S., M.S., LL.B., PGD in ADR, Diploma in Constitutional Law (DCL), and Intellectual Property Rights (DIPR)",
+      //   role: "Civil Litigation, Matrimonial Disputes, Property Matters, Criminal Law",
+      //   specializations: [
+      //     { icon: <Scale size={16} />, name: "Civil Litigation" },
+      //     { icon: <BookOpen size={16} />, name: "Family Law" },
+      //     { icon: <Layers size={16} />, name: "Property Disputes" },
+      //     { icon: <Shield size={16} />, name: "Criminal Defense" }
+      //   ],
+      //   location: "New Delhi",
+      //   phone: "+91 98103 44566",
+      //   email: "pankaj.krishnan@settlesmart.com",
+      //   linkedin: "https://www.linkedin.com/in/pankaj-rishi-krishnan-3a193221b/",
+      //   description: "Supreme Court advocate with an extraordinary track record in civil disputes. Pankaj's multidisciplinary qualifications - spanning law, science, and ADR - enable him to architect innovative solutions for complex family and property disputes. His systematic approach to dispute resolution has become a benchmark in our civil practice."
+      // },
       {
         id: 3,
         name: "Harsha Sharma",
@@ -473,7 +473,7 @@ const TeamPage = () => {
           </p>
         </motion.section>
       </main>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 };

@@ -214,76 +214,7 @@ const Header = () => {
             <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
               <div className="flex items-center space-x-2">
                 <NavLink href="/" icon={AiOutlineHome}>Home</NavLink>
-                <NavLink href="/lawyer" icon={FiUsers}>Leadership</NavLink>
-
-                <div className="relative">
-                  <motion.button 
-                    onClick={toggleCaseDropdown}
-                    className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 group h-10 whitespace-nowrap"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <MdOutlineManageSearch className="mr-2 text-base text-gray-700 dark:text-gray-300" />
-                    <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
-                      Cases
-                    </span>
-                    {caseDropdownOpen ? (
-                      <AiOutlineUp className="ml-1 text-gray-700 dark:text-gray-300" size={14} />
-                    ) : (
-                      <AiOutlineDown className="ml-1 text-gray-700 dark:text-gray-300" size={14} />
-                    )}
-                  </motion.button>
-
-                  <AnimatePresence>
-                    {caseDropdownOpen && (
-                      <motion.div 
-                        className="absolute left-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Link href="/case" passHref>
-                          <motion.div 
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setCaseDropdownOpen(false)}
-                          >
-                            <FiFileText className="mr-2 text-gray-700 dark:text-gray-300" />
-                            Overview
-                          </motion.div>
-                        </Link>
-                        <Link href="/case/cause-list" passHref>
-                          <motion.div 
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setCaseDropdownOpen(false)}
-                          >
-                            <FiList className="mr-2 text-gray-700 dark:text-gray-300" />
-                            Cause List
-                          </motion.div>
-                        </Link>
-                        <Link href="/case/current-hearings" passHref>
-                          <motion.div 
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setCaseDropdownOpen(false)}
-                          >
-                            <FiHeadphones className="mr-2 text-gray-700 dark:text-gray-300" />
-                            Hearings
-                          </motion.div>
-                        </Link>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                <NavLink href="/services" icon={FiSettings}>Services</NavLink>
-                <NavLink href="/StartDispute" icon={FiShield}>Dispute</NavLink>
-                <NavLink href="/contact" icon={FiMail}>Contact</NavLink>
-                
-                {/* <NavLink href={isLoggedIn ? "/conference" : "/login"} onClick={handleConferenceClick} icon={FiVideo}>Conference</NavLink> */}
-              </div>
+                 </div>
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
