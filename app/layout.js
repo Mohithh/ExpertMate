@@ -1,32 +1,37 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Script from "next/script";
+import './globals.css';
+import localFont from 'next/font/local';
+import Script from 'next/script';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const geistSans = localFont({
+  src: './fonts/Geist-Regular.woff2',
+  variable: '--font-geist-sans',
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const geistMono = localFont({
+  src: './fonts/GeistMono-Regular.woff2',
+  variable: '--font-geist-mono',
+  display: 'swap',
 });
 
 export const metadata = {
-  title: "SettleSmart Solutions",
-  description: "Legal Dispute Resolution",
+  title: 'SettleSmart Solutions',
+  description: 'Legal Dispute Resolution',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        
-        {children }
-        <Script src="//code.tidio.co/8jpdhmhglwc0sfka7q6kltnmeazvydai.js" strategy="lazyOnload" />
+      <body className="antialiased">
+        {children}
+        <Script
+          src="//code.tidio.co/8jpdhmhglwc0sfka7q6kltnmeazvydai.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
-  );}
+  );
+}
