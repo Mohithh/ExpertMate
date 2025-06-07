@@ -1,6 +1,9 @@
 import './globals.css';
 import localFont from 'next/font/local';
 import Script from 'next/script';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+
 
 const geistSans = localFont({
   src: './fonts/Geist-Regular.woff2',
