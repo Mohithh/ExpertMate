@@ -12,7 +12,7 @@ const Page = () => {
     <div>
       <Header />  
       <Hero />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
