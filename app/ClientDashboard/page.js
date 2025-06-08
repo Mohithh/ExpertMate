@@ -1,526 +1,1063 @@
-"use client";
-import { useState, useEffect } from "react";
-import { 
-  AiOutlineMenu, 
-  AiOutlineClose, 
-  AiOutlineSun, 
-  AiOutlineMoon, 
-  AiOutlineDown, 
-  AiOutlineUp,
-  AiOutlineHome,
-  AiOutlineVideoCamera,
-  AiOutlineUser,
-  AiOutlineDashboard
-} from "react-icons/ai";
-import { 
-  FiUser, 
-  FiLogIn, 
-  FiLogOut,
-  FiUsers,
-  FiFileText,
-  FiList,
-  FiHeadphones,
-  FiSettings,
-  FiShield,
-  FiMail,
-  FiVideo
-} from "react-icons/fi";
-import { MdOutlineManageSearch } from "react-icons/md";
-import Link from "next/link";
+"use client"
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
-import Image from "next/image";
-import Logo from "@/app/assets/hello_logo.png";
-import { motion, AnimatePresence } from "framer-motion";
-import ClientDashboard from "@/app/ClientDashboard/page"
 
-const Header = () => {
+import Link from 'next/link';
+import Header from '../header/page';
+
+
+const page = () => {
+
+  // blocked,urgent,completed,rejected,accepted,pending   
+
   const router = useRouter();
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
-  const [userType, setUserType] = useState("");
-  const [caseDropdownOpen, setCaseDropdownOpen] = useState(false);
-  const [mobileCaseDropdownOpen, setMobileCaseDropdownOpen] = useState(false);
-  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [useremail, setuseremail] = useState("")
+  const [loading, setloading] = useState(true)
+
+  const [allrequestbox, setallrequestbox] = useState(false)
+  const [pendingrequestbox, setpendingrequestbox] = useState(false)
+  const [acceptedrequestbox, setacceptedrequestbox] = useState(false)
+  const [rejectedrequestbox, setrejectedrequestbox] = useState(false)
+  const [completedrequestbox, setcompletedrequestbox] = useState(false)
+  const [urgentrequestbox, seturgentrequestbox] = useState(false)
+  const [blockedrequestbox, setblockedrequestbox] = useState(false)
+
+  const [allrequest, setallrequest] = useState()
+  const [pendingrequest, setpendingrequest] = useState()
+  const [pendingloading, setpendingloading] = useState(true)
+
+  const [acceptedrequest, setacceptedrequest] = useState()
+  const [acceptedloading, setacceptedloading] = useState(true)
+
+
+  const [rejectedrequest, setrejectedrequest] = useState()
+  const [rejectedloading, setrejectedloading] = useState(true)
+
+  const [completedrequest, setcompletedrequest] = useState()
+  const [completedloading, setcompletedloading] = useState(true)
+
+  const [urgentrequest, seturgentrequest] = useState()
+  const [urgentloading, seturgentloading] = useState(true)
+
+  const [blockedrequest, setblockedrequest] = useState()
+  const [blockedloading, setblockedloading] = useState(true)
+
+
+
+
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const facultyToken = localStorage.getItem("facultytoken");
-    const email = localStorage.getItem("userEmail");
-    
-    setIsLoggedIn(!!token || !!facultyToken);
-    
-    if (email) {
-      setUserEmail(email);
-    }
-    
-    if (token) {
-      setUserType("client");
-    } else if (facultyToken) {
-      setUserType("faculty");
-    }
-    
-    setMounted(true);
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/login");
+        return;
+      }
 
-    const savedTheme = localStorage.getItem('theme');
-    const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    setDarkMode(isDark);
-    document.documentElement.classList.toggle('dark', isDark);
+      try {
+        // First, fetch user email
+        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            token: token,
+          },
+        });
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+        const res = await response.json();
+
+        if (!res.success) {
+          localStorage.removeItem("token");
+          router.push("/login");
+          return;
+        }
+
+        // Set email and continue
+        setuseremail(res.email);
+        setloading(false);
+
+        // Then fetch all requests using the fetched email
+        const allRes = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/fetchAllRequest`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userEmail: res.email }),
+        });
+
+        const data = await allRes.json();
+
+        if (allRes.ok) {
+          setallrequest(data);
+        } else {
+          alert("Failed to fetch requests");
+        }
+      } catch (err) {
+        console.error("Error during fetch:", err);
+        router.push("/login");
+      }
+
+
+
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    fetchData();
   }, []);
 
-  const toggleDarkMode = () => {
-    if (!mounted) return;
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    localStorage.setItem('theme', newMode ? 'dark' : 'light');
-    document.documentElement.classList.toggle('dark', newMode);
-  };
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-    document.body.style.overflow = menuOpen ? '' : 'hidden';
-  };
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-    document.body.style.overflow = '';
-  };
 
-  const toggleCaseDropdown = (e) => {
-    e.stopPropagation();
-    setCaseDropdownOpen(!caseDropdownOpen);
-  };
+  const allrequestclick = () => {
+    setallrequestbox(true)
+    setpendingrequestbox(false)
+    setacceptedrequestbox(false)
+    setrejectedrequestbox(false)
+    setcompletedrequestbox(false)
+    seturgentrequestbox(false)
+    setblockedrequestbox(false)
+  }
+  const pendingrequestclick = async () => {
+    setallrequestbox(false)
+    setpendingrequestbox(true)
+    setacceptedrequestbox(false)
+    setrejectedrequestbox(false)
+    setcompletedrequestbox(false)
+    seturgentrequestbox(false)
+    setblockedrequestbox(false)
+    console.log("woking")
 
-  const toggleMobileCaseDropdown = (e) => {
-    e.stopPropagation();
-    setMobileCaseDropdownOpen(!mobileCaseDropdownOpen);
-  };
 
-  const toggleProfileDropdown = (e) => {
-    e.stopPropagation();
-    setProfileDropdownOpen(!profileDropdownOpen);
-  };
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail: useremail, status: "Pending" }),
+      });
 
-  // const handleConferenceClick = (e) => {
-  //   e.preventDefault();
-  //   if (!isLoggedIn) {
-  //     router.push('/login');
-  //     return;
-  //   }
-  //   router.push('/conference');
-  // };
+      const data = await response.json();
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("facultytoken");
-    localStorage.removeItem("userEmail");
-    setIsLoggedIn(false);
-    setUserEmail("");
-    setUserType("");
-    setProfileDropdownOpen(false);
-    router.push('/login');
-  };
+      if (response.ok) {
+        setpendingloading(false)
 
-  useEffect(() => {
-    const handleClickOutside = () => {
-      if (caseDropdownOpen) setCaseDropdownOpen(false);
-      if (profileDropdownOpen) setProfileDropdownOpen(false);
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [caseDropdownOpen, profileDropdownOpen]);
+        setpendingrequest(data);
+      } else {
+        alert("Failed to fetch requests");
+      }
 
-  const NavLink = ({ href, children, onClick, icon: Icon }) => (
-    <Link href={href} passHref onClick={onClick}>
-      <motion.div 
-        className="relative group whitespace-nowrap"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <div className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 h-10">
-          {Icon && (
-            <motion.span 
-              className="mr-2 text-base text-gray-700 dark:text-gray-300 opacity-70 group-hover:opacity-100 transition-opacity"
-              whileHover={{ rotate: 10 }}
-            >
-              <Icon />
-            </motion.span>
-          )}
-          <span className="text-gray-700 dark:text-gray-300 font-medium group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors text-sm">
-            {children}
-          </span>
-        </div>
-        <motion.span 
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-amber-500"
-          initial={{ width: 0 }}
-          whileHover={{ width: '80%' }}
-          transition={{ duration: 0.3 }}
-        />
-      </motion.div>
-    </Link>
-  );
 
-  const MobileNavLink = ({ href, children, onClick, icon: Icon }) => (
-    <Link href={href} passHref onClick={onClick}>
-      <motion.div 
-        className="flex items-center text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 w-full whitespace-nowrap"
-        whileHover={{ x: 5 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        {Icon && <Icon className="mr-3 text-lg text-gray-800 dark:text-gray-200" />}
-        <span>{children}</span>
-      </motion.div>
-    </Link>
-  );
+    } catch (error) {
+
+    }
+
+  }
+  const acceptedrequestclick = async () => {
+    setallrequestbox(false)
+    setpendingrequestbox(false)
+    setacceptedrequestbox(true)
+    setrejectedrequestbox(false)
+    setcompletedrequestbox(false)
+    seturgentrequestbox(false)
+    setblockedrequestbox(false)
+
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail: useremail, status: "Accepted" }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setacceptedloading(false)
+        setacceptedrequest(data);
+      } else {
+        alert("Failed to fetch requests");
+      }
+
+
+    } catch (error) {
+
+    }
+
+
+  }
+  const rejectedrequestclick = async () => {
+    setallrequestbox(false)
+    setpendingrequestbox(false)
+    setacceptedrequestbox(false)
+    setrejectedrequestbox(true)
+    setcompletedrequestbox(false)
+    seturgentrequestbox(false)
+    setblockedrequestbox(false)
+
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail: useremail, status: "Rejected" }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        setrejectedloading(false)
+
+        setrejectedrequest(data);
+      } else {
+        alert("Failed to fetch requests");
+      }
+
+
+    } catch (error) {
+
+    }
+
+
+  }
+  const completedrequestclick = async () => {
+    setallrequestbox(false)
+    setpendingrequestbox(false)
+    setacceptedrequestbox(false)
+    setrejectedrequestbox(false)
+    setcompletedrequestbox(true)
+    seturgentrequestbox(false)
+    setblockedrequestbox(false)
+
+
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail: useremail, status: "Completed" }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        setcompletedloading(false)
+
+        setcompletedrequest(data);
+      } else {
+        alert("Failed to fetch requests");
+      }
+
+
+    } catch (error) {
+
+    }
+
+  }
+  const urgentrequestclick = async () => {
+    setallrequestbox(false)
+    setpendingrequestbox(false)
+    setacceptedrequestbox(false)
+    setrejectedrequestbox(false)
+    setcompletedrequestbox(false)
+    seturgentrequestbox(true)
+    setblockedrequestbox(false)
+
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail: useremail, status: "Urgent" }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        seturgentloading(false)
+
+        seturgentrequest(data);
+      } else {
+        alert("Failed to fetch requests");
+      }
+
+
+    } catch (error) {
+
+    }
+
+
+  }
+  const blockedrequestclick = async () => {
+    setallrequestbox(false)
+    setpendingrequestbox(false)
+    setacceptedrequestbox(false)
+    setrejectedrequestbox(false)
+    setcompletedrequestbox(false)
+    seturgentrequestbox(false)
+    setblockedrequestbox(true)
+    console.log("working")
+
+
+
+
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail: useremail, status: "Blocked" }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setblockedloading(false)
+
+        setblockedrequest(data);
+      } else {
+        alert("Failed to fetch requests");
+      }
+
+
+    } catch (error) {
+
+    }
+  }
+
 
   return (
-    <>
-      <motion.header 
-        className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, type: 'spring' }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" passHref>
-              <motion.div 
-                className="flex-shrink-0 w-40"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="relative w-full h-12">
-                  <Image
-                    src={Logo}
-                    alt="Company Logo"
-                    fill
-                    className="object-contain object-left"
-                    priority
-                  />
-                </div>
-              </motion.div>
-            </Link>
+    <div>
+      <Header />
+      {loading && <div>
 
-            <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
-              <div className="flex items-center space-x-2">
-                <NavLink href="/" icon={AiOutlineHome}>Home</NavLink>
-                 </div>
-            </nav>
+        laoding
 
-            <div className="hidden md:flex items-center space-x-4">
-              <motion.button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {darkMode ? (
-                  <AiOutlineSun size={18} className="text-gray-300" />
-                ) : (
-                  <AiOutlineMoon size={18} className="text-gray-700" />
-                )}
-              </motion.button>
+      </div>}
 
-              {!isLoggedIn ? (
-                <>
-                  <Link href="/login" passHref>
-                    <motion.button 
-                      className="flex items-center px-4 py-2 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50/80 dark:hover:bg-gray-800/90 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <FiLogIn className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
-                      <span>Login</span>
-                      <svg 
-                        className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M5 12h14m-7-7l7 7-7 7"
-                        />
-                      </svg>
-                    </motion.button>
-                  </Link>
-                  <Link href="/signup" passHref>
-                    <motion.button 
-                      className="flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white font-medium hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-700 dark:hover:to-amber-800 shadow-sm hover:shadow-amber-200/50 dark:hover:shadow-amber-700/30 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <FiUser className="mr-2" size={16} />
-                      <span>Sign Up</span>
-                      <svg 
-                        className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 4v16m8-8H4"
-                        />
-                      </svg>
-                    </motion.button>
-                  </Link>
-                </>
-              ) : (
-                <div className="relative">
-                  <motion.button
-                    onClick={toggleProfileDropdown}
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-lg" />
-                    <span className="sr-only">User profile</span>
-                  </motion.button>
 
-                  <AnimatePresence>
-                    {profileDropdownOpen && (
-                      <motion.div 
-                        className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                          <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                            {userEmail || "Loading..."}
-                          </p>
-                          <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
-                            {userType} account
-                          </p>
-                        </div>
-                        <Link href={userType === "faculty" ? "/faculty-dashboard" : "/ClientDashboard"} passHref>
-                          <motion.div 
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setProfileDropdownOpen(false)}
-                          >
-                            <AiOutlineDashboard className="mr-2 text-gray-700 dark:text-gray-300" />
-                            Dashboard
-                          </motion.div>
-                        </Link>
-                        <motion.button
-                          onClick={logout}
-                          className="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                          whileHover={{ x: 5 }}
-                        >
-                          <FiLogOut className="mr-2 text-gray-700 dark:text-gray-300" />
-                          Sign out
-                        </motion.button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              )}
+      {!loading && <div>
+
+
+        <div className="min-h-screen bg-[#f9f7f6] p-8">
+          <h1 className="text-4xl font-extrabold text-left text-gray-800 mb-10">
+            🧑‍💻 Welcome, User!
+          </h1>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div
+              onClick={allrequestclick}
+              className="relative bg-gradient-to-br from-[#ffffff] to-[#f0f0f0] border-l-4 border-purple-500 rounded-3xl p-6 shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+            >
+              <h2 className="text-xl font-bold text-purple-700 mb-2">All Requests</h2>
+              <p className="text-sm text-gray-500">View everything in one place</p>
             </div>
 
-            <motion.button
-              className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-              aria-expanded={menuOpen}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+            <div
+              onClick={pendingrequestclick}
+              className="relative bg-gradient-to-br from-[#ffffff] to-[#f8f6e7] border-l-4 border-yellow-500 rounded-3xl p-6 shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
             >
-              {menuOpen ? (
-                <AiOutlineClose size={22} className="text-amber-600 dark:text-amber-400" />
-              ) : (
-                <AiOutlineMenu size={22} className="text-gray-700 dark:text-gray-300" />
-              )}
-            </motion.button>
+              <h2 className="text-xl font-bold text-yellow-600 mb-2">Pending Requests</h2>
+              <p className="text-sm text-gray-500">Awaiting confirmation</p>
+            </div>
+
+            <div
+              onClick={acceptedrequestclick}
+              className="relative bg-gradient-to-br from-[#ffffff] to-[#e6f9f0] border-l-4 border-green-500 rounded-3xl p-6 shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+            >
+              <h2 className="text-xl font-bold text-green-600 mb-2">Accepted Requests</h2>
+              <p className="text-sm text-gray-500">Requests that got approved</p>
+            </div>
+
+            <div
+              onClick={rejectedrequestclick}
+              className="relative bg-gradient-to-br from-[#ffffff] to-[#fbeaea] border-l-4 border-red-400 rounded-3xl p-6 shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+            >
+              <h2 className="text-xl font-bold text-red-500 mb-2">Rejected Requests</h2>
+              <p className="text-sm text-gray-500">Requests that were declined</p>
+            </div>
+
+            <div
+              onClick={completedrequestclick}
+              className="relative bg-gradient-to-br from-[#ffffff] to-[#e7f1fe] border-l-4 border-blue-400 rounded-3xl p-6 shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+            >
+              <h2 className="text-xl font-bold text-blue-600 mb-2">Completed Requests</h2>
+              <p className="text-sm text-gray-500">Everything successfully done</p>
+            </div>
+
+            <div
+              onClick={urgentrequestclick}
+              className="relative bg-gradient-to-br from-[#ffffff] to-[#fde8f2] border-l-4 border-pink-400 rounded-3xl p-6 shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+            >
+              <h2 className="text-xl font-bold text-pink-600 mb-2">Urgent Requests</h2>
+              <p className="text-sm text-gray-500">Handle with high priority</p>
+            </div>
+
+            <div
+              onClick={blockedrequestclick}
+              className="relative bg-gradient-to-br from-[#ffffff] to-[#eaeaea] border-l-4 border-gray-400 rounded-3xl p-6 shadow-xl hover:-translate-y-2 hover:shadow-2xl transition-transform duration-300 cursor-pointer"
+            >
+              <h2 className="text-xl font-bold text-gray-600 mb-2">Blocked</h2>
+              <p className="text-sm text-gray-500">Restricted access requests</p>
+            </div>
           </div>
-        </div>
 
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              className="md:hidden fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg"
-              style={{
-                top: '4rem',
-                height: 'calc(100vh - 4rem)',
-              }}
-              initial={{ opacity: 0, y: '-100%' }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: '-100%' }}
-              transition={{ type: 'spring', damping: 25 }}
-            >
-              <div className="flex flex-col items-center justify-start w-full h-full overflow-y-auto py-4">
-                {isLoggedIn && (
-                  <div className="flex items-center justify-center w-full px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                    <div className="flex items-center">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 mr-3">
-                        <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-xl" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {userEmail || "Loading..."}
-                        </p>
-                        <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
-                          {userType} account
-                        </p>
-                      </div>
-                    </div>
+
+
+
+
+          {allrequestbox && (
+            <div>
+              <h2 className="text-2xl font-bold text-purple-800 mb-4 mt-6 text-center">
+                All Requests Overview
+              </h2>
+
+              {allrequest?.data?.length > 0 ? (
+                <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200">
+                  <table className="min-w-full text-sm text-left text-gray-700">
+                    <thead className="bg-purple-700 text-white">
+                      <tr>
+                        <th className="px-4 py-5">Name</th>
+                        <th className="px-4 py-5">Category</th>
+                        <th className="px-4 py-5">Subject</th>
+                        <th className="px-4 py-5">Status</th>
+                        <th className="px-4 py-5">Main Category</th>
+                        <th className="px-4 py-5">Urgency</th>
+                        <th className="px-4 py-5">Created At</th>
+                        <th className="px-4 py-5">Details</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white">
+                      {allrequest.data.map((item, index) => {
+                        const createdAt = new Date(item.createdAt);
+                        const date = createdAt.toLocaleDateString("en-GB");
+                        const time = createdAt.toLocaleTimeString("en-US", {
+                          hour: "numeric",
+                          minute: "2-digit",
+                          hour12: true,
+                        });
+                        const formattedDate = `${date} time ${time}`;
+                        const status = item.status.toLowerCase();
+
+                        const statusColor = {
+                          pending: "text-yellow-600",
+                          accepted: "text-green-600",
+                          rejected: "text-red-500",
+                          completed: "text-blue-600",
+                          blocked: "text-red-700 font-bold",
+                          urgent: "text-orange-600",
+                        };
+
+                        return (
+                          <tr
+                            key={item._id}
+                            className={index % 2 === 0 ? "bg-gray-50 hover:bg-gray-200" : "bg-white hover:bg-gray-200"}
+                          >
+                            <td className="px-4 py-4">{item.name}</td>
+                            <td className="px-4 py-4">{item.category}</td>
+                            <td className="px-4 py-5">{item.subject}</td>
+                            <td className={`px-4 py-2 capitalize ${statusColor[status] || "text-gray-700"}`}>
+                              {status}
+                            </td>
+                            <td className="px-4 py-2">{item.mainCategory}</td>
+                            <td
+                              className={`px-4 py-2 font-semibold ${item.urgency === "High"
+                                  ? "text-red-600"
+                                  : item.urgency === "Medium"
+                                    ? "text-orange-500"
+                                    : "text-green-600"
+                                }`}
+                            >
+                              {item.urgency}
+                            </td>
+                            <td className="px-4 py-2 text-blue-600">{formattedDate}</td>
+                            <td className="px-4 py-2 break-all text-purple-700 font-medium">
+                              <Link
+                                href={`dashboarddetails/${item._id}`}
+                                className="hover:underline"
+                              >
+                                Update
+                              </Link>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p className="text-gray-500 mt-4">No requests found.</p>
+              )}
+            </div>
+          )}
+
+
+
+
+
+
+
+
+          {/* const [pendingrequest, setpendingrequest] = useState()
+        const [pendingloading, setpendingloading] = useState(true) */}
+
+
+          {pendingrequestbox && <div>
+
+
+            {!pendingloading && (
+              <div>
+
+
+                <h2 className="text-center text-2xl font-semibold mt-6 mb-3 text-yellow-700">Pending Request List
+                </h2>
+
+                {pendingrequest?.data && pendingrequest.data.length > 0 ? (
+                  <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200">
+                    <table className="min-w-full text-sm text-left text-gray-700">
+                      <thead className="bg-yellow-700 text-white">
+                        <tr>
+                          <th className="px-4 py-5">Name</th>
+                          <th className="px-4 py-3">Category</th>
+                          <th className="px-4 py-3">Subject</th>
+                          <th className="px-4 py-3">Status</th>
+                          <th className="px-4 py-3">Main Category</th>
+                          <th className="px-4 py-3">Urgency</th>
+                          <th className="px-4 py-3">Created At</th>
+                          <th className="px-4 py-3">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white">
+                        {pendingrequest.data.map((item, index) => {
+                          const createdAt = new Date(item.createdAt);
+                          const date = createdAt.toLocaleDateString("en-GB");
+                          const time = createdAt.toLocaleTimeString("en-US", {
+                            hour: "numeric",
+                            minute: "2-digit",
+                            hour12: true,
+                          });
+                          const formattedDate = `${date} time ${time}`;
+
+                          // Format status to lowercase
+                          const status = item.status?.toLowerCase();
+
+                          return (
+                            <tr
+                              key={item._id}
+                              className={index % 2 === 0 ? "bg-gray-50 hover:bg-gray-200" : "bg-white hover:bg-gray-200"}
+                            >
+                              <td className="px-4 py-5">{item.name}</td>
+                              <td className="px-4 py-5">{item.category}</td>
+                              <td className="px-4 py-2">{item.subject}</td>
+                              <td
+                                className={`px-4 py-2 font-medium capitalize ${status === "pending"
+                                    ? "text-yellow-600"
+                                    : status === "blocked"
+                                      ? "text-red-600"
+                                      : status === "urgent"
+                                        ? "text-orange-600"
+                                        : status === "rejected"
+                                          ? "text-pink-600"
+                                          : status === "accepted"
+                                            ? "text-blue-600"
+                                            : status === "completed"
+                                              ? "text-green-600"
+                                              : "text-gray-600"
+                                  }`}
+                              >
+                                {status}
+                              </td>
+                              <td className="px-4 py-2">{item.mainCategory}</td>
+                              <td
+                                className={`px-4 py-2 font-semibold ${item.urgency === "High"
+                                    ? "text-red-600"
+                                    : item.urgency === "Medium"
+                                      ? "text-orange-500"
+                                      : "text-green-600"
+                                  }`}
+                              >
+                                {item.urgency}
+                              </td>
+                              <td className="px-4 py-2 text-blue-600">{formattedDate}</td>
+                              <td className="px-4 py-2 break-all text-purple-700 font-medium">
+                                <Link
+                                  href={`dashboarddetails/${item._id}`}
+                                  className="hover:underline"
+                                >
+                                  Update
+                                </Link>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
-                )}
-
-                <MobileNavLink href="/" onClick={closeMenu} icon={AiOutlineHome}>Home</MobileNavLink>
-                <MobileNavLink href="/lawyer" onClick={closeMenu} icon={FiUsers}>Leadership</MobileNavLink>
-
-                <div className="w-full">
-                  <motion.button 
-                    onClick={toggleMobileCaseDropdown}
-                    className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
-                    whileHover={{ x: 5 }}
-                  >
-                    <MdOutlineManageSearch className="mr-3 text-lg text-gray-800 dark:text-gray-200" />
-                    <span>Case Management</span>
-                    {mobileCaseDropdownOpen ? (
-                      <AiOutlineUp className="ml-auto text-gray-800 dark:text-gray-200" size={14} />
-                    ) : (
-                      <AiOutlineDown className="ml-auto text-gray-800 dark:text-gray-200" size={14} />
-                    )}
-                  </motion.button>
-
-                  <AnimatePresence>
-                    {mobileCaseDropdownOpen && (
-                      <motion.div 
-                        className="w-full bg-gray-50 dark:bg-gray-800/50"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <MobileNavLink href="/case" onClick={closeMenu} icon={FiFileText}>Overview</MobileNavLink>
-                        <MobileNavLink href="/case/cause-list" onClick={closeMenu} icon={FiList}>Cause List</MobileNavLink>
-                        <MobileNavLink href="/case/current-hearings" onClick={closeMenu} icon={FiHeadphones}>Hearings</MobileNavLink>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                <MobileNavLink href="/services" onClick={closeMenu} icon={FiSettings}>Services</MobileNavLink>
-                <MobileNavLink href="/StartDispute" onClick={closeMenu} icon={FiShield}>Dispute</MobileNavLink>
-                <MobileNavLink href="/contact" onClick={closeMenu} icon={FiMail}>Contact</MobileNavLink>
-                {/* <MobileNavLink href={isLoggedIn ? "/conference" : "/login"} onClick={(e) => {
-                  if (!isLoggedIn) {
-                    e.preventDefault();
-                    router.push('/login');
-                    closeMenu();
-                  }
-                }} icon={FiVideo}>Conference</MobileNavLink> */}
-
-                {isLoggedIn && (
-                  <>
-                    <MobileNavLink 
-                      href={userType === "faculty" ? "/faculty-dashboard" : "/ClientDashboard"} 
-                      onClick={closeMenu} 
-                      icon={AiOutlineDashboard}
-                    >
-                      Dashboard
-                    </MobileNavLink>
-                    <motion.button 
-                      onClick={() => {
-                        logout();
-                        closeMenu();
-                      }} 
-                      className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
-                      whileHover={{ x: 5 }}
-                    >
-                      <FiLogOut className="mr-3 text-lg text-gray-800 dark:text-gray-200" />
-                      <span>Sign Out</span>
-                    </motion.button>
-                  </>
-                )}
-
-                <div className="flex items-center mt-4">
-                  <motion.button
-                    onClick={toggleDarkMode}
-                    className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                    aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    {darkMode ? (
-                      <AiOutlineSun size={22} className="text-gray-300" />
-                    ) : (
-                      <AiOutlineMoon size={22} className="text-gray-700" />
-                    )}
-                  </motion.button>
-                </div>
-
-                {!isLoggedIn && (
-                  <div className="flex flex-col space-y-3 w-full max-w-xs mt-4 px-4">
-                    <Link href="/login" className="w-full" onClick={closeMenu} passHref>
-                      <motion.button 
-                        className="flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50 dark:hover:bg-gray-800 transition-colors whitespace-nowrap relative overflow-hidden group"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <FiLogIn className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
-                        <span>Login</span>
-                        <svg 
-                          className="absolute -right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
-                          width="16" 
-                          height="16" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M5 12h14m-7-7l7 7-7 7"
-                          />
-                        </svg>
-                      </motion.button>
-                    </Link>
-                    <Link href="/signup" className="w-full" onClick={closeMenu} passHref>
-                      <motion.button 
-                        className="flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white font-medium hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-700 dark:hover:to-amber-800 transition-colors whitespace-nowrap relative overflow-hidden group"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <FiUser className="mr-2" size={16} />
-                        <span>Sign Up</span>
-                        <svg 
-                          className="absolute -right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
-                          width="16" 
-                          height="16" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M12 4v16m8-8H4"
-                          />
-                        </svg>
-                      </motion.button>
-                    </Link>
+                ) : (
+                  <div className="text-red-600 mt-4 font-semibold">
+                    No pending requests found in the database.
                   </div>
                 )}
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.header>
+            )}
 
-      <div className="h-16"></div>
-    </>
-  );
-};
-export default Header;
+
+
+          </div>}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          {acceptedrequestbox && <div>
+
+            {acceptedrequestbox && (
+              <div>
+                <h2 className="text-center text-2xl font-semibold mt-6 text-green-700"> Accepted Requests List
+                </h2>
+
+                {acceptedloading ? (
+                  <div className="text-yellow-600 font-medium">Loading accepted requests...</div>
+                ) : (
+                  <div>
+                    {acceptedrequest?.data?.length > 0 ? (
+                      <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200 mt-4">
+                        <table className="min-w-full text-sm text-left text-gray-700">
+                          <thead className="bg-green-700 text-white">
+                            <tr>
+                              <th className="px-4 py-3">Name</th>
+                              <th className="px-4 py-3">Category</th>
+                              <th className="px-4 py-3">Subject</th>
+                              <th className="px-4 py-3">Status</th>
+                              <th className="px-4 py-3">Main Category</th>
+                              <th className="px-4 py-3">Urgency</th>
+                              <th className="px-4 py-3">Created At</th>
+                              <th className="px-4 py-3">Details</th>
+                            </tr>
+                          </thead>
+                          <tbody className="bg-white">
+                            {acceptedrequest.data.map((item, index) => {
+                              const createdAt = new Date(item.createdAt);
+                              const date = createdAt.toLocaleDateString("en-GB");
+                              const time = createdAt.toLocaleTimeString("en-US", {
+                                hour: "numeric",
+                                minute: "2-digit",
+                                hour12: true,
+                              });
+                              const formattedDate = `${date} time ${time}`;
+
+                              // Lowercase status for color logic
+                              const status = item.status.toLowerCase();
+                              const statusColor =
+                                status === "pending"
+                                  ? "text-yellow-600"
+                                  : status === "blocked"
+                                    ? "text-red-600"
+                                    : status === "rejected"
+                                      ? "text-gray-500"
+                                      : status === "urgent"
+                                        ? "text-pink-600"
+                                        : status === "accepted"
+                                          ? "text-green-600"
+                                          : status === "completed"
+                                            ? "text-blue-600"
+                                            : "text-black";
+
+                              return (
+                                <tr key={item._id} className={index % 2 === 0 ? "bg-gray-50 hover:bg-gray-200" : "bg-white hover:bg-gray-200"}>
+                                  <td className="px-4 py-2">{item.name}</td>
+                                  <td className="px-4 py-2">{item.category}</td>
+                                  <td className="px-4 py-2">{item.subject}</td>
+                                  <td className={`px-4 py-2 font-medium capitalize ${statusColor}`}>
+                                    {status}
+                                  </td>
+                                  <td className="px-4 py-2">{item.mainCategory}</td>
+                                  <td
+                                    className={`px-4 py-2 font-semibold ${item.urgency === "High"
+                                        ? "text-red-600"
+                                        : item.urgency === "Medium"
+                                          ? "text-orange-500"
+                                          : "text-green-600"
+                                      }`}
+                                  >
+                                    {item.urgency}
+                                  </td>
+                                  <td className="px-4 py-2 text-blue-600">{formattedDate}</td>
+                                  <td className="px-4 py-2 break-all text-purple-700 font-medium">
+                                    <Link
+                                      href={`dashboarddetails/${item._id}`}
+                                      className="hover:underline"
+                                    >
+                                      Update
+                                    </Link>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 mt-4 font-medium">No accepted requests found.</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+
+
+
+          </div>}
+
+          {rejectedrequestbox && <div>
+
+            {!rejectedloading && (
+              <div>
+                <h2 className="text-center text-2xl font-semibold mt-6 text-red-700"> Rejected Requests List
+                </h2>
+
+                {rejectedrequest?.data && rejectedrequest.data.length > 0 ? (
+                  <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200 mt-4">
+                    <table className="min-w-full text-sm text-left text-gray-700">
+                      <thead className="bg-red-500 text-white">
+                        <tr>
+                          <th className="px-4 py-3">Name</th>
+                          <th className="px-4 py-3">Category</th>
+                          <th className="px-4 py-3">Subject</th>
+                          <th className="px-4 py-3">Status</th>
+                          <th className="px-4 py-3">Main Category</th>
+                          <th className="px-4 py-3">Urgency</th>
+                          <th className="px-4 py-3">Created At</th>
+                          <th className="px-4 py-3">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white">
+                        {rejectedrequest.data.map((item, index) => {
+                          const createdAt = new Date(item.createdAt);
+                          const date = createdAt.toLocaleDateString("en-GB");
+                          const time = createdAt.toLocaleTimeString("en-US", {
+                            hour: "numeric",
+                            minute: "2-digit",
+                            hour12: true,
+                          });
+                          const formattedDate = `${date} time ${time}`;
+
+                          // Normalize status string to lowercase for comparison
+                          const status = item.status.toLowerCase();
+                          const statusColor =
+                            status === "rejected"
+                              ? "text-red-600"
+                              : status === "pending"
+                                ? "text-yellow-600"
+                                : "text-green-600";
+
+                          return (
+                            <tr key={item._id} className={index % 2 === 0 ? "bg-gray-50 hover:bg-gray-200" : "bg-white hover:bg-gray-200"}>
+                              <td className="px-4 py-2">{item.name}</td>
+                              <td className="px-4 py-2">{item.category}</td>
+                              <td className="px-4 py-2">{item.subject}</td>
+                              <td className={`px-4 py-2 font-medium capitalize ${statusColor}`}>
+                                {item.status}
+                              </td>
+                              <td className="px-4 py-2">{item.mainCategory}</td>
+                              <td
+                                className={`px-4 py-2 font-semibold ${item.urgency === "High"
+                                    ? "text-red-600"
+                                    : item.urgency === "Medium"
+                                      ? "text-orange-500"
+                                      : "text-green-600"
+                                  }`}
+                              >
+                                {item.urgency}
+                              </td>
+                              <td className="px-4 py-2 text-blue-600">{formattedDate}</td>
+                              <td className="px-4 py-2 break-all text-purple-700 font-medium">
+                                <Link href={`dashboarddetails/${item._id}`} className="hover:underline">
+                                  Update
+                                </Link>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <p className="text-red-600 mt-4 font-semibold">
+                    No rejected requests found in the database.
+                  </p>
+                )}
+              </div>
+            )}
+
+
+
+          </div>}
+
+          {completedrequestbox && <div>
+
+
+            {!completedloading && (
+              <div>
+                <h2 className="text-center text-2xl font-semibold mt-6 text-green-700"> Completed Requests List
+                </h2>
+
+
+                {completedrequest?.data && completedrequest.data.length > 0 ? (
+                  <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200 mt-4">
+                    <table className="min-w-full text-sm text-left text-gray-700">
+                      <thead className="bg-green-600 text-white">
+                        <tr>
+                          <th className="px-4 py-3">Name</th>
+                          <th className="px-4 py-3">Category</th>
+                          <th className="px-4 py-3">Subject</th>
+                          <th className="px-4 py-3">Status</th>
+                          <th className="px-4 py-3">Main Category</th>
+                          <th className="px-4 py-3">Urgency</th>
+                          <th className="px-4 py-3">Created At</th>
+                          <th className="px-4 py-3">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white">
+                        {completedrequest.data.map((item, index) => {
+                          const createdAt = new Date(item.createdAt);
+                          const date = createdAt.toLocaleDateString("en-GB");
+                          const time = createdAt.toLocaleTimeString("en-US", {
+                            hour: "numeric",
+                            minute: "2-digit",
+                            hour12: true,
+                          });
+                          const formattedDate = `${date} time ${time}`;
+
+                          return (
+                            <tr key={item._id} className={index % 2 === 0 ? "bg-gray-50 hover:bg-gray-200" : "bg-white hover:bg-gray-200"}>
+                              <td className="px-4 py-2">{item.name}</td>
+                              <td className="px-4 py-2">{item.category}</td>
+                              <td className="px-4 py-2">{item.subject}</td>
+                              <td className="px-4 py-2 font-medium text-green-600 capitalize">{item.status}</td>
+                              <td className="px-4 py-2">{item.mainCategory}</td>
+                              <td
+                                className={`px-4 py-2 font-semibold ${item.urgency === "High"
+                                    ? "text-red-600"
+                                    : item.urgency === "Medium"
+                                      ? "text-orange-500"
+                                      : "text-green-600"
+                                  }`}
+                              >
+                                {item.urgency}
+                              </td>
+                              <td className="px-4 py-2 text-blue-600">{formattedDate}</td>
+                              <td className="px-4 py-2 break-all text-purple-700 font-medium">
+                                <Link href={`dashboarddetails/${item._id}`} className="hover:underline">
+                                  Update
+                                </Link>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <p className="text-red-600 mt-4 font-semibold">No completed requests found in the database.</p>
+                )}
+              </div>
+            )}
+
+
+          </div>}
+
+
+
+          {urgentrequestbox && <div>
+
+
+            {!urgentloading && (
+              <div>
+                <h2 className="text-center text-2xl font-semibold mt-6 text-red-700">
+                  Urgent Requests List
+                </h2>
+
+                {urgentrequest?.data && urgentrequest.data.length > 0 ? (
+                  <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200 mt-4">
+                    <table className="min-w-full text-sm text-left text-gray-700">
+                      <thead className="bg-red-700 text-white">
+                        <tr>
+                          <th className="px-4 py-3">Name</th>
+                          <th className="px-4 py-3">Category</th>
+                          <th className="px-4 py-3">Subject</th>
+                          <th className="px-4 py-3">Status</th>
+                          <th className="px-4 py-3">Main Category</th>
+                          <th className="px-4 py-3">Urgency</th>
+                          <th className="px-4 py-3">Created At</th>
+                          <th className="px-4 py-3">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white">
+                        {urgentrequest.data.map((item, index) => {
+                          const createdAt = new Date(item.createdAt);
+                          const date = createdAt.toLocaleDateString("en-GB");
+                          const time = createdAt.toLocaleTimeString("en-US", {
+                            hour: "numeric",
+                            minute: "2-digit",
+                            hour12: true,
+                          });
+                          const formattedDate = `${date} time ${time}`;
+
+                          // Normalize status for color coding
+                          const status = item.status.toLowerCase();
+                          const statusColor =
+                            status === "pending"
+                              ? "text-yellow-600"
+                              : status === "blocked"
+                                ? "text-red-600"
+                                : "text-green-600";
+
+                          return (
+                            <tr key={item._id} className={index % 2 === 0 ? "bg-gray-50 hover:bg-gray-200" : "bg-white hover:bg-gray-200"}>
+                              <td className="px-4 py-2">{item.name}</td>
+                              <td className="px-4 py-2">{item.category}</td>
+                              <td className="px-4 py-2">{item.subject}</td>
+                              <td className={`px-4 py-2 font-medium capitalize ${statusColor}`}>{item.status}</td>
+                              <td className="px-4 py-2">{item.mainCategory}</td>
+                              <td className="px-4 py-2 font-semibold text-red-600">{item.urgency}</td>
+                              <td className="px-4 py-2 text-blue-600">{formattedDate}</td>
+                              <td className="px-4 py-2 break-all text-purple-700 font-medium">
+                                <Link href={`dashboarddetails/${item._id}`} className="hover:underline">
+                                  Update
+                                </Link>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <p className="text-red-600 mt-4 font-semibold">No urgent requests found in the database.</p>
+                )}
+              </div>
+            )}
+
+          </div>}
+
+
+
+          {blockedrequestbox && <div>
+
+
+            {!blockedloading && (
+              <div>
+                <h2 className="text-center text-2xl font-semibold mt-6">
+                  Blocked Requests Overview
+                </h2>
+                {blockedrequest?.data && blockedrequest.data.length > 0 ? (
+                  <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200 mt-4">
+                    <table className="min-w-full text-sm text-left text-gray-700">
+                      <thead className="bg-black text-white ">
+                        <tr>
+                          <th className="px-4 py-3">Name</th>
+                          <th className="px-4 py-3">Category</th>
+                          <th className="px-4 py-3">Subject</th>
+                          <th className="px-4 py-3">Status</th>
+                          <th className="px-4 py-3">Main Category</th>
+                          <th className="px-4 py-3">Urgency</th>
+                          <th className="px-4 py-3">Created At</th>
+                          <th className="px-4 py-3">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white ">
+                        {blockedrequest.data.map((item, index) => {
+                          const createdAt = new Date(item.createdAt);
+                          const date = createdAt.toLocaleDateString("en-GB");
+                          const time = createdAt.toLocaleTimeString("en-US", {
+                            hour: "numeric",
+                            minute: "2-digit",
+                            hour12: true,
+                          });
+                          const formattedDate = `${date} time ${time}`;
+
+                          return (
+                            <tr
+                              key={item._id}
+                              className={index % 2 === 0 ? "bg-gray-50 hover:bg-gray-200" : "bg-white hover:bg-gray-200"}
+                            >
+                              <td className="px-4 py-2">{item.name}</td>
+                              <td className="px-4 py-2">{item.category}</td>
+                              <td className="px-4 py-2">{item.subject}</td>
+                              <td className="px-4 py-2 font-medium text-red-600">
+                                {item.status}
+                              </td>
+                              <td className="px-4 py-2">{item.mainCategory}</td>
+                              <td
+                                className={`px-4 py-2 font-semibold ${item.urgency === "High"
+                                    ? "text-red-600"
+                                    : item.urgency === "Medium"
+                                      ? "text-orange-500"
+                                      : "text-green-600"
+                                  }`}
+                              >
+                                {item.urgency}
+                              </td>
+                              <td className="px-4 py-2 text-blue-600">{formattedDate}</td>
+                              <td className="px-4 py-2 break-all text-purple-700 font-medium">
+                                <Link
+                                  href={`dashboarddetails/${item._id}`}
+                                  className="hover:underline"
+                                >
+                                  Update
+                                </Link>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="text-red-600 mt-4 font-semibold">
+                    No blocked requests found in the database.
+                  </div>
+                )}
+              </div>
+            )}
+
+
+          </div>}
+
+
+        </div>
+
+
+      </div>}
+
+
+    </div>
+  )
+}
+
+export default page

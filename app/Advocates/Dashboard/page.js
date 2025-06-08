@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import LawyerHeader from '@/app/Advocates/LawyerHeader/page'
+import LawyerHeader from '@/app/LawyerHeader/page'
 
 
 const page = () => {

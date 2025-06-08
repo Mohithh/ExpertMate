@@ -6,7 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { format } from 'date-fns';
-import LawyerHeader from '@/app/Advocates/LawyerHeader/page'
+import LawyerHeader from '@/app/LawyerHeader/page'
 
 
 const CalendarPage = () => {

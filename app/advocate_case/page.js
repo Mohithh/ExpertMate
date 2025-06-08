@@ -9,7 +9,7 @@ import {
   FaBalanceScale,
   FaBell,
 } from "react-icons/fa";
-import LawyerHeader from '@/app/Advocates/LawyerHeader/page'
+import LawyerHeader from '@/app/LawyerHeader/page'
 
 const defaultCases = [
   {

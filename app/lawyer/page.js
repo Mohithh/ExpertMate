@@ -6,29 +6,39 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Header from "../header/page";
-// import Footer from "../footer/page";
+import { FaRegWindowClose } from "react-icons/fa";
 
 // Icons
 import { 
   Linkedin, Phone, Mail, MapPin, Briefcase, Scale, GraduationCap, 
   UserCircle, ChevronLeft, ChevronRight, Gavel, Handshake, Landmark,
-  Award, BookOpen, Layers, FileText, Shield, TrendingUp, Moon, Sun 
+  Award, BookOpen, Layers, FileText, Shield, TrendingUp, Moon, Sun,
+  Send
 } from 'lucide-react';
 
 // Team Images
 import Amit from "@/app/assets/amit.png";
 import Rudra from "@/app/assets/rudra1.jpeg";
 import Harsha from "@/app/assets/harsha11.jpeg";
-// import Pankaj from "@/app/assets/Pankaj11.jpeg";
 import Anand from "@/app/assets/anand1.jpeg";
 import Nageshwar from "@/app/assets/nages.jpeg";
 import Bhatti from "@/app/assets/BhattiAman.jpg";
-
 
 const TeamPage = () => {
   const [activeTab, setActiveTab] = useState("management");
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [requestbox, setrequestbox] = useState(false);
+  const [mainCategory, setMainCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
+  const [subject, setsubject] = useState("");
+  const [category, setcategory] = useState("");
+  const [furgency, setfurgency] = useState("Low");
+  const [finalcatogery, setfinalcatogery] = useState("Mentorship");
+  const [name, setname] = useState("");
+  const [expectedResponseDate, setexpectedResponseDate] = useState("");
+  const [useremail, setuseremail] = useState("");
+  const [selectedMember, setSelectedMember] = useState(null);
 
   const tabs = [
     { id: "management", name: "Management", icon: <UserCircle size={18} /> },
@@ -36,6 +46,30 @@ const TeamPage = () => {
     { id: "board", name: "Board", icon: <Landmark size={18} /> }
   ];
 
+  // Request form constants
+  const urgency = {
+    Low: "Low",
+    Medium: "Medium",
+    High: "High",
+  };
+
+  const categories = {
+    mentorship: "Mentorship",
+    internship: "Internship",
+    job: "Job",
+    project: "Project",
+    research: "Research",
+    event: "Event",
+    other: "Other"
+  };
+
+  const professions = {
+    doctor: { cardiologist: 'Cardiologist', dermatologist: 'Dermatologist', pediatrician: 'Pediatrician' },
+    engineer: { software: 'Software Engineer', civil: 'Civil Engineer', mechanical: 'Mechanical Engineer' },
+    teacher: { math: 'Math Teacher', science: 'Science Teacher', english: 'English Teacher' },
+    lawyer: { criminal: 'Criminal Lawyer', corporate: 'Corporate Lawyer', family: 'Family Lawyer' },
+    artist: { painter: 'Painter', musician: 'Musician', dancer: 'Dancer' }
+  };
 
   const teamData = {
     management: [
@@ -122,27 +156,6 @@ const TeamPage = () => {
         linkedin: "https://www.linkedin.com/in/amit-sharma-ab33b5107/",
         description: "Tax litigation specialist with a razor-sharp understanding of fiscal regulations. Known for his landmark victories in complex tax disputes, Amit brings strategic depth to our commercial ODR practice. His dual expertise in corporate law and taxation creates unique synergies for SettleSmart's high-value dispute clients."
       },
-      // {
-      //   id: 2,
-      //   name: "Pankaj Rishi Krishnan",
-      //   title: "Board of Directors & Head of ODR",
-      //   subtitle: "Civil, Matrimonial, and Property Disputes",
-      //   image: Pankaj,
-      //   experience: "Supreme Court of India, Delhi HC, Punjab & Haryana HC, NGT, NCLAT, NCDRC & AFT",
-      //   education: "B.S., M.S., LL.B., PGD in ADR, Diploma in Constitutional Law (DCL), and Intellectual Property Rights (DIPR)",
-      //   role: "Civil Litigation, Matrimonial Disputes, Property Matters, Criminal Law",
-      //   specializations: [
-      //     { icon: <Scale size={16} />, name: "Civil Litigation" },
-      //     { icon: <BookOpen size={16} />, name: "Family Law" },
-      //     { icon: <Layers size={16} />, name: "Property Disputes" },
-      //     { icon: <Shield size={16} />, name: "Criminal Defense" }
-      //   ],
-      //   location: "New Delhi",
-      //   phone: "+91 98103 44566",
-      //   email: "pankaj.krishnan@settlesmart.com",
-      //   linkedin: "https://www.linkedin.com/in/pankaj-rishi-krishnan-3a193221b/",
-      //   description: "Supreme Court advocate with an extraordinary track record in civil disputes. Pankaj's multidisciplinary qualifications - spanning law, science, and ADR - enable him to architect innovative solutions for complex family and property disputes. His systematic approach to dispute resolution has become a benchmark in our civil practice."
-      // },
       {
         id: 3,
         name: "Harsha Sharma",
@@ -212,6 +225,107 @@ const TeamPage = () => {
     setDarkMode(!darkMode);
   };
 
+  const changebox = (member) => {
+    setSelectedMember(member);
+    setrequestbox(!requestbox);
+  };
+
+  const handleMainCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setMainCategory(selectedCategory);
+    setSubCategory(""); // Reset sub-category when main category changes
+  };
+
+  const valueonchnage = (e) => {
+    if(e.target.placeholder === "Type subject"){
+      setsubject(e.target.value);
+    }
+    if(e.target.placeholder === "Enter information"){
+      setcategory(e.target.value);
+    }
+    if(e.target.placeholder === "Enter name"){
+      setname(e.target.value);
+    }
+    if(e.target.placeholder === "Expected Response Date"){
+      setexpectedResponseDate(e.target.value);
+    }
+  };
+
+  const seturgency = (e) => {
+    setfurgency(e.target.value);
+  };
+
+  const valueCategory = (e) => {
+    setfinalcatogery(e.target.value);
+  };
+
+  const fetchUserEmail = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+      });
+
+      const res = await response.json();
+      if (res.success) {
+        setuseremail(res.email);
+      } else {
+        console.error("Failed to fetch user email:", res.message);
+      }
+    } catch (err) {
+      console.error("Error fetching user email:", err);
+    }
+  };
+
+  const submitform = async(e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/AddRequest`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          name: name, 
+          userEmail: useremail,
+          facultyEmail: selectedMember.email,
+          category: finalcatogery,
+          subject: subject,
+          message: category,
+          urgency: furgency,
+          expectedResponseDate: expectedResponseDate,
+          status: "Pending",
+          mainCategory: mainCategory,
+          categoryType: subCategory 
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Request sent successfully");
+        setname("");
+        setsubject("");
+        setcategory("");
+        setfurgency("Low");
+        setfinalcatogery("Mentorship");
+        setMainCategory("");
+        setSubCategory("");
+        setrequestbox(false);
+      } else {
+        alert("Failed to send request");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Error: " + error.message);
+    }
+  };
+
   const CustomArrow = ({ direction, onClick }) => (
     <motion.button
       whileHover={{ scale: 1.2, backgroundColor: "rgba(37, 99, 235, 0.2)" }}
@@ -239,7 +353,6 @@ const TeamPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <Header />
 
-
       <button
         onClick={toggleDarkMode}
         className="fixed z-50 bottom-6 right-6 w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
@@ -253,7 +366,6 @@ const TeamPage = () => {
       </button>
 
       <main className="container mx-auto px-4 py-16">
-
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -278,7 +390,6 @@ const TeamPage = () => {
           </p>
         </motion.section>
 
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -300,7 +411,6 @@ const TeamPage = () => {
             ))}
           </div>
         </motion.div>
-
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -330,7 +440,6 @@ const TeamPage = () => {
                     className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
                   >
                     <div className="flex flex-col md:flex-row">
-
                       <div className="w-full md:w-1/3 p-6 flex justify-center bg-gray-50 dark:bg-gray-700">
                         <motion.div
                           whileHover={{ scale: 1.02 }}
@@ -352,7 +461,6 @@ const TeamPage = () => {
                         </motion.div>
                       </div>
 
-
                       <div className="w-full md:w-2/3 p-8">
                         <div className="flex flex-col h-full">
                           <div>
@@ -365,7 +473,6 @@ const TeamPage = () => {
                           </div>
 
                           <div className="mt-auto">
-
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                               <div className="flex items-start gap-3">
                                 <Briefcase className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" size={18} />
@@ -407,7 +514,6 @@ const TeamPage = () => {
                               </div>
                             </div>
 
-
                             <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
                               <motion.a
                                 whileHover={{ scale: 1.03 }}
@@ -428,6 +534,19 @@ const TeamPage = () => {
                                 <Mail className="mr-2" size={16} />
                                 Email
                               </motion.a>
+
+                              <motion.button
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={() => {
+                                  fetchUserEmail();
+                                  changebox(member);
+                                }}
+                                className="flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors"
+                              >
+                                <Send className="mr-2" size={16} />
+                                Send Request
+                              </motion.button>
 
                               {member.linkedin && (
                                 <motion.a
@@ -452,7 +571,6 @@ const TeamPage = () => {
           </motion.div>
         </AnimatePresence>
 
-
         <motion.section
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -473,7 +591,201 @@ const TeamPage = () => {
           </p>
         </motion.section>
       </main>
-      {/* <Footer/> */}
+
+      {/* Request Form Modal */}
+      {requestbox && (
+        <div>
+          {/* Background Overlay with blur */}
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"></div>
+      
+          {/* Form Container */}
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+            <form
+              onSubmit={submitform}
+              className="bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 max-w-3xl w-full p-8 space-y-8 font-sans text-gray-800 overflow-auto max-h-[90vh]"
+              style={{ animation: "fadeIn 0.3s ease forwards" }}
+            >
+              {/* Close Button */}
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Request to {selectedMember?.name}
+                </h2>
+                <button
+                  type="button"
+                  onClick={changebox}
+                  className="text-gray-500 hover:text-gray-800 text-3xl"
+                  aria-label="Close form"
+                >
+                  <FaRegWindowClose />
+                </button>
+              </div>
+      
+              {/* Name */}
+              <div>
+                <label htmlFor="name" className="block text-lg font-semibold mb-2">
+                  Enter Name
+                </label>
+                <input
+                  id="name"
+                  required
+                  onChange={valueonchnage}
+                  type="text"
+                  placeholder="Enter name"
+                  className="w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-3 focus:ring-blue-400 transition"
+                />
+              </div>
+      
+              {/* Expected Response Date */}
+              <div>
+                <label htmlFor="date" className="block text-lg font-semibold mb-2">
+                  Expected Response Date
+                </label>
+                <input
+                  id="date"
+                  required
+                  onChange={valueonchnage}
+                  type="date"
+                  placeholder="Expected Response Date"
+                  className="w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-3 focus:ring-blue-400 transition"
+                />
+              </div>
+      
+              {/* Subject */}
+              <div>
+                <label htmlFor="subject" className="block text-lg font-semibold mb-2">
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  required
+                  onChange={valueonchnage}
+                  type="text"
+                  placeholder="Type subject"
+                  className="w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-3 focus:ring-blue-400 transition"
+                />
+              </div>
+      
+              {/* Category */}
+              <div>
+                <label htmlFor="category" className="block text-lg font-semibold mb-2">
+                  Category
+                </label>
+                <select
+                  id="category"
+                  onChange={valueCategory}
+                  className="w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-3 focus:ring-blue-400 transition"
+                >
+                  <option value="">Select</option>
+                  {Object.keys(categories).map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              </div>
+      
+              {/* Message */}
+              <div>
+                <label htmlFor="message" className="block text-lg font-semibold mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  required
+                  onChange={valueonchnage}
+                  placeholder="Enter information"
+                  className="w-full p-4 border border-gray-300 rounded-xl shadow-sm resize-y focus:outline-none focus:ring-3 focus:ring-blue-400 transition"
+                  rows={5}
+                />
+              </div>
+      
+              {/* Urgency */}
+              <div>
+                <label htmlFor="urgency" className="block text-lg font-semibold mb-2">
+                  Urgency
+                </label>
+                <select
+                  id="urgency"
+                  onChange={seturgency}
+                  className="w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-3 focus:ring-blue-400 transition"
+                >
+                  <option value="">Select</option>
+                  {Object.keys(urgency).map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              </div>
+      
+              {/* Profession Section */}
+              <section>
+                <h2 className="text-3xl font-bold mb-6 text-blue-700 tracking-wide">
+                  Professional Categories
+                </h2>
+      
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Main Category */}
+                  <div>
+                    <label
+                      htmlFor="mainCategory"
+                      className="block mb-2 font-semibold text-gray-700"
+                    >
+                      Main Category
+                    </label>
+                    <select
+                      id="mainCategory"
+                      onChange={handleMainCategoryChange}
+                      required
+                      className="w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-3 focus:ring-blue-500 transition"
+                    >
+                      <option value="">-- Select Main Category --</option>
+                      {Object.keys(professions).map((value) => (
+                        <option key={value} value={value}>
+                          {value.charAt(0).toUpperCase() + value.slice(1)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+      
+                  {/* Sub Category */}
+                  <div>
+                    <label
+                      htmlFor="subCategory"
+                      className="block mb-2 font-semibold text-gray-700"
+                    >
+                      Category Type
+                    </label>
+                    <select
+                      id="subCategory"
+                      required
+                      onChange={(e) => setSubCategory(e.target.value)}
+                      disabled={!mainCategory}
+                      className="w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-3 focus:ring-blue-500 transition disabled:bg-gray-100"
+                    >
+                      <option value="">Select</option>
+                      {mainCategory &&
+                        Object.entries(professions[mainCategory]).map(([key, val]) => (
+                          <option key={key} value={key}>
+                            {val}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </div>
+              </section>
+      
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition duration-300"
+              >
+                Submit Request
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

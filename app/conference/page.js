@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import LawyerHeader from '@/app/Advocates/LawyerHeader/page';
+import LawyerHeader from '@/app/LawyerHeader/page';
 
 const ConferenceRoomPage = () => {
   const router = useRouter();

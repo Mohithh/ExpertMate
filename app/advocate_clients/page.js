@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { FaUserPlus, FaSearch, FaUsers, FaEdit, FaTrash, FaTimes } from 'react-icons/fa';
-import LawyerHeader from '@/app/Advocates/LawyerHeader/page'
+import LawyerHeader from '@/app/LawyerHeader/page'
 
 const ClientsPage = () => {
   const [clients, setClients] = useState([]);
