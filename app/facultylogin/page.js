@@ -105,7 +105,7 @@ const Page = () => {
         theme: darkMode ? "dark" : "light",
         transition: Bounce,
       });
-      console.error("Login error:", error);
+      // console.error("Login error:", error);
     } finally {
       setIsLoading(false);
     }

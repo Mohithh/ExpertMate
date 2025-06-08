@@ -120,14 +120,14 @@ export default function SignUpPage() {
     }
      const submitotp = async (e) => {
     
-          console.log("cotp",cotp)
-          console.log("userotp",userotp)
+          // console.log("cotp",cotp)
+          // console.log("userotp",userotp)
           e.preventDefault();
-          console.log("submitotp")
+          // console.log("submitotp")
           
           if (userotp ==cotp) {
     
-            console.log("otp matched")
+            // console.log("otp matched")
             setfirst(false)
             setsecond(true)
             setotpbox(false)

@@ -149,14 +149,14 @@ const page = () => {
 
     const submitotp = async (e) => {
 
-        console.log("cotp", cotp)
-        console.log("userotp", userotp)
+        // console.log("cotp", cotp)
+        // console.log("userotp", userotp)
         e.preventDefault();
-        console.log("submitotp")
+        // console.log("submitotp")
 
         if (userotp == cotp) {
 
-            console.log("otp matched")
+            // console.log("otp matched")
             setfirst(false)
             setsecond(true)
             setotpbox(false)
@@ -220,7 +220,7 @@ const page = () => {
 
                         {/* Message */}
                         {message && <p className="text-sm text-red-500 font-medium">{message}</p>}
-                        {cotp && <p className="text-xs text-gray-400">OTP sent: {cotp}</p>}
+                        {/* {cotp && <p className="text-xs text-gray-400">OTP sent: {cotp}</p>} */}
 
                         {/* OTP Box */}
                         {otpbox && (
