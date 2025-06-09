@@ -2,49 +2,34 @@
 import React, { useEffect, useState } from 'react'
 import { FaRegUserCircle } from "react-icons/fa";
 import Link from 'next/link';
-
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
+import Logo from "@/app/assets/hello_logo.png";
 
 
 const page = () => {
     const router = useRouter();
 
-
     useEffect(() => {
         const token = localStorage.getItem('token')
-
         if (token) {
             router.push("/");
         }
-
     }, [])
 
-
-
-
-
     const [finalmail, setfinalmail] = useState("")
-
     const [name, setname] = useState("")
     const [email, setemail] = useState(finalmail)
     const [password, setpassword] = useState("")
-
     const [first, setfirst] = useState(true)
     const [second, setsecond] = useState(false)
-
     const [sendmail, setsendmail] = useState("Send mail")
     const [message, setMessage] = useState("");
     const [cotp, setcotp] = useState("")
-
     const [otpbox, setotpbox] = useState(false)
-
     const [userotp, setuserotp] = useState("")
-
-
-
-
 
     const onchangeinput = (e) => {
         if (e.target.name == "name") {
@@ -60,12 +45,9 @@ const page = () => {
 
     const submitform = async (e) => {
         e.preventDefault()
-
         const data = { name, finalmail, password }
 
         try {
-
-            //  const response = await fetch("http://localhost:3000/api/signin", {
             const response = await fetch(`${process.env.LOCAL_URL}/api/FacultyNewLogin`, {
                 method: "POST",
                 headers: { "context-type": "application/json" },
@@ -83,7 +65,6 @@ const page = () => {
                 theme: "light",
             });
 
-            // setemail(""); 
             setfinalmail("")
             setname("")
             setpassword("")
@@ -99,13 +80,7 @@ const page = () => {
                 progress: undefined,
                 theme: "light",
             });
-
         }
-
-
-
-
-
     }
 
     const finalmaill = async (e) => {
@@ -113,21 +88,19 @@ const page = () => {
     }
 
     const sendingmail = async (e) => {
-
         e.preventDefault();
         setMessage("Sending...");
 
-        const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
-        const text = `Your OTP is ${otp}. It is valid for 5 minutesssss.`; // use inline here
+        const otp = Math.floor(100000 + Math.random() * 900000);
+        const text = `Your OTP is ${otp}. It is valid for 5 minutesssss.`;
         setcotp(otp)
         const subject = "verification Mail";
-
 
         try {
             const res = await fetch("/api/varificationMail", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: finalmail, text: text, subject }), // pass email and generated text
+                body: JSON.stringify({ email: finalmail, text: text, subject }),
             });
 
             const data = await res.json();
@@ -136,27 +109,17 @@ const page = () => {
                 setMessage(data.message);
                 setotpbox(true)
                 setsendmail("Resend mail")
-
-
             } else {
                 setMessage(data.error || "Failed to send email");
             }
         } catch (error) {
             setMessage("Error: " + error.message);
         }
-
     }
 
     const submitotp = async (e) => {
-
-        // console.log("cotp", cotp)
-        // console.log("userotp", userotp)
         e.preventDefault();
-        // console.log("submitotp")
-
         if (userotp == cotp) {
-
-            // console.log("otp matched")
             setfirst(false)
             setsecond(true)
             setotpbox(false)
@@ -188,135 +151,259 @@ const page = () => {
     }
 
     return (
+        <div className="min-h-screen bg-gray-50">
+            {/* Animated Background SVG */}
+            <div className="fixed inset-0 overflow-hidden z-0">
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.1" />
+                            <stop offset="100%" stopColor="#6366f1" stopOpacity="0.1" />
+                        </linearGradient>
+                    </defs>
+                    <path 
+                        fill="url(#gradient)" 
+                        d="M0,0V900H1440V0ZM1440,517.32C1316.67,550.66 1200,566.66 1080,565.32C960,564 840,545.32 720,509.32C600,473.32 480,420 360,349.32C240,278.66 120,190.66 0,85.32L0,517.32Z"
+                        className="animate-float"
+                    />
+                </svg>
+            </div>
 
-        <div>
-            {first && (
-                <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-blue-100 px-4">
-                    <form className="bg-white border border-blue-200 shadow-lg rounded-xl p-6 w-full max-w-sm space-y-4 animate-fade-in">
-
-                        {/* Email */}
-                        <div>
-                            <label htmlFor="email" className="text-sm font-semibold text-gray-700">
-                                Email Address
-                            </label>
-                            <input
-                                required
-                                onChange={finalmaill}
-                                type="email"
-                                id="email"
-                                placeholder="Enter your email"
-                                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                            />
-                        </div>
-
-                        {/* Send Mail Button */}
-                        <button
-                            onClick={sendingmail}
-                            type="button"
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition-all duration-200"
-                        >
-                            {sendmail}
-                        </button>
-
-                        {/* Message */}
-                        {message && <p className="text-sm text-red-500 font-medium">{message}</p>}
-                        {/* {cotp && <p className="text-xs text-gray-400">OTP sent: {cotp}</p>} */}
-
-                        {/* OTP Box */}
-                        {otpbox && (
-                            <div className="pt-2 space-y-3 border-t border-gray-200">
-                                <div>
-                                    <label className="text-sm font-semibold text-gray-700">Enter OTP</label>
-                                    <input
-                                        required
-                                        onChange={valueotp}
-                                        type="number"
-                                        placeholder="6-digit OTP"
-                                        className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            {/* Main Content */}
+            <div className="relative z-10">
+                {first && (
+                    <div className="min-h-screen flex items-center justify-center px-4">
+                        <form className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md space-y-6 animate-fade-in-up border border-gray-100">
+                            {/* Logo */}
+                            <div className="text-center">
+                                <div className="flex justify-center">
+                                    <Image 
+                                        src={Logo} 
+                                        alt="Company Logo" 
+                                        width={120} 
+                                        height={120} 
+                                        className="object-contain"
                                     />
                                 </div>
-
-                                <button
-                                    type="button"
-                                    onClick={submitotp}
-                                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-md transition-all"
-                                >
-                                    Verify OTP
-                                </button>
+                                <h1 className="text-2xl font-bold text-gray-800 mt-4">Law Firm Portal</h1>
+                                <p className="text-gray-600 mt-2">Attorney secure login</p>
                             </div>
-                        )}
-                    </form>
 
-                    {/* Display entered email below form */}
-                    <p className="absolute bottom-6 text-xs text-gray-500">{finalmail}</p>
-                </div>
-            )}
+                            {/* Email */}
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Attorney Email Address
+                                </label>
+                                <div className="relative">
+                                    <input
+                                        required
+                                        onChange={finalmaill}
+                                        type="email"
+                                        id="email"
+                                        placeholder="lawyer@firm.com"
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition pl-10"
+                                    />
+                                    <svg className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                            </div>
 
+                            {/* Send Mail Button */}
+                            <button
+                                onClick={sendingmail}
+                                type="button"
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                                {sendmail}
+                            </button>
 
-            {second && <div className=' '>
+                            {/* Message */}
+                            {message && <p className={`text-sm font-medium ${message.includes("Failed") ? "text-red-500" : "text-green-500"}`}>{message}</p>}
 
+                            {/* OTP Box */}
+                            {otpbox && (
+                                <div className="pt-4 space-y-4 border-t border-gray-200 animate-fade-in">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Verification Code</label>
+                                        <div className="relative">
+                                            <input
+                                                required
+                                                onChange={valueotp}
+                                                type="number"
+                                                placeholder="Enter 6-digit OTP"
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition pl-10"
+                                            />
+                                            <svg className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                            </svg>
+                                        </div>
+                                    </div>
 
-                <ToastContainer
-                    position="top-center"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                    transition={Bounce}
-                />
+                                    <button
+                                        type="button"
+                                        onClick={submitotp}
+                                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center"
+                                    >
+                                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        Verify OTP
+                                    </button>
+                                </div>
+                            )}
+                        </form>
+                    </div>
+                )}
 
+                {second && (
+                    <div className="min-h-screen flex items-center justify-center px-4 py-12">
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                            transition={Bounce}
+                        />
 
+                        <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md animate-fade-in-up">
+                            <div className="text-center">
+                                <div className="flex justify-center mb-6">
+                                    <Image 
+                                        src={Logo} 
+                                        alt="Company Logo" 
+                                        width={100} 
+                                        height={100} 
+                                        className="object-contain"
+                                    />
+                                </div>
+                                <h2 className="text-2xl font-bold text-gray-800">Attorney Registration</h2>
+                                <p className="text-gray-600 mt-2">Complete your profile</p>
+                            </div>
 
+                            <form onSubmit={submitform} className="mt-8 space-y-6">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                    <div className="relative">
+                                        <input 
+                                            required 
+                                            onChange={onchangeinput} 
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition pl-10" 
+                                            placeholder="John Doe" 
+                                            value={name} 
+                                            type="text" 
+                                            name="name" 
+                                            id="name" 
+                                        />
+                                        <svg className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                        </svg>
+                                    </div>
+                                </div>
 
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <div className="relative">
+                                        <input 
+                                            readOnly 
+                                            required 
+                                            onChange={onchangeinput} 
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition pl-10 bg-gray-50" 
+                                            placeholder="lawyer@firm.com" 
+                                            value={finalmail} 
+                                            type="email" 
+                                            name="email" 
+                                            id="email" 
+                                        />
+                                        <svg className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                </div>
 
-                <div className='w-64 md:w-1/4  m-auto mb-10 items-center text-center mt-20  '>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                                    <div className="relative">
+                                        <input 
+                                            required 
+                                            onChange={onchangeinput} 
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition pl-10" 
+                                            type="password" 
+                                            name="password" 
+                                            value={password} 
+                                            id="password" 
+                                            placeholder="••••••••" 
+                                        />
+                                        <svg className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                        </svg>
+                                    </div>
+                                </div>
 
-                    <FaRegUserCircle className='text-5xl items-center m-auto ' />
+                                <button 
+                                    type="submit" 
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center"
+                                >
+                                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                                    </svg>
+                                    Complete Registration
+                                </button>
 
-
-                    <h2 className='mt-5 font-bold text-2xl'>Sign up Your Account  </h2>
-
-
-                    <form onSubmit={submitform} action="" method='POST' >
-
-                        <div className='m-2 '>
-                            <label className='' htmlFor="name">Name</label>
-                            <input required onChange={onchangeinput} className='mt-2 w-full border border-gray-400 rounded p-1  focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out' placeholder='Enter name ' value={name} type="name" name="name" id="name" />
-
+                                <div className="flex justify-between pt-4 border-t border-gray-200">
+                                    <Link href="/facultylogin">
+                                        <a className="text-sm text-blue-600 hover:text-blue-800 font-medium transition">Already registered? Login</a>
+                                    </Link>
+                                    <Link href="forgot">
+                                        <a className="text-sm text-blue-600 hover:text-blue-800 font-medium transition">Forgot password?</a>
+                                    </Link>
+                                </div>
+                            </form>
                         </div>
-                        <div className='m-2 '>
-                            <label className='' htmlFor="email"></label>
-                            <input readOnly required onChange={onchangeinput} className='mt-2 w-full border border-gray-400 rounded p-1  focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out' placeholder='Email id' value={finalmail} type="email" name="email" id="email" />
+                    </div>
+                )}
+            </div>
 
-                        </div>
-
-
-                        <div className='m-2 '>
-                            <label htmlFor="password">Password</label>
-                            <input required onChange={onchangeinput} className='mt-2 w-full border border-gray-400 rounded p-1  focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out' type="password" name="password" value={password} id="password" placeholder='Password' />
-                        </div>
-
-                        <button className=" w-full m-auto items-center mt-5 mx-2 text-white bg-pink-500 border-0 py-3  focus:outline-none hover:bg-indigo-600 rounded">Sign in </button>
-                        {/* <Link href="/login"> <p className='mx-10 mt-5 text-blue-500  font-extralight '> Login</p></Link>
-<Link href="forgot"> <p className='mx-10 mt-5 text-blue-500 font-extralight'>forgot password</p></Link> */}
-
-                        {/* <div className='flex '> */}
-                        <Link href="/facultylogin"> <p className='mx-10 mt-5 text-blue-500  font-extralight '> Login</p></Link>
-                        <Link href="forgot"> <p className='mx-10 mt-5 text-blue-500 font-extralight'>forgot password</p></Link>
-                        {/* </div> */}
-
-                    </form>
-                </div>
-
-            </div>}
-
-
-
+            {/* Global Styles for Animations */}
+            <style jsx global>{`
+                @keyframes float {
+                    0% { transform: translateY(0px); }
+                    50% { transform: translateY(-20px); }
+                    100% { transform: translateY(0px); }
+                }
+                .animate-float {
+                    animation: float 8s ease-in-out infinite;
+                }
+                .animate-fade-in-up {
+                    animation: fadeInUp 0.6s ease-out forwards;
+                }
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                .animate-fade-in {
+                    animation: fadeIn 0.4s ease-out forwards;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+            `}</style>
         </div>
     )
 }

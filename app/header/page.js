@@ -214,9 +214,10 @@ const Header = () => {
             <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
               <div className="flex items-center space-x-2">
                 <NavLink href="/" icon={AiOutlineHome}>Home</NavLink>
-                <NavLink href="/lawyer" icon={FiUsers}>Leadership</NavLink>
+                <NavLink href="/lawyer" icon={FiUsers}>Our Legal Professionals. 
+</NavLink>
 
-                <div className="relative">
+                {/* <div className="relative">
                   <motion.button 
                     onClick={toggleCaseDropdown}
                     className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 group h-10 whitespace-nowrap"
@@ -276,7 +277,7 @@ const Header = () => {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </div> */}
 
                 <NavLink href="/services" icon={FiSettings}>Services</NavLink>
                 <NavLink href="/StartDispute" icon={FiShield}>Dispute</NavLink>

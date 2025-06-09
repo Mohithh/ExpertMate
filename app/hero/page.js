@@ -185,7 +185,7 @@ const Hero = () => {
           animate={{ x: ["100%", "-100%"] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         >
-          <span className="mx-8">• SETTLESMART SOLUTIONS • INDIA'S LEADING DISPUTE RESOLUTION PLATFORM • TRUSTED BY 500+ BUSINESSES •</span>
+          <span className="mx-8">SETTLESMART SOLUTIONS • INDIA'S LEADING DISPUTE RESOLUTION PLATFORM • TRUSTED BY 500+ BUSINESSES •</span>
         </motion.div>
       </div>
 

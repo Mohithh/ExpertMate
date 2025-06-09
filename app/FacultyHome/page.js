@@ -260,8 +260,8 @@ const page = () => {
     <div className="max-w-5xl mx-auto px-4 py-10">
     <div className="flex justify-between items-center mb-6">
       <h1 className="text-3xl font-bold text-green-600">Submit Your Details</h1>
-      <Link href="/details" className="text-blue-600 font-semibold hover:underline text-lg">
-        View Information
+      <Link href="/LawyerDashboard" className="text-blue-600 font-semibold hover:underline text-lg">
+        Dashboard
       </Link>
     </div>
   

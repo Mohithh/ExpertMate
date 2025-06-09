@@ -43,7 +43,7 @@ const TeamPage = () => {
   const tabs = [
     { id: "management", name: "Management", icon: <UserCircle size={18} /> },
     { id: "leadership", name: "Leadership", icon: <Briefcase size={18} /> },
-    { id: "board", name: "Board", icon: <Landmark size={18} /> }
+    { id: "board", name: "Board of Directors", icon: <Landmark size={18} /> }
   ];
 
   // Request form constants
@@ -187,9 +187,9 @@ const TeamPage = () => {
         education: "LL.B. (Delhi University) & LL.M. (Business Law)",
         role: "Corporate and Commercial Disputes, Banking & Finance, Insolvency",
         specializations: [
-          { icon: <FileText size={16} />, name: "Commercial Litigation" },
-          { icon: <TrendingUp size={16} />, name: "Banking Law" },
-          { icon: <Scale size={16} />, name: "Insolvency" }
+          { icon: <FileText size={16} />, name: "Labor Law" },
+          { icon: <TrendingUp size={16} />, name: "civil" },
+          { icon: <Scale size={16} />, name: "Matrimonial, Property" }
         ],
         location: "New Delhi",
         phone: "+91 98108 47722",
@@ -535,18 +535,21 @@ const TeamPage = () => {
                                 Email
                               </motion.a>
 
-                              <motion.button
-                                whileHover={{ scale: 1.03 }}
-                                whileTap={{ scale: 0.98 }}
-                                onClick={() => {
-                                  fetchUserEmail();
-                                  changebox(member);
-                                }}
-                                className="flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors"
-                              >
-                                <Send className="mr-2" size={16} />
-                                Send Request
-                              </motion.button>
+                              {/* Only show Request button for Board members */}
+                              {activeTab === "board" && (
+                                <motion.button
+                                  whileHover={{ scale: 1.03 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  onClick={() => {
+                                    fetchUserEmail();
+                                    changebox(member);
+                                  }}
+                                  className="flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors"
+                                >
+                                  <Send className="mr-2" size={16} />
+                                  Send Request
+                                </motion.button>
+                              )}
 
                               {member.linkedin && (
                                 <motion.a
