@@ -171,22 +171,6 @@ const Hero = () => {
   return (
     <div ref={ref} className="relative bg-white dark:bg-gray-900 overflow-hidden">
       {/* Theme Toggle */}
-      <button
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        className="fixed top-4 right-4 z-50 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700"
-        aria-label="Toggle dark mode"
-      >
-        {theme === 'dark' ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-        )}
-      </button>
-
       {/* Legal Consent Popup */}
       {showConsent && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
@@ -412,7 +396,7 @@ const Hero = () => {
           </div>
 
           {/* Right side - Company branding */}
-          <div className="lg:w-1/2 relative">
+          <div className="hidden lg:block lg:w-1/2 relative">
             <motion.div
               className="relative"
               initial={{ opacity: 0, x: 50 }}
@@ -607,7 +591,7 @@ const Hero = () => {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                He believes in leveraging technology to make legal processes more accessible and efficient for everyone. His dedication to providing fair and timely resolutions aligns perfectly with the mission of SettleSmart Solutions.
+                Driven by a passion for accessible justice, Adv. Sharma plays a pivotal role in ensuring that SettleSmart Solutions provides fair, efficient, and confidential online dispute resolution services. His leadership and legal acumen are instrumental in guiding the platform's strategies and upholding its ethical standards.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -616,39 +600,38 @@ const Hero = () => {
               >
                 <Link href="/about" passHref>
                   <motion.button
-                    className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors flex items-center gap-2"
+                    className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors flex items-center gap-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     Learn More About Us
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                     </svg>
                   </motion.button>
                 </Link>
               </motion.div>
             </div>
-            <div className="lg:w-1/2">
+            <div className="lg:w-1/2 flex justify-center items-center">
               <motion.div
-                className="relative rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700"
+                className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl border-4 border-blue-500 dark:border-blue-400"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                whileHover={{ rotate: 2, scale: 1.02 }}
+                whileHover={{ rotate: 3, scale: 1.02 }}
               >
                 <Image
                   src={nageshwar}
                   alt="Adv. Nageshwar Sharma"
-                  width={600}
-                  height={400}
+                  width={500}
+                  height={500}
                   layout="responsive"
+                  objectFit="cover"
                   className="rounded-3xl"
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-3xl flex items-end p-6">
-                  <div className="text-white">
-                    <h3 className="text-2xl font-bold">Adv. Nageshwar Sharma</h3>
-                    <p className="text-blue-200">Legal Head, SettleSmart Solutions</p>
-                  </div>
+                  <h3 className="text-white text-2xl font-bold">Adv. Nageshwar Sharma</h3>
                 </div>
               </motion.div>
             </div>
@@ -656,7 +639,7 @@ const Hero = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* How it Works Section */}
       <section className="relative z-10 py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2
@@ -665,42 +648,41 @@ const Hero = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            How SettleSmart Works
+            How It Works
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                className="bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 flex flex-col items-center text-center group cursor-pointer"
+                className="bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 flex flex-col items-center text-center group"
                 initial={{ opacity: 0, y: 50 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                whileHover={{ scale: 1.05, boxShadow: "0 15px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)" }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                  backgroundColor: theme === 'dark' ? '#1f2937' : '#f3f4f6'
+                }}
+                whileTap={{ scale: 0.98 }}
               >
-                <div className="relative mb-4">
-                  <motion.div
-                    className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-3xl"
-                    initial={{ scale: 0 }}
-                    animate={inView ? { scale: 1 } : {}}
-                    transition={{ type: "spring", stiffness: 200, damping: 10, delay: index * 0.15 + 0.3 }}
-                  >
-                    {step.number}
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0 flex items-center justify-center text-5xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    animate={inView ? { opacity: 0 } : {}}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {step.icon}
-                  </motion.div>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {step.description}
-                </p>
+                <motion.div
+                  className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-3xl font-bold mb-4 border-2 border-blue-300 dark:border-blue-700"
+                  initial={{ scale: 0 }}
+                  animate={inView ? { scale: 1 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
+                  whileHover={{ rotate: 15 }}
+                >
+                  {step.number}
+                </motion.div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{step.description}</p>
+                {index < steps.length - 1 && (
+                  <div className="absolute -right-8 top-1/2 -translate-y-1/2 hidden lg:block">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-blue-400 dark:text-blue-600">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
