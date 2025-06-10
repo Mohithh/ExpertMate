@@ -4,22 +4,24 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/app/assets/hello_logo.png";
+import Logo from "@/app/assets/hello_logo.png"; // Make sure this is your company logo
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
+import nageshwar from "@/app/assets/nageshwar.jpg"; // Example image for the lawyer
 
 const Hero = () => {
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: false });
   const router = useRouter();
   const [showConsent, setShowConsent] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (inView) controls.start("visible");
-    
-    // Check if consent was already given
+
     const consentGiven = localStorage.getItem('lawFirmConsent');
     if (!consentGiven) {
       setShowConsent(true);
@@ -72,9 +74,9 @@ const Hero = () => {
     e.preventDefault();
     setButtonClicked(true);
     setTimeout(() => setButtonClicked(false), 500);
-    
+
     const isLoggedIn = typeof window !== 'undefined' && localStorage.getItem("token");
-    if (isLoggedIn) { 
+    if (isLoggedIn) {
       router.push("https://cal.com/settlesmart/schedule-meeting");
     } else {
       router.push("/login");
@@ -95,73 +97,172 @@ const Hero = () => {
     { number: "4", title: "Get Binding Outcome", description: "Legally enforceable resolution in 30 days", icon: "⚖️" },
   ];
 
+  // Define your services here, including an icon or a placeholder
+  const services = [
+    {
+      title: "Arbitration",
+      description: "Neutral third-party resolves disputes, leading to a binding decision.",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-blue-600 dark:text-blue-400">
+          <path fillRule="evenodd" d="M3.75 3.75c-.828 0-1.5.672-1.5 1.5V19.5c0 .828.672 1.5 1.5 1.5h16.5c.828 0 1.5-.672 1.5-1.5V5.25c0-.828-.672-1.5-1.5-1.5H3.75zM8.25 6a.75.75 0 00-.75.75v6c0 .414.336.75.75.75h7.5a.75.75 0 00.75-.75v-6a.75.75 0 00-.75-.75h-7.5zM7.5 9.75a.75.75 0 01.75-.75h7.5a.75.75 0 01.75.75V15a.75.75 0 01-.75.75H8.25a.75.75 0 01-.75-.75v-5.25z" clipRule="evenodd" />
+        </svg>
+      )
+    },
+    {
+      title: "Mediation",
+      description: "Facilitated negotiation to help parties reach a mutually agreeable settlement.",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-blue-600 dark:text-blue-400">
+          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" clipRule="evenodd" />
+        </svg>
+      )
+    },
+    {
+      title: "Conciliation",
+      description: "A non-binding process where a conciliator assists parties in reaching a settlement.",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-blue-600 dark:text-blue-400">
+          <path fillRule="evenodd" d="M11.54 22.351A8.724 8.724 0 0012 22.5c2.486 0 4.757-.791 6.643-2.126A8.724 8.724 0 0022.5 12c0-2.486-.791-4.757-2.126-6.643C19.093 3.791 16.822 3 14.25 3A8.724 8.724 0 005.15 4.417 8.724 8.724 0 003 12c0 2.486.791 4.757 2.126 6.643C6.907 20.209 9.178 21 11.75 21a8.724 8.724 0 00.209.001zM13.75 12.25a.75.75 0 011.06 0l2 2a.75.75 0 01-1.06 1.06L14.5 14.06v3.19a.75.75 0 01-1.5 0v-3.19l-1.47 1.47a.75.75 0 01-1.06-1.06l2-2a.75.75 0 010-1.06zM8.5 9.75a.75.75 0 00.75-.75V7.5a.75.75 0 00-.75-.75H5.25a.75.75 0 00-.75.75v5.25a.75.75 0 00.75.75h3.25a.75.75 0 000-1.5H5.25v-2.25h3.25z" clipRule="evenodd" />
+        </svg>
+      )
+    },
+    {
+      title: "Online Dispute Resolution (ODR)",
+      description: "Resolving disputes entirely online, leveraging technology for efficiency.",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-blue-600 dark:text-blue-400">
+          <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
+          <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
+        </svg>
+      )
+    },
+  ];
+
+  // Legal-themed SVG icons (if not already defined)
+  const LegalIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-600 dark:text-blue-400">
+      <path d="M11.644 1.59a.75.75 0 01.712 0l9.75 5.25a.75.75 0 010 1.32l-9.75 5.25a.75.75 0 01-.712 0l-9.75-5.25a.75.75 0 010-1.32l9.75-5.25z" />
+      <path d="M3.265 10.602l7.668 4.129a2.25 2.25 0 002.134 0l7.668-4.13 1.37.739a.75.75 0 010 1.32l-9.75 5.25a.75.75 0 01-.71 0l-9.75-5.25a.75.75 0 010-1.32l1.37-.738z" />
+      <path d="M10.933 19.231l-7.668-4.13-1.37.739a.75.75 0 000 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 000-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 01-2.134-.001z" />
+    </svg>
+  );
+
+  const ScaleIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-600 dark:text-blue-400">
+      <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
+    </svg>
+  );
+
+  const DocumentIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-600 dark:text-blue-400">
+      <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
+      <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
+    </svg>
+  );
+
+  const ShieldIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-600 dark:text-blue-400">
+      <path fillRule="evenodd" d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08zm3.094 8.016a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+    </svg>
+  );
+
+  if (!mounted) return null;
+
   return (
     <div ref={ref} className="relative bg-white dark:bg-gray-900 overflow-hidden">
+      {/* Theme Toggle */}
+      <button
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        className="fixed top-4 right-4 z-50 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700"
+        aria-label="Toggle dark mode"
+      >
+        {theme === 'dark' ? (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        )}
+      </button>
+
       {/* Legal Consent Popup */}
-     {showConsent && (
-  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-    <motion.div 
-      className="bg-white dark:bg-gray-800 rounded-xl max-w-2xl w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto"
-      initial={{ scale: 0.9, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 100 }}
-    >
-      <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white text-center">Welcome to SettleSmart Solutions</h1>
-      <h2 className="text-xl font-semibold mb-6 text-center text-blue-600 dark:text-blue-400">Powered by Shivaay Legal Professionals</h2>
-      
-      <div className="text-gray-700 dark:text-gray-300 mb-6 space-y-4">
-        <p className="font-medium">Before you proceed, please read and accept the following disclaimer in accordance with the rules of the Bar Council of India (BCI) and applicable Indian laws:</p>
+      {showConsent && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+          <motion.div
+            className="bg-white dark:bg-gray-800 rounded-xl max-w-2xl w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 100 }}
+          >
+            <div className="flex justify-center mb-4">
+              <div className="rounded-full border-4 border-blue-500 p-1">
+                <div className="rounded-full bg-blue-100 dark:bg-blue-900/30 w-32 h-32 flex items-center justify-center">
+                  <Image
+                    src={Logo}
+                    alt="SettleSmart Solutions Logo"
+                    width={80}
+                    height={80}
+                    className="rounded-full"
+                  />
+                </div>
+              </div>
+            </div>
+            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white text-center">Welcome to SettleSmart Solutions</h1>
+            <h2 className="text-xl font-semibold mb-6 text-center text-blue-600 dark:text-blue-400">Powered by Shivaay Legal Professionals</h2>
 
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">No Advertisement or Solicitation:</h3>
-            <p>This website is not intended to advertise, solicit work, or offer legal advice. By accessing this platform, the user acknowledges that they are doing so voluntarily and of their own accord and that there has been no form of solicitation, personal communication, or inducement by SettleSmart Solutions or its Board of Directors.</p>
-          </div>
+            <div className="text-gray-700 dark:text-gray-300 mb-6 space-y-4">
+              <p className="font-medium">Before you proceed, please read and accept the following disclaimer in accordance with the rules of the Bar Council of India (BCI) and applicable Indian laws:</p>
 
-          <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Informational Purpose Only:</h3>
-            <p>The content provided on this website is intended only for general information purposes regarding our online dispute resolution services, and does not constitute legal advice or the formation of an attorney-client relationship.</p>
-          </div>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">No Advertisement or Solicitation:</h3>
+                  <p>This website is not intended to advertise, solicit work, or offer legal advice. By accessing this platform, the user acknowledges that they are doing so voluntarily and of their own accord and that there has been no form of solicitation, personal communication, or inducement by SettleSmart Solutions or its Board of Directors.</p>
+                </div>
 
-          <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Professional Relationship:</h3>
-            <p>Any use of this platform does not create a lawyer-client relationship between the user and SettleSmart Solutions, or with any of its Board Members. Users are advised to seek appropriate professional or legal advice before acting on any information provided here.</p>
-          </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Informational Purpose Only:</h3>
+                  <p>The content provided on this website is intended only for general information purposes regarding our online dispute resolution services, and does not constitute legal advice or the formation of an attorney-client relationship.</p>
+                </div>
 
-          <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Compliant with BCI Guidelines:</h3>
-            <p>This website is designed to comply with Rule 36 of the BCI Rules and the relevant norms laid down by the Bar Council of India regarding lawyer websites and online presence. We do not seek to advertise or promote our services in violation of any BCI rules or laws of India.</p>
-          </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Professional Relationship:</h3>
+                  <p>Any use of this platform does not create a lawyer-client relationship between the user and SettleSmart Solutions, or with any of its Board Members. Users are advised to seek appropriate professional or legal advice before acting on any information provided here.</p>
+                </div>
 
-          <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Consent and Acknowledgement:</h3>
-            <p>By clicking "I Agree" below and proceeding further, the user acknowledges that they have read and understood this Disclaimer and wish to gain more information about SettleSmart Solutions for their own information and use.</p>
-          </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Compliant with BCI Guidelines:</h3>
+                  <p>This website is designed to comply with Rule 36 of the BCI Rules and the relevant norms laid down by the Bar Council of India regarding lawyer websites and online presence. We do not seek to advertise or promote our services in violation of any BCI rules or laws of India.</p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg text-900 dark:text-white">Consent and Acknowledgement:</h3>
+                  <p>By clicking "I Agree" below and proceeding further, the user acknowledges that they have read and understood this Disclaimer and wish to gain more information about SettleSmart Solutions for their own information and use.</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <motion.button
+                onClick={acceptConsent}
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ShieldIcon />
+                I Agree and Proceed
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
-      </div>
-      <div className="flex justify-center">
-        <motion.button
-          onClick={acceptConsent}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          I Agree and Proceed
-        </motion.button>
-      </div>
-    </motion.div>
-  </div>
-)}
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 to-white dark:from-gray-800/20 dark:to-gray-900 z-0"></div>
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 dark:opacity-[0.03] z-0"></div>
+      )}
 
-      {/* Animated blobs */}
+      {/* Background elements */}
       <motion.div
         className="absolute top-0 right-0 w-64 h-64 bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10"
-        animate={{ 
-          x: [0, 100, 0], 
-          y: [0, -100, 0], 
+        animate={{
+          x: [0, 100, 0],
+          y: [0, -100, 0],
           rotate: [0, 180, 360],
           scale: [1, 1.1, 1]
         }}
@@ -169,9 +270,9 @@ const Hero = () => {
       />
       <motion.div
         className="absolute bottom-0 left-0 w-72 h-72 bg-purple-200 dark:bg-purple-900/30 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10"
-        animate={{ 
-          x: [0, -100, 0], 
-          y: [0, 100, 0], 
+        animate={{
+          x: [0, -100, 0],
+          y: [0, 100, 0],
           rotate: [0, -180, -360],
           scale: [1, 1.1, 1]
         }}
@@ -181,11 +282,15 @@ const Hero = () => {
       {/* Marquee */}
       <div className="bg-gradient-to-r from-blue-800 to-blue-900 py-2 overflow-hidden">
         <motion.div
-          className="text-white font-bold text-sm md:text-base whitespace-nowrap"
+          className="text-white font-bold text-sm md:text-base whitespace-nowrap flex items-center"
           animate={{ x: ["100%", "-100%"] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         >
-          <span className="mx-8">SETTLESMART SOLUTIONS • INDIA'S LEADING DISPUTE RESOLUTION PLATFORM • TRUSTED BY 500+ BUSINESSES •</span>
+          <span className="mx-8 flex items-center gap-2">
+            <LegalIcon />
+            SETTLESMART SOLUTIONS • INDIA'S LEADING DISPUTE RESOLUTION PLATFORM • TRUSTED BY 500+ BUSINESSES •
+            <LegalIcon />
+          </span>
         </motion.div>
       </div>
 
@@ -195,33 +300,34 @@ const Hero = () => {
           <div className="lg:w-1/2 space-y-8">
             {/* Tagline */}
             <motion.div
-              className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs font-semibold px-3 py-1 rounded-full"
+              className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs font-semibold px-3 py-1 rounded-full"
               variants={itemVariants}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 backgroundColor: theme === 'dark' ? 'rgba(30, 58, 138, 0.5)' : 'rgba(219, 234, 254, 1)'
               }}
             >
+              <LegalIcon />
               INNOVATIVE DISPUTE RESOLUTION
             </motion.div>
 
             {/* Headline */}
             <motion.div variants={itemVariants}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
-                <motion.span 
+                <motion.span
                   className="block"
                   whileHover={{ x: 5 }}
                 >
                   From Vivaad se Samadhan
                 </motion.span>
-                <motion.span 
+                <motion.span
                   className="block bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-500 dark:to-blue-700 bg-clip-text text-transparent"
                   whileHover={{ x: 5 }}
                 >
                   Tak within Days
                 </motion.span>
               </h1>
-              <motion.p 
+              <motion.p
                 className="mt-4 text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed"
                 whileHover={{ scale: 1.01 }}
               >
@@ -235,8 +341,8 @@ const Hero = () => {
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Schedule a Consultation</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">Get expert advice on your dispute resolution options</p>
                 <div onClick={handleBooking}>
-                  <motion.div 
-                    className="relative overflow-hidden group" 
+                  <motion.div
+                    className="relative overflow-hidden group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -258,25 +364,27 @@ const Hero = () => {
                 <Link href="/JoinAsArbitrator" passHref>
                   <motion.button
                     className="w-full px-6 py-3 border-2 border-blue-600 dark:border-blue-500 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-xl font-semibold transition-all flex items-center justify-center gap-2"
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.02,
                       backgroundColor: theme === 'dark' ? 'rgba(55, 65, 81, 1)' : 'rgba(239, 246, 255, 1)'
                     }}
                     whileTap={{ scale: 0.98 }}
                   >
+                    <ScaleIcon />
                     Join as Arbitrator/Mediator
                   </motion.button>
                 </Link>
-                
+
                 <Link href="/registerCase" passHref>
                   <motion.button
                     className="w-full px-6 py-3 border-2 border-blue-600 dark:border-blue-500 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-xl font-semibold transition-all flex items-center justify-center gap-2"
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.02,
                       backgroundColor: theme === 'dark' ? 'rgba(55, 65, 81, 1)' : 'rgba(239, 246, 255, 1)'
                     }}
                     whileTap={{ scale: 0.98 }}
                   >
+                    <DocumentIcon />
                     Register a Case
                   </motion.button>
                 </Link>
@@ -290,7 +398,7 @@ const Hero = () => {
                   key={index}
                   className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all"
                   variants={itemVariants}
-                  whileHover={{ 
+                  whileHover={{
                     y: -5,
                     scale: 1.05,
                     backgroundColor: theme === 'dark' ? 'rgba(55, 65, 81, 1)' : 'rgba(249, 250, 251, 1)'
@@ -303,9 +411,9 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right side - Visual element */}
+          {/* Right side - Company branding */}
           <div className="lg:w-1/2 relative">
-            <motion.div 
+            <motion.div
               className="relative"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -313,67 +421,291 @@ const Hero = () => {
               whileHover={{ scale: 1.01 }}
             >
               <div className="relative aspect-square w-full max-w-lg mx-auto">
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-blue-500/10 rounded-3xl rotate-6"
                   animate={{
                     rotate: [6, 8, 6],
                     transition: { duration: 8, repeat: Infinity }
                   }}
                 ></motion.div>
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-blue-500/5 rounded-3xl -rotate-6"
                   animate={{
                     rotate: [-6, -8, -6],
                     transition: { duration: 10, repeat: Infinity }
                   }}
                 ></motion.div>
-                <motion.div 
-                  className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex items-center justify-center p-8"
+                <motion.div
+                  className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col items-center justify-center p-8 text-center"
                   whileHover={{ scale: 1.01 }}
                 >
-                  <div className="text-center space-y-6">
-                    <motion.h3 
-                      className="text-2xl font-bold text-gray-900 dark:text-white"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      How It Works
-                    </motion.h3>
-                    <div className="grid grid-cols-2 gap-4">
-                      {steps.map((step, index) => (
-                        <motion.div 
-                          key={index} 
-                          className="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg"
-                          whileHover={{ 
-                            y: -5,
-                            scale: 1.05,
-                            backgroundColor: theme === 'dark' ? 'rgba(55, 65, 81, 1)' : 'rgba(219, 234, 254, 1)'
-                          }}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <motion.div 
-                            className="text-3xl mb-2"
-                            animate={{
-                              y: [0, -5, 0],
-                              transition: { delay: index * 0.5, duration: 2, repeat: Infinity }
-                            }}
-                          >
-                            {step.icon}
-                          </motion.div>
-                          <div className="text-xs font-semibold text-blue-600 dark:text-blue-400">STEP {step.number}</div>
-                          <h4 className="font-bold text-gray-900 dark:text-white mt-1">{step.title}</h4>
-                          <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">{step.description}</p>
-                        </motion.div>
-                      ))}
+                  {/* Company Logo - Larger Size */}
+                  <motion.div
+                    className="rounded-full border-4 border-blue-500 p-1 mb-6"
+                    whileHover={{ rotate: 10 }}
+                  >
+                    <div className="rounded-full bg-blue-100 dark:bg-blue-900/30 w-48 h-48 flex items-center justify-center">
+                      <Image
+                        src={Logo}
+                        alt="SettleSmart Solutions Logo"
+                        width={120}
+                        height={120}
+                        className="rounded-full"
+                        priority
+                      />
                     </div>
-                  </div>
+                  </motion.div>
+
+                  {/* Company Name */}
+                  <motion.h2
+                    className="text-4xl font-bold text-gray-900 dark:text-white mb-2"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    SettleSmart Solutions
+                  </motion.h2>
+
+                  <motion.p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
+                    Your Trusted Legal Resolution Partner
+                  </motion.p>
+
+                  {/* Divider */}
+                  <motion.div
+                    className="w-32 h-1 bg-blue-500 rounded-full my-4"
+                    whileHover={{ scaleX: 1.2 }}
+                  />
+
+                  {/* Legal Icons */}
+                  <motion.div
+                    className="grid grid-cols-2 gap-8 mt-8"
+                    variants={containerVariants}
+                  >
+                    <motion.div
+                      className="flex flex-col items-center"
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-blue-600 dark:text-blue-400">
+                          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <span className="text-lg font-medium">Fast Resolution</span>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex flex-col items-center"
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-blue-600 dark:text-blue-400">
+                          <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <span className="text-lg font-medium">Fair Outcomes</span>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex flex-col items-center"
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-blue-600 dark:text-blue-400">
+                          <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <span className="text-lg font-medium">Confidential</span>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex flex-col items-center"
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-blue-600 dark:text-blue-400">
+                          <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                          <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <span className="text-lg font-medium">Transparent</span>
+                    </motion.div>
+                  </motion.div>
                 </motion.div>
               </div>
             </motion.div>
           </div>
         </div>
       </div>
+
+      {/* Services Section */}
+      <section className="relative z-10 py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            Our Services
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                className="bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 flex flex-col items-center text-center cursor-pointer"
+                initial={{ opacity: 0, y: 50 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                  backgroundColor: theme === 'dark' ? '#1f2937' : '#f3f4f6'
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="mb-4">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {service.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section className="relative z-10 py-16 md:py-24 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="lg:w-1/2">
+              <motion.h2
+                className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
+                initial={{ opacity: 0, y: -20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6 }}
+              >
+                Meet Adv. Nageshwar Sharma
+              </motion.h2>
+              <motion.p
+                className="text-lg text-gray-600 dark:text-gray-300 mb-6"
+                initial={{ opacity: 0, y: -20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Advocate Nageshwar Sharma is a seasoned legal professional with extensive experience in various facets of law. He has a distinguished career marked by a commitment to justice and a deep understanding of legal principles. His expertise spans across arbitration, mediation, and conciliation, making him a cornerstone of SettleSmart Solutions' commitment to effective dispute resolution.
+              </motion.p>
+              <motion.p
+                className="text-lg text-gray-600 dark:text-gray-300 mb-6"
+                initial={{ opacity: 0, y: -20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                He believes in leveraging technology to make legal processes more accessible and efficient for everyone. His dedication to providing fair and timely resolutions aligns perfectly with the mission of SettleSmart Solutions.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <Link href="/about" passHref>
+                  <motion.button
+                    className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors flex items-center gap-2"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Learn More About Us
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </motion.button>
+                </Link>
+              </motion.div>
+            </div>
+            <div className="lg:w-1/2">
+              <motion.div
+                className="relative rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                whileHover={{ rotate: 2, scale: 1.02 }}
+              >
+                <Image
+                  src={nageshwar}
+                  alt="Adv. Nageshwar Sharma"
+                  width={600}
+                  height={400}
+                  layout="responsive"
+                  className="rounded-3xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-3xl flex items-end p-6">
+                  <div className="text-white">
+                    <h3 className="text-2xl font-bold">Adv. Nageshwar Sharma</h3>
+                    <p className="text-blue-200">Legal Head, SettleSmart Solutions</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="relative z-10 py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            How SettleSmart Works
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                className="bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 flex flex-col items-center text-center group cursor-pointer"
+                initial={{ opacity: 0, y: 50 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                whileHover={{ scale: 1.05, boxShadow: "0 15px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)" }}
+              >
+                <div className="relative mb-4">
+                  <motion.div
+                    className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-3xl"
+                    initial={{ scale: 0 }}
+                    animate={inView ? { scale: 1 } : {}}
+                    transition={{ type: "spring", stiffness: 200, damping: 10, delay: index * 0.15 + 0.3 }}
+                  >
+                    {step.number}
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center text-5xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    animate={inView ? { opacity: 0 } : {}}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {step.icon}
+                  </motion.div>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
