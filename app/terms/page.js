@@ -63,7 +63,7 @@ const TermsAndConditions = () => {
           >
             <h2 className="text-2xl font-semibold mb-4 text-green-500">1. Acceptance of Terms</h2>
             <div className="prose max-w-none" style={darkMode ? { color: '#e5e7eb' } : {}}>
-              <p>By accessing and using the website <span className="underline">https://settlesmart111.netlify.app</span> ("Platform"), you agree to be bound by these Terms and Conditions. If you do not agree, you must not access or use the Platform.</p>
+              <p>By accessing and using the website <span className="underline">https://settlesmartsolution.com</span> ("Platform"), you agree to be bound by these Terms and Conditions. If you do not agree, you must not access or use the Platform.</p>
             </div>
           </motion.section>
 
