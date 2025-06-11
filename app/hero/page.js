@@ -575,7 +575,7 @@ const Hero = () => {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
               >
-                Meet Adv. Nageshwar Sharma
+                Mr. Nageshwar Singh
               </motion.h2>
               <motion.p
                 className="text-lg text-gray-600 dark:text-gray-300 mb-6"
@@ -583,16 +583,16 @@ const Hero = () => {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Advocate Nageshwar Sharma is a seasoned legal professional with extensive experience in various facets of law. He has a distinguished career marked by a commitment to justice and a deep understanding of legal principles. His expertise spans across arbitration, mediation, and conciliation, making him a cornerstone of SettleSmart Solutions' commitment to effective dispute resolution.
+                Founder & Chief Managing Director at SettleSmart Solutions; Legal Intern at Khaitan & Co., LK & S, Reliance Retail Ltd. (Legal), H.K. Law Offices, Trilegal and the Ministry of External Affairs, Government of India
               </motion.p>
-              <motion.p
+              {/* <motion.p
                 className="text-lg text-gray-600 dark:text-gray-300 mb-6"
                 initial={{ opacity: 0, y: -20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 Driven by a passion for accessible justice, Adv. Sharma plays a pivotal role in ensuring that SettleSmart Solutions provides fair, efficient, and confidential online dispute resolution services. His leadership and legal acumen are instrumental in guiding the platform's strategies and upholding its ethical standards.
-              </motion.p>
+              </motion.p> */}
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}

@@ -106,7 +106,7 @@ const TeamPage = () => {
                 phone: "+91 91499 45265",
                 email: "ns677112@gmail.com",
                 linkedin: "https://www.linkedin.com/in/choudhary-nageshwar-singh-696808227/",
-                description: "Visionary legal entrepreneur who pioneered SettleSmart's innovative dispute resolution ecosystem. Combines sharp corporate law acumen with transformative leadership, having trained under top-tier firms like Khaitan & Co. Architect of our hybrid ODR platform that merges legal expertise with cutting-edge technology."
+                description: "Founder & Chief Managing Director at SettleSmart Solutions; Legal Intern at Khaitan & Co., LK & S, Reliance Retail Ltd. (Legal), H.K. Law Offices, Trilegal and the Ministry of External Affairs, Government of India"
             }
         ],
         leadership: [
