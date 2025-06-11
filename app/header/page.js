@@ -456,7 +456,7 @@ const Header = () => {
                 <MobileNavLink href="/lawyer" onClick={closeMenu} icon={FiUsers}>Leadership</MobileNavLink>
 
                 <div className="w-full">
-                  <motion.button 
+                  {/* <motion.button 
                     onClick={toggleMobileCaseDropdown}
                     className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
                     whileHover={{ x: 5 }}
@@ -468,9 +468,9 @@ const Header = () => {
                     ) : (
                       <AiOutlineDown className="ml-auto text-gray-800 dark:text-gray-200" size={14} />
                     )}
-                  </motion.button>
+                  </motion.button> */}
 
-                  <AnimatePresence>
+                  {/* <AnimatePresence>
                     {mobileCaseDropdownOpen && (
                       <motion.div 
                         className="w-full bg-gray-50 dark:bg-gray-800/50"
@@ -484,7 +484,7 @@ const Header = () => {
                         <MobileNavLink href="/case/current-hearings" onClick={closeMenu} icon={FiHeadphones}>Hearings</MobileNavLink>
                       </motion.div>
                     )}
-                  </AnimatePresence>
+                  </AnimatePresence> */}
                 </div>
 
                 <MobileNavLink href="/services" onClick={closeMenu} icon={FiSettings}>Services</MobileNavLink>
