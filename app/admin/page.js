@@ -80,7 +80,7 @@ const page = () => {
 
   const openchatbox = async() => {
 
-      const response = await fetch("http://localhost:3000/api/readchat", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/readchat`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

@@ -20,7 +20,7 @@ const Page = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/useremail", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Page = () => {
     if (useremail) {
       const fetchDetails = async () => {
         try {
-          const response = await fetch("http://localhost:3000/api/viewFacultydetails", {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/viewFacultydetails`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

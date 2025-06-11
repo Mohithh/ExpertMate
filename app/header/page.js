@@ -288,119 +288,132 @@ const Header = () => {
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
-              <motion.button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {darkMode ? (
-                  <AiOutlineSun size={18} className="text-gray-300" />
-                ) : (
-                  <AiOutlineMoon size={18} className="text-gray-700" />
-                )}
-              </motion.button>
+  <motion.button
+    onClick={toggleDarkMode}
+    className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+    aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+  >
+    {darkMode ? (
+      <AiOutlineSun size={18} className="text-gray-300" />
+    ) : (
+      <AiOutlineMoon size={18} className="text-gray-700" />
+    )}
+  </motion.button>
 
-              {!isLoggedIn ? (
-                <>
-                  <Link href="/login" passHref>
-                    <motion.button 
-                      className="flex items-center px-4 py-2 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50/80 dark:hover:bg-gray-800/90 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <FiLogIn className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
-                      <span>Login</span>
-                      <svg 
-                        className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M5 12h14m-7-7l7 7-7 7"
-                        />
-                      </svg>
-                    </motion.button>
-                  </Link>
-                  <Link href="/signup" passHref>
-                    <motion.button 
-                      className="flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white font-medium hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-700 dark:hover:to-amber-800 shadow-sm hover:shadow-amber-200/50 dark:hover:shadow-amber-700/30 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <FiUser className="mr-2" size={16} />
-                      <span>Sign Up</span>
-                      <svg 
-                        className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 4v16m8-8H4"
-                        />
-                      </svg>
-                    </motion.button>
-                  </Link>
-                </>
-              ) : (
-                <div className="relative">
-                  <motion.button
-                    onClick={toggleProfileDropdown}
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-lg" />
-                    <span className="sr-only">User profile</span>
-                  </motion.button>
+  {!isLoggedIn ? (
+    <>
+      <Link href="/login" passHref>
+        <motion.button 
+          className="flex items-center px-4 py-2 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50/80 dark:hover:bg-gray-800/90 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <FiLogIn className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
+          <span>Login</span>
+          <svg 
+            className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M5 12h14m-7-7l7 7-7 7"
+            />
+          </svg>
+        </motion.button>
+      </Link>
+      <Link href="/signup" passHref>
+        <motion.button 
+          className="flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white font-medium hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-700 dark:hover:to-amber-800 shadow-sm hover:shadow-amber-200/50 dark:hover:shadow-amber-700/30 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <FiUser className="mr-2" size={16} />
+          <span>Sign Up</span>
+          <svg 
+            className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+        </motion.button>
+      </Link>
+    </>
+  ) : (
+    <div className="relative">
+      <motion.button
+        onMouseEnter={() => setProfileDropdownOpen(true)}
+        onMouseLeave={() => setProfileDropdownOpen(false)}
+        className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-lg" />
+        <span className="sr-only">User profile</span>
+      </motion.button>
 
-                  <AnimatePresence>
-                    {profileDropdownOpen && (
-                      <motion.div 
-                        className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                          <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                            {userEmail || "Loading..."}
-                          </p>
-                          <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
-                            {userType} account
-                          </p>
-                        </div>
-                        <Link href={userType === "faculty" ? "/faculty-dashboard" : "/ClientDashboard"} passHref>
-                          <motion.div 
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setProfileDropdownOpen(false)}
-                          >
-                            <AiOutlineDashboard className="mr-2 text-gray-700 dark:text-gray-300" />
-                            Dashboard
-                          </motion.div>
-                        </Link>
-                        <motion.button
-                          onClick={logout}
-                          className="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                          whileHover={{ x: 5 }}
-                        >
-                          <FiLogOut className="mr-2 text-gray-700 dark:text-gray-300" />
-                          Sign out
-                        </motion.button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              )}
+      <AnimatePresence>
+        {profileDropdownOpen && (
+          <motion.div 
+            className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            onMouseEnter={() => setProfileDropdownOpen(true)}
+            onMouseLeave={() => setProfileDropdownOpen(false)}
+          >
+            <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+              <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                {userEmail || "Loading..."}
+              </p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
+                {userType} account
+              </p>
             </div>
+            <Link href="/details" passHref>
+              <motion.div 
+                className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                whileHover={{ x: 5 }}
+                onClick={() => setProfileDropdownOpen(false)}
+              >
+                <AiOutlineUser className="mr-2 text-gray-700 dark:text-gray-300" />
+                Profile
+              </motion.div>
+            </Link>
+            <Link href={userType === "faculty" ? "/faculty-dashboard" : "/ClientDashboard"} passHref>
+              <motion.div 
+                className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                whileHover={{ x: 5 }}
+                onClick={() => setProfileDropdownOpen(false)}
+              >
+                <AiOutlineDashboard className="mr-2 text-gray-700 dark:text-gray-300" />
+                Dashboard
+              </motion.div>
+            </Link>
+            <motion.button
+              onClick={logout}
+              className="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+              whileHover={{ x: 5 }}
+            >
+              <FiLogOut className="mr-2 text-gray-700 dark:text-gray-300" />
+              Sign out
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )}
+</div>
 
             <motion.button
               className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
