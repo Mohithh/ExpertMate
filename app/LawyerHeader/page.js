@@ -278,87 +278,156 @@ const Header = () => {
                   </Link>
                 </>
               ) : (
-               <div className="relative">
-  <motion.button
-    onClick={toggleProfileDropdown}
-    className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-lg" />
-    <span className="sr-only">User profile</span>
-  </motion.button>
+                <div className="relative">
+                  <motion.button
+                    onClick={toggleProfileDropdown}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-lg" />
+                    <span className="sr-only">User profile</span>
+                  </motion.button>
 
-  <AnimatePresence>
-    {profileDropdownOpen && (
-      <motion.div 
-        className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.2 }}
-      >
-        <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-          <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-            {userEmail || "Loading..."}
-          </p>
-          <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
-            {userType} 
-          </p>
-        </div>
-        
-        <Link href="/details" passHref>
-          <motion.div 
-            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-            whileHover={{ x: 5 }}
-            onClick={() => setProfileDropdownOpen(false)}
-          >
-            <AiOutlineUser className="mr-2 text-gray-700 dark:text-gray-300" />
-            Profile
-          </motion.div>
-        </Link>
-        
-        <Link href={userType === "client" ? "/LawyerDashboard" : "/"} passHref>
-          <motion.div 
-            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-            whileHover={{ x: 5 }}
-            onClick={() => setProfileDropdownOpen(false)}
-          >
-            <AiOutlineDashboard className="mr-2 text-gray-700 dark:text-gray-300" />
-            Dashboard
-          </motion.div>
-        </Link>
-        
-        <motion.button
-          onClick={logout}
-          className="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-          whileHover={{ x: 5 }}
-        >
-          <FiLogOut className="mr-2 text-gray-700 dark:text-gray-300" />
-          Sign out
-        </motion.button>
-      </motion.div>
-    )}
-  </AnimatePresence>
-</div>
+                  <AnimatePresence>
+                    {profileDropdownOpen && (
+                      <motion.div 
+                        className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                          <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                            {userEmail || "Loading..."}
+                          </p>
+                          <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
+                            {userType} 
+                          </p>
+                        </div>
+                        
+                        <Link href="/details" passHref>
+                          <motion.div 
+                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                            whileHover={{ x: 5 }}
+                            onClick={() => setProfileDropdownOpen(false)}
+                          >
+                            <AiOutlineUser className="mr-2 text-gray-700 dark:text-gray-300" />
+                            Profile
+                          </motion.div>
+                        </Link>
+                        
+                        <Link href={userType === "client" ? "/LawyerDashboard" : "/"} passHref>
+                          <motion.div 
+                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                            whileHover={{ x: 5 }}
+                            onClick={() => setProfileDropdownOpen(false)}
+                          >
+                            <AiOutlineDashboard className="mr-2 text-gray-700 dark:text-gray-300" />
+                            Dashboard
+                          </motion.div>
+                        </Link>
+                        
+                        <motion.button
+                          onClick={logout}
+                          className="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                          whileHover={{ x: 5 }}
+                        >
+                          <FiLogOut className="mr-2 text-gray-700 dark:text-gray-300" />
+                          Sign out
+                        </motion.button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               )}
             </div>
 
-            <motion.button
-              className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-              aria-expanded={menuOpen}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {menuOpen ? (
-                <AiOutlineClose size={22} className="text-amber-600 dark:text-amber-400" />
-              ) : (
-                <AiOutlineMenu size={22} className="text-gray-700 dark:text-gray-300" />
+            {/* Mobile menu button and profile icon */}
+            <div className="flex md:hidden items-center space-x-2">
+              {isLoggedIn && (
+                <motion.button
+                  onClick={toggleProfileDropdown}
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-lg" />
+                  <span className="sr-only">User profile</span>
+                </motion.button>
               )}
-            </motion.button>
+              
+              <motion.button
+                className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
+                onClick={toggleMenu}
+                aria-label="Toggle menu"
+                aria-expanded={menuOpen}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {menuOpen ? (
+                  <AiOutlineClose size={22} className="text-amber-600 dark:text-amber-400" />
+                ) : (
+                  <AiOutlineMenu size={22} className="text-gray-700 dark:text-gray-300" />
+                )}
+              </motion.button>
+            </div>
+
+            {/* Mobile profile dropdown */}
+            <AnimatePresence>
+              {profileDropdownOpen && (
+                <motion.div 
+                  className="md:hidden absolute right-2 top-16 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                      {userEmail || "Loading..."}
+                    </p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
+                      {userType} 
+                    </p>
+                  </div>
+                  
+                  <Link href="/details" passHref>
+                    <motion.div 
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                      whileHover={{ x: 5 }}
+                      onClick={() => setProfileDropdownOpen(false)}
+                    >
+                      <AiOutlineUser className="mr-2 text-gray-700 dark:text-gray-300" />
+                      Profile
+                    </motion.div>
+                  </Link>
+                  
+                  <Link href={userType === "client" ? "/LawyerDashboard" : "/"} passHref>
+                    <motion.div 
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                      whileHover={{ x: 5 }}
+                      onClick={() => setProfileDropdownOpen(false)}
+                    >
+                      <AiOutlineDashboard className="mr-2 text-gray-700 dark:text-gray-300" />
+                      Dashboard
+                    </motion.div>
+                  </Link>
+                  
+                  <motion.button
+                    onClick={logout}
+                    className="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                    whileHover={{ x: 5 }}
+                  >
+                    <FiLogOut className="mr-2 text-gray-700 dark:text-gray-300" />
+                    Sign out
+                  </motion.button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 

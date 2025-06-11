@@ -120,7 +120,7 @@ const page = () => {
                 objectFit="contain"
               />
             </div>
-            <h1 className="text-2xl font-bold text-gray-800">LawConnect Profile</h1>
+            <h1 className="text-2xl font-bold text-gray-800"></h1>
           </div>
           <div className="text-sm text-gray-500">
             {useremail && `Logged in as: ${useremail}`}

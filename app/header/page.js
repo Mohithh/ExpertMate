@@ -111,15 +111,6 @@ const Header = () => {
     setProfileDropdownOpen(!profileDropdownOpen);
   };
 
-  // const handleConferenceClick = (e) => {
-  //   e.preventDefault();
-  //   if (!isLoggedIn) {
-  //     router.push('/login');
-  //     return;
-  //   }
-  //   router.push('/conference');
-  // };
-
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("facultytoken");
@@ -193,227 +184,161 @@ const Header = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-           <Link href="/" passHref>
-  <motion.div 
-    className="flex-shrink-0 w-40"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    <div className="relative w-full h-12 overflow-hidden rounded-full">
-      <Image
-        src={Logo}
-        alt="Company Logo"
-        fill
-        className="object-contain object-left"
-        priority
-      />
-    </div>
-  </motion.div>
-</Link>
+            <Link href="/" passHref>
+              <motion.div 
+                className="flex-shrink-0 w-40"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className="relative w-full h-12 overflow-hidden rounded-full">
+                  <Image
+                    src={Logo}
+                    alt="Company Logo"
+                    fill
+                    className="object-contain object-left"
+                    priority
+                  />
+                </div>
+              </motion.div>
+            </Link>
 
             <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
               <div className="flex items-center space-x-2">
                 <NavLink href="/" icon={AiOutlineHome}>Home</NavLink>
-                <NavLink href="/lawyer" icon={FiUsers}>Our Legal Professionals. 
-</NavLink>
-
-                {/* <div className="relative">
-                  <motion.button 
-                    onClick={toggleCaseDropdown}
-                    className="flex items-center px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 group h-10 whitespace-nowrap"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <MdOutlineManageSearch className="mr-2 text-base text-gray-700 dark:text-gray-300" />
-                    <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
-                      Cases
-                    </span>
-                    {caseDropdownOpen ? (
-                      <AiOutlineUp className="ml-1 text-gray-700 dark:text-gray-300" size={14} />
-                    ) : (
-                      <AiOutlineDown className="ml-1 text-gray-700 dark:text-gray-300" size={14} />
-                    )}
-                  </motion.button>
-
-                  <AnimatePresence>
-                    {caseDropdownOpen && (
-                      <motion.div 
-                        className="absolute left-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Link href="/case" passHref>
-                          <motion.div 
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setCaseDropdownOpen(false)}
-                          >
-                            <FiFileText className="mr-2 text-gray-700 dark:text-gray-300" />
-                            Overview
-                          </motion.div>
-                        </Link>
-                        <Link href="/case/cause-list" passHref>
-                          <motion.div 
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setCaseDropdownOpen(false)}
-                          >
-                            <FiList className="mr-2 text-gray-700 dark:text-gray-300" />
-                            Cause List
-                          </motion.div>
-                        </Link>
-                        <Link href="/case/current-hearings" passHref>
-                          <motion.div 
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setCaseDropdownOpen(false)}
-                          >
-                            <FiHeadphones className="mr-2 text-gray-700 dark:text-gray-300" />
-                            Hearings
-                          </motion.div>
-                        </Link>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div> */}
-
+                <NavLink href="/lawyer" icon={FiUsers}>Our Legal Professionals</NavLink>
                 <NavLink href="/services" icon={FiSettings}>Services</NavLink>
                 <NavLink href="/StartDispute" icon={FiShield}>Dispute</NavLink>
                 <NavLink href="/contact" icon={FiMail}>Contact</NavLink>
-                
-                {/* <NavLink href={isLoggedIn ? "/conference" : "/login"} onClick={handleConferenceClick} icon={FiVideo}>Conference</NavLink> */}
               </div>
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
-  <motion.button
-    onClick={toggleDarkMode}
-    className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-    aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}
-  >
-    {darkMode ? (
-      <AiOutlineSun size={18} className="text-gray-300" />
-    ) : (
-      <AiOutlineMoon size={18} className="text-gray-700" />
-    )}
-  </motion.button>
+              <motion.button
+                onClick={toggleDarkMode}
+                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                aria-label={`Toggle ${darkMode ? 'light' : 'dark'} mode`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                {darkMode ? (
+                  <AiOutlineSun size={18} className="text-gray-300" />
+                ) : (
+                  <AiOutlineMoon size={18} className="text-gray-700" />
+                )}
+              </motion.button>
 
-  {!isLoggedIn ? (
-    <>
-      <Link href="/login" passHref>
-        <motion.button 
-          className="flex items-center px-4 py-2 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50/80 dark:hover:bg-gray-800/90 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <FiLogIn className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
-          <span>Login</span>
-          <svg 
-            className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
-            width="16" 
-            height="16" 
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M5 12h14m-7-7l7 7-7 7"
-            />
-          </svg>
-        </motion.button>
-      </Link>
-      <Link href="/signup" passHref>
-        <motion.button 
-          className="flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white font-medium hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-700 dark:hover:to-amber-800 shadow-sm hover:shadow-amber-200/50 dark:hover:shadow-amber-700/30 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <FiUser className="mr-2" size={16} />
-          <span>Sign Up</span>
-          <svg 
-            className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
-            width="16" 
-            height="16" 
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M12 4v16m8-8H4"
-            />
-          </svg>
-        </motion.button>
-      </Link>
-    </>
-  ) : (
-    <div className="relative">
-      <motion.button
-        onMouseEnter={() => setProfileDropdownOpen(true)}
-        onMouseLeave={() => setProfileDropdownOpen(false)}
-        className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-lg" />
-        <span className="sr-only">User profile</span>
-      </motion.button>
+              {!isLoggedIn ? (
+                <>
+                  <Link href="/login" passHref>
+                    <motion.button 
+                      className="flex items-center px-4 py-2 rounded-lg bg-transparent text-amber-600 dark:text-amber-400 border border-amber-600 dark:border-amber-400 font-medium hover:bg-amber-50/80 dark:hover:bg-gray-800/90 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FiLogIn className="mr-2 text-amber-600 dark:text-amber-400" size={16} />
+                      <span>Login</span>
+                      <svg 
+                        className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M5 12h14m-7-7l7 7-7 7"
+                        />
+                      </svg>
+                    </motion.button>
+                  </Link>
+                  <Link href="/signup" passHref>
+                    <motion.button 
+                      className="flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 text-white font-medium hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-700 dark:hover:to-amber-800 shadow-sm hover:shadow-amber-200/50 dark:hover:shadow-amber-700/30 transition-all duration-200 text-sm whitespace-nowrap relative overflow-hidden group"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FiUser className="mr-2" size={16} />
+                      <span>Sign Up</span>
+                      <svg 
+                        className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:right-3 transition-all duration-300"
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M12 4v16m8-8H4"
+                        />
+                      </svg>
+                    </motion.button>
+                  </Link>
+                </>
+              ) : (
+                <div className="relative">
+                  <motion.button
+                    onMouseEnter={() => setProfileDropdownOpen(true)}
+                    onMouseLeave={() => setProfileDropdownOpen(false)}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <AiOutlineUser className="text-gray-700 dark:text-gray-300 text-lg" />
+                    <span className="sr-only">User profile</span>
+                  </motion.button>
 
-      <AnimatePresence>
-        {profileDropdownOpen && (
-          <motion.div 
-            className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            onMouseEnter={() => setProfileDropdownOpen(true)}
-            onMouseLeave={() => setProfileDropdownOpen(false)}
-          >
-            <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-              <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                {userEmail || "Loading..."}
-              </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
-                {userType} account
-              </p>
+                  <AnimatePresence>
+                    {profileDropdownOpen && (
+                      <motion.div 
+                        className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50 border border-gray-200 dark:border-gray-700"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        onMouseEnter={() => setProfileDropdownOpen(true)}
+                        onMouseLeave={() => setProfileDropdownOpen(false)}
+                      >
+                        <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                          <p className="text-sm font-medium text-gray-900 dark:text-white">Signed in as</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                            {userEmail || "Loading..."}
+                          </p>
+                          <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
+                            {userType} account
+                          </p>
+                        </div>
+                        <Link href="/details" passHref>
+                          <motion.div 
+                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                            whileHover={{ x: 5 }}
+                            onClick={() => setProfileDropdownOpen(false)}
+                          >
+                            <AiOutlineUser className="mr-2 text-gray-700 dark:text-gray-300" />
+                            Profile
+                          </motion.div>
+                        </Link>
+                        <Link href={userType === "faculty" ? "/faculty-dashboard" : "/ClientDashboard"} passHref>
+                          <motion.div 
+                            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                            whileHover={{ x: 5 }}
+                            onClick={() => setProfileDropdownOpen(false)}
+                          >
+                            <AiOutlineDashboard className="mr-2 text-gray-700 dark:text-gray-300" />
+                            Dashboard
+                          </motion.div>
+                        </Link>
+                        <motion.button
+                          onClick={logout}
+                          className="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+                          whileHover={{ x: 5 }}
+                        >
+                          <FiLogOut className="mr-2 text-gray-700 dark:text-gray-300" />
+                          Sign out
+                        </motion.button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
             </div>
-            <Link href="/details" passHref>
-              <motion.div 
-                className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                whileHover={{ x: 5 }}
-                onClick={() => setProfileDropdownOpen(false)}
-              >
-                <AiOutlineUser className="mr-2 text-gray-700 dark:text-gray-300" />
-                Profile
-              </motion.div>
-            </Link>
-            <Link href={userType === "faculty" ? "/faculty-dashboard" : "/ClientDashboard"} passHref>
-              <motion.div 
-                className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-                whileHover={{ x: 5 }}
-                onClick={() => setProfileDropdownOpen(false)}
-              >
-                <AiOutlineDashboard className="mr-2 text-gray-700 dark:text-gray-300" />
-                Dashboard
-              </motion.div>
-            </Link>
-            <motion.button
-              onClick={logout}
-              className="flex items-center w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-              whileHover={{ x: 5 }}
-            >
-              <FiLogOut className="mr-2 text-gray-700 dark:text-gray-300" />
-              Sign out
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )}
-</div>
 
             <motion.button
               className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
@@ -466,50 +391,10 @@ const Header = () => {
                 )}
 
                 <MobileNavLink href="/" onClick={closeMenu} icon={AiOutlineHome}>Home</MobileNavLink>
-                <MobileNavLink href="/lawyer" onClick={closeMenu} icon={FiUsers}>Leadership</MobileNavLink>
-
-                <div className="w-full">
-                  {/* <motion.button 
-                    onClick={toggleMobileCaseDropdown}
-                    className="flex items-center w-full text-gray-800 dark:text-gray-200 text-base font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-3 px-6 whitespace-nowrap"
-                    whileHover={{ x: 5 }}
-                  >
-                    <MdOutlineManageSearch className="mr-3 text-lg text-gray-800 dark:text-gray-200" />
-                    <span>Case Management</span>
-                    {mobileCaseDropdownOpen ? (
-                      <AiOutlineUp className="ml-auto text-gray-800 dark:text-gray-200" size={14} />
-                    ) : (
-                      <AiOutlineDown className="ml-auto text-gray-800 dark:text-gray-200" size={14} />
-                    )}
-                  </motion.button> */}
-
-                  {/* <AnimatePresence>
-                    {mobileCaseDropdownOpen && (
-                      <motion.div 
-                        className="w-full bg-gray-50 dark:bg-gray-800/50"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <MobileNavLink href="/case" onClick={closeMenu} icon={FiFileText}>Overview</MobileNavLink>
-                        <MobileNavLink href="/case/cause-list" onClick={closeMenu} icon={FiList}>Cause List</MobileNavLink>
-                        <MobileNavLink href="/case/current-hearings" onClick={closeMenu} icon={FiHeadphones}>Hearings</MobileNavLink>
-                      </motion.div>
-                    )}
-                  </AnimatePresence> */}
-                </div>
-
+                <MobileNavLink href="/lawyer" onClick={closeMenu} icon={FiUsers}>Our Legal Professionals</MobileNavLink>
                 <MobileNavLink href="/services" onClick={closeMenu} icon={FiSettings}>Services</MobileNavLink>
                 <MobileNavLink href="/StartDispute" onClick={closeMenu} icon={FiShield}>Dispute</MobileNavLink>
                 <MobileNavLink href="/contact" onClick={closeMenu} icon={FiMail}>Contact</MobileNavLink>
-                {/* <MobileNavLink href={isLoggedIn ? "/conference" : "/login"} onClick={(e) => {
-                  if (!isLoggedIn) {
-                    e.preventDefault();
-                    router.push('/login');
-                    closeMenu();
-                  }
-                }} icon={FiVideo}>Conference</MobileNavLink> */}
 
                 {isLoggedIn && (
                   <>
@@ -519,6 +404,13 @@ const Header = () => {
                       icon={AiOutlineDashboard}
                     >
                       Dashboard
+                    </MobileNavLink>
+                    <MobileNavLink 
+                      href="/details" 
+                      onClick={closeMenu} 
+                      icon={AiOutlineUser}
+                    >
+                      Profile
                     </MobileNavLink>
                     <motion.button 
                       onClick={() => {
