@@ -321,7 +321,7 @@ const Page = () => {
               </div>
 
               <div className="text-sm">
-                <Link href="/forgot-password" className="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+                <Link href="/facultyforgot" className="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
                   Forgot password?
                 </Link>
               </div>

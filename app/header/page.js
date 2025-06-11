@@ -193,23 +193,23 @@ const Header = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" passHref>
-              <motion.div 
-                className="flex-shrink-0 w-40"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="relative w-full h-12">
-                  <Image
-                    src={Logo}
-                    alt="Company Logo"
-                    fill
-                    className="object-contain object-left"
-                    priority
-                  />
-                </div>
-              </motion.div>
-            </Link>
+           <Link href="/" passHref>
+  <motion.div 
+    className="flex-shrink-0 w-40"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    <div className="relative w-full h-12 overflow-hidden rounded-full">
+      <Image
+        src={Logo}
+        alt="Company Logo"
+        fill
+        className="object-contain object-left"
+        priority
+      />
+    </div>
+  </motion.div>
+</Link>
 
             <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
               <div className="flex items-center space-x-2">
