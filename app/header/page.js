@@ -17,6 +17,7 @@ import {
   FiLogIn, 
   FiLogOut,
   FiUsers,
+  FiLayers,
   FiFileText,
   FiList,
   FiHeadphones,
@@ -208,6 +209,7 @@ const Header = () => {
                 <NavLink href="/lawyer" icon={FiUsers}>Our Legal Professionals</NavLink>
                 <NavLink href="/services" icon={FiSettings}>Services</NavLink>
                 <NavLink href="/StartDispute" icon={FiShield}>Dispute</NavLink>
+                <NavLink href="/carrer" icon={FiLayers}>Career</NavLink>
                 <NavLink href="/contact" icon={FiMail}>Contact</NavLink>
               </div>
             </nav>
@@ -394,6 +396,7 @@ const Header = () => {
                 <MobileNavLink href="/lawyer" onClick={closeMenu} icon={FiUsers}>Our Legal Professionals</MobileNavLink>
                 <MobileNavLink href="/services" onClick={closeMenu} icon={FiSettings}>Services</MobileNavLink>
                 <MobileNavLink href="/StartDispute" onClick={closeMenu} icon={FiShield}>Dispute</MobileNavLink>
+                <MobileNavLink href="/carrer" onClick={closeMenu} icon={FiLayers}>Career</MobileNavLink>
                 <MobileNavLink href="/contact" onClick={closeMenu} icon={FiMail}>Contact</MobileNavLink>
 
                 {isLoggedIn && (
