@@ -23,6 +23,7 @@ import Harsha from "@/app/assets/harsha11.jpeg";
 import Anand from "@/app/assets/anand1.jpeg";
 import Nageshwar from "@/app/assets/nageshwar.jpg";
 import Bhatti from "@/app/assets/BhattiAman.jpg";
+import Nikhil from "@/app/assets/Akhil.jpg";
 
 const TeamPage = () => {
     const [activeTab, setActiveTab] = useState("management");
@@ -170,6 +171,26 @@ const TeamPage = () => {
                 phone: "+91 94191 96940",
                 email: "amit.sharma@settlesmart.com",
                 linkedin: "https://www.linkedin.com/in/amit-sharma-ab33b5107/",
+                description: "Tax litigation specialist with a razor-sharp understanding of fiscal regulations. Known for his landmark victories in complex tax disputes, Amit brings strategic depth to our commercial ODR practice. His dual expertise in corporate law and taxation creates unique synergies for SettleSmart's high-value dispute clients."
+            },
+             {
+                id: 2,
+                name: "Nikhil Padha",
+                title: "Board of Directors & Head of ODR",
+                subtitle: "Chambers of Nikhil Padha || Organisation For Human Rights and Harmony",
+                image: Nikhil,
+                experience: "3+ years before J&K High Court, CAT, AFT, Sales Tax Tribunals, NCLT, NCLAT",
+                education: "LL.M. in Business Law (Rajiv Gandhi National University of Law) | B.A., LL.B. (University of Jammu)",
+                role: "Taxation, Corporate Governance, Commercial Disputes",
+                specializations: [
+                    { icon: <FileText size={16} />, name: "Tax Litigation" },
+                    { icon: <Scale size={16} />, name: "Corporate Governance" },
+                    { icon: <BookOpen size={16} />, name: "Commercial Disputes" }
+                ],
+                location: "Jammu",
+                phone: "+91 94191 96940",
+                email: "amit.sharma@settlesmart.com",
+                linkedin: "https://www.linkedin.com/in/nikhil-padha-22b453190/",
                 description: "Tax litigation specialist with a razor-sharp understanding of fiscal regulations. Known for his landmark victories in complex tax disputes, Amit brings strategic depth to our commercial ODR practice. His dual expertise in corporate law and taxation creates unique synergies for SettleSmart's high-value dispute clients."
             },
             {
