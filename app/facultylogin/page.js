@@ -51,7 +51,7 @@ const Page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error("Please fill in all fields", {
+      toast.error("Please fill in all fields", { 
         position: "top-center",
         autoClose: 3000,
         theme: darkMode ? "dark" : "light",
@@ -64,7 +64,7 @@ const Page = () => {
     const data = { email, password };
 
     try {
-      const response = await fetch(`${process.env.LOCAL_URL}/api/FacultyLogin`, {
+      const response = await fetch(`/api/FacultyLogin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)

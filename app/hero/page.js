@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"; 
 import Logo from "@/app/assets/hello_logo.png"; // Make sure this is your company logo
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
