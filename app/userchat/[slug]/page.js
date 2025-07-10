@@ -26,7 +26,7 @@ export default function Page() {
             if (!token) return;
 
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+                const response = await fetch(`/api/useremail`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export default function Page() {
         if (!useremail) return;
 
         const fetchChats = async () => {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/readchat`, {
+            const response = await fetch(`/api/readchat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -80,7 +80,7 @@ export default function Page() {
     const submit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/addchat"`, {
+        const response = await fetch(`/api/addchat"`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -94,7 +94,7 @@ export default function Page() {
         if (result.message) {
             setmessage("");
             // Refresh chat after sending
-            const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/readchat`, {
+            const response = await fetch(`/api/readchat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

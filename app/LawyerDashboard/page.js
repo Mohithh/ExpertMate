@@ -58,7 +58,7 @@ const page = () => {
 
       try {
         // First, fetch user email
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+        const response = await fetch(`/api/useremail`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const page = () => {
         setloading(false);
 
         // Then fetch all requests using the fetched email
-        const allRes = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/fetchAllRequest`, {
+        const allRes = await fetch(`/api/fetchAllRequest`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -130,7 +130,7 @@ const page = () => {
 
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+      const response = await fetch(`/api/getStatus`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -168,7 +168,7 @@ const page = () => {
 
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+      const response = await fetch(`/api/getStatus`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -203,7 +203,7 @@ const page = () => {
 
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+      const response = await fetch(`/api/getStatus`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -239,7 +239,7 @@ const page = () => {
 
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+      const response = await fetch(`/api/getStatus`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -273,7 +273,7 @@ const page = () => {
 
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+      const response = await fetch(`/api/getStatus`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -312,7 +312,7 @@ const page = () => {
 
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getStatus`, {
+      const response = await fetch(`/api/getStatus`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

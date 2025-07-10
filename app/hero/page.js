@@ -585,54 +585,7 @@ const Hero = () => {
         </div>
       </section>
 
-      {/* About Us Section */}
-      <section className="relative z-10 py-16 md:py-24 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="lg:w-1/2">
-              <motion.h2
-                className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
-                initial={{ opacity: 0, y: -20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}} // Trigger animation when in view
-                transition={{ duration: 0.6 }}
-              >
-                Mr. Nageshwar Singh
-              </motion.h2>
-              <motion.p
-                className="text-lg text-gray-600 dark:text-gray-300 mb-6"
-                initial={{ opacity: 0, y: -20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}} // Trigger animation when in view
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Founder & Chief Managing Director at SettleSmart Solutions; Legal Intern at Khaitan & Co., LK & S, Reliance Retail Ltd. (Legal), H.K. Law Offices, Trilegal and the Ministry of External Affairs, Government of India
-              </motion.p>
-              <motion.p
-                className="text-lg text-gray-600 dark:text-gray-300 mb-6"
-                initial={{ opacity: 0, y: -20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-              </motion.p>
-            </div>
-            {/* Added the image for Nageshwar Singh back, assuming you want to show it. */}
-            <motion.div
-              className="lg:w-1/2 flex justify-center items-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.6 }}
-            >
-              <Image
-                src={nageshwar}
-                alt="Mr. Nageshwar Singh"
-                width={400}
-                height={400}
-                className="rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 object-cover"
-                priority
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+    
     </div>
   );
 };

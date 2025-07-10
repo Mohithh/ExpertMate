@@ -33,7 +33,7 @@ export default function Page({ params }) {
       const token = localStorage.getItem("token");
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+        const response = await fetch(`/api/useremail`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export default function Page({ params }) {
         setfemail(res.email);
         console.log("User email:", res.email);
 
-        const responsed = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/FacultyMailCheck`, {
+        const responsed = await fetch(`/api/FacultyMailCheck`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export default function Page({ params }) {
       setValue(resolvedParams.slug);
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/requestPage`, {
+        const response = await fetch(`/api/requestPage`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -119,7 +119,7 @@ export default function Page({ params }) {
 
   
  const pendingrequest = async () => {
-  const responsed = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/updateStatus`, {
+  const responsed = await fetch(`/api/updateStatus`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userEmail: ruseremail, facultyEmail: rfacultyEmail, _id: ruserid, status: "Pending" }),
@@ -139,7 +139,7 @@ export default function Page({ params }) {
 
 
  const acceptedrequest = async () => {
-  const responsed = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/updateStatus`, {
+  const responsed = await fetch(`/api/updateStatus`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userEmail: ruseremail, facultyEmail: rfacultyEmail, _id: ruserid, status: "Accepted" }),
@@ -160,7 +160,7 @@ export default function Page({ params }) {
 
 
 const rectedrequest = async () => {
-  const responsed = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/updateStatus`, {
+  const responsed = await fetch(`/api/updateStatus`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userEmail: ruseremail, facultyEmail: rfacultyEmail, _id: ruserid, status: "Rejected" }),
@@ -181,7 +181,7 @@ const rectedrequest = async () => {
 
 
 const blockedrequest = async () => {
-  const responsed = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/updateStatus`, {
+  const responsed = await fetch(`/api/updateStatus`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userEmail: ruseremail, facultyEmail: rfacultyEmail, _id: ruserid, status: "Blocked" }),
@@ -203,7 +203,7 @@ const blockedrequest = async () => {
 
 
 const completedrequest = async () => {
-  const responsed = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/updateStatus`, {
+  const responsed = await fetch(`/api/updateStatus`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userEmail: ruseremail, facultyEmail: rfacultyEmail, _id: ruserid, status: "Completed" }),

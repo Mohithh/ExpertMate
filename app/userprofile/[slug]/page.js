@@ -33,7 +33,7 @@ export default function UserProfilePage() {
 
                 console.log(decodeURIComponent(params.slug))
 
-                const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/viewFacultydetails`, {
+                const response = await fetch(`/api/viewFacultydetails`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email: decodeURIComponent(params.slug) }),
@@ -68,7 +68,7 @@ export default function UserProfilePage() {
             if (!token) return;
 
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+                const response = await fetch(`/api/useremail`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -198,7 +198,7 @@ export default function UserProfilePage() {
     
     
                 try {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/AddRequest`, {
+          const res = await fetch(`/api/AddRequest`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name:name , userEmail:useremail,facultyEmail:details.email,category:finalcatogery,subject:subject ,message:category, urgency:furgency,expectedResponseDate:expectedResponseDate ,status:"Pending" ,mainCategory:mainCategory,categoryType:subCategory }),

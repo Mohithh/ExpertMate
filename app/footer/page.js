@@ -101,11 +101,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-gray-400 text-sm">
                 <EnvelopeIcon className="h-4 w-4 mr-2 text-blue-400" />
-                settlesmartsolutions01@gmail.com
+                mohityadavhh@gmail.com
               </div>
               <div className="flex items-start text-gray-400 text-sm">
                 <MapPinIcon className="h-4 w-4 mr-2 text-blue-400 mt-0.5 flex-shrink-0" />
-                <span>Avanta Business Centre, Barakhamba Road, Connaught Place, New Delhi - 110001</span>
+                <span>Uttar Pradesh Siddharth Nagar - 272207</span>
               </div>
             </div>
             

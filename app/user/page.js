@@ -18,7 +18,7 @@ const YourComponent = () => {
       }
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+        const response = await fetch(`/api/useremail`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -26,7 +26,7 @@ const page = () => {
       }
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/useremail`, {
+        const response = await fetch(`/api/useremail`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const page = () => {
     if (useremail) {
       const fetchFaculty = async () => {
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/viewFacultydetails`, {
+          const response = await fetch(`/api/viewFacultydetails`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const page = () => {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/Facultydetails`, {
+      const response = await fetch(`/api/Facultydetails`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

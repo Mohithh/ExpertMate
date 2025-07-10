@@ -14,13 +14,13 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false); // Added missing state
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     setIsLoading(true);
 
     const data = { email, password };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/Login`, {
+      const response = await fetch(`/api/Login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -39,7 +39,7 @@ export default function LoginPage() {
           transition: Bounce,
         });
 
-        setTimeout(() => router.push("/"), 1000);
+        setTimeout(() => router.push("/search"), 1000);
       } else {
         toast.error(res.error || "Login failed", {
           position: "top-center",
@@ -65,7 +65,7 @@ export default function LoginPage() {
       <div className="flex max-w-5xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden">
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-8 md:p-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-indigo-700 mb-2">Welcome Back</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-indigo-700 mb-2">Welcome Back...</h2>
           <p className="text-sm text-gray-500 mb-6 md:mb-8">
             Enter your credentials to access your account.
           </p>

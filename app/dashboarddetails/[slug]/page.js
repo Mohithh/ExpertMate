@@ -16,7 +16,7 @@ export default function Page({ params }) {
       setValue(resolvedParams.slug);
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/requestPage`, {
+        const response = await fetch(`/api/requestPage`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

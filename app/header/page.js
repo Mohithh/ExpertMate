@@ -206,11 +206,11 @@ const Header = () => {
             <nav className="hidden md:flex items-center justify-center flex-1 mx-4">
               <div className="flex items-center space-x-2">
                 <NavLink href="/" icon={AiOutlineHome}>Home</NavLink>
-                <NavLink href="/lawyer" icon={FiUsers}>Our Legal Professionals</NavLink>
                 <NavLink href="/services" icon={FiSettings}>Services</NavLink>
                 <NavLink href="/StartDispute" icon={FiShield}>Dispute</NavLink>
                 <NavLink href="/carrer" icon={FiLayers}>Career</NavLink>
                 <NavLink href="/contact" icon={FiMail}>Contact</NavLink>
+                <NavLink href="/search" icon={FiMail}>Search</NavLink>
               </div>
             </nav>
 
@@ -386,18 +386,19 @@ const Header = () => {
                         </p>
                         <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">
                           {userType} account
-                        </p>
+                        </p>  
                       </div>
                     </div>
                   </div>
                 )}
 
                 <MobileNavLink href="/" onClick={closeMenu} icon={AiOutlineHome}>Home</MobileNavLink>
-                <MobileNavLink href="/lawyer" onClick={closeMenu} icon={FiUsers}>Our Legal Professionals</MobileNavLink>
                 <MobileNavLink href="/services" onClick={closeMenu} icon={FiSettings}>Services</MobileNavLink>
                 <MobileNavLink href="/StartDispute" onClick={closeMenu} icon={FiShield}>Dispute</MobileNavLink>
                 <MobileNavLink href="/carrer" onClick={closeMenu} icon={FiLayers}>Career</MobileNavLink>
                 <MobileNavLink href="/contact" onClick={closeMenu} icon={FiMail}>Contact</MobileNavLink>
+                <MobileNavLink href="/search" onClick={closeMenu} icon={FiMail}>Search</MobileNavLink>
+
 
                 {isLoggedIn && (
                   <>

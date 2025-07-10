@@ -54,7 +54,7 @@ export default function SignUpPage() {
 
     try {
       setIsAnimating(true);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/LoginNew`, {
+      const response = await fetch(`/api/LoginNew`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

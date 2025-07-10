@@ -3,15 +3,14 @@
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
-
 const page = () => {
   const [engineerList, setEngineerList] = useState([]);
   const [userImages, setUserImages] = useState({});
-
+ 
   useEffect(() => {
     const fetchEngineers = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/engineerList`, {
+        const response = await fetch(`/api/engineerList`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });

@@ -35,7 +35,7 @@ export default function SignUpPage() {
 
 
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/userforgot`, {  
+        const response = await fetch(`/api/userforgot`, {  
 
         method: "POST",
         headers: { "Content-Type": "application/json" },

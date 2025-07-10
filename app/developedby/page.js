@@ -126,22 +126,6 @@ const ContactPage = () => {
 
   // Founders data
   const founders = [
-
-       {
-      id: 2,
-      name: "Aman Bhatti",
-      role: "Co-Founder & CEO",
-      bio: "Experienced software architect specializing in scalable systems and cloud infrastructure. Focused on creating robust backend solutions and optimizing system performance.",
-      email: "aman@example.com",
-      phone: "+91 9876543210",
-      photo: "/aman.jpg", // Replace with your actual path
-      social: [
-        { icon: <FaLinkedin />, url: "https://www.linkedin.com/in/amanbhatti01/", color: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300" },
-        { icon: <FaGithub />, url: "https://github.com/Bhattiaman", color: "text-gray-800 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-200" },
-       
-        { icon: <FaGlobe />, url: "https://aman01.vercel.app/", color: "text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300" }
-      ]
-    },
     {
       id: 1,
       name: "Mohit Yadav",
@@ -149,15 +133,29 @@ const ContactPage = () => {
       bio: "Tech enthusiast with expertise in full-stack development and product design. Passionate about building scalable web applications and solving complex problems.",
       email: "mohityadavhh@gmail.com",
       phone: "+91 6392609366",
-      photo: "/Mohit kumar yadav.jpg", // Replace with your actual path
+      photo: "/founders/mohit.jpg", // Replace with your actual path
       social: [
         { icon: <FaLinkedin />, url: "https://linkedin.com/in/mohit-kumar-yadav-898711230", color: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300" },
         { icon: <FaGithub />, url: "https://github.com/Mohithh", color: "text-gray-800 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-200" },
-       { icon: <FaGlobe />, url: "mohityyadav.vercel.app", color: "text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300" }
-        
+        { icon: <FaInstagram />, url: "https://www.instagram.com/mohityadav.h", color: "text-pink-500 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300" },
+        { icon: <FaTwitter />, url: "https://twitter.com/yourusername", color: "text-sky-500 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300" }
+      ]
+    },
+    {
+      id: 2,
+      name: "Aman Sharma",
+      role: "Co-Founder & CTO",
+      bio: "Experienced software architect specializing in scalable systems and cloud infrastructure. Focused on creating robust backend solutions and optimizing system performance.",
+      email: "aman@example.com",
+      phone: "+91 9876543210",
+      photo: "/founders/aman.jpg", // Replace with your actual path
+      social: [
+        { icon: <FaLinkedin />, url: "https://linkedin.com/in/aman-example", color: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300" },
+        { icon: <FaGithub />, url: "https://github.com/aman-example", color: "text-gray-800 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-200" },
+        { icon: <FaTwitter />, url: "https://twitter.com/aman-example", color: "text-sky-500 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300" },
+        { icon: <FaGlobe />, url: "https://aman-personal-website.com", color: "text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300" }
       ]
     }
- 
   ];
 
   if (!mounted) {
