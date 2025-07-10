@@ -132,8 +132,8 @@ const ContactPage = () => {
       name: "Aman Bhatti",
       role: "Co-Founder & CEO",
       bio: "Experienced software architect specializing in scalable systems and cloud infrastructure. Focused on creating robust backend solutions and optimizing system performance.",
-      email: "aman@example.com",
-      phone: "+91 9876543210",
+      email: "amanbhatti105@gmail.com", 
+      phone: "+91 9876543210", 
       photo: "/aman.jpg", // Replace with your actual path
       social: [
         { icon: <FaLinkedin />, url: "https://www.linkedin.com/in/amanbhatti01/", color: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300" },
@@ -153,7 +153,7 @@ const ContactPage = () => {
       social: [
         { icon: <FaLinkedin />, url: "https://linkedin.com/in/mohit-kumar-yadav-898711230", color: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300" },
         { icon: <FaGithub />, url: "https://github.com/Mohithh", color: "text-gray-800 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-200" },
-       { icon: <FaGlobe />, url: "mohityyadav.vercel.app", color: "text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300" }
+       { icon: <FaGlobe />, url: "https://mohityyadav.vercel.app/", color: "text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300" }
         
       ]
     }
